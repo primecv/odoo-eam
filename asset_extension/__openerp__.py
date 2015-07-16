@@ -33,6 +33,7 @@
         'asset_view.xml',
         'product_view.xml',
         'asset_sequence.xml',
+        'asset_data.xml',
     ],
     'installable': True,
     'auto_install': False,

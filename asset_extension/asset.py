@@ -40,6 +40,7 @@ class asset_asset_category(osv.Model):
 	_name = "asset.asset.category"
 
 	_columns = {
-		'name': fields.char('Description', required=True, select=True),
+		'name': fields.char('Category Name', required=True, select=True),
+		'code': fields.char('Code'),
 	}
 

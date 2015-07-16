@@ -1,0 +1,30 @@
+<openerp>
+	<data noupdate="1">
+	
+		<record id="asset_asset_category1" model="asset.asset.category">
+			<field name="name">Equipamentos Hospitalares</field>
+			<field name="code">EH</field>
+		</record>
+
+		<record id="asset_asset_category2" model="asset.asset.category">
+			<field name="name">Equipamentos de Escritório</field>
+			<field name="code">EE</field>
+		</record>
+
+		<record id="asset_asset_category3" model="asset.asset.category">
+			<field name="name">Componentes de Equipamentos</field>
+			<field name="code">CE</field>
+		</record>
+
+		<record id="asset_asset_category4" model="asset.asset.category">
+			<field name="name">Instrumentos Hospitalares</field>
+			<field name="code">IH</field>
+		</record>
+
+		<record id="asset_asset_category5" model="asset.asset.category">
+			<field name="name">Mobiliário</field>
+			<field name="code">MO</field>
+		</record>
+
+	</data>
+</openerp>

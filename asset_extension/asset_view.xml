@@ -70,6 +70,7 @@
 				<form string="Asset Category">
 					<group>
 						<field name="name"/>
+						<field name="code"/>
 					</group>
 				</form>
 			</field>
@@ -81,6 +82,7 @@
 			<field name="arch" type="xml">
 				<tree string="Asset Category">
 					<field name="name"/>
+					<field name="code"/>
 				</tree>
 			</field>
 		</record>
@@ -89,7 +91,7 @@
 			<field name="name">Asset Category</field>
 			<field name="res_model">asset.asset.category</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">tree, form</field>
+			<field name="view_mode">tree,form</field>
 		</record>
 
         <menuitem name="Asset Categories"
