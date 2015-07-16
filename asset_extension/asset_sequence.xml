@@ -1,0 +1,17 @@
+<openerp>
+	<data noupdate="1">
+
+        <record id="seq_type_asset_asset" model="ir.sequence.type">
+            <field name="name">Asset</field>
+            <field name="code">asset.asset</field>
+        </record>
+
+        <record id="seq_asset_asset" model="ir.sequence">
+            <field name="name">Asset</field>
+            <field name="code">asset.asset</field>
+            <field name="prefix"></field>
+            <field name="padding">4</field>
+        </record>
+
+	</data>
+</openerp>

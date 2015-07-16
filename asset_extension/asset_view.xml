@@ -1,0 +1,106 @@
+<openerp>
+	<data>
+
+        <record id="assets_form_view_extension" model="ir.ui.view">
+            <field name="name">asset.asset.form.extension</field>
+            <field name="model">asset.asset</field>
+			<field name="inherit_id" ref="asset.assets_form_view"/>
+            <field name="arch" type="xml">
+				<field name="property_stock_asset" position="replace">
+					<field name="property_stock_asset" invisible="1"/>
+				</field>
+
+				<field name="criticality" position="before">
+					<field name="property_stock_asset" domain="[('usage','=','asset')]"/>
+				</field>
+
+				<field name="category_ids" position="before">
+					<label for="asset_id" class="oe_edit_only"/>
+					<field name="asset_id" readonly="1"/>
+				</field>
+				<field name="active" position="before">
+					<field name="category_id"/>
+					<field name="hospital_id" on_change="onchange_hospital(hospital_id)" domain="[('is_hospital','=',True)]" context="{'form_view_ref': 'res_partner_hospital.view_partner_hospital_form'}"/>
+					<field name="hospital_category_id" attrs="{'invisible':[('hospital_id','=',False)]}" readonly="1"/>
+				</field>
+				<field name="active" position="replace">
+					<field name="active" invisible="1"/>
+				</field>
+
+				<page string="Info" position="replace">
+                    <page string="Info">
+                        <group>
+                            <group>
+                                <field name="asset_number"/>
+                                <field name="model"/>
+                                <field name="serial"/>
+                            </group>
+                            <group>
+								<field name="manuf_year"/>
+								<field name="mark"/>
+								<field name="state_operation" widget="radio"/>
+                            </group>
+                        </group>
+                        <group string="Warranty">
+                            <group>
+                            <field name="manufacturer_id"/>
+                            <field name="start_date"/>
+                            <field name="warranty_start_date"/>
+                            </group>
+                            <group>
+                            <field name="vendor_id"/>
+                            <field name="purchase_date"/>
+                            <field name="warranty_end_date"/>
+                            </group>
+                        </group>
+						<group colspan="4" string="Notes">
+							<field name="notes" colspan="4" nolabel="1"/> 
+						</group>
+                    </page>
+				</page>
+
+			</field>
+		</record>
+
+
+		<record id="asset_asset_category_form" model="ir.ui.view">
+			<field name="name">asset.asset.category.form</field>
+			<field name="model">asset.asset.category</field>
+			<field name="arch" type="xml">
+				<form string="Asset Category">
+					<group>
+						<field name="name"/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id="asset_asset_category_tree" model="ir.ui.view">
+			<field name="name">asset.asset.category.tree</field>
+			<field name="model">asset.asset.category</field>
+			<field name="arch" type="xml">
+				<tree string="Asset Category">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="asset_asset_category_action" model="ir.actions.act_window">
+			<field name="name">Asset Category</field>
+			<field name="res_model">asset.asset.category</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree, form</field>
+		</record>
+
+        <menuitem name="Asset Categories"
+            action="asset_asset_category_action"
+            id="menu_asset_asset_category"
+            parent="asset.menu_maintenance_config"
+            groups="asset.group_mro_manager"
+            sequence="110"/>
+
+
+
+
+	</data>
+</openerp>
