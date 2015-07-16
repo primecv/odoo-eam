@@ -1,0 +1,169 @@
+<openerp>
+	<data noupdate="1">
+
+		<record id="hospital_category1" model="hospital.category">
+		<field name="name">Anatomia Patológica</field>
+		<field name="code">ANP</field>
+		</record>
+		<record id="hospital_category2" model="hospital.category">
+		<field name="name">BUP</field>
+		<field name="code">BUP</field>
+		</record>
+		<record id="hospital_category3" model="hospital.category">
+		<field name="name">Banco Sangue</field>
+		<field name="code">BCS</field>
+		</record>
+		<record id="hospital_category4" model="hospital.category">
+		<field name="name">Bloco Operatório</field>
+		<field name="code">BOC</field>
+		</record>
+		<record id="hospital_category5" model="hospital.category">
+		<field name="name">BUA</field>
+		<field name="code">BUA</field>
+		</record>
+		<record id="hospital_category6" model="hospital.category">
+		<field name="name">Cardiologia</field>
+		<field name="code">CRD</field>
+		</record>
+		<record id="hospital_category7" model="hospital.category">
+		<field name="name">Central de Consultas</field>
+		<field name="code">CC</field>
+		</record>
+		<record id="hospital_category8" model="hospital.category">
+		<field name="name">Cirurgia</field>
+		<field name="code">CIR</field>
+		</record>
+		<record id="hospital_category9" model="hospital.category">
+		<field name="name">Diálise</field>
+		<field name="code">CDL</field>
+		</record>
+		<record id="hospital_category10" model="hospital.category">
+		<field name="name">Estatística</field>
+		<field name="code">ETT</field>
+		</record>
+		<record id="hospital_category11" model="hospital.category">
+		<field name="name">Esterilização</field>
+		<field name="code">EST</field>
+		</record>
+		<record id="hospital_category12" model="hospital.category">
+		<field name="name">Estomatologia</field>
+		<field name="code">ESM</field>
+		</record>
+		<record id="hospital_category13" model="hospital.category">
+		<field name="name">Farmácia</field>
+		<field name="code">FAR</field>
+		</record>
+		<record id="hospital_category14" model="hospital.category">
+		<field name="name">Fisioterapia</field>
+		<field name="code">FIS</field>
+		</record>
+		<record id="hospital_category15" model="hospital.category">
+		<field name="name">Oncologia</field>
+		<field name="code">ONC</field>
+		</record>
+		<record id="hospital_category16" model="hospital.category">
+		<field name="name">Laboratório Analises Clínica</field>
+		<field name="code">LAC</field>
+		</record>
+		<record id="hospital_category17" model="hospital.category">
+		<field name="name">Laboratório Elisa</field>
+		<field name="code">LEL</field>
+		</record>
+		<record id="hospital_category18" model="hospital.category">
+		<field name="name">Lavandaria</field>
+		<field name="code">LAV</field>
+		</record>
+		<record id="hospital_category19" model="hospital.category">
+		<field name="name">Manutenção</field>
+		<field name="code">MAN</field>
+		</record>
+		<record id="hospital_category20" model="hospital.category">
+		<field name="name">Medicina</field>
+		<field name="code">MED</field>
+		</record>
+		<record id="hospital_category21" model="hospital.category">
+		<field name="name">Neonatologia</field>
+		<field name="code">NEO</field>
+		</record>
+		<record id="hospital_category22" model="hospital.category">
+		<field name="name">Nutrição e Dietética</field>
+		<field name="code">NUT</field>
+		</record>
+		<record id="hospital_category23" model="hospital.category">
+		<field name="name">Ginecologia</field>
+		<field name="code">GIN</field>
+		</record>
+		<record id="hospital_category24" model="hospital.category">
+		<field name="name">Oftalmologia</field>
+		<field name="code">OFT</field>
+		</record>
+		<record id="hospital_category25" model="hospital.category">
+		<field name="name">Ortopedia</field>
+		<field name="code">ORT</field>
+		</record>
+		<record id="hospital_category26" model="hospital.category">
+		<field name="name">Otorrino</field>
+		<field name="code">OTR</field>
+		</record>
+		<record id="hospital_category27" model="hospital.category">
+		<field name="name">Pediatria</field>
+		<field name="code">PED</field>
+		</record>
+		<record id="hospital_category28" model="hospital.category">
+		<field name="name">Imagiologia</field>
+		<field name="code">IMG</field>
+		</record>
+		<record id="hospital_category29" model="hospital.category">
+		<field name="name">Serviço Social</field>
+		<field name="code">SRS</field>
+		</record>
+		<record id="hospital_category30" model="hospital.category">
+		<field name="name">Secretaria</field>
+		<field name="code">SEC</field>
+		</record>
+		<record id="hospital_category31" model="hospital.category">
+		<field name="name">Psiquiatria</field>
+		<field name="code">PSI</field>
+		</record>
+		<record id="hospital_category32" model="hospital.category">
+		<field name="name">Obstetrícia</field>
+		<field name="code">OBS</field>
+		</record>
+		<record id="hospital_category33" model="hospital.category">
+		<field name="name">Sala de Parto</field>
+		<field name="code">SLP</field>
+		</record>
+		<record id="hospital_category34" model="hospital.category">
+		<field name="name">Bloco Operatório da Maternidade</field>
+		<field name="code">BOM</field>
+		</record>
+		<record id="hospital_category35" model="hospital.category">
+		<field name="name">Banco de Leite</field>
+		<field name="code">BCL</field>
+		</record>
+		<record id="hospital_category36" model="hospital.category">
+		<field name="name">Segurança</field>
+		<field name="code">SGR</field>
+		</record>
+		<record id="hospital_category37" model="hospital.category">
+		<field name="name">Casa Mortuária</field>
+		<field name="code">CMT</field>
+		</record>
+		<record id="hospital_category38" model="hospital.category">
+		<field name="name">Endoscopia</field>
+		<field name="code">END</field>
+		</record>
+		<record id="hospital_category39" model="hospital.category">
+		<field name="name">Banco de Urgência Materna</field>
+		<field name="code">BUM</field>
+		</record>
+		<record id="hospital_category40" model="hospital.category">
+		<field name="name">Puerpério</field>
+		<field name="code">PUE</field>
+		</record>
+
+
+
+
+	</data>
+</openerp>
