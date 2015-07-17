@@ -319,7 +319,7 @@
 			<field name="name">hospital.category.form</field>
 			<field name="model">hospital.category</field>
 			<field name="arch" type="xml">
-				<form string="Hospital Category">
+				<form string="Hospital Department">
 					<group>
 						<field name="name" required="1"/>
 						<field name="code" required="1"/>
@@ -332,7 +332,7 @@
 			<field name="name">hospital.category.tree</field>
 			<field name="model">hospital.category</field>
 			<field name="arch" type="xml">
-				<tree string="Hospital Category">
+				<tree string="Hospital Department">
 					<field name="name"/>
 					<field name="code"/>
 				</tree>
@@ -341,7 +341,7 @@
 	
 
 		<record id="hospital_category_action" model="ir.actions.act_window">
-			<field name="name">Hospital Category</field>
+			<field name="name">Hospital Department</field>
 			<field name="res_model">hospital.category</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree, form</field>
