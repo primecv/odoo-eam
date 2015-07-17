@@ -11,7 +11,14 @@
 				</field>
 
 				<field name="criticality" position="before">
+					<field name="category_id"/>
 					<field name="property_stock_asset" domain="[('usage','=','asset')]"/>
+				</field>
+				<field name="criticality" position="replace">
+					<field name="criticality" invisible="1"/>
+				</field>
+				<field name="user_id" position="replace">
+					<field name="user_id" invisible="1"/>
 				</field>
 
 				<field name="category_ids" position="before">
@@ -19,9 +26,8 @@
 					<field name="asset_id" readonly="1"/>
 				</field>
 				<field name="active" position="before">
-					<field name="category_id"/>
 					<field name="hospital_id" on_change="onchange_hospital(hospital_id)" domain="[('is_hospital','=',True)]" context="{'form_view_ref': 'res_partner_hospital.view_partner_hospital_form'}"/>
-					<field name="hospital_category_id" attrs="{'invisible':[('hospital_id','=',False)]}" readonly="1"/>
+					<field name="hospital_category_id" readonly="1"/>
 				</field>
 				<field name="active" position="replace">
 					<field name="active" invisible="1"/>
@@ -31,14 +37,14 @@
                     <page string="Info">
                         <group>
                             <group>
-                                <field name="asset_number"/>
-                                <field name="model"/>
-                                <field name="serial"/>
-                            </group>
-                            <group>
 								<field name="manuf_year"/>
 								<field name="mark"/>
 								<field name="state_operation" widget="radio"/>
+                            </group>
+                            <group>
+                                <field name="asset_number" invisible="1"/>
+                                <field name="model"/>
+                                <field name="serial"/>
                             </group>
                         </group>
                         <group string="Warranty">
