@@ -18,3 +18,15 @@ class mro_request(osv.Model):
 	_defaults = {
 		'type': 'Corrective',
 	}
+
+class mro_order(osv.Model):
+	_inherit = "mro.order"
+
+	_columns = {
+		'type': fields.selection([('Preventive', 'Preventive')],'Type of Maintenance'),
+		'technician_id': fields.many2one("res.partner", 'Technician', domain="[('is_technician','=',True)]"),
+	}
+
+	_defaults = {
+		'type': 'Preventive'
+	}

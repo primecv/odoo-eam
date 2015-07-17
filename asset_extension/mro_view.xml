@@ -46,7 +46,21 @@
 		</record>
 
 
-					
+			
+        <record id="mro_order_form_view" model="ir.ui.view">
+            <field name="name">mro.order.form</field>
+            <field name="model">mro.order</field>
+			<field name="inherit_id" ref="mro.mro_order_form_view"/>
+            <field name="arch" type="xml">		
+				<field name="description" position="after">
+					<field name="type" readonly="1"/>
+					<field name="technician_id" required="1"/>
+				</field>
+				<field name="date_execution" position="replace">
+					<field name="date_execution" on_change="onchange_execution_date(date_execution,state)" attrs="{'invisible':[('state','in',('draft','released','cancel'))]}"/>
+				</field>
+			</field>
+		</record>
 
 	</data>
 </openerp>
