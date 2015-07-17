@@ -11,5 +11,6 @@ class product_product(osv.Model):
 		'serial': fields.char('Serial No'),
 		'purchase_date': fields.date('Purchase Date'),
 		'manufacturing_year': fields.date('Manufacturing Year'),
+		'equipment_id': fields.many2one('asset.asset', 'Equipment'),
 	
 	}
