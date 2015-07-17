@@ -34,6 +34,8 @@
         'product_view.xml',
         'asset_sequence.xml',
         'asset_data.xml',
+        'res_partner_view.xml',
+        'mro_view.xml',
     ],
     'installable': True,
     'auto_install': False,
