@@ -27,7 +27,7 @@
 				</field>
 				<field name="active" position="before">
 					<field name="hospital_id" domain="[('is_hospital','=',True)]" context="{'form_view_ref': 'res_partner_hospital.view_partner_hospital_form'}"/>
-					<field name="department_ids" readonly="1"/>
+					<field name="department_ids"/>
 				</field>
 				<field name="active" position="replace">
 					<field name="active" invisible="1"/>
