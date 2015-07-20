@@ -6,7 +6,7 @@ class asset_asset(osv.osv):
 	_columns = {
 		'asset_id': fields.char('ID'),
 		'hospital_id': fields.many2one('res.partner', 'Hospital'),
-		'hospital_category_id': fields.related('hospital_id', 'hospital_category_id', 'name', string='Department', type='char', store=True),
+		'department_ids': fields.related('hospital_id', 'department_ids', string='Departments', relation='hospital.department', type='many2many', store=False, readonly=True),
 		'category_id': fields.many2one('asset.asset.category', 'Category'),
 		'mark': fields.char('Mark'),
 		'manuf_year': fields.date('Manufacturing Year'),
@@ -30,9 +30,12 @@ class asset_asset(osv.osv):
 
 	def onchange_hospital(self, cr, uid, ids, hospital_id, context=None):
 		if not hospital_id:
-			return {'value': {'hospital_category_id': False}}
-		hospital_category_id = self.pool.get('res.partner').browse(cr, uid, [hospital_id])[0].hospital_category_id.name
-		return {'value': {'hospital_category_id': hospital_category_id}}
+			return {'value': {'department_ids': []}}
+		departments = []
+		for partner in self.pool.get('res.partner').browse(cr, uid, [hospital_id]):
+			for dept in partner.department_ids:
+				departments.append(dept.id)
+		return {'value': {'department_ids': [6,0,departments]}}
 
 
 

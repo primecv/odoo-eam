@@ -233,7 +233,7 @@
 						<page string="Department" name="department">
 							<group>
 								<group>
-									<field name="hospital_category_id" required="1" />
+									<field name="department_ids" required="1" />
 								</group>
 								<group>
 									<field name="is_hospital" invisible="1"/>
@@ -299,9 +299,7 @@
 						<group>
 							<group>
 								<field name="is_hospital"/>
-							</group>
-							<group>
-								<field name="hospital_category_id" attrs="{'invisible':[('is_hospital','=',False)], 'required':[('is_hospital','=',True)]}"/>
+								<field name="department_ids" widget="many2many_list" attrs="{'invisible':[('is_hospital','=',False)], 'required':[('is_hospital','=',True)]}" colspan="4"/>
 							</group>
 						</group>
 					</page>
@@ -315,12 +313,12 @@
 		<menuitem id="hospital_sub" parent="hospital_main" action="action_partner_hospital_form"/>
 
 
-		<record id="hospital_category_form" model="ir.ui.view">
-			<field name="name">hospital.category.form</field>
-			<field name="model">hospital.category</field>
+		<record id="hospital_department_form" model="ir.ui.view">
+			<field name="name">hospital.department.form</field>
+			<field name="model">hospital.department</field>
 			<field name="arch" type="xml">
 				<form string="Hospital Department">
-					<group>
+					<group col="4">
 						<field name="name" required="1"/>
 						<field name="code" required="1"/>
 					</group>
@@ -328,9 +326,9 @@
 			</field>
 		</record>
 
-		<record id="hospital_category_tree" model="ir.ui.view">
-			<field name="name">hospital.category.tree</field>
-			<field name="model">hospital.category</field>
+		<record id="hospital_department_tree" model="ir.ui.view">
+			<field name="name">hospital.department.tree</field>
+			<field name="model">hospital.department</field>
 			<field name="arch" type="xml">
 				<tree string="Hospital Department">
 					<field name="name"/>
@@ -340,15 +338,15 @@
 		</record>
 	
 
-		<record id="hospital_category_action" model="ir.actions.act_window">
+		<record id="hospital_department_action" model="ir.actions.act_window">
 			<field name="name">Hospital Department</field>
-			<field name="res_model">hospital.category</field>
+			<field name="res_model">hospital.department</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">tree, form</field>
+			<field name="view_mode">tree,form</field>
 		</record>
 
 		<menuitem id="hospital_configuration" parent="hospital_top" name="Configuration" sequence="20"/>
-		<menuitem id="hospital_category" parent="hospital_configuration" action="hospital_category_action"/>
+		<menuitem id="menu_hospital_department" parent="hospital_configuration" action="hospital_department_action"/>
 
 	
 	</data>

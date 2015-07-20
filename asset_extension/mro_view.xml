@@ -13,7 +13,7 @@
 				<field name="requested_date" position="after">
 					<field name="cause"/>
 					<field name="hospital_id" context="{'form_view_ref': 'res_partner_hospital.view_partner_hospital_form'}"/>
-					<field name="hospital_department_id"/>
+					<field name="department_ids"/>
 					<field name="type" readonly="1"/>
 				</field>
 				<field name="requested_date" position="replace"/>

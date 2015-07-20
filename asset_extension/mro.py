@@ -5,7 +5,7 @@ class mro_request(osv.Model):
 
 	_columns = {
 		'hospital_id': fields.many2one('res.partner', 'Hospital', domain="[('is_hospital','=',True)]"),
-		'hospital_department_id': fields.many2one('hospital.category', 'Department'),
+		'department_ids': fields.related('hospital_id', 'department_ids', string='Departments', type='many2many', relation='hospital.department', store=False, readonly=True),
 		'diagnostic': fields.text('Diagnostic'),
 		'resolution': fields.text('Resolution'),
 		'resolution_date': fields.date('Resolution Date'),
