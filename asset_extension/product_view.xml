@@ -56,7 +56,7 @@
                                 </group>
                                 <field name="description" placeholder="describe the product characteristics..."/>
                             </page>
-                            <page string="Procurements" groups="base.group_user">
+                            <page string="Procurements" groups="base.group_user" invisible="1">
                                 <group name="procurement">
                                     <group name="general">
                                         <field name="standard_price"/>
@@ -70,7 +70,7 @@
                                 <separator string="Description for Suppliers"/>
                                 <field name="description_purchase" placeholder="This note will be displayed on requests for quotation..."/>
                             </page>
-                            <page string="Inventory">
+                            <page string="Inventory"  invisible="1">
                                 <group name="inventory">
                                      <group name="status" string="Status">
                                         <field name="state"/>
@@ -86,7 +86,7 @@
                                     <field name="packaging_ids" string="Configurations" context="{'tree_view_ref':'product.product_packaging_tree_view_product', 'form_view_ref': 'product.product_packaging_form_view_without_product'}"/>
                                 </group>
                             </page>
-                            <page string="Sales" attrs="{'invisible':[('sale_ok','=',False)]}" name="sales">
+                            <page string="Sales" attrs="{'invisible':[('sale_ok','=',False)]}" name="sales" invisible="1">
                                 <group name="sale">
                                     <group name="sale_condition" string="Sale Conditions" colspan="3">
                                         <label for="warranty"/>
@@ -105,7 +105,7 @@
                                 <separator string="Description for Quotations"/>
                                 <field name="description_sale" placeholder="note to be displayed on quotations..."/>
                             </page>
-				            <page string="Accounting" groups="account.group_account_invoice">
+				            <page string="Accounting" groups="account.group_account_invoice" invisible="1">
 				                <group>
 				                    <label for="categ_id" string="Internal Category"/>
 				                    <div><field name="categ_id" colspan="3" nolabel="1"/></div>
