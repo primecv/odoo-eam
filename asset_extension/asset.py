@@ -6,12 +6,14 @@ class asset_asset(osv.osv):
 	_columns = {
 		'asset_id': fields.char('ID'),
 		'hospital_id': fields.many2one('res.partner', 'Hospital'),
-		'department_ids': fields.many2many('hospital.department', 'asset_hospital_departments', 'asset_id', 'department_id', 'Departments'),
+		'department_ids': fields.many2many('hospital.department', 'asset_hospital_departments', 'asset	_id', 'department_id', 'Departments'),
 		'category_id': fields.many2one('asset.asset.category', 'Category'),
 		'mark': fields.char('Mark'),
 		'manuf_year': fields.date('Manufacturing Year'),
 		'state_operation': fields.selection([('1', 'Active'),('0','Inactive')], 'State Operation'),
 		'notes': fields.text('Notes'),
+		'code': fields.char('Code'),
+		'asset_value': fields.float('Value'),
 	}
 
 	def create(self, cr, uid, vals, context=None):
@@ -26,6 +28,8 @@ class asset_asset(osv.osv):
 			name = vals['name'][0:3]
 		asset_id = hospital_seq + name + str(seq)
 		vals['asset_id'] = asset_id
+		codeseq = self.pool.get('ir.sequence').get(cr, uid, 'asset.code') 
+		vals['code'] = codeseq
 		return super(asset_asset, self).create(cr, uid, vals, context)
 
 	def onchange_hospital(self, cr, uid, ids, hospital_id, context=None):

@@ -28,7 +28,7 @@
     'author': 'Prime Consulting, Cape Verde',
     'website': 'prime.cv',
     'category': 'Enterprise Asset Management',
-    'depends': ['mro', 'res_partner_hospital', 'hr'],
+    'depends': ['mro', 'res_partner_hospital', 'hr', 'asset_stock'],
     'data': [
         'asset_view.xml',
         'product_view.xml',
@@ -37,6 +37,7 @@
         #'res_partner_view.xml',
         'hr_view.xml',
         'mro_view.xml',
+        'asset_stock_view.xml',
     ],
     'installable': True,
     'auto_install': False,

@@ -1,0 +1,58 @@
+<openerp>
+	<data>
+
+        <record id="assets_form_view_stock_extension" model="ir.ui.view">
+            <field name="name">asset.asset.form.stock.extension</field>
+            <field name="model">asset.asset</field>
+			<field name="inherit_id" ref="asset_stock.assets_form_view_stock"/>
+            <field name="arch" type="xml">
+				<field name="property_stock_asset" position="replace"/>
+				<field name="criticality" position="before">
+					<field name="property_stock_asset" domain="[('usage','=','asset')]"/>
+				</field>
+
+				<field name="active" position="replace">
+					<field name="active" invisible="1"/>
+				</field>
+				<field name="active" position="before">
+					<field name="category_id"/>
+					<field name="asset_value"/>
+				</field>
+
+				<page string="Info" position="replace">
+                    <page string="Info">
+                        <group>
+                            <group>
+                                <field name="asset_number"/>
+                                <field name="model"/>
+                                <field name="serial"/>
+                            </group>
+                            <group>
+								<field name="mark"/>
+								<field name="manuf_year"/>
+								<field name="state_operation" widget="radio"/>
+                            </group>
+                        </group>
+                        <group string="Warranty">
+                            <group>
+                            <field name="manufacturer_id"/>
+                            <field name="start_date"/>
+                            <field name="warranty_start_date"/>
+                            </group>
+                            <group>
+                            <field name="vendor_id"/>
+                            <field name="purchase_date"/>
+                            <field name="warranty_end_date"/>
+                            </group>
+                        </group>
+						<group colspan="4" string="Notes">
+							<field name="notes" colspan="4" nolabel="1"/> 
+						</group>
+                    </page>
+				</page>
+
+			</field>
+		</record>
+
+	</data>
+</openerp>

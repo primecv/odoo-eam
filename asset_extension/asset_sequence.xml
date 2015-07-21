@@ -13,5 +13,17 @@
             <field name="padding">4</field>
         </record>
 
+        <record id="seq_type_asset_code" model="ir.sequence.type">
+            <field name="name">Asset Code</field>
+            <field name="code">asset.code</field>
+        </record>
+
+        <record id="seq_asset_code" model="ir.sequence">
+            <field name="name">Asset Code</field>
+            <field name="code">asset.code</field>
+            <field name="prefix">HCV</field>
+            <field name="padding">4</field>
+        </record>
+
 	</data>
 </openerp>
