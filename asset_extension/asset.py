@@ -6,7 +6,7 @@ class asset_asset(osv.osv):
 	_columns = {
 		'asset_id': fields.char('ID'),
 		'hospital_id': fields.many2one('res.partner', 'Hospital'),
-		'department_ids': fields.many2many('hospital.department', 'asset_hospital_departments', 'asset	_id', 'department_id', 'Departments'),
+		'department_ids': fields.many2many('hospital.department', 'asset_hospital_departments', 'asset_id', 'department_id', 'Departments'),
 		'category_id': fields.many2one('asset.asset.category', 'Category'),
 		'mark': fields.char('Mark'),
 		'manuf_year': fields.date('Manufacturing Year'),
