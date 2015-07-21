@@ -15,6 +15,7 @@
 					<field name="active" invisible="1"/>
 				</field>
 				<field name="active" position="before">
+					<field name="code" readonly="1" attrs="{'invisible': [('code','=',False)]}"/>
 					<field name="category_id"/>
 					<field name="asset_value"/>
 				</field>
