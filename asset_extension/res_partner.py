@@ -5,5 +5,6 @@ class res_partner(osv.Model):
 
 	_columns = {
 		#'is_technician': fields.boolean('Is Technician?'),
+		'is_manufacturer': fields.boolean('Is Manufacturer?'),
 	}
 
