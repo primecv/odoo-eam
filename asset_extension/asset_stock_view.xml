@@ -7,6 +7,9 @@
 			<field name="inherit_id" ref="asset_stock.assets_form_view_stock"/>
             <field name="arch" type="xml">
 				<field name="property_stock_asset" position="replace"/>
+				<field name="user_id" position="replace">
+					<field name="user_id" invisible="1"/>
+				</field>
 				<field name="criticality" position="before">
 					<field name="property_stock_asset" domain="[('usage','=','asset')]"/>
 				</field>
@@ -24,7 +27,9 @@
                     <page string="Info">
                         <group>
                             <group>
-                                <field name="asset_number"/>
+                                <field name="asset_number" invisible="1"/>
+								<field name="manufacturer_id" domain="[('is_manufacturer','=',True)]"/>
+	                            <field name="start_date"/>								
                                 <field name="model"/>
                                 <field name="serial"/>
                             </group>
@@ -35,15 +40,13 @@
                             </group>
                         </group>
                         <group string="Warranty">
-                            <group>
-                            <field name="manufacturer_id" domain="[('is_manufacturer','=',True)]"/>
-                            <field name="start_date"/>
-                            <field name="warranty_start_date"/>
+                            <group col="4">
+                            	<field name="warranty_start_date"/>
+								<field name="warranty_end_date"/>
                             </group>
-                            <group>
-                            <field name="vendor_id"/>
-                            <field name="purchase_date"/>
-                            <field name="warranty_end_date"/>
+                            <group invisible="1">
+	                            <field name="vendor_id"/>
+    	                        <field name="purchase_date"/>
                             </group>
                         </group>
 						<group colspan="4" string="Notes">
