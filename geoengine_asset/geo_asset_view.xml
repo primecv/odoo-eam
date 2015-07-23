@@ -6,9 +6,12 @@
             <field name="model">asset.asset</field>
             <field name="inherit_id" ref="asset_extension.assets_form_view_stock_extension"/>
             <field name="arch" type="xml">
+				<field name="property_stock_asset" domain="[('usage','=','asset')]" position="replace">
+					<field name="property_stock_asset" domain="[('usage','=','asset')]" on_change="onchange_location(property_stock_asset)"/>
+				</field>
                 <page string="Info" position="after">
                     <page string="GeoReferencing">
-						<group col="4">
+						<group col="4" invisible="1">
 							<field name="street"/>
 							<field name="city"/>
 							<field name="county"/>

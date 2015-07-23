@@ -3,3 +3,4 @@ import product
 import hr 
 import res_partner
 import mro
+import stock

@@ -38,6 +38,7 @@
         'hr_view.xml',
         'mro_view.xml',
         'asset_stock_view.xml',
+        'stock_view.xml',
         
     ],
     'installable': True,

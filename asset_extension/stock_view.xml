@@ -1,0 +1,26 @@
+<openerp>
+	<data>
+
+        <record id="view_location_asset_form" model="ir.ui.view">
+            <field name="name">stock.location.asset.form</field>
+            <field name="model">stock.location</field>
+			<field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+				<separator string="Additional Information" position="before">
+					<group col="4" string="Location" attrs="{'invisible': [('usage','!=','asset')]}">
+						<field name="street"/>
+						<field name="city"/>
+						<field name="county"/>
+						<field name="island"/>
+						<field name="country"/>
+						<field name="zip"/>
+					</group>
+				</separator>
+				<field name="location_id" position="replace">
+					<field name="location_id" on_change="onchange_location_id(location_id)"/>
+				</field>
+			</field>
+		</record>
+
+	</data>
+</openerp>

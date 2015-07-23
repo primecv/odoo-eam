@@ -126,12 +126,12 @@ class asset_asset(geo_model.GeoModel, osv.osv):
                 self.env.cr, self.latitude, self.longitude)
 
     geo_point = fields.GeoPoint(string='Addresses Coordinate', readonly=True, store=True, compute='_get_geo_point')
-    street = oe_fields.Char(string='Street')
-    city = oe_fields.Char(string='City')
-    zip = oe_fields.Char(string='Zip')
-    country = oe_fields.Many2one('res.country', string='Country')
-    island = oe_fields.Char(string='Island')
-    county = oe_fields.Char(string='County')
+    street = oe_fields.Char(string='Street', related='property_stock_asset.street', store=True, readonly=True)
+    city = oe_fields.Char(string='City', related='property_stock_asset.city', store=True, readonly=True)
+    zip = oe_fields.Char(string='Zip', related='property_stock_asset.zip', store=True, readonly=True)
+    country = oe_fields.Many2one('res.country', string='Country', related='property_stock_asset.country', store=True, readonly=True)
+    island = oe_fields.Char(string='Island', related='property_stock_asset.island', store=True, readonly=True)
+    county = oe_fields.Char(string='County', related='property_stock_asset.county', store=True, readonly=True)
     latitude = oe_fields.Float(string='Latitude')
     longitude = oe_fields.Float(string='Longitude')
 
@@ -150,3 +150,21 @@ class asset_asset(geo_model.GeoModel, osv.osv):
                     'longitude': result[1],
                 }, context=context)
         return True
+
+    @api.one
+    @api.depends('property_stock_asset')
+    def onchange_location(self, location_id=False):
+        if location_id:
+           location = self.env['stock.location'].browse(location_id)
+           return {
+              'value': {
+                  'street': location.street,
+  				  'city': location.city,
+				  'zip': location.zip,
+			 	  'country': location.country.id or False,
+         		  'island': location.island,
+				  'county': location.county
+               }
+            }
+        return {} 
+
