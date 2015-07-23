@@ -8,12 +8,17 @@
             <field name="arch" type="xml">
 				<separator string="Additional Information" position="before">
 					<group col="4" string="Location" attrs="{'invisible': [('usage','!=','asset')]}">
-						<field name="street"/>
-						<field name="city"/>
-						<field name="county"/>
-						<field name="island"/>
 						<field name="country"/>
+						<field name="island"/>
+						<field name="county"/>
+						<field name="city"/>
+						<field name="street"/>
 						<field name="zip"/>
+					</group>
+					<group col="5">
+						<button name="geo_localize" type="object" string="GeoLocalize" icon="color-picker"/><newline/>
+						<field name="latitude" readonly="1"/>
+						<field name="longitude" readonly="1"/>
 					</group>
 				</separator>
 				<field name="location_id" position="replace">

@@ -12,14 +12,14 @@
                 <page string="Info" position="after">
                     <page string="GeoReferencing">
 						<group col="4" invisible="1">
-							<field name="street"/>
-							<field name="city"/>
-							<field name="county"/>
-							<field name="island"/>
 							<field name="country"/>
+							<field name="island"/>
+							<field name="county"/>
+							<field name="city"/>
+							<field name="street"/>
 							<field name="zip"/>
 						</group>
-						<group col="5">
+						<group col="5" invisible="1">
 							<button name="geo_localize" type="object" string="GeoLocalize" icon="color-picker"/><newline/>
 							<field name="latitude" readonly="1"/>
 							<field name="longitude" readonly="1"/>

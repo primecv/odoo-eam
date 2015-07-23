@@ -117,7 +117,7 @@ class asset_asset(geo_model.GeoModel, osv.osv):
         return True
 
     @api.one
-    @api.depends('street', 'city', 'zip', 'country', 'county', 'latitude', 'longitude')
+    @api.depends('latitude', 'longitude')
     def _get_geo_point(self):
         if not self.latitude or not self.longitude:
             self.geo_point = False
@@ -132,8 +132,8 @@ class asset_asset(geo_model.GeoModel, osv.osv):
     country = oe_fields.Many2one('res.country', string='Country', related='property_stock_asset.country', store=True, readonly=True)
     island = oe_fields.Char(string='Island', related='property_stock_asset.island', store=True, readonly=True)
     county = oe_fields.Char(string='County', related='property_stock_asset.county', store=True, readonly=True)
-    latitude = oe_fields.Float(string='Latitude')
-    longitude = oe_fields.Float(string='Longitude')
+    latitude = oe_fields.Float(string='Latitude', related='property_stock_asset.latitude', store=True, readonly=True)
+    longitude = oe_fields.Float(string='Longitude', related='property_stock_asset.longitude', store=True, readonly=True)
 
     def geo_localize(self, cr, uid, ids, context=None):
         for product in self.browse(cr, uid, ids):
@@ -163,7 +163,9 @@ class asset_asset(geo_model.GeoModel, osv.osv):
 				  'zip': location.zip,
 			 	  'country': location.country.id or False,
          		  'island': location.island,
-				  'county': location.county
+				  'county': location.county,
+                  'latitude': location.latitude,
+				  'longitude': location.longitude
                }
             }
         return {} 
