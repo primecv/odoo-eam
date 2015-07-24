@@ -30,6 +30,7 @@
     'depends': ['base', 'account'],
     'data': [
         'res_partner_view.xml',
+        'res_country_city_view.xml',
         'res_partner_hospital_data.xml',
     ],
     'installable': True,

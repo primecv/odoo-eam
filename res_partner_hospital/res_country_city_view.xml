@@ -1,0 +1,73 @@
+<openerp>
+	<data>
+
+
+		<record id="res_country_city_form" model="ir.ui.view">
+			<field name="name">res.country.city.form</field>
+			<field name="model">res.country.city</field>
+			<field name="arch" type="xml">
+				<form string="City">
+					<group col='4'>
+						<field name="name" required="1"/>
+						<field name="country_id" required="1"/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id="res_country_city_tree" model="ir.ui.view">
+			<field name="name">res.country.city.tree</field>
+			<field name="model">res.country.city</field>
+			<field name="arch" type="xml">
+				<tree string="City">
+					<field name="name"/>
+					<field name="country_id"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="res_country_city_action" model="ir.actions.act_window">
+			<field name="name">Cities</field>
+			<field name="res_model">res.country.city</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="menu_res_country_city" parent="base.menu_localisation" sequence="5" action="res_country_city_action" groups="base.group_no_one"/>
+
+		<record id="res_country_county_form" model="ir.ui.view">
+			<field name="name">res.country.county.form</field>
+			<field name="model">res.country.county</field>
+			<field name="arch" type="xml">
+				<form string="County">
+					<group col='4'>
+						<field name="name" required="1"/>
+						<field name="country_id" required="1"/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id="res_country_county_tree" model="ir.ui.view">
+			<field name="name">res.country.county.tree</field>
+			<field name="model">res.country.county</field>
+			<field name="arch" type="xml">
+				<tree string="County">
+					<field name="name"/>
+					<field name="country_id"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="res_country_county_action" model="ir.actions.act_window">
+			<field name="name">Counties</field>
+			<field name="res_model">res.country.county</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<menuitem id="menu_res_country_county" parent="base.menu_localisation" sequence="7" action="res_country_county_action" groups="base.group_no_one"/>
+
+	</data>
+</openerp>
