@@ -16,7 +16,7 @@ class asset_asset(osv.osv):
 		'code': fields.char('Code'),
 		'asset_value': fields.float('Value'),
 		'asset_value_estimate': fields.float('Estimated Value'),
-		'equipment_type': fields.selection([('Equipamento Biomédico','Equipamento Biomédico'), ('Equipamento Refrigeração','Equipamento Refrigeração'), ('Equipamento Lavandaria','Equipamento Lavandaria')], 'Equipment Family')
+		'equipment_type': fields.selection([('equip1','Equipamento Biomédico'), ('equip2','Equipamento Refrigeração'), ('equip3','Equipamento Lavandaria')], 'Equipment Family')
 	}
 
 	def create(self, cr, uid, vals, context=None):
