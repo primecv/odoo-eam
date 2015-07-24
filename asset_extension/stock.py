@@ -60,11 +60,49 @@ class stock_location(osv.osv):
             }
         return {} 
 
+    @api.multi
+    def onchange_country(self, country_id=False):
+        if country_id:
+           country = self.env['res.country'].browse(country_id)
+           return {
+                  'value': {
+  			   	     'city_id': False,
+				     'county_id': False,
+  			   	     'city': False,
+				     'county': False,
+                     'country_code': country.code
+                    }
+                }
+        return {'value': {'country_code': ''}} 
+
+    def onchange_county(self, county_id=False):
+        if county_id:
+           county = self.env['res.country.county'].browse(county_id)
+           return {
+                  'value': {
+				     'county': county.name,
+                    }
+                }
+        return {} 
+
+    def onchange_city(self, city_id=False):
+        if city_id:
+           city = self.env['res.country.city'].browse(city_id)
+           return {
+                  'value': {
+				     'city': city.name,
+                    }
+                }
+        return {} 
+
     street = fields.Char(string='Street')
+    city_id = fields.Many2one('res.country.city', string='City')
     city = fields.Char(string='City')
     zip = fields.Char(string='Zip')
     country = fields.Many2one('res.country', string='Country')
+    country_code = fields.Char(string='Country Code')
     island = fields.Char(string='Island')
+    county_id = fields.Many2one('res.country.county', string='County')
     county = fields.Char(string='County')
     latitude = fields.Float(string='Latitude')
     longitude = fields.Float(string='Longitude')
