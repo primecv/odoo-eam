@@ -13,6 +13,9 @@
             <field name="padding">4</field>
         </record>
 
+	</data>
+
+	<data noupdate="0">
         <record id="seq_type_asset_code" model="ir.sequence.type">
             <field name="name">Asset Code</field>
             <field name="code">asset.code</field>
@@ -22,8 +25,7 @@
             <field name="name">Asset Code</field>
             <field name="code">asset.code</field>
             <field name="prefix">HCV</field>
-            <field name="padding">4</field>
+            <field name="padding">10</field>
         </record>
-
 	</data>
 </openerp>

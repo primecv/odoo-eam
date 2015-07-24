@@ -12,6 +12,11 @@
 				</field>
 				<field name="criticality" position="before">
 					<field name="property_stock_asset" domain="[('usage','=','asset')]"/>
+					<field name="equipment_type"/>		
+					<field name="asset_value_estimate"/>
+				</field>
+				<field name="criticality" position="replace">
+					<field name="criticality" invisible="1"/>
 				</field>
 
 				<field name="active" position="replace">

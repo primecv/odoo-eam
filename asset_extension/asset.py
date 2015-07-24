@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from openerp.osv import osv, fields
 
 class asset_asset(osv.osv):
@@ -14,6 +15,8 @@ class asset_asset(osv.osv):
 		'notes': fields.text('Notes'),
 		'code': fields.char('Code'),
 		'asset_value': fields.float('Value'),
+		'asset_value_estimate': fields.float('Estimated Value'),
+		'equipment_type': fields.selection([('Equipamento Biomédico','Equipamento Biomédico'), ('Equipamento Refrigeração','Equipamento Refrigeração'), ('Equipamento Lavandaria','Equipamento Lavandaria')], 'Equipment Family')
 	}
 
 	def create(self, cr, uid, vals, context=None):
