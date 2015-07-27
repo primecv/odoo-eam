@@ -186,6 +186,21 @@
             parent="mro.menu_maintenance_parts"
             sequence="100"/>
 
+		<delete id="mro.menu_maintenance_parts_parts" model="ir.ui.menu"/>
+
+        <menuitem name="Parts"
+            id="menu_stock_parts"
+            parent="stock.menu_stock_root"
+            groups="stock.group_stock_user"
+            sequence="10"/>
+
+        <menuitem name="Parts"
+            action="product_template_parts_action"
+            id="menu_stock_parts_parts"
+            parent="menu_stock_parts"
+            sequence="100"/>
+
+
 				
 	</data>
 </openerp>
