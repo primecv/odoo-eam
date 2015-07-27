@@ -1,0 +1,282 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* res_partner_hospital
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20150126\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-25 11:54+0000\n"
+"PO-Revision-Date: 2015-07-25 17:16-0100\n"
+"Last-Translator: eneida\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_PT\n"
+"X-Generator: Poedit 1.6.9\n"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "(edit company address)"
+msgstr "(edite o endereço da empresa)"
+
+#. module: res_partner_hospital
+#: model:ir.actions.act_window,help:res_partner_hospital.action_partner_hospital_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a Hospital.\n"
+"              </p><p>\n"
+"                Odoo helps you easily track all activities related to\n"
+"                a customer; discussions, history of business opportunities,\n"
+"                documents, etc.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a Hospital.\n"
+"              </p><p>\n"
+"                Odoo helps you easily track all activities related to\n"
+"                a customer; discussions, history of business opportunities,\n"
+"                documents, etc.\n"
+"              </p>\n"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+#: view:res.partner:res_partner_hospital.view_partner_property_asset_form
+msgid "Accounting"
+msgstr "Contabilidade"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Address"
+msgstr "Endereço"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Bank Details"
+msgstr "Detalhes bancários"
+
+#. module: res_partner_hospital
+#: model:ir.actions.act_window,name:res_partner_hospital.res_country_city_action
+#: model:ir.ui.menu,name:res_partner_hospital.menu_res_country_city
+msgid "Cities"
+msgstr "Cidades"
+
+#. module: res_partner_hospital
+#: view:res.country.city:res_partner_hospital.res_country_city_form
+#: view:res.country.city:res_partner_hospital.res_country_city_tree
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "City"
+msgstr "Cidade"
+
+#. module: res_partner_hospital
+#: field:res.country.city,name:0
+msgid "City Name"
+msgstr "Nome da Cidade"
+
+#. module: res_partner_hospital
+#: field:hospital.department,code:0
+msgid "Code"
+msgstr "Código"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Company"
+msgstr "Empresa"
+
+#. module: res_partner_hospital
+#: model:ir.ui.menu,name:res_partner_hospital.hospital_configuration
+msgid "Configuration"
+msgstr "Configuração"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Contacts"
+msgstr "Contactos"
+
+#. module: res_partner_hospital
+#: model:ir.actions.act_window,name:res_partner_hospital.res_country_county_action
+#: model:ir.ui.menu,name:res_partner_hospital.menu_res_country_county
+msgid "Counties"
+msgstr "Concelhos"
+
+#. module: res_partner_hospital
+#: field:res.country.city,country_id:0 field:res.country.county,country_id:0
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Country"
+msgstr "País"
+
+#. module: res_partner_hospital
+#: view:res.country.county:res_partner_hospital.res_country_county_form
+#: view:res.country.county:res_partner_hospital.res_country_county_tree
+msgid "County"
+msgstr "Concelho"
+
+#. module: res_partner_hospital
+#: field:res.country.county,name:0
+msgid "County Name"
+msgstr "Nome do Concelho"
+
+#. module: res_partner_hospital
+#: field:hospital.department,create_uid:0 field:res.country.city,create_uid:0
+#: field:res.country.county,create_uid:0
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: res_partner_hospital
+#: field:hospital.department,create_date:0
+#: field:res.country.city,create_date:0 field:res.country.county,create_date:0
+msgid "Created on"
+msgstr "Criado a "
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+#: view:res.partner:res_partner_hospital.view_partner_property_asset_form
+msgid "Department"
+msgstr "Serviço"
+
+#. module: res_partner_hospital
+#: field:hospital.department,name:0
+msgid "Department Name"
+msgstr "Nome do Serviço"
+
+#. module: res_partner_hospital
+#: field:res.partner,department_ids:0
+msgid "Departments"
+msgstr "Serviços"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Fax:"
+msgstr "Fax"
+
+#. module: res_partner_hospital
+#: model:ir.actions.act_window,name:res_partner_hospital.action_partner_hospital_form
+#: model:ir.ui.menu,name:res_partner_hospital.hospital_sub
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Hospital"
+msgstr "Unidade Hospitalar"
+
+#. module: res_partner_hospital
+#: model:ir.model,name:res_partner_hospital.model_hospital_category
+msgid "Hospital Category - Department"
+msgstr "Serviços"
+
+#. module: res_partner_hospital
+#: view:hospital.department:res_partner_hospital.hospital_department_form
+#: view:hospital.department:res_partner_hospital.hospital_department_tree
+#: model:ir.actions.act_window,name:res_partner_hospital.hospital_department_action
+#: model:ir.ui.menu,name:res_partner_hospital.menu_hospital_department
+msgid "Hospital Department"
+msgstr "Serviço"
+
+#. module: res_partner_hospital
+#: model:ir.model,name:res_partner_hospital.model_hospital_department
+msgid "Hospital Department - Service Areas"
+msgstr "Serviços"
+
+#. module: res_partner_hospital
+#: model:ir.ui.menu,name:res_partner_hospital.hospital_main
+#: model:ir.ui.menu,name:res_partner_hospital.hospital_top
+msgid "Hospital Management"
+msgstr "Gestão Hospitalar"
+
+#. module: res_partner_hospital
+#: field:hospital.department,id:0 field:res.country.city,id:0
+#: field:res.country.county,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Internal Notes"
+msgstr "Notas Internas"
+
+#. module: res_partner_hospital
+#: field:res.partner,is_hospital:0
+msgid "Is Hospital?"
+msgstr "É uma unidade Hospitalar?"
+
+#. module: res_partner_hospital
+#: field:hospital.department,write_uid:0 field:res.country.city,write_uid:0
+#: field:res.country.county,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualização por"
+
+#. module: res_partner_hospital
+#: field:hospital.department,write_date:0 field:res.country.city,write_date:0
+#: field:res.country.county,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualização a"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Mobile:"
+msgstr "Móvel:"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Name"
+msgstr "Nome"
+
+#. module: res_partner_hospital
+#: model:ir.model,name:res_partner_hospital.model_res_partner
+msgid "Partner"
+msgstr "Terceiro"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Phone:"
+msgstr "Telefone"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Put an internal note..."
+msgstr "Colocar uma nota interna"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Sales & Purchases"
+msgstr "Vendas & Compras"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "State"
+msgstr "Estado"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Street..."
+msgstr "Zona"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "Tags..."
+msgstr "Tags..."
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "ZIP"
+msgstr "Código Postal"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "e.g. +32.81.81.37.00"
+msgstr ""
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "e.g. Sales Director"
+msgstr "e.g. Director de Vendas"
+
+#. module: res_partner_hospital
+#: view:res.partner:res_partner_hospital.view_partner_hospital_form
+msgid "e.g. www.odoo.com"
+msgstr "e.g. www.odoo.com"

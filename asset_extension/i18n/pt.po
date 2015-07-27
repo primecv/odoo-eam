@@ -1,0 +1,645 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* asset_extension
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20150126\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-25 11:54+0000\n"
+"PO-Revision-Date: 2015-07-26 00:09-0100\n"
+"Last-Translator: eneida\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_PT\n"
+"X-Generator: Poedit 1.6.9\n"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "(edit company address)"
+msgstr "(editar endereço de empresa)"
+
+#. module: asset_extension
+#: model:ir.actions.act_window,help:asset_extension.action_partner_manufacturer_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a manufacturer.\n"
+"              </p><p>\n"
+"                Odoo helps you easily track all activities related to\n"
+"                a customer; discussions, history of business opportunities,\n"
+"                documents, etc.\n"
+"              </p>\n"
+"            "
+msgstr ""
+
+#. module: asset_extension
+#: model:ir.actions.act_window,help:asset_extension.action_employee_technician_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a new Technician.\n"
+"              </p><p>\n"
+"                With just a quick glance on the Odoo employee screen, you\n"
+"                can easily find all the information you need for each "
+"person;\n"
+"                contact data, job position, availability, etc.\n"
+"              </p>\n"
+"            "
+msgstr ""
+
+#. module: asset_extension
+#: selection:product.product,product_type:0
+msgid "Accessory"
+msgstr "Acessório"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Accounting"
+msgstr "Contabilidade"
+
+#. module: asset_extension
+#: selection:asset.asset,state_operation:0
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "Active"
+msgstr "Activo"
+
+#. module: asset_extension
+#: view:stock.location:asset_extension.view_location_asset_form
+msgid "Additional Information"
+msgstr "Informação adicional"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Address"
+msgstr "Endereço"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_asset_asset
+msgid "Asset"
+msgstr "Activo"
+
+#. module: asset_extension
+#: model:ir.ui.menu,name:asset_extension.menu_asset_asset_category
+msgid "Asset Categories"
+msgstr "Categorias de Activo"
+
+#. module: asset_extension
+#: view:asset.asset.category:asset_extension.asset_asset_category_form
+#: view:asset.asset.category:asset_extension.asset_asset_category_tree
+#: model:ir.actions.act_window,name:asset_extension.asset_asset_category_action
+msgid "Asset Category"
+msgstr "Categoria de Activo"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Bank Details"
+msgstr "Datelhes bancários"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "Birth"
+msgstr "Nascimento"
+
+#. module: asset_extension
+#: code:addons/asset_extension/stock.py:22
+#, python-format
+msgid ""
+"Cannot contact geolocation servers. Please make sure that your internet "
+"connection is up and running (%s)."
+msgstr ""
+
+#. module: asset_extension
+#: field:asset.asset,category_id:0
+msgid "Category"
+msgstr "Categoria"
+
+#. module: asset_extension
+#: field:asset.asset.category,name:0
+msgid "Category Name"
+msgstr "Nome da Categoria"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "Citizenship & Other Info"
+msgstr "Nacionalidade e Outras informações"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+#: field:stock.location,city:0 field:stock.location,city_id:0
+msgid "City"
+msgstr "Cidade"
+
+#. module: asset_extension
+#: field:asset.asset,code:0 field:asset.asset.category,code:0
+msgid "Code"
+msgstr "Código"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Company"
+msgstr "Empresa"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Configurations"
+msgstr "Configuraações"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "Contact Information"
+msgstr "Informações de Contacto"
+
+#. module: asset_extension
+#: selection:mro.request,type:0
+msgid "Corrective"
+msgstr "Correctiva"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+#: field:stock.location,country:0
+msgid "Country"
+msgstr "País"
+
+#. module: asset_extension
+#: field:stock.location,country_code:0
+msgid "Country Code"
+msgstr "Código do País"
+
+#. module: asset_extension
+#: field:stock.location,county:0 field:stock.location,county_id:0
+msgid "County"
+msgstr "Concelho"
+
+#. module: asset_extension
+#: field:asset.asset.category,create_uid:0
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: asset_extension
+#: field:asset.asset.category,create_date:0
+msgid "Created on"
+msgstr "Criado a"
+
+#. module: asset_extension
+#: field:mro.request,delivery_date:0
+msgid "Date of Delivery"
+msgstr "Data da Entrega"
+
+#. module: asset_extension
+#: field:asset.asset,department_ids:0 field:mro.request,department_ids:0
+msgid "Departments"
+msgstr "Serviços"
+
+#. module: asset_extension
+#: view:mro.request:asset_extension.mro_request_asset_extension_form
+msgid "Description"
+msgstr "Descrição"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Description for Quotations"
+msgstr "Descrição das Cotações"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Description for Suppliers"
+msgstr "Descrição para os Fornecedores"
+
+#. module: asset_extension
+#: field:mro.request,diagnostic:0
+msgid "Diagnostic"
+msgstr "Diagonóstico"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_hr_employee
+msgid "Employee"
+msgstr "Funcionário"
+
+#. module: asset_extension
+#: selection:asset.asset,equipment_type:0
+msgid "Equipamento Biomédico"
+msgstr ""
+
+#. module: asset_extension
+#: selection:asset.asset,equipment_type:0
+msgid "Equipamento Lavandaria"
+msgstr ""
+
+#. module: asset_extension
+#: selection:asset.asset,equipment_type:0
+msgid "Equipamento Refrigeração"
+msgstr ""
+
+#. module: asset_extension
+#: field:product.product,equipment_id:0
+msgid "Equipment"
+msgstr "Equipamento"
+
+#. module: asset_extension
+#: field:asset.asset,equipment_type:0
+msgid "Equipment Family"
+msgstr "Família de Equipamento"
+
+#. module: asset_extension
+#: field:asset.asset,asset_value_estimate:0
+msgid "Estimated Value"
+msgstr "Valor aproximado"
+
+#. module: asset_extension
+#: field:mro.request,technician_id:0
+msgid "Expert (technician)"
+msgstr "Técnico"
+
+#. module: asset_extension
+#: view:stock.location:asset_extension.view_location_asset_form
+msgid "GeoLocalize"
+msgstr "GeoReferenciação"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "HR Settings"
+msgstr "Configurações RH"
+
+#. module: asset_extension
+#: field:asset.asset,hospital_id:0 field:mro.request,hospital_id:0
+msgid "Hospital"
+msgstr "Unidade Hospitalar"
+
+#. module: asset_extension
+#: field:asset.asset,asset_id:0 field:asset.asset.category,id:0
+msgid "ID"
+msgstr ""
+
+#. module: asset_extension
+#: selection:asset.asset,state_operation:0
+msgid "Inactive"
+msgstr "Inactico"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_extension
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+msgid "Info"
+msgstr "Info"
+
+#. module: asset_extension
+#: view:mro.request:asset_extension.mro_request_asset_extension_form
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Information"
+msgstr "Informação"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Internal Category"
+msgstr "Categoria Interna"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Internal Notes"
+msgstr "Notas Internas"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Inventory"
+msgstr "Inventário"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_stock_location
+msgid "Inventory Locations"
+msgstr "Localização de Inventário"
+
+#. module: asset_extension
+#: field:res.partner,is_manufacturer:0
+msgid "Is Manufacturer?"
+msgstr "É Fabricante?"
+
+#. module: asset_extension
+#: field:hr.employee,is_technician:0
+msgid "Is Technician?"
+msgstr "É Tecnico"
+
+#. module: asset_extension
+#: field:stock.location,island:0
+msgid "Island"
+msgstr "Ilha"
+
+#. module: asset_extension
+#: field:asset.asset.category,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualização por"
+
+#. module: asset_extension
+#: field:asset.asset.category,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualização a"
+
+#. module: asset_extension
+#: field:stock.location,latitude:0
+msgid "Latitude"
+msgstr ""
+
+#. module: asset_extension
+#: view:stock.location:asset_extension.view_location_asset_form
+msgid "Location"
+msgstr "Localização"
+
+#. module: asset_extension
+#: field:stock.location,longitude:0
+msgid "Longitude"
+msgstr ""
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_mro_order
+msgid "Maintenance Order"
+msgstr "Manutenção Correctiva"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_mro_request
+msgid "Maintenance Request"
+msgstr "Manutenção Correctiva"
+
+#. module: asset_extension
+#: model:ir.actions.act_window,name:asset_extension.action_partner_manufacturer_form
+#: model:ir.ui.menu,name:asset_extension.menu_mrp_manufacturer_action
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Manufacturer"
+msgstr "Fabricante"
+
+#. module: asset_extension
+#: field:asset.asset,manuf_year:0 field:product.product,manufacturing_year:0
+msgid "Manufacturing Year"
+msgstr "Ano de Fabrico"
+
+#. module: asset_extension
+#: field:asset.asset,mark:0 field:product.product,mark:0
+msgid "Mark"
+msgstr "Marca"
+
+#. module: asset_extension
+#: field:product.product,model:0
+msgid "Model"
+msgstr "Modelo"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Name"
+msgstr "Nome"
+
+#. module: asset_extension
+#: code:addons/asset_extension/stock.py:21
+#, python-format
+msgid "Network error"
+msgstr "Erro de Rede"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_extension
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+#: field:asset.asset,notes:0
+msgid "Notes"
+msgstr "Observações"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "Other Information ..."
+msgstr "Outras Informações..."
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Packaging"
+msgstr "Embalagem"
+
+#. module: asset_extension
+#: selection:product.product,product_type:0
+msgid "Part"
+msgstr "Peça"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_res_partner
+msgid "Partner"
+msgstr "Terceiro"
+
+#. module: asset_extension
+#: model:ir.actions.act_window,name:asset_extension.product_template_parts_action
+#: view:product.product:asset_extension.product_template_parts_form_view
+#: view:product.product:asset_extension.product_template_parts_tree_view
+msgid "Parts"
+msgstr "Peças"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "Personal Information"
+msgstr "Informação Pessoal"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "Position"
+msgstr "Posição"
+
+#. module: asset_extension
+#: selection:mro.order,type:0
+msgid "Preventive"
+msgstr "Preventiva"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Procurements"
+msgstr "Aquisições"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_product_product
+msgid "Product"
+msgstr "Produto"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "Public Information"
+msgstr "Informação Pública"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Purchase"
+msgstr "Compra"
+
+#. module: asset_extension
+#: field:product.product,purchase_date:0
+msgid "Purchase Date"
+msgstr "Data da Compra"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Put an internal note..."
+msgstr "Colocar uma nota interna"
+
+#. module: asset_extension
+#: view:mro.request:asset_extension.mro_request_asset_extension_form
+msgid "Reject Reason"
+msgstr "Ignorar o Motivo"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "Related User"
+msgstr "Utilizador associado"
+
+#. module: asset_extension
+#: field:mro.request,resolution:0
+msgid "Resolution"
+msgstr "Resolução"
+
+#. module: asset_extension
+#: field:mro.request,resolution_date:0
+msgid "Resolution Date"
+msgstr "Data da Resolução"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Sale Conditions"
+msgstr "Condições de Venda"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Sales"
+msgstr "Vendas"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Sales & Purchases"
+msgstr "Compra e Venda"
+
+#. module: asset_extension
+#: field:product.product,serial:0
+msgid "Serial No"
+msgstr "Nº de Série"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+msgid "Start Use"
+msgstr "Início do Uso"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "State"
+msgstr "Estado"
+
+#. module: asset_extension
+#: field:asset.asset,state_operation:0
+msgid "State Operation"
+msgstr "Estado Operacional"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Status"
+msgstr "Estado"
+
+#. module: asset_extension
+#: field:stock.location,street:0
+msgid "Street"
+msgstr "Zona"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "Street..."
+msgstr "Zona..."
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+msgid "Supplier"
+msgstr "Fornecedor"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Suppliers"
+msgstr "Fornecedores"
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+#: model:ir.actions.act_window,name:asset_extension.action_employee_technician_form
+#: model:ir.ui.menu,name:asset_extension.technician_base
+#: model:ir.ui.menu,name:asset_extension.technician_main
+#: field:mro.order,technician_id:0
+msgid "Technician"
+msgstr "Técnico"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "This note will be displayed on requests for quotation..."
+msgstr "Esta nota será apresentado nos pedidos de Cotação"
+
+#. module: asset_extension
+#: view:mro.order:asset_extension.mro_order_form_view
+msgid "True"
+msgstr "Verdadeiro"
+
+#. module: asset_extension
+#: field:product.product,product_type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: asset_extension
+#: field:mro.order,type:0 field:mro.request,type:0
+msgid "Type of Maintenance"
+msgstr "Tipo de Manutenção"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Unit of Measure"
+msgstr "Unidade de Medida"
+
+#. module: asset_extension
+#: field:asset.asset,asset_value:0
+msgid "Value"
+msgstr "Valor"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_extension
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+msgid "Warranty"
+msgstr "Garantia "
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Weights"
+msgstr "Pesos"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "ZIP"
+msgstr ""
+
+#. module: asset_extension
+#: field:stock.location,zip:0
+msgid "Zip"
+msgstr ""
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "describe the product characteristics..."
+msgstr "Descreve as características do Produto"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "e.g. +32.81.81.37.00"
+msgstr ""
+
+#. module: asset_extension
+#: view:hr.employee:asset_extension.view_employee_technician_form
+msgid "e.g. Part Time"
+msgstr "e.g. Meio Período"
+
+#. module: asset_extension
+#: view:res.partner:asset_extension.view_partner_manufacturer_form
+msgid "e.g. www.odoo.com"
+msgstr ""
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "months"
+msgstr "Meses"
+
+#. module: asset_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "note to be displayed on quotations..."
+msgstr ""
