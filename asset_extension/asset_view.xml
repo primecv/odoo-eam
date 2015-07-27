@@ -107,7 +107,14 @@
             groups="asset.group_mro_manager"
             sequence="110"/>
 
+		<delete id="menu_asset_asset_category" model="ir.ui.menu"/>
 
+        <menuitem name="Asset Categories"
+            action="asset_asset_category_action"
+            id="menu_stock_asset_category"
+            parent="stock.menu_stock_configuration"
+            groups="asset.group_mro_manager"
+            sequence="110"/>
 
 
 	</data>
