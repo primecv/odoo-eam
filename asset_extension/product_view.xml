@@ -34,8 +34,8 @@
                             <page string="Information">
                                 <group colspan="4">
                                     <group>
-                                        <field name="type"/>
-                                        <field name="uom_id" on_change="onchange_uom(uom_id,uom_po_id)" groups="product.group_uom"/>
+                                        <field name="type" invisible="1"/>
+                                        <field name="uom_id" on_change="onchange_uom(uom_id,uom_po_id)" groups="product.group_uom" invisible="1"/>
                                         <field name="lst_price"/>
 										<field name="product_type" widget="radio"/>
 										<field name="model"/>
@@ -44,8 +44,9 @@
                                     </group>
                                     <group>
                                         <field name="active"/>
-										<field name="ean13"/>
-										<field name="default_code"/>
+										<field name="ean13" invisible="1"/>
+										<field name="default_code" invisible="1"/>
+										<field name="part_location_id" domain="[('usage','=','asset')]"/>
 										<field name="mark"/>
 										<field name="purchase_date"/>
 										<field name="manufacturing_year"/>
