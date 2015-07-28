@@ -9,11 +9,11 @@
 				<separator string="Additional Information" position="before">
 					<group col="4" string="Location" attrs="{'invisible': [('usage','!=','asset')]}">
 						<field name="country" on_change="onchange_country(country)"/>
-						<field name="island"/>
+						<field name="island_id" domain="[('country_id','=',country)]"/>
 						<field name="county" attrs="{'invisible':[('country_code','=','CV')]}"/>
 						<field name="city" attrs="{'invisible':[('country_code','=','CV')]}"/>
-						<field name="county_id" attrs="{'invisible':['|', ('country_code','!=','CV'),('country_code','=',False)]}" on_change="onchange_county(county_id)"/>
-						<field name="city_id" attrs="{'invisible':['|',('country_code','!=','CV'), ('country_code','=',False)]}" on_change="onchange_city(city_id)"/>
+						<field name="county_id" attrs="{'invisible':[('country_code','!=','CV')]}" domain="[('island_id','=',island_id)]" on_change="onchange_county(county_id)"/>
+						<field name="city_id" attrs="{'invisible':['|',('country_code','!=','CV'), ('country_code','=',False)]}" domain="[('county_id','=',county_id)]" on_change="onchange_city(city_id)"/>
 						<field name="street"/>
 						<field name="zip"/>
 						<field name="country_code" invisible="1"/>

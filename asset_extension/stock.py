@@ -97,13 +97,19 @@ class stock_location(osv.osv):
                 }
         return {} 
 
+    @api.model
+    def get_default_country(self):
+        country = self.env['res.country'].search([('code','ilike','CV')]).id
+        return country or False
+
     street = fields.Char(string='Street')
     city_id = fields.Many2one('res.country.city', string='City')
     city = fields.Char(string='City')
     zip = fields.Char(string='Zip')
-    country = fields.Many2one('res.country', string='Country')
+    country = fields.Many2one('res.country', string='Country', default=get_default_country)
     country_code = fields.Char(string='Country Code')
-    island = fields.Char(string='Island')
+    island_id = fields.Many2one('res.country.island', string='Island')
+    island = fields.Char(related='island_id.name', string='Island', store=True)
     county_id = fields.Many2one('res.country.county', string='County')
     county = fields.Char(string='County')
     latitude = fields.Float(string='Latitude')
