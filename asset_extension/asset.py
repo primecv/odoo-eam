@@ -18,7 +18,7 @@ class asset_asset(osv.osv):
 		'asset_value_estimate': fields.float('Estimated Value'),
 		'equipment_type': fields.selection([('equip1','Equipamento Biomédico'), ('equip2','Equipamento Refrigeração'), ('equip3','Equipamento Lavandaria')], 'Equipment Family'),
 		'barcode_label': fields.binary('Barcode'),
-		'barcode_no': fields.char('Barcode No'),
+		'barcode_no': fields.char('Barcode No', track_visibility='onchange'),
 	}
 
 	def create(self, cr, uid, vals, context=None):

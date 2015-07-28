@@ -12,5 +12,7 @@ class product_product(osv.Model):
 		'purchase_date': fields.date('Purchase Date'),
 		'manufacturing_year': fields.date('Manufacturing Year'),
 		'equipment_id': fields.many2one('asset.asset', 'Equipment'),
+		'barcode_label': fields.binary('Barcode'),
+		'barcode_no': fields.char('Barcode No', track_visibility='onchange'),
 	
 	}
