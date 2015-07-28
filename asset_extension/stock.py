@@ -75,6 +75,7 @@ class stock_location(osv.osv):
                 }
         return {'value': {'country_code': ''}} 
 
+    @api.multi
     def onchange_county(self, county_id=False):
         if county_id:
            county = self.env['res.country.county'].browse(county_id)
@@ -85,6 +86,7 @@ class stock_location(osv.osv):
                 }
         return {} 
 
+    @api.multi
     def onchange_city(self, city_id=False):
         if city_id:
            city = self.env['res.country.city'].browse(city_id)
