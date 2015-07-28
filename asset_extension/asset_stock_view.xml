@@ -42,6 +42,12 @@
 								<field name="state_operation" widget="radio"/>
                             </group>
                         </group>
+						<group attrs="{'invisible':[('barcode_no','=',False)]}">
+							<group col="4">
+								<field name="barcode_no" readonly="1"/>
+								<field name="barcode_label" widget='image' class="oe_left oe_avatar" options='{"size": [250, 100]}' nolabel="1" colspan="2" readonly="1"/>
+							</group>
+						</group>
                         <group string="Warranty">
                             <group>
 								<field name="manufacturer_id" domain="[('is_manufacturer','=',True)]"/>
