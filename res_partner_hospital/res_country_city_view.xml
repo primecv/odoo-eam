@@ -79,7 +79,7 @@
 			<field name="arch" type="xml">
 				<form string="Island">
 					<group col='4'>
-						<field name="name" required="1"/>
+						<field name="name" required="1" string="Island Name"/>
 						<field name="country_id" required="1"/>
 					</group>
 				</form>
@@ -91,7 +91,7 @@
 			<field name="model">res.country.island</field>
 			<field name="arch" type="xml">
 				<tree string="Island">
-					<field name="name"/>
+					<field name="name" string="Island Name"/>
 					<field name="country_id"/>
 				</tree>
 			</field>

@@ -69,5 +69,16 @@
 			</field>
 		</record>
 
+		<!-- Localization (Country, Island, County, City) Menus -->
+        <menuitem id="menu_localisation_stock" name="Localization" parent="stock.menu_stock_configuration" sequence="2" groups="asset.group_mro_manager"/>
+            
+        <menuitem action="base.action_country" id="menu_country_partner_stock" parent="menu_localisation_stock" sequence="2" groups="asset.group_mro_manager"/>
+
+		<menuitem id="menu_res_country_island_stock" parent="menu_localisation_stock" sequence="4" action="res_partner_hospital.res_country_island_action" groups="asset.group_mro_manager"/>
+
+		<menuitem id="menu_res_country_county_stock" parent="menu_localisation_stock" sequence="6" action="res_partner_hospital.res_country_county_action" groups="asset.group_mro_manager"/>
+		
+		<menuitem id="menu_res_country_city_stock" parent="menu_localisation_stock" sequence="8" action="res_partner_hospital.res_country_city_action" groups="asset.group_mro_manager"/>
+
 	</data>
 </openerp>

@@ -20,6 +20,6 @@ class res_country_island(osv.Model):
 	_name = "res.country.island"
 
 	_columns = {
-		'name': fields.char('County Name'),
+		'name': fields.char('Island Name'),
 		'country_id': fields.many2one('res.country', 'Country'),
 	}
