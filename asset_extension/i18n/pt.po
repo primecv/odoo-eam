@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0-20150126\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 11:54+0000\n"
-"PO-Revision-Date: 2015-07-26 00:09-0100\n"
+"POT-Creation-Date: 2015-07-28 15:04+0000\n"
+"PO-Revision-Date: 2015-07-29 00:24-0100\n"
 "Last-Translator: eneida\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: pt_PT\n"
 "X-Generator: Poedit 1.6.9\n"
+"Language: pt_PT\n"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "(edit company address)"
-msgstr "(editar endereço de empresa)"
+msgstr "(editar endereço da empresa)"
 
 #. module: asset_extension
 #: model:ir.actions.act_window,help:asset_extension.action_partner_manufacturer_form
@@ -69,7 +69,7 @@ msgstr "Activo"
 #. module: asset_extension
 #: view:stock.location:asset_extension.view_location_asset_form
 msgid "Additional Information"
-msgstr "Informação adicional"
+msgstr "Informação Adicional"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
@@ -82,26 +82,45 @@ msgid "Asset"
 msgstr "Activo"
 
 #. module: asset_extension
-#: model:ir.ui.menu,name:asset_extension.menu_asset_asset_category
+#: model:ir.ui.menu,name:asset_extension.menu_stock_asset_category
 msgid "Asset Categories"
-msgstr "Categorias de Activo"
+msgstr "Categoria do Activo"
 
 #. module: asset_extension
 #: view:asset.asset.category:asset_extension.asset_asset_category_form
 #: view:asset.asset.category:asset_extension.asset_asset_category_tree
 #: model:ir.actions.act_window,name:asset_extension.asset_asset_category_action
 msgid "Asset Category"
-msgstr "Categoria de Activo"
+msgstr "Categoria do Activo"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "Bank Details"
-msgstr "Datelhes bancários"
+msgstr "Dados bancários"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+#: field:asset.asset,barcode_label:0
+#: view:product.product:asset_extension.product_template_parts_form_view
+#: field:product.product,barcode_label:0
+msgid "Barcode"
+msgstr "Código de barras"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+#: view:product.product:asset_extension.product_template_parts_form_view
+msgid "Barcode Label"
+msgstr "Foto da Etiqueta"
+
+#. module: asset_extension
+#: field:asset.asset,barcode_no:0 field:product.product,barcode_no:0
+msgid "Barcode No"
+msgstr "Nº do Código de barras"
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "Birth"
-msgstr "Nascimento"
+msgstr "Origem"
 
 #. module: asset_extension
 #: code:addons/asset_extension/stock.py:22
@@ -110,6 +129,8 @@ msgid ""
 "Cannot contact geolocation servers. Please make sure that your internet "
 "connection is up and running (%s)."
 msgstr ""
+"Impossível contactar os servidores de geolocalização. Por favor, verifique "
+"se o seu acesso internet está funcional (%s)."
 
 #. module: asset_extension
 #: field:asset.asset,category_id:0
@@ -122,9 +143,14 @@ msgid "Category Name"
 msgstr "Nome da Categoria"
 
 #. module: asset_extension
+#: model:ir.ui.menu,name:asset_extension.menu_res_country_city_stock
+msgid "Cities"
+msgstr "Cidades"
+
+#. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "Citizenship & Other Info"
-msgstr "Nacionalidade e Outras informações"
+msgstr "Cidadania & Outras informações"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
@@ -145,17 +171,27 @@ msgstr "Empresa"
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "Configurations"
-msgstr "Configuraações"
+msgstr "Configurações"
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "Contact Information"
-msgstr "Informações de Contacto"
+msgstr "Informação de Contacto"
 
 #. module: asset_extension
 #: selection:mro.request,type:0
 msgid "Corrective"
 msgstr "Correctiva"
+
+#. module: asset_extension
+#: model:ir.ui.menu,name:asset_extension.menu_res_country_county_stock
+msgid "Counties"
+msgstr "Concelhos"
+
+#. module: asset_extension
+#: model:ir.ui.menu,name:asset_extension.menu_country_partner_stock
+msgid "Countries"
+msgstr "Países"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
@@ -181,7 +217,7 @@ msgstr "Criado por"
 #. module: asset_extension
 #: field:asset.asset.category,create_date:0
 msgid "Created on"
-msgstr "Criado a"
+msgstr "Criado a "
 
 #. module: asset_extension
 #: field:mro.request,delivery_date:0
@@ -201,17 +237,17 @@ msgstr "Descrição"
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "Description for Quotations"
-msgstr "Descrição das Cotações"
+msgstr "Descrição para Cotações"
 
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "Description for Suppliers"
-msgstr "Descrição para os Fornecedores"
+msgstr "Descrição para Fornecedores"
 
 #. module: asset_extension
 #: field:mro.request,diagnostic:0
 msgid "Diagnostic"
-msgstr "Diagonóstico"
+msgstr "Disgonóstico"
 
 #. module: asset_extension
 #: model:ir.model,name:asset_extension.model_hr_employee
@@ -256,7 +292,7 @@ msgstr "Técnico"
 #. module: asset_extension
 #: view:stock.location:asset_extension.view_location_asset_form
 msgid "GeoLocalize"
-msgstr "GeoReferenciação"
+msgstr "Geolocalização"
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
@@ -266,7 +302,7 @@ msgstr "Configurações RH"
 #. module: asset_extension
 #: field:asset.asset,hospital_id:0 field:mro.request,hospital_id:0
 msgid "Hospital"
-msgstr "Unidade Hospitalar"
+msgstr "Hospital"
 
 #. module: asset_extension
 #: field:asset.asset,asset_id:0 field:asset.asset.category,id:0
@@ -276,13 +312,13 @@ msgstr ""
 #. module: asset_extension
 #: selection:asset.asset,state_operation:0
 msgid "Inactive"
-msgstr "Inactico"
+msgstr "Inativo"
 
 #. module: asset_extension
 #: view:asset.asset:asset_extension.assets_form_view_extension
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
 msgid "Info"
-msgstr "Info"
+msgstr ""
 
 #. module: asset_extension
 #: view:mro.request:asset_extension.mro_request_asset_extension_form
@@ -308,20 +344,21 @@ msgstr "Inventário"
 #. module: asset_extension
 #: model:ir.model,name:asset_extension.model_stock_location
 msgid "Inventory Locations"
-msgstr "Localização de Inventário"
+msgstr "Localização do Inventário"
 
 #. module: asset_extension
 #: field:res.partner,is_manufacturer:0
 msgid "Is Manufacturer?"
-msgstr "É Fabricante?"
+msgstr "É Fabricante"
 
 #. module: asset_extension
 #: field:hr.employee,is_technician:0
 msgid "Is Technician?"
-msgstr "É Tecnico"
+msgstr "É Técnico"
 
 #. module: asset_extension
-#: field:stock.location,island:0
+#: model:ir.ui.menu,name:asset_extension.menu_res_country_island_stock
+#: field:stock.location,island:0 field:stock.location,island_id:0
 msgid "Island"
 msgstr "Ilha"
 
@@ -341,6 +378,11 @@ msgid "Latitude"
 msgstr ""
 
 #. module: asset_extension
+#: model:ir.ui.menu,name:asset_extension.menu_localisation_stock
+msgid "Localization"
+msgstr "Localizações"
+
+#. module: asset_extension
 #: view:stock.location:asset_extension.view_location_asset_form
 msgid "Location"
 msgstr "Localização"
@@ -353,7 +395,7 @@ msgstr ""
 #. module: asset_extension
 #: model:ir.model,name:asset_extension.model_mro_order
 msgid "Maintenance Order"
-msgstr "Manutenção Correctiva"
+msgstr "Manutenção Preventiva"
 
 #. module: asset_extension
 #: model:ir.model,name:asset_extension.model_mro_request
@@ -392,24 +434,24 @@ msgstr "Nome"
 #: code:addons/asset_extension/stock.py:21
 #, python-format
 msgid "Network error"
-msgstr "Erro de Rede"
+msgstr "Erro de conecção"
 
 #. module: asset_extension
 #: view:asset.asset:asset_extension.assets_form_view_extension
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
 #: field:asset.asset,notes:0
 msgid "Notes"
-msgstr "Observações"
+msgstr "Notas"
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "Other Information ..."
-msgstr "Outras Informações..."
+msgstr "Outra Informação..."
 
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "Packaging"
-msgstr "Embalagem"
+msgstr "Embalar"
 
 #. module: asset_extension
 #: selection:product.product,product_type:0
@@ -423,6 +465,8 @@ msgstr "Terceiro"
 
 #. module: asset_extension
 #: model:ir.actions.act_window,name:asset_extension.product_template_parts_action
+#: model:ir.ui.menu,name:asset_extension.menu_stock_parts
+#: model:ir.ui.menu,name:asset_extension.menu_stock_parts_parts
 #: view:product.product:asset_extension.product_template_parts_form_view
 #: view:product.product:asset_extension.product_template_parts_tree_view
 msgid "Parts"
@@ -446,7 +490,7 @@ msgstr "Preventiva"
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "Procurements"
-msgstr "Aquisições"
+msgstr "Compras"
 
 #. module: asset_extension
 #: model:ir.model,name:asset_extension.model_product_product
@@ -456,7 +500,7 @@ msgstr "Produto"
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "Public Information"
-msgstr "Informação Pública"
+msgstr "Informação pública"
 
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
@@ -476,7 +520,7 @@ msgstr "Colocar uma nota interna"
 #. module: asset_extension
 #: view:mro.request:asset_extension.mro_request_asset_extension_form
 msgid "Reject Reason"
-msgstr "Ignorar o Motivo"
+msgstr ""
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
@@ -506,17 +550,17 @@ msgstr "Vendas"
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "Sales & Purchases"
-msgstr "Compra e Venda"
+msgstr "Compras & Vendas"
 
 #. module: asset_extension
 #: field:product.product,serial:0
 msgid "Serial No"
-msgstr "Nº de Série"
+msgstr "Nº de série"
 
 #. module: asset_extension
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
 msgid "Start Use"
-msgstr "Início do Uso"
+msgstr "Início de Uso"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
@@ -532,7 +576,7 @@ msgstr "Estado Operacional"
 #: view:hr.employee:asset_extension.view_employee_technician_form
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "Status"
-msgstr "Estado"
+msgstr "Estado "
 
 #. module: asset_extension
 #: field:stock.location,street:0
@@ -566,7 +610,7 @@ msgstr "Técnico"
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "This note will be displayed on requests for quotation..."
-msgstr "Esta nota será apresentado nos pedidos de Cotação"
+msgstr "Esta nota será disponibilizada na requisição de Cotação"
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view
@@ -597,7 +641,7 @@ msgstr "Valor"
 #: view:asset.asset:asset_extension.assets_form_view_extension
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
 msgid "Warranty"
-msgstr "Garantia "
+msgstr "Garrantia"
 
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
@@ -617,7 +661,7 @@ msgstr ""
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "describe the product characteristics..."
-msgstr "Descreve as características do Produto"
+msgstr ""
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
@@ -627,7 +671,7 @@ msgstr ""
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "e.g. Part Time"
-msgstr "e.g. Meio Período"
+msgstr ""
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form

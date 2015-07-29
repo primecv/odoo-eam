@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0-20150126\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 11:54+0000\n"
-"PO-Revision-Date: 2015-07-25 17:16-0100\n"
+"POT-Creation-Date: 2015-07-28 15:04+0000\n"
+"PO-Revision-Date: 2015-07-29 09:24-0100\n"
 "Last-Translator: eneida\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "(edit company address)"
-msgstr "(edite o endereço da empresa)"
+msgstr "(editar endereço de empresa)"
 
 #. module: res_partner_hospital
 #: model:ir.actions.act_window,help:res_partner_hospital.action_partner_hospital_form
@@ -34,13 +34,6 @@ msgid ""
 "              </p>\n"
 "            "
 msgstr ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"                Click to add a Hospital.\n"
-"              </p><p>\n"
-"                Odoo helps you easily track all activities related to\n"
-"                a customer; discussions, history of business opportunities,\n"
-"                documents, etc.\n"
-"              </p>\n"
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
@@ -56,7 +49,7 @@ msgstr "Endereço"
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Bank Details"
-msgstr "Detalhes bancários"
+msgstr "Dados bancários"
 
 #. module: res_partner_hospital
 #: model:ir.actions.act_window,name:res_partner_hospital.res_country_city_action
@@ -108,33 +101,35 @@ msgid "Counties"
 msgstr "Concelhos"
 
 #. module: res_partner_hospital
-#: field:res.country.city,country_id:0 field:res.country.county,country_id:0
+#: field:res.country.island,country_id:0
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Country"
 msgstr "País"
 
 #. module: res_partner_hospital
+#: field:res.country.city,county_id:0
 #: view:res.country.county:res_partner_hospital.res_country_county_form
 #: view:res.country.county:res_partner_hospital.res_country_county_tree
 msgid "County"
-msgstr "Concelho"
+msgstr "concelho"
 
 #. module: res_partner_hospital
-#: field:res.country.county,name:0
+#: field:res.country.county,name:0 field:res.country.island,name:0
 msgid "County Name"
 msgstr "Nome do Concelho"
 
 #. module: res_partner_hospital
 #: field:hospital.department,create_uid:0 field:res.country.city,create_uid:0
-#: field:res.country.county,create_uid:0
+#: field:res.country.county,create_uid:0 field:res.country.island,create_uid:0
 msgid "Created by"
 msgstr "Criado por"
 
 #. module: res_partner_hospital
 #: field:hospital.department,create_date:0
 #: field:res.country.city,create_date:0 field:res.country.county,create_date:0
+#: field:res.country.island,create_date:0
 msgid "Created on"
-msgstr "Criado a "
+msgstr "Criado a"
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
@@ -155,14 +150,14 @@ msgstr "Serviços"
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Fax:"
-msgstr "Fax"
+msgstr ""
 
 #. module: res_partner_hospital
 #: model:ir.actions.act_window,name:res_partner_hospital.action_partner_hospital_form
 #: model:ir.ui.menu,name:res_partner_hospital.hospital_sub
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Hospital"
-msgstr "Unidade Hospitalar"
+msgstr "Hospital"
 
 #. module: res_partner_hospital
 #: model:ir.model,name:res_partner_hospital.model_hospital_category
@@ -190,9 +185,9 @@ msgstr "Gestão Hospitalar"
 
 #. module: res_partner_hospital
 #: field:hospital.department,id:0 field:res.country.city,id:0
-#: field:res.country.county,id:0
+#: field:res.country.county,id:0 field:res.country.island,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
@@ -202,24 +197,39 @@ msgstr "Notas Internas"
 #. module: res_partner_hospital
 #: field:res.partner,is_hospital:0
 msgid "Is Hospital?"
-msgstr "É uma unidade Hospitalar?"
+msgstr "É um Hospital"
+
+#. module: res_partner_hospital
+#: model:ir.actions.act_window,name:res_partner_hospital.res_country_island_action
+#: model:ir.ui.menu,name:res_partner_hospital.menu_res_country_island
+#: field:res.country.county,island_id:0
+#: view:res.country.island:res_partner_hospital.res_country_island_form
+#: view:res.country.island:res_partner_hospital.res_country_island_tree
+msgid "Island"
+msgstr "Ilha"
+
+#. module: res_partner_hospital
+#: view:res.country.island:res_partner_hospital.res_country_island_form
+#: view:res.country.island:res_partner_hospital.res_country_island_tree
+msgid "Island Name"
+msgstr "Nome da Ilha"
 
 #. module: res_partner_hospital
 #: field:hospital.department,write_uid:0 field:res.country.city,write_uid:0
-#: field:res.country.county,write_uid:0
+#: field:res.country.county,write_uid:0 field:res.country.island,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualização por"
 
 #. module: res_partner_hospital
 #: field:hospital.department,write_date:0 field:res.country.city,write_date:0
-#: field:res.country.county,write_date:0
+#: field:res.country.county,write_date:0 field:res.country.island,write_date:0
 msgid "Last Updated on"
-msgstr "Última actualização a"
+msgstr "Última actualização a "
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Mobile:"
-msgstr "Móvel:"
+msgstr "Móvel"
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
@@ -234,17 +244,17 @@ msgstr "Terceiro"
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Phone:"
-msgstr "Telefone"
+msgstr "Telefone:"
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Put an internal note..."
-msgstr "Colocar uma nota interna"
+msgstr "Coloque uma Nota interna..."
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Sales & Purchases"
-msgstr "Vendas & Compras"
+msgstr "Compra & Venda"
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
@@ -254,17 +264,17 @@ msgstr "Estado"
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Street..."
-msgstr "Zona"
+msgstr "Zona..."
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "Tags..."
-msgstr "Tags..."
+msgstr ""
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "ZIP"
-msgstr "Código Postal"
+msgstr ""
 
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
@@ -279,4 +289,4 @@ msgstr "e.g. Director de Vendas"
 #. module: res_partner_hospital
 #: view:res.partner:res_partner_hospital.view_partner_hospital_form
 msgid "e.g. www.odoo.com"
-msgstr "e.g. www.odoo.com"
+msgstr ""
