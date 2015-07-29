@@ -1,5 +1,6 @@
 from openerp import api
 from openerp import fields as fields
+from openerp.addons.base_geoengine import fields as geo_fields
 from openerp.osv import osv
 from openerp import exceptions
 from openerp import tools
@@ -102,6 +103,33 @@ class stock_location(osv.osv):
         country = self.env['res.country'].search([('code','ilike','CV')]).id
         return country or False
 
+
+
+    @api.one
+    def geocode_address(self):
+        self.write({
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+            })
+
+    @api.one
+    def geo_localize(self):
+        self.geocode_address()
+        return True
+
+    @api.one
+    @api.depends('latitude', 'longitude')
+    def _get_geo_point(self):
+        if not self.latitude or not self.longitude:
+            self.geo_point = False
+        else:
+            try:
+                self.geo_point = geo_fields.GeoPoint.from_latlon(
+                    self.env.cr, self.latitude, self.longitude)
+            except Exception, e:
+                #self.latitude, self.longitude = 0.0, 0.0
+                raise osv.except_osv(('Alert!'), ('Invalid Latitude or Longitude. \n%s'%(e)))
+
     street = fields.Char(string='Street')
     city_id = fields.Many2one('res.country.city', string='City')
     city = fields.Char(string='City')
@@ -114,6 +142,7 @@ class stock_location(osv.osv):
     county = fields.Char(string='County')
     latitude = fields.Float(string='Latitude')
     longitude = fields.Float(string='Longitude')
+    geo_point = geo_fields.GeoPoint(string='Addresses Coordinate', readonly=True, store=False, compute='_get_geo_point')
 
     def geo_localize(self, cr, uid, ids, context=None):
         for product in self.browse(cr, uid, ids):
@@ -130,3 +159,23 @@ class stock_location(osv.osv):
                     'longitude': result[1],
                 }, context=context)
         return True
+
+    def create(self, cr, uid, vals, context=None):
+        try:
+            res = super(stock_location, self).create(cr, uid, vals, context)
+            geo = geo_fields.GeoPoint.from_latlon(cr, vals['latitude'], vals['longitude'])
+            return res 
+        except Exception, e:
+            if 'latitude or longitude exceeded limits' in str(e):
+                raise osv.except_osv(('Alert!'), ('Invalid Latitude or Longitude. \n%s'%(e)))
+            else:
+                raise osv.except_osv(('Error!'), ('%s'%(e)))
+
+    def write(self, cr, uid, ids, vals, context=None):
+        try:
+            res = super(stock_location, self).write(cr, uid, ids, vals, context)
+        except Exception, e:
+            if 'latitude or longitude exceeded limits' in str(e):
+                raise osv.except_osv(('Alert!'), ('Invalid Latitude or Longitude. \n%s'%(e)))
+            else:
+                raise osv.except_osv(('Error!'), ('%s'%(e)))
