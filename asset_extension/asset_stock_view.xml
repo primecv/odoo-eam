@@ -69,6 +69,40 @@
 			</field>
 		</record>
 
+        <record id="asset.assets_tree_view" model="ir.ui.view">
+            <field name="name">asset.asset.tree</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <tree string="Assets">
+					<field name="barcode_no"/>
+                    <field name="name"/>
+                    <field name="property_stock_asset"/>
+				</tree>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="assets_search_extension">
+            <field name="name">Asset Search</field>
+            <field name="model">asset.asset</field>
+			<field name="inherit_id" ref="asset.assets_search"/>
+            <field name="arch" type="xml">
+				<field name="property_stock_asset" position="after">
+					<field name="location_island"/>
+					<field name="location_county"/>
+				</field>
+			</field>
+		</record>
+
+        <record id="asset.action_assets" model="ir.actions.act_window">
+            <field name="name">Assets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.asset</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+			<field name="search_view_id" ref="assets_search_extension"/>
+            <field name="view_id" eval="False"/>
+        </record>
+
 		<!-- Localization (Country, Island, County, City) Menus -->
         <menuitem id="menu_localisation_stock" name="Localization" parent="stock.menu_stock_configuration" sequence="2" groups="asset.group_mro_manager"/>
             

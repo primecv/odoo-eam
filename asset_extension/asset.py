@@ -19,6 +19,8 @@ class asset_asset(osv.osv):
 		'equipment_type': fields.selection([('equip1','Equipamento Biomédico'), ('equip2','Equipamento Refrigeração'), ('equip3','Equipamento Lavandaria'),('equip4','Equipamento Cozinha')], 'Equipment Family'),
 		'barcode_label': fields.binary('Barcode'),
 		'barcode_no': fields.char('Barcode No', track_visibility='onchange'),
+		'location_island': fields.related('property_stock_asset', 'island', type='char', string='Island', store=True),
+		'location_county': fields.related('property_stock_asset', 'county', type='char', string='County', store=True),
 	}
 
 	def create(self, cr, uid, vals, context=None):
