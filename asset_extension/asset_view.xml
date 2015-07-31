@@ -12,7 +12,7 @@
 
 				<field name="criticality" position="before">
 					<field name="category_id"/>
-					<field name="property_stock_asset" domain="[('usage','=','asset')]"/>
+					<field name="property_stock_asset" domain="[('usage','=','asset')]" required="1"/>
 				</field>
 				<field name="criticality" position="replace">
 					<field name="criticality" invisible="1"/>
