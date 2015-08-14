@@ -21,6 +21,14 @@ class asset_asset(osv.osv):
 		'barcode_no': fields.char('Barcode No', track_visibility='onchange'),
 		'location_island': fields.related('property_stock_asset', 'island', type='char', string='Island', store=True),
 		'location_county': fields.related('property_stock_asset', 'county', type='char', string='County', store=True),
+        'property_stock_asset': fields.property(
+          type='many2one',
+          relation='stock.location',
+          string="Asset Location",
+          store=True,
+		  required=True,
+          help="This location will be used as the destination location for installed parts during asset life."),
+
 	}
 
 	def create(self, cr, uid, vals, context=None):
