@@ -179,3 +179,4 @@ class stock_location(osv.osv):
                 raise osv.except_osv(('Alert!'), ('Invalid Latitude or Longitude. \n%s'%(e)))
             else:
                 raise osv.except_osv(('Error!'), ('%s'%(e)))
+        return True

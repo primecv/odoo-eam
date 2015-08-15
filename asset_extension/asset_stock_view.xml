@@ -62,6 +62,16 @@
                         </group>
 						<group colspan="4" string="Notes">
 							<field name="notes" colspan="4" nolabel="1"/> 
+							<field name="asset_location_parent_ids" invisible="1">
+								<tree>
+									<field name="location_id"/>
+								</tree>
+							</field>
+							<field name="asset_location_child_ids" invisible="1">
+								<tree>
+									<field name="location_id"/>
+								</tree>
+							</field>
 						</group>
                     </page>
 				</page>
@@ -89,6 +99,8 @@
 				<field name="property_stock_asset" position="after">
 					<field name="location_island"/>
 					<field name="location_county"/>
+					<field name="asset_location_parent_search"/>
+					<field name="asset_location_child_search"/>
 				</field>
 			</field>
 		</record>

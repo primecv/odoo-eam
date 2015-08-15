@@ -28,7 +28,12 @@ class asset_asset(osv.osv):
           store=True,
 		  required=True,
           help="This location will be used as the destination location for installed parts during asset life."),
-
+		'asset_location_child_ids': fields.one2many('asset.location.rel', 'child_id', 'Asset Location Hierarchy'),
+		'asset_location_parent_ids': fields.one2many('asset.location.rel', 'parent_id', 'Asset Location Hierarchy'),
+		'asset_location_parent_search': fields.related('asset_location_parent_ids', 'location_id', type='many2one', relation='stock.location', string='Asset Location with Parent Locations'),
+		'asset_location_child_search': fields.related('asset_location_child_ids', 'location_id', type='many2one', relation='stock.location', string='Asset Location with Child Locations'),
+		'asset_location_rel_check': fields.boolean('Location Rel Check'),
+		
 	}
 
 	def create(self, cr, uid, vals, context=None):
@@ -45,7 +50,51 @@ class asset_asset(osv.osv):
 		vals['asset_id'] = asset_id
 		codeseq = self.pool.get('ir.sequence').get(cr, uid, 'asset.code') 
 		vals['code'] = codeseq
-		return super(asset_asset, self).create(cr, uid, vals, context)
+		res = super(asset_asset, self).create(cr, uid, vals, context)
+		location_id = vals['property_stock_asset']
+		self.update_location_hierarchy(cr, uid, res, location_id)
+		return res 
+
+	def update_location_hierarchy(self, cr, uid, res, location_id):
+		asset_location_rel_obj = self.pool.get('asset.location.rel')
+		search_ids = asset_location_rel_obj.search(cr, uid, [('child_id','=',res)])
+		asset_location_rel_obj.unlink(cr,uid,search_ids)
+		#get child locations:
+		child_ids = []
+		for loc in self.pool.get('stock.location').browse(cr, uid, [location_id]):
+			for l in loc.child_ids:
+				child_ids.append(l.id)
+		child_ids.append(location_id)
+		for loc in child_ids:
+			asset_location_rel_obj.create(cr, uid, {'location_id': loc, 'child_id': res})
+		#get parent locations:
+		search_ids = asset_location_rel_obj.search(cr, uid, [('parent_id','=',res)])
+		asset_location_rel_obj.unlink(cr,uid,search_ids)
+		parent_ids = []
+		parent_ids.append(location_id)
+		def parent_loc(location_id):
+			parent_loc_id = None
+			for locs in self.pool.get('stock.location').browse(cr, uid, [location_id]):
+				parent_loc_id = locs.location_id.id
+			if parent_loc_id:
+				parent_ids.append(parent_loc_id)
+				parent_loc(parent_loc_id)
+		parent_loc(location_id)
+		for loc in parent_ids:
+			asset_location_rel_obj.create(cr, uid, {'location_id': loc, 'parent_id': res})
+		return True
+
+	def write(self, cr, uid, ids, vals, context=None):
+		if 'property_stock_asset' in vals:
+			self.update_location_hierarchy(cr, uid, ids[0], vals['property_stock_asset'])
+			vals['asset_location_rel_check'] = True
+		else:
+			for rec in self.browse(cr, uid, ids):
+				if rec.property_stock_asset and rec.asset_location_rel_check is False:
+					self.update_location_hierarchy(cr, uid, ids[0], rec.property_stock_asset.id)
+					vals['asset_location_rel_check'] = True
+		return super(asset_asset, self).write(cr, uid, ids, vals, context)
+
 
 	def onchange_hospital(self, cr, uid, ids, hospital_id, context=None):
 		if not hospital_id:
@@ -64,5 +113,15 @@ class asset_asset_category(osv.Model):
 	_columns = {
 		'name': fields.char('Category Name', required=True, select=True),
 		'code': fields.char('Code'),
+	}
+
+#dummy table to manage Asset Location parent-child hierarchy to be used in Asset Search:
+class asset_location_rel(osv.Model):
+	_name = "asset.location.rel"
+
+	_columns = {
+		'location_id': fields.many2one('stock.location', 'Location'),
+		'child_id': fields.many2one('asset.asset', 'Child Asset'),
+		'parent_id': fields.many2one('asset.asset', 'Parent Asset'),
 	}
 
