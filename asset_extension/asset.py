@@ -30,8 +30,8 @@ class asset_asset(osv.osv):
           help="This location will be used as the destination location for installed parts during asset life."),
 		'asset_location_child_ids': fields.one2many('asset.location.child.rel', 'child_id', 'Asset Location Hierarchy'),
 		'asset_location_parent_ids': fields.one2many('asset.location.parent.rel', 'parent_id', 'Asset Location Hierarchy'),
-		'asset_location_parent_search': fields.related('asset_location_parent_ids', 'location_id', type='many2one', relation='stock.location', string='Asset Location with Parent Locations'),
-		'asset_location_child_search': fields.related('asset_location_child_ids', 'location_id', type='many2one', relation='stock.location', string='Asset Location with Child Locations'),
+		'asset_location_parent_search': fields.related('asset_location_parent_ids', 'location_id', 'name', type='char', string='Asset Location with Parent Locations'),
+		'asset_location_child_search': fields.related('asset_location_child_ids', 'location_id', 'name', type='char', relation='stock.location', string='Asset Location with Child Locations'),
 		'asset_location_rel_check': fields.boolean('Location Rel Check'),
 		
 	}
@@ -56,33 +56,33 @@ class asset_asset(osv.osv):
 		return res 
 
 	def update_location_hierarchy(self, cr, uid, res, location_id):
-		asset_location_child_rel_obj = self.pool.get('asset.location.child.rel')
-		search_ids = asset_location_child_rel_obj.search(cr, uid, [('child_id','=',res)])
-		asset_location_child_rel_obj.unlink(cr,uid,search_ids)
 		#get child locations:
+		asset_location_parent_rel_obj = self.pool.get('asset.location.parent.rel')
+		search_ids = asset_location_parent_rel_obj.search(cr, uid, [('parent_id','=',res)])
+		asset_location_parent_rel_obj.unlink(cr,uid,search_ids)
 		child_ids = []
 		for loc in self.pool.get('stock.location').browse(cr, uid, [location_id]):
 			for l in loc.child_ids:
 				child_ids.append(l.id)
 		child_ids.append(location_id)
 		for loc in child_ids:
-			asset_location_child_rel_obj.create(cr, uid, {'location_id': loc, 'child_id': res})
+			asset_location_parent_rel_obj.create(cr, uid, {'location_id': loc, 'parent_id': res})
 		#get parent locations:
-		asset_location_parent_rel_obj = self.pool.get('asset.location.parent.rel')
-		search_ids = asset_location_parent_rel_obj.search(cr, uid, [('parent_id','=',res)])
-		asset_location_parent_rel_obj.unlink(cr,uid,search_ids)
+		asset_location_child_rel_obj = self.pool.get('asset.location.child.rel')
+		search_ids = asset_location_child_rel_obj.search(cr, uid, [('child_id','=',res)])
+		asset_location_child_rel_obj.unlink(cr,uid,search_ids)
 		parent_ids = []
 		parent_ids.append(location_id)
 		def parent_loc(location_id):
 			parent_loc_id = None
 			for locs in self.pool.get('stock.location').browse(cr, uid, [location_id]):
 				parent_loc_id = locs.location_id.id
-			if parent_loc_id:
 				parent_ids.append(parent_loc_id)
+			if parent_loc_id:
 				parent_loc(parent_loc_id)
 		parent_loc(location_id)
 		for loc in parent_ids:
-			asset_location_parent_rel_obj.create(cr, uid, {'location_id': loc, 'parent_id': res})
+			asset_location_child_rel_obj.create(cr, uid, {'location_id': loc, 'child_id': res})
 		return True
 
 	def write(self, cr, uid, ids, vals, context=None):
