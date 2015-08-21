@@ -100,8 +100,8 @@ class stock_location(osv.osv):
 
     @api.model
     def get_default_country(self):
-        country = self.env['res.country'].search([('code','ilike','CV')]).id
-        return country or False
+        #country = self.env['res.country'].search([('code','ilike','CV')]).id
+        return self.env['res.country'].search([('code','ilike','CV')], limit=1)
 
 
 
