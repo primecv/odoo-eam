@@ -89,11 +89,11 @@ class asset_asset(osv.osv):
 		if 'property_stock_asset' in vals:
 			self.update_location_hierarchy(cr, uid, ids[0], vals['property_stock_asset'])
 			vals['asset_location_rel_check'] = True
-		else:
-			for rec in self.browse(cr, uid, ids):
-				if rec.property_stock_asset and rec.asset_location_rel_check is False:
-					self.update_location_hierarchy(cr, uid, ids[0], rec.property_stock_asset.id)
-					vals['asset_location_rel_check'] = True
+		#else:#used to update asset parent and child location hierarchy for old Records.
+		#	for rec in self.browse(cr, uid, ids):
+		#		if rec.property_stock_asset and rec.asset_location_rel_check is False:
+		#			self.update_location_hierarchy(cr, uid, ids[0], rec.property_stock_asset.id)
+		#			vals['asset_location_rel_check'] = True
 		return super(asset_asset, self).write(cr, uid, ids, vals, context)
 
 
