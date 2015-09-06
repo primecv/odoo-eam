@@ -51,8 +51,9 @@ class asset_asset(osv.osv):
 		codeseq = self.pool.get('ir.sequence').get(cr, uid, 'asset.code') 
 		vals['code'] = codeseq
 		res = super(asset_asset, self).create(cr, uid, vals, context)
-		location_id = vals['property_stock_asset']
-		self.update_location_hierarchy(cr, uid, res, location_id)
+		if 'property_stock_asset' in vals:
+			location_id = vals['property_stock_asset']
+			self.update_location_hierarchy(cr, uid, res, location_id)
 		return res 
 
 	def update_location_hierarchy(self, cr, uid, res, location_id):
