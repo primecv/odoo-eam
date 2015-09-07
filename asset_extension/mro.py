@@ -10,7 +10,7 @@ class mro_request(osv.Model):
 		'resolution': fields.text('Resolution'),
 		'resolution_date': fields.date('Resolution Date'),
 		'delivery_date': fields.date('Date of Delivery'),
-		'technician_id': fields.many2one('res.partner', 'Expert (technician)', domain="[('is_technician','=',True)]"),
+		'technician_id': fields.many2one('hr.employee', 'Expert (technician)', domain="[('is_technician','=',True)]"),
 		'type': fields.selection([('Corrective','Corrective')],'Type of Maintenance'),
 		
 	}
@@ -24,7 +24,7 @@ class mro_order(osv.Model):
 
 	_columns = {
 		'type': fields.selection([('Preventive', 'Preventive')],'Type of Maintenance'),
-		'technician_id': fields.many2one("res.partner", 'Technician', domain="[('is_technician','=',True)]"),
+		'technician_id': fields.many2one("hr.employee", 'Technician', domain="[('is_technician','=',True)]"),
 	}
 
 	_defaults = {
