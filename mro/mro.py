@@ -82,7 +82,7 @@ class mro_order(osv.osv):
             When the maintenance is over, the status is set to 'Done'."),
         'maintenance_type': fields.selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True, readonly=True, states={'draft': [('readonly', False)]}),
         'task_id': fields.many2one('mro.task', 'Task', readonly=True, states={'draft': [('readonly', False)]}),
-        'description': fields.char('Description', size=64, translate=True, required=True, readonly=True, states={'draft': [('readonly', False)]}),
+        'description': fields.char('Description', size=64, translate=True, readonly=True, states={'draft': [('readonly', False)]}),
         'asset_id': fields.many2one('asset.asset', 'Asset', required=True, readonly=True, states={'draft': [('readonly', False)]}),
         'date_planned': fields.datetime('Planned Date', required=True, select=1, readonly=True, states={'draft':[('readonly',False)]}),
         'date_scheduled': fields.datetime('Scheduled Date', required=True, select=1, readonly=True, states={'draft':[('readonly',False)],'released':[('readonly',False)],'ready':[('readonly',False)]}),
