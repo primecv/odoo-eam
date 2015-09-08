@@ -89,8 +89,9 @@
                             <group>
 								<field name="type" required="1"/>
                                 <field name="asset_id" on_change="onchange_asset(asset_id)"/>
-								<field name="asset_location_id" attrs="{'invisible': [('type','!=','Corrective')]}"/>
+								<field name="asset_location_rel_id"/>
 								<field name="cause" attrs="{'invisible': [('type','!=','Corrective')]}"/>
+								<field name="description" attrs="{'invisible': [('type','!=','Preventive')]}"/>
 								<field name="intervention_type" attrs="{'invisible': ['|',('type','not in',('Preventive','Corrective')),('state','in',('draft','cancel'))], 'readonly':[('state','!=','ready')]}" widget="radio"/>
                                 <field name="category_ids" invisible="1"/>
                                 <field name="maintenance_type" invisible="1"/>
@@ -98,11 +99,10 @@
                                 <div attrs="{'invisible':[('maintenance_type','=','bm')]}">
                                     <field name="task_id" domain="[('category_id','in',category_ids[0][2]),('maintenance_type','=',maintenance_type)]" attrs="{'required':[('maintenance_type','!=','bm')]}" on_change="onchange_task(task_id,parts_lines)"/>
                                 </div>
-                                <field name="description" attrs="{'invisible': [('type','!=','Preventive')]}"/>
                             </group>
                             <group>
-                                <field name="date_planned" on_change="onchange_planned_date(date_planned)"/>
-                                <field name="date_scheduled" on_change="onchange_scheduled_date(date_scheduled)"/>
+                                <field name="date_planned" string="Request Date" on_change="onchange_planned_date(date_planned)"/>
+                                <field name="date_scheduled" on_change="onchange_scheduled_date(date_scheduled)" invisible="1"/>
 								<field name="date_execution" on_change="onchange_execution_date(date_execution,state)" attrs="{'invisible':[('state','in',('draft','released','cancel'))]}"/>
                                 <field name="origin" invisible="1"/>
                             </group>
@@ -113,22 +113,27 @@
                             </group>
                         </group>
                         <notebook>
-							<page string="Information" attrs="{'invisible': [('state', '=', 'draft')]}">
+							<page string="Information" attrs="{'invisible': [('state', 'not in', ('ready','done'))]}">
 								<group col="4">
-									<field name="technician_id" attrs="{'required': [('state','=','ready')], 'invisible': [('state','=','draft')], 'readonly':[('state','!=','ready')]}"/>
-									<field name="diagnostic" attrs="{'invisible': [('type','!=','Corrective')]}"/>
+									<field name="technician_id" attrs="{'required': [('state','=','ready')], 'readonly':[('state','!=','ready')]}"/>
+									<field name="date"/>
+									<field name="diagnostic" colspan="4"/>
 								</group>
 							</page>
 
-							<page string="Resolution" attrs="{'invisible': [('type','!=','Corrective')]}">
+							<page string="Resolution" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','done'))]}">
 								<group col="4">
-									<field name="resolution_part_id"/>
-									<field name="resolution_date"/>
+									<field name="resolution_date"/><newline/>
 									<field name="resolution_note" colspan="4"/>
+									<field name="resolution_parts_line">
+										<tree editable="top" string="Parts for Resolution">
+											<field name="parts_id"/>
+										</tree>
+									</field>
 								</group>
 							</page>
 	
-							<page string="Delivery" attrs="{'invisible': [('type','!=','Corrective')]}">
+							<page string="Delivery" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','done'))]}">
 								<group col="4">
 									<field name="delivery_date"/><newline/>
 									<field name="delivery_note" colspan="4"/>
@@ -141,7 +146,7 @@
 								</group>
 							</page>
 
-                            <page string="Parts" attrs="{'invisible': [('type','!=','Preventive')]}">
+                            <page string="Parts" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('ready','done'))]}">
                                     <group string="Planned Parts" states="draft,released,done,parts_except,cancel">
                                         <field name="parts_lines" nolabel="1">
                                             <tree string="Planned Parts" editable="bottom">
@@ -183,7 +188,7 @@
                                         </field>
                                     </group>
                             </page>
-                            <page string="Tools" attrs="{'invisible': [('type','!=','Preventive')]}">
+                            <page string="Tools" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('ready','done'))]}">
                                 <separator string="Description for Tools"/>
                                 <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..."/>
                             </page>
@@ -191,11 +196,11 @@
                                 <separator string="Description for Labor"/>
                                 <field name="labor_description" placeholder="Specify the specialists needed for execute this order..."/>
                             </page>
-                            <page string="Operations" attrs="{'invisible': [('type','!=','Preventive')]}">
+                            <page string="Operations" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('ready','done'))]}">
                                 <separator string="Description for Operations"/>
                                 <field name="operations_description" placeholder="Specify the jobs that need execute..."/>
                             </page>
-                            <page string="Documentation">
+                            <page string="Documentation" attrs="{'invisible': [('state', 'not in', ('ready','done'))]}">
 								<separator string="Attachments"/>
 								<field name="documentation_attachments">
 									<tree string="Attachments" nolabel="1" editable="top">

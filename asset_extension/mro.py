@@ -50,11 +50,13 @@ class mro_order(osv.Model):
 	_columns = {
 		'type': fields.selection([('Preventive', 'Preventive'), ('Corrective', 'Corrective')],'Type of Maintenance'),
 		'technician_id': fields.many2one("hr.employee", 'Assigned To', domain="[('is_technician','=',True)]", track_visibility='onchange'),
-		'asset_location_id': fields.many2one('stock.location', 'Asset Location', track_visibility='onchange'),
+		'asset_location_rel_id': fields.related('asset_id', 'property_stock_asset', type='many2one', relation='stock.location', string='Asset Location', store=True, track_visibility='onchange', readonly=True),
 		'cause': fields.char('Cause', track_visibility='onchange'), 
 		'intervention_type': fields.selection([('Internal', 'Internal'),('External', 'External')], 'Type of Intervention', track_visibility='onchange'),
 		'diagnostic': fields.text('Diagnostic', track_visibility='onchange'),
-		'resolution_part_id': fields.many2one('product.product', 'Part', track_visibility='onchange'),
+		'date': fields.date('Date'),
+		#'resolution_part_id': fields.many2one('product.product', 'Part', track_visibility='onchange'),
+		'resolution_parts_line': fields.one2many('mro.order.parts.line', 'order_id', 'Resolution Parts'),
 		'resolution_note': fields.text('Description'),
 		'resolution_date': fields.date('Resolution Date', track_visibility='onchange'),
 		'delivery_date': fields.date('Date of Delivery', track_visibility='onchange'),
@@ -71,7 +73,7 @@ class mro_order(osv.Model):
 	def onchange_asset(self, cr, uid, ids, asset):
 		value = {}
 		if asset:
-			value['asset_location_id'] = self.pool.get('asset.asset').browse(cr, uid, asset).property_stock_asset
+			value['asset_location_rel_id'] = self.pool.get('asset.asset').browse(cr, uid, asset).property_stock_asset
 		return {'value': value}
 
 class mro_order_delivery_attachments(osv.Model):
@@ -90,4 +92,11 @@ class mro_order_documentation_attachments(osv.Model):
 		'order_id': fields.many2one('mro.order', 'Maintenance Order'),
 		'name': fields.char('Filename'),
 		'file': fields.binary('File'),
+	}
+
+class mro_order_parts_line(osv.osv):
+	_inherit = 'mro.order.parts.line'
+
+	_columns = {
+		'order_id': fields.many2one('mro.order', 'MRO Order'),
 	}
