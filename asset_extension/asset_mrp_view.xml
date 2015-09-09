@@ -1,0 +1,16 @@
+<openerp>
+	<data>
+
+        <record id="assets_form_view_mrp_hcv_extension" model="ir.ui.view">
+            <field name="name">asset.asset.form.mrp.hcv.extension</field>
+            <field name="model">asset.asset</field>
+			<field name="inherit_id" ref="asset_mrp.assets_form_view_mrp"/>
+            <field name="arch" type="xml">
+				<field name="manufacturer_id" position="replace">
+					<field name="manufacturer_id" domain="[('is_manufacturer','=',True)]" context="{'form_view_ref':'asset_extension.view_partner_manufacturer_form'}"/>
+				</field>
+			</field>
+		</record>
+
+	</data>
+</openerp>

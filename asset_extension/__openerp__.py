@@ -39,7 +39,7 @@
         'mro_view.xml',
         'asset_stock_view.xml',
         'stock_view.xml',
-        
+        'asset_mrp_view.xml',
     ],
     'installable': True,
     'auto_install': False,
