@@ -92,8 +92,8 @@
 								<field name="asset_location_rel_id"/>
 								<field name="cause" attrs="{'invisible': [('type','!=','Corrective')], 'readonly': [('state', 'not in', ('draft','ready'))]}"/>
 								<field name="description" attrs="{'invisible': [('type','!=','Preventive')], 'readonly': [('state','in',('done','cancel'))]}"/>
-								<field name="intervention_type" attrs="{'invisible': ['|',('type','not in',('Preventive','Corrective')),('state','in',('draft','cancel'))], 'readonly':[('state','!=','ready')]}" widget="radio"/>
-								<field name="technician_id" attrs="{'required': [('state','=','ready')], 'readonly':[('state','!=','ready')], 'invisible': [('type','!=', 'Preventive')]}"/>
+								<field name="intervention_type" attrs="{'invisible': ['|',('type','not in',('Preventive','Corrective'))], 'readonly':[('state','in',('done','cancel'))]}" widget="radio"/>
+								<field name="technician_p_id" attrs="{'required': [('state','=','ready')], 'readonly':[('state','in',('done','cancel'))], 'invisible': [('type','!=', 'Preventive')]}"/>
                                 <field name="category_ids" invisible="1"/>
                                 <field name="maintenance_type" invisible="1"/>
                                 <label for="task_id" attrs="{'invisible':[('maintenance_type','=','bm')]}"/>
@@ -116,7 +116,7 @@
                         <notebook>
 							<page string="Information" attrs="{'invisible': ['|', ('state', 'not in', ('ready','done')), ('type', '!=', 'Corrective')]}">
 								<group col="4">
-									<field name="technician_id" attrs="{'required': [('state','=','ready')], 'readonly': [('state','in',('done','cancel'))]}"/>
+									<field name="technician_id" attrs="{'required': [('state','=','ready'), ('type','=','Corrective')], 'readonly': [('state','in',('done','cancel'))]}"/>
 									<field name="date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
 									<field name="diagnostic" colspan="4" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
 								</group>
