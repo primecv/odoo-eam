@@ -91,7 +91,7 @@
                                 <field name="asset_id" on_change="onchange_asset(asset_id)"/>
 								<field name="asset_location_rel_id"/>
 								<field name="cause" attrs="{'invisible': [('type','!=','Corrective')], 'readonly': [('state', 'not in', ('draft','ready'))]}"/>
-								<field name="description" attrs="{'invisible': [('type','!=','Preventive')]}"/>
+								<field name="description" attrs="{'invisible': [('type','!=','Preventive')], 'readonly': [('state','in',('done','cancel'))]}"/>
 								<field name="intervention_type" attrs="{'invisible': ['|',('type','not in',('Preventive','Corrective')),('state','in',('draft','cancel'))], 'readonly':[('state','!=','ready')]}" widget="radio"/>
 								<field name="technician_id" attrs="{'required': [('state','=','ready')], 'readonly':[('state','!=','ready')], 'invisible': [('type','!=', 'Preventive')]}"/>
                                 <field name="category_ids" invisible="1"/>
@@ -116,17 +116,17 @@
                         <notebook>
 							<page string="Information" attrs="{'invisible': ['|', ('state', 'not in', ('ready','done')), ('type', '!=', 'Corrective')]}">
 								<group col="4">
-									<field name="technician_id" attrs="{'required': [('state','=','ready')], 'readonly':[('state','!=','ready')]}"/>
-									<field name="date"/>
-									<field name="diagnostic" colspan="4"/>
+									<field name="technician_id" attrs="{'required': [('state','=','ready')], 'readonly': [('state','in',('done','cancel'))]}"/>
+									<field name="date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
+									<field name="diagnostic" colspan="4" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
 								</group>
 							</page>
 
 							<page string="Resolution" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','done'))]}">
 								<group col="4">
-									<field name="resolution_date"/><newline/>
-									<field name="resolution_note" colspan="4"/>
-									<field name="resolution_parts_line">
+									<field name="resolution_date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/><newline/>
+									<field name="resolution_note" colspan="4" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
+									<field name="resolution_parts_line" attrs="{'readonly': [('state','in',('done','cancel'))]}">
 										<tree editable="top" string="Parts for Resolution">
 											<field name="parts_id"/>
 										</tree>
@@ -136,9 +136,9 @@
 	
 							<page string="Delivery" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','done'))]}">
 								<group col="4">
-									<field name="delivery_date"/><newline/>
-									<field name="delivery_note" colspan="4"/>
-									<field name="delivery_document_ids">
+									<field name="delivery_date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/><newline/>
+									<field name="delivery_note" colspan="4" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
+									<field name="delivery_document_ids" attrs="{'readonly': [('state','in',('done','cancel'))]}">
 										<tree string="Delivery Documents" editable="top">
 											<field name="file" filename="name"/>
 											<field name="name" invisible="1"/>
@@ -149,7 +149,7 @@
 
                             <page string="Parts" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('ready','done'))]}">
                                     <group string="Planned Parts" states="draft,released,done,parts_except,cancel">
-                                        <field name="parts_lines" nolabel="1">
+                                        <field name="parts_lines" nolabel="1" attrs="{'readonly': [('state','in',('done','cancel'))]}">
                                             <tree string="Planned Parts" editable="bottom">
                                                 <field name="parts_id" on_change="onchange_parts(parts_id)"/>
                                                 <field name="parts_qty"/>
@@ -191,7 +191,7 @@
                             </page>
                             <page string="Tools" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('ready','done'))]}">
                                 <separator string="Description for Tools"/>
-                                <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..."/>
+                                <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
                             <page string="Labor" invisible="1">
                                 <separator string="Description for Labor"/>
@@ -199,11 +199,11 @@
                             </page>
                             <page string="Operations" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('ready','done'))]}">
                                 <separator string="Description for Operations"/>
-                                <field name="operations_description" placeholder="Specify the jobs that need execute..."/>
+                                <field name="operations_description" placeholder="Specify the jobs that need execute..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
                             <page string="Documentation" attrs="{'invisible': [('state', 'not in', ('ready','done'))]}">
 								<separator string="Attachments"/>
-								<field name="documentation_attachments">
+								<field name="documentation_attachments" attrs="{'readonly': [('state','in',('done','cancel'))]}">
 									<tree string="Attachments" nolabel="1" editable="top">
 										<field name="file" filename="name"/>
 										<field name="name" invisible="1"/>
@@ -211,7 +211,7 @@
 								</field>
 
                                 <separator string="Description for Documentation"/>
-                                <field name="documentation_description" placeholder="Specify the documentation useful when execute this order..."/>
+                                <field name="documentation_description" placeholder="Specify the documentation useful when execute this order..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
                         </notebook>
                         <group string="Problem Description" invisible="1">
