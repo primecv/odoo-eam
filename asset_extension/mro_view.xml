@@ -87,12 +87,13 @@
                         </div>
                         <group>
                             <group>
-								<field name="type" required="1"/>
+								<field name="type" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>	
                                 <field name="asset_id" on_change="onchange_asset(asset_id)"/>
 								<field name="asset_location_rel_id"/>
-								<field name="cause" attrs="{'invisible': [('type','!=','Corrective')]}"/>
+								<field name="cause" attrs="{'invisible': [('type','!=','Corrective')], 'readonly': [('state', 'not in', ('draft','ready'))]}"/>
 								<field name="description" attrs="{'invisible': [('type','!=','Preventive')]}"/>
 								<field name="intervention_type" attrs="{'invisible': ['|',('type','not in',('Preventive','Corrective')),('state','in',('draft','cancel'))], 'readonly':[('state','!=','ready')]}" widget="radio"/>
+								<field name="technician_id" attrs="{'required': [('state','=','ready')], 'readonly':[('state','!=','ready')], 'invisible': [('type','!=', 'Preventive')]}"/>
                                 <field name="category_ids" invisible="1"/>
                                 <field name="maintenance_type" invisible="1"/>
                                 <label for="task_id" attrs="{'invisible':[('maintenance_type','=','bm')]}"/>
@@ -101,8 +102,8 @@
                                 </div>
                             </group>
                             <group>
-                                <field name="date_planned" string="Request Date" on_change="onchange_planned_date(date_planned)"/>
-                                <field name="date_scheduled" on_change="onchange_scheduled_date(date_scheduled)" invisible="1"/>
+                                <field name="date_planned" attrs="{'invisible': [('type','!=','Preventive')]}" on_change="onchange_planned_date(date_planned)"/>
+                                <field name="date_scheduled" attrs="{'invisible': [('type','!=','Corrective')]}" string="Request Date" on_change="onchange_scheduled_date(date_scheduled)"/>
 								<field name="date_execution" on_change="onchange_execution_date(date_execution,state)" attrs="{'invisible':[('state','in',('draft','released','cancel'))]}"/>
                                 <field name="origin" invisible="1"/>
                             </group>
@@ -113,7 +114,7 @@
                             </group>
                         </group>
                         <notebook>
-							<page string="Information" attrs="{'invisible': [('state', 'not in', ('ready','done'))]}">
+							<page string="Information" attrs="{'invisible': ['|', ('state', 'not in', ('ready','done')), ('type', '!=', 'Corrective')]}">
 								<group col="4">
 									<field name="technician_id" attrs="{'required': [('state','=','ready')], 'readonly':[('state','!=','ready')]}"/>
 									<field name="date"/>
