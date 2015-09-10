@@ -147,8 +147,8 @@
 								</group>
 							</page>
 
-                            <page string="Parts" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('ready','done'))]}">
-                                    <group string="Planned Parts" states="draft,released,done,parts_except,cancel">
+                            <page string="Parts" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'released', 'ready','done'))]}">
+                                    <group string="Planned Parts" states="draft,ready,released,done,parts_except,cancel">
                                         <field name="parts_lines" nolabel="1" attrs="{'readonly': [('state','in',('done','cancel'))]}">
                                             <tree string="Planned Parts" editable="bottom">
                                                 <field name="parts_id" on_change="onchange_parts(parts_id)"/>
@@ -169,7 +169,7 @@
                                         </field>
                                     </group>
                                     <group string="Parts to Consume" states="ready">
-                                        <field name="parts_move_lines" nolabel="1" readonly="1">
+                                        <field name="parts_move_lines" nolabel="1" attrs="{'readonly': [('state','in',('done','cancel'))]}">
                                             <tree string="Parts to Consume">
                                                 <field name="product_id" string="Parts"/>
                                                 <field name="product_qty" string="Quantity"/>
