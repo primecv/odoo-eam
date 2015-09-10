@@ -50,7 +50,7 @@
 						</group>
                         <group string="Warranty">
                             <group>
-								<field name="manufacturer_id" domain="[('is_manufacturer','=',True)]"/>
+								<field name="manufacturer_id" domain="[('is_manufacturer','=',True)]" context="{'form_view_ref':'asset_extension.view_partner_manufacturer_form', 'is_manufacturer': True, 'default_is_manufacturer': True}"/>
 	                            <field name="start_date" string="Start Use"/>
                             	<field name="warranty_start_date"/>
                             </group>
@@ -135,7 +135,7 @@
 								</group>
 					            <group string="Warranty">
 					                <group>
-										<field name="manufacturer_id" domain="[('is_manufacturer','=',True)]"/>
+										<field name="manufacturer_id" domain="[('is_manufacturer','=',True)]" context="{'form_view_ref':'asset_extension.view_partner_manufacturer_form', 'is_manufacturer': True, 'default_is_manufacturer': True}"/>
 						                <field name="start_date" string="Start Use"/>
 					                	<field name="warranty_start_date"/>
 					                </group>
