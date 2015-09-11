@@ -88,7 +88,7 @@
                         <group>
                             <group>
 								<field name="type" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>	
-                                <field name="asset_id" on_change="onchange_asset(asset_id)" context="{'form_view_ref': 'asset_extension.assets_form_view_hcv_stock'}"/>
+								<field name="asset_id" on_change="onchange_asset(asset_id)" context="{'form_view_ref': 'asset_extension.assets_form_view_hcv_stock', 'default_active': 1, 'search_default_active': 1}"/>
 								<field name="asset_location_rel_id"/>
 								<field name="cause" attrs="{'invisible': [('type','!=','Corrective')], 'readonly': [('state', 'not in', ('draft','ready'))]}"/>
 								<field name="description" attrs="{'invisible': [('type','!=','Preventive')], 'readonly': [('state','in',('done','cancel'))]}"/>

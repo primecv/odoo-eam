@@ -97,6 +97,14 @@ class asset_asset(osv.osv):
 		#			vals['asset_location_rel_check'] = True
 		return super(asset_asset, self).write(cr, uid, ids, vals, context)
 
+	def search(self, cr, user, args, offset=0, limit=None, order=None, context=None, count=False):
+		res = super(asset_asset, self).search(cr, user, args, offset=offset, limit=limit, order=order, context=context, count=count)
+		if 'default_active' in context:
+			cr.execute('select id from asset_asset')
+			records = cr.fetchall()
+			args = [['id', 'in', list(records)]]
+			res = super(asset_asset, self).search(cr, user, args, offset=offset, limit=limit, order=order, context=context, count=count)
+		return res
 
 	def onchange_hospital(self, cr, uid, ids, hospital_id, context=None):
 		if not hospital_id:
