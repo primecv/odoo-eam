@@ -158,7 +158,7 @@
                                             </tree>
                                         </field>
                                     </group>
-                                    <group string="Available Parts" states="released,parts_except">
+                                    <group string="Available Parts" states="released,parts_except" invisible="1">
                                         <field name="parts_ready_lines" nolabel="1" readonly="1">
                                             <tree string="Available Parts">
                                                 <field name="product_id" string="Parts"/>
