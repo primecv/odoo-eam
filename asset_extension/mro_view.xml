@@ -93,7 +93,7 @@
 								<field name="cause" attrs="{'invisible': [('type','!=','Corrective')], 'readonly': [('state', 'not in', ('draft','ready'))]}"/>
 								<field name="description" attrs="{'invisible': [('type','!=','Preventive')], 'readonly': [('state','in',('done','cancel'))]}"/>
 								<field name="intervention_type" attrs="{'invisible': ['|',('type','not in',('Preventive','Corrective'))], 'readonly':[('state','in',('done','cancel'))]}" widget="radio"/>
-								<field name="technician_p_id" attrs="{'required': [('state','=','ready')], 'readonly':[('state','in',('done','cancel'))], 'invisible': [('type','!=', 'Preventive')]}" context="{'form_view_ref': 'asset_extension.view_employee_technician_form', 'is_technician': True, 'default_is_technician': True}"/>
+								<field name="technician_p_id" attrs="{'required': [('state','=','ready'), ('type','=','Preventive')], 'readonly':[('state','in',('done','cancel'))], 'invisible': [('type','!=', 'Preventive')]}" context="{'form_view_ref': 'asset_extension.view_employee_technician_form', 'is_technician': True, 'default_is_technician': True}"/>
                                 <field name="category_ids" invisible="1"/>
                                 <field name="maintenance_type" invisible="1"/>
                                 <label for="task_id" attrs="{'invisible':[('maintenance_type','=','bm')]}"/>
@@ -225,6 +225,29 @@
                 </form>
             </field>
         </record>
+
+        <record id="mro_order_tree_view_eam" model="ir.ui.view">
+            <field name="name">mro.order.eam.tree</field>
+            <field name="model">mro.order</field>
+			<field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <tree fonts="bold:message_unread==True" string="Maintenance Orders">
+                    <field name="message_unread" invisible="1"/>
+                    <field name="name"/>
+					<field name="date_scheduled" widget="date" string="Order Date"/>
+                    <field name="date_execution" widget="date"/>
+                    <field name="asset_id" string="Equipment(Asset)"/>
+                    <field name="maintenance_type" invisible="1"/>
+					<field name="type" string="Maintenance Type"/>
+                    <field name="description" invisible="1"/>
+                    <field name="origin" invisible="1"/>
+					<field name="technician_ref"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+
 
 	</data>
 </openerp>
