@@ -189,7 +189,7 @@
                                         </field>
                                     </group>
                             </page>
-                            <page string="Tools" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('ready','done'))]}">
+                            <page string="Tools" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'ready','done'))]}">
                                 <separator string="Description for Tools"/>
                                 <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
@@ -197,11 +197,11 @@
                                 <separator string="Description for Labor"/>
                                 <field name="labor_description" placeholder="Specify the specialists needed for execute this order..."/>
                             </page>
-                            <page string="Operations" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('ready','done'))]}">
+                            <page string="Operations" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'ready','done'))]}">
                                 <separator string="Description for Operations"/>
                                 <field name="operations_description" placeholder="Specify the jobs that need execute..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
-                            <page string="Documentation" attrs="{'invisible': [('state', 'not in', ('ready','done'))]}">
+                            <page string="Documentation" attrs="{'invisible': [('state', 'not in', ('draft', 'ready','done'))]}">
 								<separator string="Attachments"/>
 								<field name="documentation_attachments" attrs="{'readonly': [('state','in',('done','cancel'))]}">
 									<tree string="Attachments" nolabel="1" editable="top">

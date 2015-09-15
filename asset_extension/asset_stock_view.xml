@@ -175,8 +175,11 @@
             <field name="model">asset.asset</field>
             <field name="arch" type="xml">
                 <tree string="Assets">
-					<field name="barcode_no"/>
                     <field name="name"/>
+					<field name="serial"/>
+					<field name="barcode_no"/>
+					<field name="mark"/>
+					<field name="category_id"/>
                     <field name="property_stock_asset"/>
 				</tree>
 			</field>
