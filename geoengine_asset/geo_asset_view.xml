@@ -88,7 +88,7 @@
             </field>
         </record>
         <record id="geoengine_vector_layer_asset_asset_google" model="geoengine.raster.layer">
-            <field name="raster_type">google</field>
+            <field name="raster_type">osm</field>
             <field name="google_type">G_HYBRID_MAP</field>
             <field name="name">Employee background</field>
             <field name="view_id" ref="ir_ui_view_geo_asset_stock"/>
