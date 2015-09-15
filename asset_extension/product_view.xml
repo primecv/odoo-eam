@@ -193,7 +193,7 @@
             parent="mro.menu_maintenance_parts"
             sequence="100"/>
 
-		<delete id="mro.menu_maintenance_parts_parts" model="ir.ui.menu"/>
+		<!--delete id="mro.menu_maintenance_parts_parts" model="ir.ui.menu"/-->
 
         <menuitem name="Parts"
             id="menu_stock_parts"
@@ -207,6 +207,8 @@
             parent="menu_stock_parts"
             sequence="100"/>
 
+		<delete id="menu_stock_parts" model="ir.ui.menu"/>
+		<delete id="menu_stock_parts_parts" model="ir.ui.menu"/>
 
 				
 	</data>
