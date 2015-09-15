@@ -99,7 +99,7 @@ class asset_asset(osv.osv):
 
 	def search(self, cr, user, args, offset=0, limit=None, order=None, context=None, count=False):
 		res = super(asset_asset, self).search(cr, user, args, offset=offset, limit=limit, order=order, context=context, count=count)
-		if 'default_active' in context:
+		if context and 'default_active' in context:
 			cr.execute('select id from asset_asset')
 			records = cr.fetchall()
 			if not args:
