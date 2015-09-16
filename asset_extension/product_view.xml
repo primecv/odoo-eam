@@ -50,6 +50,7 @@
 										<field name="mark"/>
 										<field name="purchase_date"/>
 										<field name="manufacturing_year"/>
+										<field name="supplier_id" domain="[('supplier','=',True)]"/>
                                     </group>
                                 </group>
 								<group string="Barcode">

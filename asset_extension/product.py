@@ -15,5 +15,6 @@ class product_product(osv.Model):
 		'barcode_label': fields.binary('Barcode'),
 		'barcode_no': fields.char('Barcode No', track_visibility='onchange'),
 		'part_location_id': fields.many2one('stock.location', 'Location'),
+		'supplier_id': fields.many2one('res.partner', 'Supplier', domain="[('supplier','=',1)]"),
 	
 	}
