@@ -129,6 +129,11 @@ class mro_order_parts_line(osv.osv):
 			search.append(('parts_id','=',values['parts_id']))
 		ids = self.search(cr, uid, search)
 		if len(ids)>0:
+			if values and 'parts_qty' not in values:
+				values.update({'parts_qty': 0})
+			elif not values:
+				values = {}
+				values.update({'parts_qty': 0})
 			values['parts_qty'] = self.browse(cr, uid, ids[0]).parts_qty + values['parts_qty']
 			self.write(cr, uid, ids[0], values, context=context)
 			return ids[0]
