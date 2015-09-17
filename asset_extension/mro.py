@@ -120,3 +120,21 @@ class mro_order_parts_line(osv.osv):
 	_columns = {
 		'order_id': fields.many2one('mro.order', 'MRO Order'),
 	}
+
+	def create(self, cr, uid, values, context=None):
+		search = []
+		if 'maintenance_id' in values:
+			search.append(('maintenance_id','=',values['maintenance_id']))
+		if 'parts_id' in values:
+			search.append(('parts_id','=',values['parts_id']))
+		ids = self.search(cr, uid, search)
+		if len(ids)>0:
+			values['parts_qty'] = self.browse(cr, uid, ids[0]).parts_qty + values['parts_qty']
+			self.write(cr, uid, ids[0], values, context=context)
+			return ids[0]
+		ids = self.search(cr, uid, [('maintenance_id','=',False)])
+		if len(ids)>0:
+			self.write(cr, uid, ids[0], values, context=context)
+			return ids[0]
+		return super(mro_order_parts_line, self).create(cr, uid, values, context=context)
+
