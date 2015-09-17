@@ -104,7 +104,7 @@
                             <group>
                                 <field name="date_planned" attrs="{'invisible': [('type','!=','Preventive')]}" on_change="onchange_planned_date(date_planned)"/>
                                 <field name="date_scheduled" attrs="{'invisible': [('type','!=','Corrective')]}" string="Request Date" on_change="onchange_scheduled_date(date_scheduled)"/>
-								<field name="date_execution" on_change="onchange_execution_date(date_execution,state)" attrs="{'invisible':[('state','in',('draft','released','cancel'))]}"/>
+								<field name="date_execution" on_change="onchange_execution_date(date_execution,state)" attrs="{'invisible':['|', ('type','=','Corrective'), ('state','in',('draft','released','cancel'))]}"/>
                                 <field name="origin" invisible="1"/>
                             </group>
                             <group groups="stock.group_locations">
@@ -201,7 +201,7 @@
                                 <separator string="Description for Operations"/>
                                 <field name="operations_description" placeholder="Specify the jobs that need execute..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
-                            <page string="Documentation" attrs="{'invisible': [('state', 'not in', ('draft', 'ready','done'))]}">
+                            <page string="Documentation" attrs="{'invisible': ['|', ('state', 'not in', ('draft', 'ready','done')), ('type', '=', 'Corrective')]}">
 								<separator string="Attachments"/>
 								<field name="documentation_attachments" attrs="{'readonly': [('state','in',('done','cancel'))]}">
 									<tree string="Attachments" nolabel="1" editable="top">
