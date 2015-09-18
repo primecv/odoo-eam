@@ -84,11 +84,11 @@ class mro_order(osv.Model):
 		#'type': 'Preventive'
 	}
 
-	def action_confirm(self, cr, uid, ids, context=None):        
-		""" override default behaviour
-		returns ready state
-		"""
-		return self.write(cr, uid, ids, {'state': 'ready'})
+	#def action_confirm(self, cr, uid, ids, context=None):        
+	#	""" override default behaviour
+	#	returns ready state
+	#	"""
+	#	return self.write(cr, uid, ids, {'state': 'ready'})
 
 	def onchange_asset(self, cr, uid, ids, asset):
 		value = {}

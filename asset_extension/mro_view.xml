@@ -158,7 +158,7 @@
                                             </tree>
                                         </field>
                                     </group>
-                                    <group string="Available Parts" states="released,parts_except" invisible="1">
+                                    <group string="Available Parts" states="released,parts_except">
                                         <field name="parts_ready_lines" nolabel="1" readonly="1">
                                             <tree string="Available Parts">
                                                 <field name="product_id" string="Parts"/>
@@ -168,7 +168,7 @@
                                             </tree>
                                         </field>
                                     </group>
-                                    <group string="Parts to Consume" states="ready" invisible="1">
+                                    <group string="Parts to Consume" states="ready">
                                         <field name="parts_move_lines" nolabel="1" attrs="{'readonly': [('state','in',('done','cancel'))]}">
                                             <tree string="Parts to Consume">
                                                 <field name="product_id" string="Parts"/>
@@ -178,7 +178,7 @@
                                             </tree>
                                         </field>
                                     </group>
-                                    <group string="Consumed Parts" states="ready,done" invisible="1">
+                                    <group string="Consumed Parts" states="ready,done">
                                         <field name="parts_moved_lines" nolabel="1" attrs="{'readonly': [('state','!=','ready')]}">
                                            <tree string="Consumed Parts">
                                                <field name="product_id" readonly="1" string="Parts"/>
