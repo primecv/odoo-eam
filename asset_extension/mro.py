@@ -60,6 +60,16 @@ class mro_order(osv.Model):
 
 		return result
 
+	def get_available_parts(self, cr, uid, ids, name, arg, context=None):
+		res = {}
+		for order in self.browse(cr, uid, ids, context=context):
+			res[order.id] = {}
+			done_line_ids = []
+			if order.move_lines:
+				done_line_ids += [move.id for move in order.move_lines if move.state == 'done']
+			res[order.id]['parts_moved_lines'] = done_line_ids
+		return res
+
 	_columns = {
 		'type': fields.selection([('Preventive', 'Preventive'), ('Corrective', 'Corrective')],'Type of Maintenance'),
 		'technician_id': fields.many2one("hr.employee", 'Assigned To', domain="[('is_technician','=',True)]", track_visibility='onchange'),#used for corrective type of maintenance
@@ -78,17 +88,52 @@ class mro_order(osv.Model):
 		'delivery_note': fields.text('Note'),
 		'delivery_document_ids': fields.one2many('mro.order.delivery.attachments', 'order_id', 'Attachment(s)'),
 		'documentation_attachments': fields.one2many('mro.order.documentation.attachments', 'order_id', 'Attachment(s)'),
+
+		'move_lines': fields.one2many('stock.move', 'mro_order_id', 'Moves'),
+
+		'parts_moved_lines': fields.function(get_available_parts, relation="stock.move", method=True, type="one2many", multi='parts'),
 	}
 
 	_defaults = {
 		#'type': 'Preventive'
 	}
 
-	#def action_confirm(self, cr, uid, ids, context=None):        
-	#	""" override default behaviour
-	#	returns ready state
-	#	"""
-	#	return self.write(cr, uid, ids, {'state': 'ready'})
+	def action_confirm(self, cr, uid, ids, context=None):        
+		""" override default behaviour
+		returns ready state
+		"""
+		picking_type_id, source_location_id, location_dest_id = 0, 0, 0
+		picking_type_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'picking_type_internal')
+		if picking_type_id:
+			picking_type_id = picking_type_id[1]
+
+		source_location_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'stock_location_stock')
+		if source_location_id:
+			source_location_id = source_location_id[1]
+
+		location_dest_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'location_maintenance')
+		if location_dest_id:
+			location_dest_id = location_dest_id[1]
+
+		for rec in self.browse(cr, uid, ids):
+			group_id = self.pool.get("procurement.group").create(cr, uid, {'name': rec.name}, context=context)
+			for line in rec.parts_lines:
+				if line.parts_qty <= 0:
+					raise osv.except_osv(('Error!'), ('Invalid Parts Quantity.'))
+				else:
+					move_id = self.pool.get('stock.move').create(cr, uid, {
+								'product_id': line.parts_id.id,
+								'product_uom_qty': line.parts_qty,
+								'product_uom': line.parts_id.product_tmpl_id.uom_id.id,
+								'name': 'Maintenance Order ' + rec.name,
+								'picking_type_id': picking_type_id,
+								'location_id': source_location_id,
+								'location_dest_id': location_dest_id,
+								'group_id': group_id or None,
+								'mro_order_id': rec.id
+							})
+					self.pool.get('stock.move').action_done(cr, uid, [move_id])
+		return self.write(cr, uid, ids, {'state': 'ready'})
 
 	def onchange_asset(self, cr, uid, ids, asset):
 		value = {}
@@ -143,3 +188,9 @@ class mro_order_parts_line(osv.osv):
 			return ids[0]
 		return super(mro_order_parts_line, self).create(cr, uid, values, context=context)
 
+class stock_move(osv.osv):
+	_inherit = "stock.move"
+
+	_columns = {
+		'mro_order_id': fields.many2one('mro.order', 'Maitenance Order'),
+	}

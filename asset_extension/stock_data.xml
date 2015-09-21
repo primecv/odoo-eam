@@ -1,0 +1,16 @@
+<openerp>
+	<data noupdate="1">
+
+        <record id="stock.location_maintenance" model="stock.location">
+            <field name="name">Maintenance</field>
+            <field name="location_id" ref="stock.stock_location_locations_virtual"/>
+            <field name="usage">production</field>
+            <field name="company_id"></field>
+			<field name="latitude" eval="0.0"/>
+			<field name="longitude" eval="0.0"/>
+        </record>
+
+	</data>
+</openerp>
+
+		
