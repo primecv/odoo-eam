@@ -81,7 +81,7 @@ class mro_order(osv.Model):
 		'diagnostic': fields.text('Diagnostic', track_visibility='onchange'),
 		'date': fields.date('Date'),
 		#'resolution_part_id': fields.many2one('product.product', 'Part', track_visibility='onchange'),
-		'resolution_parts_line': fields.one2many('mro.order.parts.line', 'order_id', 'Resolution Parts'),
+		'resolution_parts_line': fields.one2many('mro.order.resolution.line', 'order_id', 'Resolution Parts'),
 		'resolution_note': fields.text('Description'),
 		'resolution_date': fields.date('Resolution Date', track_visibility='onchange'),
 		'delivery_date': fields.date('Date of Delivery', track_visibility='onchange'),
@@ -159,12 +159,20 @@ class mro_order_documentation_attachments(osv.Model):
 		'file': fields.binary('File'),
 	}
 
+class mro_order_resolution_line(osv.osv):
+	_name = 'mro.order.resolution.line'
+
+	_columns = {
+		'parts_id': fields.many2one('product.product', 'Parts', required=True),
+		'order_id': fields.many2one('mro.order', 'MRO Order'),
+	}
+
 class mro_order_parts_line(osv.osv):
 	_inherit = 'mro.order.parts.line'
 
-	_columns = {
-		'order_id': fields.many2one('mro.order', 'MRO Order'),
-	}
+	#_columns = {
+	#	'order_id': fields.many2one('mro.order', 'MRO Order'),
+	#}
 
 	def create(self, cr, uid, values, context=None):
 		search = []

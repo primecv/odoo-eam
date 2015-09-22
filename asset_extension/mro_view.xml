@@ -128,7 +128,7 @@
 									<field name="resolution_note" colspan="4" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
 									<field name="resolution_parts_line" attrs="{'readonly': [('state','in',('done','cancel'))]}">
 										<tree editable="top" string="Parts for Resolution">
-											<field name="parts_id"/>
+											<field name="parts_id" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view'}"/>
 										</tree>
 									</field>
 								</group>
