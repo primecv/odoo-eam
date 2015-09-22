@@ -213,6 +213,12 @@
                                 <separator string="Description for Documentation"/>
                                 <field name="documentation_description" placeholder="Specify the documentation useful when execute this order..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
+							<page string="Resolution" attrs="{'invisible': [('type','!=','Preventive')]}">	
+								<group col="4">
+									<field name="maintenance_cost" attrs="{'readonly': [('state','!=','draft')]}"/>
+									<field name="work_hours" widget="float_time" attrs="{'readonly': [('state','!=','draft')]}"/>
+								</group>
+							</page>
                         </notebook>
                         <group string="Problem Description" invisible="1">
                             <field name="problem_description" colspan="4" nolabel="1"/>
