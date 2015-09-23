@@ -123,10 +123,12 @@
 							</page>
 
 							<page string="Resolution" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','done'))]}">
-								<group col="4">
-									<field name="resolution_date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/><newline/>
-									<field name="resolution_note" colspan="4" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
-									<field name="resolution_parts_line" attrs="{'readonly': [('state','in',('done','cancel'))]}">
+								<group col="6">
+									<field name="resolution_date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
+									<field name="maintenance_c_cost" attrs="{'readonly': [('state','!=','ready')]}"/>
+									<field name="work_c_hours" widget="float_time" attrs="{'readonly': [('state','!=','ready')]}"/>
+									<field name="resolution_note" colspan="6" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
+									<field name="resolution_parts_line" attrs="{'readonly': [('state','in',('done','cancel'))]}" colspan="6">
 										<tree editable="top" string="Parts for Resolution">
 											<field name="parts_id" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view'}"/>
 										</tree>

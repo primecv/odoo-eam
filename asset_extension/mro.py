@@ -94,6 +94,9 @@ class mro_order(osv.Model):
 		'parts_moved_lines': fields.function(get_available_parts, relation="stock.move", method=True, type="one2many", multi='parts'),
 		'maintenance_cost': fields.float('Cost of Maintenance'),
 		'work_hours': fields.float('Work Hours'),
+		'maintenance_c_cost': fields.float('Cost of Maintenance'),
+		'work_c_hours': fields.float('Work Hours'),
+
 	}
 
 	_defaults = {
