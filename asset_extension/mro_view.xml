@@ -215,21 +215,22 @@
 										<field name="name" invisible="1"/>
 									</tree>
 								</field>
-								<separator string="Attachments" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))]}"/>
-								<field name="documentation_attachments_confirm" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))], 'readonly': [('state','in',('done','cancel'))]}">
-									<tree string="Attachments" nolabel="1" editable="top">
-										<field name="file" filename="name"/>
-										<field name="name" invisible="1"/>
-									</tree>
-								</field>
 
                                 <separator string="Description for Documentation" invisible="1"/>
                                 <field name="documentation_description" placeholder="Specify the documentation useful when execute this order..." attrs="{'readonly': [('state','in',('done','cancel'))]}" invisible="1"/>
                             </page>
-							<page string="Resolution" attrs="{'invisible': [('type','!=','Preventive')]}">	
+							<page string="Resolution" attrs="{'invisible': ['|', ('type','!=','Preventive'), ('state','=','draft')]}">	
 								<group col="4">
 									<field name="maintenance_cost" attrs="{'readonly': [('state','!=','draft')]}"/>
 									<field name="work_hours" widget="float_time" attrs="{'readonly': [('state','!=','draft')]}"/>
+									<separator string="Attachments" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))]}" colspan="4"/>
+									<field name="documentation_attachments_confirm" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))], 'readonly': [('state','in',('done','cancel'))]}" colspan="4" nolabel="1">
+										<tree string="Attachments" nolabel="1" editable="top">
+											<field name="file" filename="name"/>
+											<field name="name" invisible="1"/>
+										</tree>
+									</field>
+
 								</group>
 							</page>
                         </notebook>
