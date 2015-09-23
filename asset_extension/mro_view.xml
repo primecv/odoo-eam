@@ -233,8 +233,8 @@
                             </page>
 							<page string="Resolution" attrs="{'invisible': ['|', ('type','!=','Preventive'), ('state','=','draft')]}">	
 								<group col="4">
-									<field name="maintenance_cost" attrs="{'readonly': [('state','!=','draft')]}"/>
-									<field name="work_hours" widget="float_time" attrs="{'readonly': [('state','!=','draft')]}"/>
+									<field name="maintenance_cost" attrs="{'readonly': [('state','!=','ready')]}"/>
+									<field name="work_hours" widget="float_time" attrs="{'readonly': [('state','!=','ready')]}"/>
 									<separator string="Attachments" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))]}" colspan="4"/>
 									<field name="documentation_attachments_confirm" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))], 'readonly': [('state','in',('done','cancel'))]}" colspan="4" nolabel="1">
 										<tree string="Attachments" nolabel="1" editable="top">
