@@ -193,7 +193,9 @@
                             </page>
                             <page string="Tools" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'ready','done'))]}">
                                 <separator string="Description for Tools"/>
-                                <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
+                                <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..." attrs="{'readonly': [('state','in',('ready', 'done','cancel'))]}"/>
+                                <separator string="Description for Tools" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))]}"/>
+                                <field name="tools_description_confirm" placeholder="Specify the tools and mechanisms needed for execute this order..." attrs="{'invisible': [('state','not in', ('ready','done','cancel'))], 'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
                             <page string="Labor" invisible="1">
                                 <separator string="Description for Labor"/>
@@ -201,19 +203,28 @@
                             </page>
                             <page string="Operations" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'ready','done'))]}">
                                 <separator string="Description for Operations"/>
-                                <field name="operations_description" placeholder="Specify the jobs that need execute..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
+                                <field name="operations_description" placeholder="Specify the jobs that need execute..." attrs="{'readonly': [('state','in',('ready', 'done','cancel'))]}"/>
+								<separator string="Description for Operations" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))]}"/>
+                                <field name="operations_description_confirm" placeholder="Specify the jobs that need execute..." attrs="{'invisible': [('state','not in', ('ready','done','cancel'))], 'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
                             <page string="Documentation" attrs="{'invisible': ['|', ('state', 'not in', ('draft', 'ready','done')), ('type', '=', 'Corrective')]}">
 								<separator string="Attachments"/>
-								<field name="documentation_attachments" attrs="{'readonly': [('state','in',('done','cancel'))]}">
+								<field name="documentation_attachments" attrs="{'readonly': [('state','in',('ready', 'done','cancel'))]}">
+									<tree string="Attachments" nolabel="1" editable="top">
+										<field name="file" filename="name"/>
+										<field name="name" invisible="1"/>
+									</tree>
+								</field>
+								<separator string="Attachments" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))]}"/>
+								<field name="documentation_attachments_confirm" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))], 'readonly': [('state','in',('done','cancel'))]}">
 									<tree string="Attachments" nolabel="1" editable="top">
 										<field name="file" filename="name"/>
 										<field name="name" invisible="1"/>
 									</tree>
 								</field>
 
-                                <separator string="Description for Documentation"/>
-                                <field name="documentation_description" placeholder="Specify the documentation useful when execute this order..." attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
+                                <separator string="Description for Documentation" invisible="1"/>
+                                <field name="documentation_description" placeholder="Specify the documentation useful when execute this order..." attrs="{'readonly': [('state','in',('done','cancel'))]}" invisible="1"/>
                             </page>
 							<page string="Resolution" attrs="{'invisible': [('type','!=','Preventive')]}">	
 								<group col="4">

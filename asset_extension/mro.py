@@ -96,7 +96,10 @@ class mro_order(osv.Model):
 		'work_hours': fields.float('Work Hours'),
 		'maintenance_c_cost': fields.float('Cost of Maintenance'),
 		'work_c_hours': fields.float('Work Hours'),
-
+		
+		'tools_description_confirm': fields.text('Tools Description',translate=True, track_visibility='onchange'),
+        'operations_description_confirm': fields.text('Operations Description',translate=True, track_visibility='onchange'),
+		'documentation_attachments_confirm': fields.one2many('mro.order.documentation.attachments', 'order_confirm_id', 'Attachment(s)'),
 	}
 
 	_defaults = {
@@ -160,6 +163,7 @@ class mro_order_documentation_attachments(osv.Model):
 
 	_columns = {
 		'order_id': fields.many2one('mro.order', 'Maintenance Order'),
+		'order_confirm_id': fields.many2one('mro.order', 'Maintenance Order'),
 		'name': fields.char('Filename'),
 		'file': fields.binary('File'),
 	}
