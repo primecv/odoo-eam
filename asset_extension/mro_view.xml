@@ -73,11 +73,11 @@
                 <form string="Maintenance Orders">
                     <header>
                         <button name="button_confirm_order" states="draft" string="Confirm Maintenance" class="oe_highlight"/>
-                        <button name="button_done" states="ready" string="Done" class="oe_highlight"/>
+                        <button name="button_done" states="ready" string="Done" class="oe_highlight" type="object"/>
                         <button name="force_done" states="released" string="Done" class="oe_highlight" type="object"/>
                         <button name="force_parts_reservation" states="released" string="Force Reservation" type="object"/>
                         <button name="button_recreate_picking_parts" states="parts_except" string="Recreate Picking" class="oe_highlight"/>
-                        <button name="button_cancel" states="draft,ready,parts_except" string="Cancel"/>
+                        <button name="button_cancel" states="draft,ready,parts_except" string="Cancel" type="object"/>
                         <button name="action_cancel" type="object" states="released" string="Cancel"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,ready,done" statusbar_colors='{"parts_except":"red","released":"blue"}'/>
                     </header>
@@ -181,7 +181,19 @@
                                         </field>
                                     </group>
                                     <group string="Consumed Parts" states="ready,done">
-                                        <field name="parts_moved_lines" nolabel="1" readonly="1">
+                                        <field name="move_lines" nolabel="1" attrs="{'readonly': [('state','!=','ready')]}" context="{}">
+                                           <tree string="Consumed Parts" editable="bottom">
+                                               <field name="product_id" string="Parts" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view', 'mro_order_id': parent.id}" on_change="onchange_parts_id(product_id, 'mro.order')"/>
+                                               <field name="product_uom_qty"/>
+												<field name="state" invisible="1"/>
+												<field name="product_uom" invisible="1"/>
+												<field name="picking_type_id" invisible="1"/>
+												<field name="location_id" invisible="1"/>
+												<field name="location_dest_id" invisible="1"/>
+
+                                           </tree>
+                                        </field>
+                                        <field name="parts_moved_lines" nolabel="1" readonly="1" invisible="1">
                                            <tree string="Consumed Parts">
                                                <field name="product_id" readonly="1" string="Parts"/>
                                                <field name="product_qty" readonly="1"/>

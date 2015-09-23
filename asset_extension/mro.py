@@ -1,4 +1,5 @@
 from openerp.osv import osv, fields
+import time
 
 class mro_request(osv.Model):
 	_inherit = "mro.request"
@@ -106,11 +107,25 @@ class mro_order(osv.Model):
 		#'type': 'Preventive'
 	}
 
+	_order = "id desc"
+
+	def button_done(self, cr, uid, ids, context=None):
+		for order in self.browse(cr, uid, ids, context=context):
+			self.pool.get('stock.move').action_done(cr, uid, [x.id for x in order.move_lines])
+		self.write(cr, uid, ids, {'state': 'done', 'date_execution': time.strftime('%Y-%m-%d %H:%M:%S')})
+		return True
+
+	def button_cancel(self, cr, uid, ids, context=None):
+		for order in self.browse(cr, uid, ids, context=context):
+			self.pool.get('stock.move').action_cancel(cr, uid, [x.id for x in order.move_lines])
+		self.write(cr, uid, ids, {'state': 'cancel'})
+		return True
+
 	def action_confirm(self, cr, uid, ids, context=None):        
 		""" override default behaviour
 		returns ready state
 		"""
-		picking_type_id, source_location_id, location_dest_id = 0, 0, 0
+		'''picking_type_id, source_location_id, location_dest_id = 0, 0, 0
 		picking_type_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'picking_type_internal')
 		if picking_type_id:
 			picking_type_id = picking_type_id[1]
@@ -140,7 +155,7 @@ class mro_order(osv.Model):
 								'group_id': group_id or None,
 								'mro_order_id': rec.id
 							})
-					self.pool.get('stock.move').action_done(cr, uid, [move_id])
+					self.pool.get('stock.move').action_done(cr, uid, [move_id])'''
 		return self.write(cr, uid, ids, {'state': 'ready'})
 
 	def onchange_asset(self, cr, uid, ids, asset):
@@ -211,3 +226,40 @@ class stock_move(osv.osv):
 	_columns = {
 		'mro_order_id': fields.many2one('mro.order', 'Maitenance Order'),
 	}
+
+	def onchange_parts_id(self, cr, uid, ids, product_id, model=None, context=None):
+		vals = {}
+		if model == 'mro.order' and product_id:
+			picking_type_id, source_location_id, location_dest_id = 0, 0, 0
+			picking_type_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'picking_type_internal')
+			if picking_type_id:
+				picking_type_id = picking_type_id[1]
+
+			source_location_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'stock_location_stock')
+			if source_location_id:
+				source_location_id = source_location_id[1]
+
+			location_dest_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'location_maintenance')
+			if location_dest_id:
+				location_dest_id = location_dest_id[1]
+
+			vals['name'] = 'Maintenance Order '
+			uom_id = self.pool.get('product.product').browse(cr, uid, [product_id])[0].product_tmpl_id.uom_id.id
+			vals['product_uom'] = uom_id 
+			vals['picking_type_id'] = picking_type_id
+			vals['location_id'] = source_location_id
+			vals['location_dest_id'] = location_dest_id
+		return {'value': vals}
+
+	def create(self, cr, uid, vals, context=None):
+		if 'mro_order_id' in vals and vals['mro_order_id']:
+			ids = [vals['mro_order_id']]
+			for rec in self.pool.get('mro.order').browse(cr, uid, ids):
+				group_id = self.pool.get("procurement.group").create(cr, uid, {'name': rec.name}, context=context)
+				if vals['product_uom_qty'] <= 0:
+					raise osv.except_osv(('Error!'), ('Invalid Parts Quantity to be Consumed.'))
+				else:
+					vals['name'] = 'Maintenance Order ' + rec.name
+					vals['group_id'] = group_id
+		return super(stock_move, self).create(cr, uid, vals, context)
+
