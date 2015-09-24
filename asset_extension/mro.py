@@ -188,7 +188,12 @@ class mro_order_resolution_line(osv.osv):
 
 	_columns = {
 		'parts_id': fields.many2one('product.product', 'Parts', required=True),
+		'qty': fields.integer('Quantity'),
 		'order_id': fields.many2one('mro.order', 'MRO Order'),
+	}
+
+	_defaults = {
+		'qty': 1,
 	}
 
 class mro_order_parts_line(osv.osv):

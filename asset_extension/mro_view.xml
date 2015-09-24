@@ -131,6 +131,7 @@
 									<field name="resolution_parts_line" attrs="{'readonly': [('state','in',('done','cancel'))]}" colspan="6">
 										<tree editable="top" string="Parts for Resolution">
 											<field name="parts_id" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view'}"/>
+											<field name="qty"/>
 										</tree>
 									</field>
 								</group>
