@@ -111,7 +111,40 @@ class mro_order(osv.Model):
 
 	def button_done(self, cr, uid, ids, context=None):
 		for order in self.browse(cr, uid, ids, context=context):
-			self.pool.get('stock.move').action_done(cr, uid, [x.id for x in order.move_lines])
+			if order.type == 'Preventive':
+				self.pool.get('stock.move').action_done(cr, uid, [x.id for x in order.move_lines])
+			elif order.type == 'Corrective':
+				picking_type_id, source_location_id, location_dest_id = 0, 0, 0
+				picking_type_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'picking_type_internal')
+				if picking_type_id:
+					picking_type_id = picking_type_id[1]
+
+				source_location_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'stock_location_stock')
+				if source_location_id:
+					source_location_id = source_location_id[1]
+
+				location_dest_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'location_maintenance')
+				if location_dest_id:
+					location_dest_id = location_dest_id[1]
+
+				for rec in self.browse(cr, uid, ids):
+					group_id = self.pool.get("procurement.group").create(cr, uid, {'name': rec.name}, context=context)
+					for line in rec.resolution_parts_line:
+						if line.qty <= 0:
+							raise osv.except_osv(('Error!'), ('Invalid Parts Quantity.'))
+						else:
+							move_id = self.pool.get('stock.move').create(cr, uid, {
+										'product_id': line.parts_id.id,
+										'product_uom_qty': line.qty,
+										'product_uom': line.parts_id.product_tmpl_id.uom_id.id,
+										'name': 'Maintenance Order ' + rec.name,
+										'picking_type_id': picking_type_id,
+										'location_id': source_location_id,
+										'location_dest_id': location_dest_id,
+										'group_id': group_id or None,
+										'mro_order_id': rec.id
+									})
+							self.pool.get('stock.move').action_done(cr, uid, [move_id])
 		self.write(cr, uid, ids, {'state': 'done', 'date_execution': time.strftime('%Y-%m-%d %H:%M:%S')})
 		return True
 
