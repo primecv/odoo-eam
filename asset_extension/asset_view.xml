@@ -116,6 +116,41 @@
             groups="asset.group_mro_manager"
             sequence="110"/>
 
+		<!-- Asset Equipment Family -->
+		<record id="asset_equipment_family_form" model="ir.ui.view">
+			<field name="name">asset.equipment.family.form</field>
+			<field name="model">asset.equipment.family</field>
+			<field name="arch" type="xml">
+				<form string="Equipment Family">
+					<group>
+						<field name="name" required="1"/>
+					</group>
+				</form>
+			</field>
+		</record>
 
+		<record id="asset_equipment_family_tree" model="ir.ui.view">
+			<field name="name">asset.equipment.family.tree</field>
+			<field name="model">asset.equipment.family</field>
+			<field name="arch" type="xml">
+				<tree string="Equipment Family">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="asset_equipment_family_action" model="ir.actions.act_window">
+			<field name="name">Equipment Family</field>
+			<field name="res_model">asset.equipment.family</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+        <menuitem name="Asset Equipment Families"
+            action="asset_equipment_family_action"
+            id="menu_asset_equipment_family"
+            parent="stock.menu_stock_configuration"
+            groups="asset.group_mro_manager"
+            sequence="120"/>
 	</data>
 </openerp>
