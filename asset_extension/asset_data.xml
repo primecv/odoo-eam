@@ -27,4 +27,27 @@
 		</record>
 
 	</data>
+
+	<!-- Equipment Families -->
+	<data noupdate="1">
+		<record id="asset_equip1" model="asset.equipment.family">
+			<field name="name">Equipamento Biomédico</field>
+		</record>
+		<record id="asset_equip2" model="asset.equipment.family">
+			<field name="name">Equipamento Refrigeração</field>
+		</record>
+		<record id="asset_equip3" model="asset.equipment.family">
+			<field name="name">Equipamento Lavandaria</field>
+		</record>
+		<record id="asset_equip4" model="asset.equipment.family">
+			<field name="name">Equipamento Cozinha</field>
+		</record>
+		<record id="asset_equip5" model="asset.equipment.family">
+			<field name="name">Equipamento Informáticos</field>
+		</record>
+		<record id="asset_equip6" model="asset.equipment.family">
+			<field name="name">Equipamentos de Escritório</field>
+		</record>
+	</data>
+
 </openerp>
