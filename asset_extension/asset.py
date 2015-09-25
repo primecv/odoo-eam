@@ -16,7 +16,8 @@ class asset_asset(osv.osv):
 		'code': fields.char('Code'),
 		'asset_value': fields.float('Value'),
 		'asset_value_estimate': fields.float('Estimated Value'),
-		'equipment_type': fields.selection([('equip1','Equipamento Biomédico'), ('equip2','Equipamento Refrigeração'), ('equip3','Equipamento Lavandaria'),('equip4','Equipamento Cozinha'),('equip5', 'Equipamento Informáticos'), ('equip6', 'Equipamentos de Escritório')], 'Equipment Family'),
+		'equipment_type': fields.selection([('equip1','Equipamento Biomédico'), ('equip2','Equipamento Refrigeração'), ('equip3','Equipamento Lavandaria'),('equip4','Equipamento Cozinha'),('equip5', 'Equipamento Informáticos'), ('equip6', 'Equipamentos de Escritório')], 'Equipment Family'),#not to be used
+		'equipment_type_id': fields.many2one('asset.equipment.family', 'Equipment Family', track_visibility='onchange'),
 		'barcode_label': fields.binary('Barcode'),
 		'barcode_no': fields.char('Barcode No', track_visibility='onchange'),
 		'location_island': fields.related('property_stock_asset', 'island', type='char', string='Island', store=True),
@@ -126,6 +127,13 @@ class asset_asset_category(osv.Model):
 	_columns = {
 		'name': fields.char('Category Name', required=True, select=True),
 		'code': fields.char('Code'),
+	}
+
+class asset_equipment_familyt(osv.Model):
+	_name = "asset.equipment.family"
+
+	_columns = {
+		'name': fields.char('Equipment Family'),
 	}
 
 #dummy table to manage Asset Location parent-child hierarchy to be used in Asset Search:
