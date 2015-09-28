@@ -101,6 +101,7 @@ class mro_order(osv.Model):
 		'tools_description_confirm': fields.text('Tools Description',translate=True, track_visibility='onchange'),
         'operations_description_confirm': fields.text('Operations Description',translate=True, track_visibility='onchange'),
 		'documentation_attachments_confirm': fields.one2many('mro.order.documentation.attachments', 'order_confirm_id', 'Attachment(s)'),
+		'task_id': fields.many2one('mro.task', 'Task'),
 	}
 
 	_defaults = {
@@ -108,6 +109,47 @@ class mro_order(osv.Model):
 	}
 
 	_order = "id desc"
+
+	def write(self, cr, uid, ids, vals, context=None):
+		for rec in self.browse(cr, uid, ids):
+			mro_type = rec.type
+			if 'type' in vals:
+				mro_type = vals['type']
+			if not rec.task_id:
+				if mro_type == 'Preventive':
+					technician_id = rec.technician_p_id and rec.technician_p_id.id or False
+					if 'technician_p_id' in vals:
+						technician_id = vals['technician_p_id']
+					if technician_id:
+						task_id = self.pool.get('mro.task').create(cr, uid, {'name': rec.name, 
+																		'technician_id': technician_id,
+																		'maintenance_type': 'pm',
+																		'mro_id': rec.id
+																		})
+						vals['task_id'] = task_id
+				elif mro_type == 'Corrective':
+					technician_id = rec.technician_id and rec.technician_id.id or False
+					if 'technician_id' in vals:
+						technician_id = vals['technician_id']
+					if technician_id:
+						task_id = self.pool.get('mro.task').create(cr, uid, {'name': rec.name, 
+																		'technician_id': technician_id,
+																		'maintenance_type': 'cm',
+																		'mro_id': rec.id
+																		})
+						vals['task_id'] = task_id
+			else:
+				if mro_type == 'Preventive':
+					if 'technician_p_id' in vals:
+						technician_id = vals['technician_p_id']
+						self.pool.get('mro.task').write(cr, uid, [rec.task_id.id], {'technician_id': technician_id,
+																					'mro_id': rec.id})
+				elif mro_type == 'Corrective':
+					if 'technician_id' in vals:
+						technician_id = vals['technician_id']
+						self.pool.get('mro.task').write(cr, uid, [rec.task_id.id], {'technician_id': technician_id, 
+																					'mro_id': rec.id})
+		return super(mro_order, self).write(cr, uid, ids, vals, context=None)
 
 	def button_done(self, cr, uid, ids, context=None):
 		for order in self.browse(cr, uid, ids, context=context):
@@ -257,6 +299,15 @@ class mro_order_parts_line(osv.osv):
 			self.write(cr, uid, ids[0], values, context=context)
 			return ids[0]
 		return super(mro_order_parts_line, self).create(cr, uid, values, context=context)
+
+class mro_task(osv.osv):
+	_inherit = "mro.task"
+
+	_columns = {
+		'mro_id': fields.many2one('mro.order', 'Maintenance Order', track_visibility='onchange'),
+		'technician_id': fields.many2one('hr.employee', 'Technician', domain="[('is_technician','=',True)]", track_visibility='onchange'),
+		'category_id': fields.many2one('asset.category', 'Asset Category', ondelete='restrict', required=False),
+	}
 
 class stock_move(osv.osv):
 	_inherit = "stock.move"

@@ -320,7 +320,7 @@ class mro_task(osv.osv):
 
     _columns = {
         'name': fields.char('Description', size=64, required=True, translate=True),
-        'category_id': fields.many2one('asset.category', 'Asset Category', ondelete='restrict', required=True),
+        'category_id': fields.many2one('asset.category', 'Asset Category', ondelete='restrict'),
         'maintenance_type': fields.selection(MAINTENANCE_TYPE_SELECTION, 'Maintenance Type', required=True),
         'parts_lines': fields.one2many('mro.task.parts.line', 'task_id', 'Parts'),
         'tools_description': fields.text('Tools Description',translate=True),
