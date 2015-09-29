@@ -297,6 +297,8 @@
 						<field name="request_date"/>
 						<field name="mro_id" required="1"/>
 						<field name="technician_id" required="1"/>
+						<field name="cause" attrs="{'invisible': [('maintenance_type','!=','cm')]}"/>
+						<field name="description" attrs="{'invisible': [('maintenance_type','!=','pm')]}"/>
                         <field name="category_id" invisible="1"/>
                         <field name="active" invisible="1"/>
                     </group>

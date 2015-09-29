@@ -125,7 +125,8 @@ class mro_order(osv.Model):
 																		'technician_id': technician_id,
 																		'maintenance_type': 'pm',
 																		'mro_id': rec.id,
-																		'request_date': rec.date_execution
+																		'request_date': rec.date_execution,
+																		'description': rec.description,
 																		})
 						vals['task_id'] = task_id
 				elif mro_type == 'Corrective':
@@ -137,7 +138,8 @@ class mro_order(osv.Model):
 																		'technician_id': technician_id,
 																		'maintenance_type': 'cm',
 																		'mro_id': rec.id,
-																		'request_date': rec.date_scheduled
+																		'request_date': rec.date_scheduled,
+																		'cause': rec.cause
 																		})
 						vals['task_id'] = task_id
 			else:
@@ -146,13 +148,15 @@ class mro_order(osv.Model):
 						technician_id = vals['technician_p_id']
 						self.pool.get('mro.task').write(cr, uid, [rec.task_id.id], {'technician_id': technician_id,
 																					'mro_id': rec.id, 
-																					'request_date': rec.date_execution})
+																					'request_date': rec.date_execution,
+																					'description': rec.description})
 				elif mro_type == 'Corrective':
 					if 'technician_id' in vals:
 						technician_id = vals['technician_id']
 						self.pool.get('mro.task').write(cr, uid, [rec.task_id.id], {'technician_id': technician_id, 
 																					'mro_id': rec.id,
-																					'request_date': rec.date_scheduled})
+																					'request_date': rec.date_scheduled,
+																					'cause': rec.cause})
 		return super(mro_order, self).write(cr, uid, ids, vals, context=None)
 
 	def button_done(self, cr, uid, ids, context=None):
@@ -312,6 +316,8 @@ class mro_task(osv.osv):
 		'technician_id': fields.many2one('hr.employee', 'Technician', domain="[('is_technician','=',True)]", track_visibility='onchange'),
 		'category_id': fields.many2one('asset.category', 'Asset Category', ondelete='restrict', required=False),
 		'request_date': fields.date('Request Date', track_visibility='onchange'),
+		'description': fields.char('Description', track_visibility='onchange'),
+		'cause': fields.char('Cause', track_visibility='onchange')
 	}
 
 class stock_move(osv.osv):
