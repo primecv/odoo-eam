@@ -71,7 +71,17 @@ class mro_order(osv.Model):
 			res[order.id]['parts_moved_lines'] = done_line_ids
 		return res
 
+	STATE_SELECTION = [
+        ('draft', 'DRAFT'),
+        ('released', 'WAITING PARTS'),
+        ('ready', 'READY TO MAINTENANCE'),
+		('validate', 'VALIDATED'),
+        ('done', 'DONE'),
+        ('cancel', 'CANCELED')
+    ]
+
 	_columns = {
+		'state': fields.selection(STATE_SELECTION, 'Status', readonly=True, track_visibility='onchange'),
 		'type': fields.selection([('Preventive', 'Preventive'), ('Corrective', 'Corrective')],'Type of Maintenance'),
 		'technician_id': fields.many2one("hr.employee", 'Assigned To', domain="[('is_technician','=',True)]", track_visibility='onchange'),#used for corrective type of maintenance
 		'technician_p_id': fields.many2one("hr.employee", 'Assigned To', domain="[('is_technician','=',True)]", track_visibility='onchange'),#used for preventive type of maintenance
@@ -103,6 +113,8 @@ class mro_order(osv.Model):
         'operations_description_confirm': fields.text('Operations Description',translate=True, track_visibility='onchange'),
 		'documentation_attachments_confirm': fields.one2many('mro.order.documentation.attachments', 'order_confirm_id', 'Attachment(s)'),
 		'task_id': fields.many2one('mro.task', 'Task'),
+		'validation_date': fields.date('Validation Date'),
+		'validation_note': fields.text('Note'),
 	}
 
 	_defaults = {
@@ -205,6 +217,9 @@ class mro_order(osv.Model):
 		self.write(cr, uid, ids, {'state': 'cancel'})
 		return True
 
+	def button_validate(self, cr, uid, ids, context=None):
+		return self.write(cr, uid, ids, {'state': 'validate'})
+	
 	def action_confirm(self, cr, uid, ids, context=None):        
 		""" override default behaviour
 		returns ready state

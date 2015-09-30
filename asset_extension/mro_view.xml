@@ -73,13 +73,14 @@
                 <form string="Maintenance Orders">
                     <header>
                         <button name="button_confirm_order" states="draft" string="Confirm Maintenance" class="oe_highlight"/>
-                        <button name="button_done" states="ready" string="Done" class="oe_highlight" type="object"/>
+                        <button name="button_done" states="validate" string="Done" class="oe_highlight" type="object"/>
+						<button name="button_validate" states="ready" string="Validate" class="oe_highlight" type="object"/>
                         <button name="force_done" states="released" string="Done" class="oe_highlight" type="object"/>
                         <button name="force_parts_reservation" states="released" string="Force Reservation" type="object"/>
                         <button name="button_recreate_picking_parts" states="parts_except" string="Recreate Picking" class="oe_highlight"/>
-                        <button name="button_cancel" states="draft,ready,parts_except" string="Cancel" type="object"/>
+                        <button name="button_cancel" states="draft,ready,validate,parts_except" string="Cancel" type="object"/>
                         <button name="action_cancel" type="object" states="released" string="Cancel"/>
-                        <field name="state" widget="statusbar" statusbar_visible="draft,ready,done" statusbar_colors='{"parts_except":"red","released":"blue"}'/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,ready,validate,done" statusbar_colors='{"parts_except":"red","released":"blue"}'/>
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -94,7 +95,7 @@
 								<field name="cause" attrs="{'invisible': [('type','!=','Corrective')], 'readonly': [('state', 'not in', ('draft','ready'))]}"/>
 								<field name="description" attrs="{'invisible': [('type','!=','Preventive')], 'readonly': [('state','in',('done','cancel'))]}"/>
 								<field name="intervention_type" attrs="{'invisible': ['|',('type','not in',('Preventive','Corrective')), ('state','=','draft')], 'readonly':[('state','in',('done','cancel'))]}" widget="radio"/>
-								<field name="technician_p_id" attrs="{'required': [('state','=','ready'), ('type','=','Preventive')], 'readonly':[('state','in',('done','cancel'))], 'invisible': [('type','!=', 'Preventive')]}" context="{'form_view_ref': 'asset_extension.view_employee_technician_form', 'is_technician': True, 'default_is_technician': True}"/>
+								<field name="technician_p_id" attrs="{'required': [('state','=','ready'), ('type','=','Preventive')], 'readonly':[('state','in',('validate','done','cancel'))], 'invisible': [('type','!=', 'Preventive')]}" context="{'form_view_ref': 'asset_extension.view_employee_technician_form', 'is_technician': True, 'default_is_technician': True}"/>
                                 <field name="category_ids" invisible="1"/>
                                 <field name="maintenance_type" invisible="1"/>
                                 <label for="task_id" attrs="{'invisible':[('maintenance_type','=','bm')]}"/>
@@ -115,7 +116,7 @@
                             </group>
                         </group>
                         <notebook>
-							<page string="Information" attrs="{'invisible': ['|', ('state', 'not in', ('ready','done')), ('type', '!=', 'Corrective')]}">
+							<page string="Information" attrs="{'invisible': ['|', ('state', 'not in', ('ready','validate','done')), ('type', '!=', 'Corrective')]}">
 								<group col="4">
 									<field name="technician_id" attrs="{'required': [('state','=','ready'), ('type','=','Corrective')], 'readonly': [('state','in',('done','cancel'))]}" context="{'form_view_ref': 'asset_extension.view_employee_technician_form', 'is_technician': True, 'default_is_technician': True}"/>
 									<field name="date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
@@ -123,13 +124,13 @@
 								</group>
 							</page>
 
-							<page string="Resolution" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','done'))]}">
+							<page string="Resolution" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','validate','done'))]}">
 								<group col="6">
-									<field name="resolution_date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
+									<field name="resolution_date" attrs="{'readonly': [('state','in',('validate','done','cancel'))]}"/>
 									<field name="maintenance_c_cost" attrs="{'readonly': [('state','!=','ready')]}" invisible="1"/>
 									<field name="work_c_hours" widget="float_time" attrs="{'readonly': [('state','!=','ready')]}"/>
-									<field name="resolution_note" colspan="6" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
-									<field name="resolution_parts_line" attrs="{'readonly': [('state','in',('done','cancel'))]}" colspan="6">
+									<field name="resolution_note" colspan="6" attrs="{'readonly': [('state','in',('done','validate','cancel'))]}"/>
+									<field name="resolution_parts_line" attrs="{'readonly': [('state','in',('done','validate','cancel'))]}" colspan="6">
 										<tree editable="top" string="Parts for Resolution">
 											<field name="parts_id" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view'}"/>
 											<field name="qty"/>
@@ -138,7 +139,7 @@
 								</group>
 							</page>
 	
-							<page string="Delivery" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','done'))]}">
+							<page string="Delivery" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','validate','done'))]}">
 								<group col="4">
 									<field name="delivery_date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/><newline/>
 									<field name="delivery_note" colspan="4" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
@@ -151,9 +152,9 @@
 								</group>
 							</page>
 
-                            <page string="Parts" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'released', 'ready','done'))]}">
-                                    <group string="Parts" states="draft,ready,released,done,parts_except,cancel">
-                                        <field name="parts_lines" nolabel="1" attrs="{'readonly': [('state','in',('ready','done','cancel'))]}">
+                            <page string="Parts" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'released', 'ready','validate','done'))]}">
+                                    <group string="Parts" states="draft,ready,validate,released,done,parts_except,cancel">
+                                        <field name="parts_lines" nolabel="1" attrs="{'readonly': [('state','in',('ready','done','validate','cancel'))]}">
                                             <tree string="Parts" editable="bottom">
                                                 <field name="parts_id" on_change="onchange_parts(parts_id)" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view'}"/>
                                                 <field name="parts_qty"/>
@@ -205,7 +206,7 @@
                                         </field>
                                     </group>
                             </page>
-                            <page string="Tools" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'ready','done'))]}">
+                            <page string="Tools" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'ready','validate','done'))]}">
                                 <separator string="Description for Tools"/>
                                 <field name="tools_description" placeholder="Specify the tools and mechanisms needed for execute this order..." attrs="{'readonly': [('state','in',('ready', 'done','cancel'))]}"/>
                                 <separator string="Description for Tools" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))]}"/>
@@ -215,13 +216,13 @@
                                 <separator string="Description for Labor"/>
                                 <field name="labor_description" placeholder="Specify the specialists needed for execute this order..."/>
                             </page>
-                            <page string="Operations" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'ready','done'))]}">
+                            <page string="Operations" attrs="{'invisible': ['|',('type','!=','Preventive'),('state', 'not in', ('draft', 'ready','validate','done'))]}">
                                 <separator string="Description for Operations"/>
                                 <field name="operations_description" placeholder="Specify the jobs that need execute..." attrs="{'readonly': [('state','in',('ready', 'done','cancel'))]}"/>
-								<separator string="Description for Operations" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))]}"/>
-                                <field name="operations_description_confirm" placeholder="Specify the jobs that need execute..." attrs="{'invisible': [('state','not in', ('ready','done','cancel'))], 'readonly': [('state','in',('done','cancel'))]}"/>
+								<separator string="Description for Operations" attrs="{'invisible': [('state','not in', ('ready','validate','done','cancel'))]}"/>
+                                <field name="operations_description_confirm" placeholder="Specify the jobs that need execute..." attrs="{'invisible': [('state','not in', ('ready','validate','done','cancel'))], 'readonly': [('state','in',('done','cancel'))]}"/>
                             </page>
-                            <page string="Documentation" attrs="{'invisible': ['|', ('state', 'not in', ('draft', 'ready','done')), ('type', '=', 'Corrective')]}">
+                            <page string="Documentation" attrs="{'invisible': ['|', ('state', 'not in', ('draft', 'ready','validate','done')), ('type', '=', 'Corrective')]}">
 								<separator string="Attachments"/>
 								<field name="documentation_attachments" attrs="{'readonly': [('state','in',('ready', 'done','cancel'))]}">
 									<tree string="Attachments" nolabel="1" editable="top">
@@ -245,6 +246,16 @@
 										</tree>
 									</field>
 
+								</group>
+							</page>
+							<page string="Validation" attrs="{'invisible':[('state','not in', ('validate','done'))]}">
+								<group>
+									<group>
+										<field name="validation_date" attrs="{'required': [('state','in',('validate'))], 'readonly': [('state','not in',('validate'))]}"/>
+									</group>
+								</group>
+								<group colspan="4" string="Notes">
+									<field name="validation_note" nolabel="1" colspan="4" attrs="{'readonly': [('state','not in',('validate'))]}"/>
 								</group>
 							</page>
                         </notebook>
