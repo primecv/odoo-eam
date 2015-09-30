@@ -92,7 +92,7 @@
 								<field name="asset_location_rel_id"/>
 								<field name="cause" attrs="{'invisible': [('type','!=','Corrective')], 'readonly': [('state', 'not in', ('draft','ready'))]}"/>
 								<field name="description" attrs="{'invisible': [('type','!=','Preventive')], 'readonly': [('state','in',('done','cancel'))]}"/>
-								<field name="intervention_type" attrs="{'invisible': ['|',('type','not in',('Preventive','Corrective'))], 'readonly':[('state','in',('done','cancel'))]}" widget="radio"/>
+								<field name="intervention_type" attrs="{'invisible': ['|',('type','not in',('Preventive','Corrective')), ('state','=','draft')], 'readonly':[('state','in',('done','cancel'))]}" widget="radio"/>
 								<field name="technician_p_id" attrs="{'required': [('state','=','ready'), ('type','=','Preventive')], 'readonly':[('state','in',('done','cancel'))], 'invisible': [('type','!=', 'Preventive')]}" context="{'form_view_ref': 'asset_extension.view_employee_technician_form', 'is_technician': True, 'default_is_technician': True}"/>
                                 <field name="category_ids" invisible="1"/>
                                 <field name="maintenance_type" invisible="1"/>
@@ -125,7 +125,7 @@
 							<page string="Resolution" attrs="{'invisible': ['|',('type','!=','Corrective'),('state', 'not in', ('ready','done'))]}">
 								<group col="6">
 									<field name="resolution_date" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
-									<field name="maintenance_c_cost" attrs="{'readonly': [('state','!=','ready')]}"/>
+									<field name="maintenance_c_cost" attrs="{'readonly': [('state','!=','ready')]}" invisible="1"/>
 									<field name="work_c_hours" widget="float_time" attrs="{'readonly': [('state','!=','ready')]}"/>
 									<field name="resolution_note" colspan="6" attrs="{'readonly': [('state','in',('done','cancel'))]}"/>
 									<field name="resolution_parts_line" attrs="{'readonly': [('state','in',('done','cancel'))]}" colspan="6">
@@ -234,7 +234,7 @@
                             </page>
 							<page string="Resolution" attrs="{'invisible': ['|', ('type','!=','Preventive'), ('state','=','draft')]}">	
 								<group col="4">
-									<field name="maintenance_cost" attrs="{'readonly': [('state','!=','ready')]}"/>
+									<field name="maintenance_cost" attrs="{'readonly': [('state','!=','ready')]}"  invisible="1"/>
 									<field name="work_hours" widget="float_time" attrs="{'readonly': [('state','!=','ready')]}"/>
 									<separator string="Attachments" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))]}" colspan="4"/>
 									<field name="documentation_attachments_confirm" attrs="{'invisible': [('state','not in', ('ready','done','cancel'))], 'readonly': [('state','in',('done','cancel'))]}" colspan="4" nolabel="1">
