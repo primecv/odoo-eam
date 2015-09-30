@@ -77,6 +77,7 @@ class mro_order(osv.Model):
 		'technician_p_id': fields.many2one("hr.employee", 'Assigned To', domain="[('is_technician','=',True)]", track_visibility='onchange'),#used for preventive type of maintenance
 		'technician_ref': fields.function(get_technician, type='many2one', relation='hr.employee', string='Technician', store=True),
 		'asset_location_rel_id': fields.related('asset_id', 'property_stock_asset', type='many2one', relation='stock.location', string='Asset Location', store=True, track_visibility='onchange', readonly=True),
+		'barcode_no': fields.related('asset_id', 'barcode_no', type='char', string='Barcode No', store=True, readonly=True),
 		'cause': fields.char('Cause', track_visibility='onchange'), 
 		'intervention_type': fields.selection([('Internal', 'Internal'),('External', 'External')], 'Type of Intervention', track_visibility='onchange'),
 		'diagnostic': fields.text('Diagnostic', track_visibility='onchange'),
@@ -245,6 +246,7 @@ class mro_order(osv.Model):
 		value = {}
 		if asset:
 			value['asset_location_rel_id'] = self.pool.get('asset.asset').browse(cr, uid, asset).property_stock_asset
+			value['barcode_no'] = self.pool.get('asset.asset').browse(cr, uid, asset).barcode_no or False
 		return {'value': value}
 
 class mro_order_delivery_attachments(osv.Model):
