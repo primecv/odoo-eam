@@ -361,5 +361,20 @@
             </field>
         </record>
 
+        <record id="action_my_tasks" model="ir.actions.act_window">
+            <field name="name">Maintenance Tasks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mro.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="domain">[('technician_id.user_id.id','=',uid)]</field>
+        </record>        
+
+        <menuitem name="My Tasks"
+            action="action_my_tasks"
+            id="menu_maintenance_my_tasks"
+            parent="mro.menu_maintenance_tasks"
+            sequence="10"/>
+
 	</data>
 </openerp>
