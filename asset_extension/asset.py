@@ -34,7 +34,7 @@ class asset_asset(osv.osv):
 		'asset_location_parent_search': fields.related('asset_location_parent_ids', 'location_id', 'name', type='char', string='Asset Location with Parent Locations'),
 		'asset_location_child_search': fields.related('asset_location_child_ids', 'location_id', 'name', type='char', relation='stock.location', string='Asset Location with Child Locations'),
 		'asset_location_rel_check': fields.boolean('Location Rel Check'),
-		
+		'equipment_origin_id': fields.many2one('asset.equipment.origin', 'Origin of the Equipment'),
 	}
 
 	def create(self, cr, uid, vals, context=None):
@@ -136,6 +136,14 @@ class asset_equipment_familyt(osv.Model):
 		'name': fields.char('Equipment Family'),
 	}
 
+class asset_equipment_origin(osv.Model):
+	_name = "asset.equipment.origin"
+	_description = "Equipment Origin"
+
+	_columns = {
+		'name': fields.char('Equipment Origin'),
+	}
+	
 #dummy table to manage Asset Location parent-child hierarchy to be used in Asset Search:
 class asset_location_parent_rel(osv.Model):
 	_name = "asset.location.parent.rel"

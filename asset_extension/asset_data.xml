@@ -50,4 +50,20 @@
 		</record>
 	</data>
 
+	<!-- Equipment Origins -->
+	<data noupdate="1">
+		<record id="asset_equip_origin1" model="asset.equipment.origin">
+			<field name="name">Doação</field>
+		</record>
+		<record id="asset_equip_origin2" model="asset.equipment.origin">
+			<field name="name">Cessão</field>
+		</record>
+		<record id="asset_equip_origin3" model="asset.equipment.origin">
+			<field name="name">Compra</field>
+		</record>
+		<record id="asset_equip_origin4" model="asset.equipment.origin">
+			<field name="name">Transferência</field>
+		</record>
+	</data>
+
 </openerp>
