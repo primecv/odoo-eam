@@ -119,7 +119,10 @@ class asset_asset(osv.osv):
 				departments.append(dept.id)
 		return {'value': {'department_ids': [6,0,departments]}}
 
-
+	def onchange_equipment_type(self, cr, uid, ids, equip_id, context=None):
+		if not equip_id:
+			return {'value': {}}
+		return {'value': {'category_id': False}}
 
 class asset_asset_category(osv.Model):
 	_name = "asset.asset.category"
@@ -127,6 +130,7 @@ class asset_asset_category(osv.Model):
 	_columns = {
 		'name': fields.char('Category Name', required=True, select=True),
 		'code': fields.char('Code'),
+		'equipment_family_id': fields.many2one('asset.equipment.family', 'Related Equipment Family'),
 	}
 
 class asset_equipment_familyt(osv.Model):

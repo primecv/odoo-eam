@@ -21,7 +21,7 @@
 				<field name="criticality" position="before">
 					<field name="property_stock_asset" domain="[('usage','=','asset')]" required="1"/>
 					<field name="equipment_type" invisible="1"/>		
-					<field name="equipment_type_id"/>
+					<field name="equipment_type_id" on_change="onchange_equipment_type(equipment_type_id)"/>
 					<field name="equipment_origin_id" widget="selection"/>
 					<field name="asset_value_estimate"/>
 				</field>
@@ -34,7 +34,7 @@
 				</field>
 				<field name="active" position="before">
 					<field name="code" readonly="1" attrs="{'invisible': [('code','=',False)]}"/>
-					<field name="category_id"/>
+					<field name="category_id" domain="[('equipment_family_id','=',equipment_type_id)]"/>
 					<field name="asset_value"/>
 				</field>
 

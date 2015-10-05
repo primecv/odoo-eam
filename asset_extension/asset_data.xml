@@ -1,32 +1,4 @@
 <openerp>
-	<data noupdate="1">
-	
-		<record id="asset_asset_category1" model="asset.asset.category">
-			<field name="name">Equipamentos Hospitalares</field>
-			<field name="code">EH</field>
-		</record>
-
-		<record id="asset_asset_category2" model="asset.asset.category">
-			<field name="name">Equipamentos de Escritório</field>
-			<field name="code">EE</field>
-		</record>
-
-		<record id="asset_asset_category3" model="asset.asset.category">
-			<field name="name">Componentes de Equipamentos</field>
-			<field name="code">CE</field>
-		</record>
-
-		<record id="asset_asset_category4" model="asset.asset.category">
-			<field name="name">Instrumentos Hospitalares</field>
-			<field name="code">IH</field>
-		</record>
-
-		<record id="asset_asset_category5" model="asset.asset.category">
-			<field name="name">Mobiliário</field>
-			<field name="code">MO</field>
-		</record>
-
-	</data>
 
 	<!-- Equipment Families -->
 	<data noupdate="1">
@@ -34,20 +6,60 @@
 			<field name="name">Equipamento Biomédico</field>
 		</record>
 		<record id="asset_equip2" model="asset.equipment.family">
-			<field name="name">Equipamento Refrigeração</field>
+			<field name="name">Equipamento Hospitalar</field>
 		</record>
 		<record id="asset_equip3" model="asset.equipment.family">
-			<field name="name">Equipamento Lavandaria</field>
+			<field name="name">Equipamento de Climatização e Refrigeração</field>
 		</record>
 		<record id="asset_equip4" model="asset.equipment.family">
-			<field name="name">Equipamento Cozinha</field>
+			<field name="name">Equipamento de Informática</field>
 		</record>
 		<record id="asset_equip5" model="asset.equipment.family">
-			<field name="name">Equipamento Informáticos</field>
+			<field name="name">Equipamento Hoteleiro</field>
 		</record>
 		<record id="asset_equip6" model="asset.equipment.family">
-			<field name="name">Equipamentos de Escritório</field>
+			<field name="name">Mobiliário de Escritório</field>
 		</record>
+	</data>
+
+	<data noupdate="1">
+	
+		<record id="asset_asset_category1" model="asset.asset.category">
+			<field name="name">Diagnóstico</field>
+			<field name="equipment_family_id" ref="asset_equip1"/>
+		</record>
+
+		<record id="asset_asset_category2" model="asset.asset.category">
+			<field name="name">Terapêutico</field>
+			<field name="equipment_family_id" ref="asset_equip1"/>
+		</record>
+
+		<record id="asset_asset_category3" model="asset.asset.category">
+			<field name="name">Monitorização e Medida</field>
+			<field name="equipment_family_id" ref="asset_equip1"/>
+		</record>
+
+		<record id="asset_asset_category4" model="asset.asset.category">
+			<field name="name">Auxiliar e de Apoio</field>
+			<field name="equipment_family_id" ref="asset_equip1"/>
+		</record>
+
+		<record id="asset_asset_category5" model="asset.asset.category">
+			<field name="name">Cozinha</field>
+			<field name="equipment_family_id" ref="asset_equip5"/>
+		</record>
+
+		<record id="asset_asset_category6" model="asset.asset.category">
+			<field name="name">Lavandaria</field>
+			<field name="equipment_family_id" ref="asset_equip5"/>
+		</record>
+
+		<record id="asset_asset_category7" model="asset.asset.category">
+			<field name="name">Mobiliário e de Apoio</field>
+			<field name="equipment_family_id" ref="asset_equip5"/>
+		</record>
+
+
 	</data>
 
 	<!-- Equipment Origins -->
