@@ -196,6 +196,7 @@
 					<field name="serial"/>
 					<field name="barcode_no"/>
 					<field name="mark"/>
+					<field name="equipment_type_id"/>
 					<field name="category_id"/>
                     <field name="property_stock_asset"/>
 				</tree>
