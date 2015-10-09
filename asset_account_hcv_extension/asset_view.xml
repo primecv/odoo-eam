@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <record id="asset_account.assets_form_view" model="ir.ui.view">
+            <field name="name">account.asset.asset.form.inherit</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
+            <field name="arch" type="xml">
+				<field name="category_id" position="before">
+					<field name="asset_id" attrs="{'readonly':[('state','!=','draft')]}" on_change="onchange_asset(asset_id)"/>
+					<field name="asset_location_id" attrs="{'invisible': [('asset_location_id','=',False)]}"/>
+					<field name="barcode_no" attrs="{'invisible': [('asset_location_id','=',False)]}"/>
+				</field>
+
+                <label for="name" position="replace"/>
+                <field name="name" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+				<field name="parent_id" position="replace"/>
+
+				<field name="code" position="replace"/>
+				<field name="purchase_date" position="after">
+					<field name="code"/>
+				</field>
+			</field>
+		</record>
+
+	</data>
+</openerp>
