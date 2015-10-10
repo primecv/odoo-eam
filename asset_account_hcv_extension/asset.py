@@ -36,3 +36,24 @@ class account_asset(osv.osv):
 							'asset_location_id': asset.property_stock_asset and asset.property_stock_asset.id or False
 						}
 				}
+
+class account_asset_category(osv.osv):
+	_inherit = "account.asset.category"
+
+	_columns = {
+		'method_linear_factor': fields.float('Linear Factor'),
+	}
+
+	def onchange_method(self, cr, uid, ids, method, factor, context=None):
+		if not method:
+			return False
+		if method == 'linear':
+			return {'value': {'method_progress_factor': 0, 'method_linear_factor': 0}}
+		return {'value': {'method_progress_factor': 0}}
+
+	def onchange_method_factor(self, cr, uid, ids, factor, context=None):
+		if factor and factor != 0:
+			return {'value': {'method_number': 1/factor}}
+		return {}
+
+
