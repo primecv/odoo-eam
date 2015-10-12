@@ -12,5 +12,187 @@
 			</field>
 		</record>
 
+        <record id="purchase_order_rfq_form" model="ir.ui.view">
+            <field name="name">purchase.order.rfq.form</field>
+            <field name="model">purchase.order</field>
+			<field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <form string="Request for Quotation">
+                <header>
+                    <button name="bid_received" states="sent" string="Bid Received" class="oe_highlight"/>
+                    <button name="wkf_send_rfq" states="draft" string="Send RFQ by Email" type="object" context="{'send_rfq':True}" class="oe_highlight"/>
+                    <button name="wkf_send_rfq" states="sent" string="Re-Send RFQ by Email" type="object" context="{'send_rfq':True}"/>
+                    <button name="print_quotation" string="Print RFQ" type="object" states="draft" class="oe_highlight" groups="base.group_user"/>
+                    <button name="print_quotation" string="Re-Print RFQ" type="object" states="sent" groups="base.group_user"/>
+                    <button name="purchase_confirm" states="draft" string="Confirm Order" id="draft_confirm"/>
+                    <button name="purchase_confirm" states="bid" string="Confirm Order" class="oe_highlight" id="bid_confirm"/>
+                    <button name="wkf_send_rfq" states="approved" string="Send PO by Email" type="object" context="{'send_rfq':False}"/>
+                    <button name="action_cancel_draft" states="cancel,sent,confirmed" string="Set to Draft" type="object" />
+                    <button name="action_cancel" states="draft,confirmed,sent,bid,approved,except_picking,except_invoice" string="Cancel" type="object" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,bid" readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label string="Request for Quotation " attrs="{'invisible': [('state','not in',('draft','sent','bid','bid_done'))]}"/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" on_change="onchange_partner_id(partner_id, context)" context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}" domain="[('supplier','=',True)]" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                            <field name="partner_ref" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                            <field domain="[('type','=','purchase')]" name="pricelist_id" groups="product.group_purchase_pricelist" on_change="onchange_pricelist(pricelist_id, context)" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                            <field name="currency_id" groups="base.group_multi_currency" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                            <field name="journal_id" invisible='1' attrs="{'readonly': [('state','=','bid_done')]}"/>
+                        </group>
+                        <group>
+                            <field name="date_order" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                            <field name="origin" attrs="{'invisible': [('origin','=',False)], 'readonly': [('state','=','bid_done')]}"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                            <field name="picking_type_id" on_change="onchange_picking_type_id(picking_type_id, context)" domain="[('code','=','incoming')]" options="{'no_create': True}" context="{'special_shortened_wh_name': True}" groups="stock.group_locations" attrs="{'readonly': [('state','=','bid_done')]}"/>
+							<field name="po_id" readonly="1" attrs="{'invisible':[('po_id','=',False)]}"/>
+                            <field name="related_usage" invisible="1"/>
+                            <field name="dest_address_id" string="Customer Address" on_change="onchange_dest_address_id(dest_address_id, context)"
+                                attrs="{'invisible':[('related_usage','!=','customer')],
+                                'required': [('related_usage','=', 'customer')], 'readonly':[('state','=','bid_done')]}"
+                                groups="stock.group_locations"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="order_line" attrs="{'readonly': [('state','=','bid_done')]}">
+                                <tree string="Purchase Order Lines" editable="bottom">
+                                    <field name="product_id" on_change="onchange_product_id(parent.pricelist_id,product_id,0,False,parent.partner_id, parent.date_order,parent.fiscal_position,date_planned,name,False,parent.state,context)"/>
+                                    <field name="name"/>
+                                    <field name="date_planned"/>
+                                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                    <field name="account_analytic_id" groups="purchase.group_analytic_accounting" domain="[('type','not in',('view','template'))]"/>
+                                    <field name="product_qty" on_change="onchange_product_id(parent.pricelist_id,product_id,product_qty,product_uom,parent.partner_id,parent.date_order,parent.fiscal_position,date_planned,name,False,parent.state,context)"/>
+                                    <field name="product_uom" groups="product.group_uom" on_change="onchange_product_uom(parent.pricelist_id,product_id,product_qty,product_uom,parent.partner_id, parent.date_order,parent.fiscal_position,date_planned,name,False,parent.state,context)"/>
+                                    <field name="price_unit"/>
+                                    <field name="taxes_id" widget="many2many_tags" domain="[('parent_id','=',False),('type_tax_use','!=','sale')]"/>
+                                    <field name="price_subtotal"/>
+                                    <field name="state" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                <field name="amount_tax" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="amount_total"/>
+                                    <button name="button_dummy"
+                                        states="draft" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                                </div>
+                                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                            <div class="oe_clear"/>
+                            <field name="notes" class="oe_inline" placeholder="Terms and conditions..." attrs="{'readonly': [('state','=','bid_done')]}"/>
+                        </page>
+                        <page string="RFQ &amp; Bid">
+                            <group>
+                                <field name="incoterm_id" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                <field name="bid_date" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                <field name="bid_validity" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                            </group>
+                        </page>
+                        <page string="Deliveries &amp; Invoices">
+                            <group>
+                                <group>
+                                    <field name="minimum_planned_date" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                    <field name="location_id" groups="stock.group_locations" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                    <field name="shipped" groups="base.group_no_one" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                </group>
+                                <group>
+                                    <field name="invoice_method" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                    <field name="invoiced" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                    <field name="payment_term_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                    <field name="fiscal_position" attrs="{'readonly': ['|',('invoiced','=', True),('state','=','bid_done')]}" />
+                                    <!-- We do not need these fields anymore, the information is in open chatter -->
+                                    <field name="validator" groups="base.group_no_one" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                    <field name="date_approve" groups="base.group_no_one" attrs="{'readonly': [('state','=','bid_done')]}"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+            <field name="name">Requests for Quotation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="context">{}</field>
+            <field name="domain">[('state','in',('draft','sent','bid','cancel', 'bid_done'))]</field>
+            <field name="view_mode">tree,form,graph,calendar</field>
+            <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a request for quotation.
+              </p><p>
+                The quotation contains the history of the discussion/negotiation
+                you had with your supplier. Once confirmed, a request for
+                quotation is converted into a purchase order.
+              </p><p>
+                Most propositions of purchase orders are created automatically
+                by Odoo based on inventory needs.
+              </p>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window.view" id="action_rfq_tree">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="purchase.purchase_order_tree"/>
+            <field name="act_window_id" ref="purchase.purchase_rfq"/>
+        </record>
+
+		<record model="ir.actions.act_window.view" id="action_rfq_form">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="purchase_order_rfq_form"/>
+            <field name="act_window_id" ref="purchase.purchase_rfq"/>
+        </record>
+
+		<record model="ir.actions.act_window.view" id="action_rfq_graph">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="purchase.purchase_order_graph"/>
+            <field name="act_window_id" ref="purchase.purchase_rfq"/>
+        </record>
+
+		<record model="ir.actions.act_window.view" id="action_rfq_calendar">
+            <field name="sequence" eval="4"/>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="purchase.purchase_order_calendar"/>
+            <field name="act_window_id" ref="purchase.purchase_rfq"/>
+        </record>
+
+        <record id="purchase.purchase_form_action" model="ir.actions.act_window">
+            <field name="name">Purchase Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">tree,form,graph,calendar</field>
+            <field name="context">{}</field>
+            <field name="domain">[('state','not in',('draft','sent','bid', 'bid_done', 'confirmed'))]</field>
+            <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a quotation that will be converted into a purchase order. 
+              </p><p>
+                Use this menu to search within your purchase orders by
+                references, supplier, products, etc. For each purchase order,
+                you can track the related discussion with the supplier, control
+                the products received and control the supplier invoices.
+              </p>
+            </field>
+        </record>
+
 	</data>
 </openerp>
