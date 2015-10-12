@@ -41,7 +41,8 @@ class account_asset_category(osv.osv):
 	_inherit = "account.asset.category"
 
 	_columns = {
-		'method_linear_factor': fields.float('Linear Factor'),
+		'method_linear_factor': fields.integer('Linear Factor'),
+		'method_number_readonly': fields.related('method_number', type='integer', string='Number of Depriciations', store=True, readonly=True),
 	}
 
 	def onchange_method(self, cr, uid, ids, method, factor, context=None):
@@ -53,7 +54,7 @@ class account_asset_category(osv.osv):
 
 	def onchange_method_factor(self, cr, uid, ids, factor, context=None):
 		if factor and factor != 0:
-			return {'value': {'method_number': 1/factor}}
+			return {'value': {'method_number': 1/factor, 'method_number_readonly': 1/factor}}
 		return {}
 
 

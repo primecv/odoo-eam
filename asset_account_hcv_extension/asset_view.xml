@@ -31,6 +31,13 @@
 		    <field name="model">account.asset.category</field>
 			<field name="inherit_id" ref="account_asset.view_account_asset_category_form"/>
 		    <field name="arch" type="xml">
+				<field name="method_number" position="replace">
+					<field name="method_number" attrs="{'required':[('method_time','=','number')]}" invisible="1"/>
+				</field>
+				<field name="method_number" position="after">
+					<field name="method_number_readonly" attrs="{'invisible':[('method_time','=','end')], 'required':[('method_time','=','number')]}"/>
+				</field>
+
 				<field name="method" position="replace">
 					<field name="method" on_change="onchange_method(method, method_progress_factor)"/>
 				</field>
