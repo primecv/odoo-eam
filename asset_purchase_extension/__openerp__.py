@@ -31,6 +31,7 @@
     'depends': ['asset_purchase', 'asset_extension'],
     'data': [
         'purchase_view.xml',
+        'views/report_purchasequotation.xml',
     ],
     'installable': True,
     'auto_install': False,
