@@ -12,6 +12,21 @@
             <span class="text-center" t-field="o.date_order"/>
         </td>
 	</xpath>
+
+	<xpath expr="//th[@class='text-right']" position="after">
+        <th t-if="o.state in ('bid','bid_done')" class="text-right"><strong>Unit Price</strong></th>
+        <th t-if="o.state in ('bid','bid_done')" class="text-right"><strong>Subtotal</strong></th>
+	</xpath>
+
+	<xpath expr="//td[@class='text-right']" position="after">
+        <td t-if="o.state in ('bid','bid_done')" class="text-right">
+            <span t-field="order_line.price_unit"/>
+        </td>
+        <td t-if="o.state in ('bid','bid_done')" class="text-right">
+            <span t-field="order_line.price_subtotal"/>
+        </td>
+	</xpath>
+
 </template>
 
 </data>
