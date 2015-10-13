@@ -53,9 +53,21 @@ class purchase_order(osv.osv):
 
 	def wkf_confirm_order(self, cr, uid, ids, context=None):
 		default = {}
-		for rec in self.browse(cr, uid, ids):
-			default['name'] = rec.name
-			bid_id = super(purchase_order, self).copy(cr, uid, ids[0], default, context)
-			self.write(cr, uid, [bid_id], {'state': 'bid_done', 'po_id': ids[0]})
+		if context and 'rfq' in context and context['rfq'] is True:
+			for rec in self.browse(cr, uid, ids):
+				default['name'] = rec.name
+				bid_id = super(purchase_order, self).copy(cr, uid, ids[0], default, context)
+				self.write(cr, uid, [bid_id], {'state': 'bid_done', 'po_id': ids[0]})
 		res = super(purchase_order, self).wkf_confirm_order(cr, uid, ids, context)
 		return res
+
+	def print_quotation(self, cr, uid, ids, context=None):
+		'''
+		This function prints the request for quotation and mark it as sent, so that we can see more easily the next step of the workflow
+		'''
+		assert len(ids) == 1, 'This option should only be used for a single id at a time'
+		self.signal_workflow(cr, uid, ids, 'send_rfq')
+		for rec in self.browse(cr, uid, ids):
+			if rec.state == 'draft': 
+				self.write(cr, uid, ids, {'state': 'sent'})
+		return self.pool['report'].get_action(cr, uid, ids, 'purchase.report_purchasequotation', context=context)
