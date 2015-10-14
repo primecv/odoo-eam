@@ -41,7 +41,7 @@ class account_asset_category(osv.osv):
 	_inherit = "account.asset.category"
 
 	_columns = {
-		'method_linear_factor': fields.float('Linear Factor'),
+		'method_linear_factor': fields.float('Linear Factor', digits=(10,4)),
 		'method_number_readonly': fields.related('method_number', type='integer', string='Number of Depriciations', store=True, readonly=True),
 		'method_number': fields.integer('Number of Depreciations', help="The number of depreciations needed to depreciate your asset"),
 	}
