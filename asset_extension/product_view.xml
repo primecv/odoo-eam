@@ -40,7 +40,7 @@
 										<field name="product_type" widget="radio"/>
 										<field name="model"/>
 										<field name="serial"/>
-										<field name="equipment_id" domain="[('equipment_type_id.name','=','Equipamento Hospitalar')]"/>
+										<field name="equipment_id" domain="[]"/>
                                     </group>
                                     <group>
                                         <field name="active"/>
