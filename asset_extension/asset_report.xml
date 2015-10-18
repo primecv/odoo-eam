@@ -1,0 +1,16 @@
+<openerp>
+	<data>
+
+        <report 
+            string="Asset Report" 
+            id="asset_report_list"
+            model="asset.list.report" 
+            report_type="qweb-pdf"
+            name="asset_extension.report_assetlist"
+            file="asset_extension.report_assetlist"
+			menu="False"
+			header="True"
+        />
+	
+	</data>
+</openerp>

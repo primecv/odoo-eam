@@ -1,0 +1,47 @@
+<openerp>
+	<data>
+
+		<record id="asset_asset_report_form" model="ir.ui.view">
+			<field name="name">asset.list.report.form</field>
+			<field name="model">asset.list.report</field>
+			<field name="arch" type="xml">
+				<form string="Asset Report">
+					<group>
+						<label string="Click Print button to generate Asset Report for Selected Assets"/>
+						<field name="partner_id" invisible="1"/>
+						<field name="asset_list" colspan="4" invisible="1"/>
+					</group>
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+		<record id="asset_list_1" model="asset.list.report">
+			<field name="name"/>
+		</record>
+		
+	    <act_window name="Print Assets List"
+            res_model="asset.list.report"
+            src_model="asset.asset"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="action_view_asset_report"/>
+
+		<record id="action_view_asset_report" model="ir.actions.act_window">
+			<field name="name">Print Assets List</field>
+			<field name="res_model">asset.list.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="res_id" ref="asset_extension.asset_list_1"/>
+			<field name="target">new</field>
+		</record>
+
+	</data>
+</openerp>
+
+
