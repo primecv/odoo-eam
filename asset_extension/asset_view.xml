@@ -191,5 +191,112 @@
             parent="stock.menu_stock_configuration"
             groups="asset.group_mro_manager"
             sequence="130"/>
+
+		<!-- Accessories -->
+        <record id="asset_accessories_form_view" model="ir.ui.view">
+            <field name="name">asset.asset.accessory.form</field>
+            <field name="model">asset.asset</field>
+			<field name="priority" eval="24"/>
+            <field name="arch" type="xml">
+                <form string="Accessory">
+                    <sheet>
+                        <div class="oe_left" style="width: 500px;">
+                            <field name="image_medium" widget="image" class="oe_avatar oe_left"/>
+                            <div class="oe_title" style="width: 390px;">
+                                <label class="oe_edit_only" for="name" string="Name"/>
+                                <h1><field name="name"/></h1>
+                            </div>
+                        </div>
+                        <notebook>
+                            <page string="Information">
+                                <group colspan="4">
+                                    <group>
+                                        <field name="asset_value" string="Price"/>
+										<field name="model"/>
+										<field name="serial"/>
+                                    </group>
+                                    <group>
+										<field name="property_stock_asset" domain="[('usage','=','asset')]" string="Location"/>
+										<field name="mark"/>
+										<field name="purchase_date"/>
+										<field name="manuf_year"/>
+										<field name="supplier_id" domain="[('supplier','=',True)]" context="{'customer': 0, 'supplier': 1, 'default_customer': 0, 'default_supplier': 1}"/>
+                                    </group>
+                                </group>
+								<group string="Barcode">
+									<group col="4">
+										<field name="barcode_no"/>
+										<field name="barcode_label" widget='image' class="oe_left oe_avatar" options='{"size": [250, 100]}' string="Barcode Label" colspan="2"/>
+									</group>
+								</group>
+                                <field name="notes" placeholder="describe the accesssory characteristics..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+		<record id="asset_accessory_tree" model="ir.ui.view">
+			<field name="name">asset.accessory.tree</field>
+			<field name="model">asset.asset</field>
+			<field name="priority" eval="24"/>
+			<field name="arch" type="xml">
+				<tree string="Accessories">
+					<field name="name"/>
+					<field name="barcode_no"/>
+					<field name="property_stock_asset"/>	
+					<field name="asset_value"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="asset_accessory_action" model="ir.actions.act_window">
+			<field name="name">Accessories</field>
+			<field name="res_model">asset.asset</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('is_accessory','=',True)]</field>
+			<field name="context">{'is_accessory': True, 'default_is_accessory': True}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new Accessory.
+              </p>
+            </field>
+
+		</record>
+
+        <record model="ir.actions.act_window.view" id="action_assets_accessory_kanban_view">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="asset.assets_kanban_view"/>
+            <field name="act_window_id" ref="asset_accessory_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_assets_accessory_tree_view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="asset_accessory_tree"/>
+            <field name="act_window_id" ref="asset_accessory_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_assets_accessory_form_view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="asset_accessories_form_view"/>
+            <field name="act_window_id" ref="asset_accessory_action"/>
+        </record>
+
+        <menuitem name="Accessories"
+            action="asset_accessory_action"
+            id="menu_assets_assets_accessories"
+            parent="asset_stock.menu_maintenance_assets"
+            groups="stock.group_stock_user"
+            sequence="101"/>
+
 	</data>
 </openerp>

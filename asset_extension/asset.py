@@ -35,6 +35,12 @@ class asset_asset(osv.osv):
 		'asset_location_child_search': fields.related('asset_location_child_ids', 'location_id', 'name', type='char', relation='stock.location', string='Asset Location with Child Locations'),
 		'asset_location_rel_check': fields.boolean('Location Rel Check'),
 		'equipment_origin_id': fields.many2one('asset.equipment.origin', 'Origin of the Equipment'),
+		#accessory fields:
+		'is_accessory': fields.boolean('Is Accessory'),
+		'purchase_date': fields.date('Purchase Date'),
+		'manuf_year': fields.date('Manufacturing Year'),
+		'supplier_id': fields.many2one('res.partner', 'Supplier', domain="[('supplier','=',1)]"),
+
 	}
 
 	def create(self, cr, uid, vals, context=None):
