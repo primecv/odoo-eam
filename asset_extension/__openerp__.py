@@ -42,6 +42,7 @@
         'stock_data.xml',
         'asset_mrp_view.xml',
         'report/layouts.xml',
+        'data/report_paperformat.xml',
         'asset_report.xml',
         'asset_report_view.xml',
         'views/report_assetlist.xml',

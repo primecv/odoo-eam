@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="paperformat_assetlist" model="report.paperformat">
+            <field name="name">Asset List</field>
+        </record>
+    </data>
+</openerp>

@@ -12,5 +12,9 @@
 			header="True"
         />
 	
+        <record id="asset_report_list" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="asset_extension.paperformat_assetlist"/>
+        </record>
+
 	</data>
 </openerp>
