@@ -40,6 +40,7 @@ class asset_asset(osv.osv):
 		'purchase_date': fields.date('Purchase Date'),
 		'manuf_year': fields.date('Manufacturing Year'),
 		'supplier_id': fields.many2one('res.partner', 'Supplier', domain="[('supplier','=',1)]"),
+		'equipment_id': fields.many2one('asset.asset', 'Equipment', domain="[('is_accessory','=',False)]"),
 
 	}
 
