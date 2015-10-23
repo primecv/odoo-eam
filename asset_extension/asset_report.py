@@ -16,6 +16,8 @@ class asset_list_report(osv.osv):
 
 	def print_report(self, cr, uid, ids, context=None):
 		cr.execute("update asset_asset set asset_report_id=NULL")
+		partner = self.pool.get('res.users').browse(cr, uid, [uid])[0].partner_id.id
+		self.write(cr, uid, ids, {'partner_id': partner})
 		if context and 'active_model' in context and context['active_model'] == 'asset.asset':
 			assets = context.get('active_ids', False)
 			if len(assets) and len(assets) == 1:
