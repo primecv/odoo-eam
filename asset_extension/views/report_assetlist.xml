@@ -16,6 +16,7 @@
                 </div>
             </div>
 
+			<div class="text-right"><strong>Total: <span t-field="o.total_assets"/></strong></div>
             <table class="table table-bordered">
                     <tr style="background-color:#D3D3D3">
                         <th>Barcode No</th>
