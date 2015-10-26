@@ -35,6 +35,25 @@
 	            </tbody>
 		    </table>
 
+            <table class="table table-condensed">
+				<tr/>
+			</table>
+            <table class="table table-condensed">
+				<tr/>
+			</table>
+            <table class="table table-condensed">
+				<tr/>
+			</table>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr class="border-black">
+                            <td class="text-right"><strong>Signature</strong></td>
+                        </tr>
+					</table>
+				</div>
+			</div>
             <div class="oe_structure"/>
 
         </div>
