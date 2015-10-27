@@ -199,6 +199,9 @@
 			<field name="priority" eval="24"/>
             <field name="arch" type="xml">
                 <form string="Accessory">
+                    <header>
+                        <field name="warehouse_state_id" widget="statusbar" clickable="True"/>
+                    </header>
                     <sheet>
                         <div class="oe_left" style="width: 500px;">
                             <field name="image_medium" widget="image" class="oe_avatar oe_left"/>
