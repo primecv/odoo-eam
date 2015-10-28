@@ -209,7 +209,7 @@
 			<field name="inherit_id" ref="asset.assets_search"/>
             <field name="arch" type="xml">
 				<field name="name" position="after">
-					<field name="equipment_type"/>
+					<field name="equipment_type_id"/>
 					<field name="category_id"/>
 				</field>
 				<field name="property_stock_asset" position="after">
