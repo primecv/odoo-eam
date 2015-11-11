@@ -36,6 +36,7 @@
 					<field name="code" readonly="1" attrs="{'invisible': [('code','=',False)]}"/>
 					<field name="category_id" domain="[('equipment_family_id','=',equipment_type_id)]"/>
 					<field name="asset_value"/>
+					<field name="is_accessory" invisible="1"/>		
 				</field>
 
 				<page string="Info" position="replace">
@@ -228,6 +229,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
 			<field name="domain">[('is_accessory','=',False)]</field>
+			<field name="context">{'default_is_accessory': 0, 'search_default_is_accessory': 0}</field>
 			<field name="search_view_id" ref="assets_search_extension"/>
             <field name="view_id" eval="False"/>
         </record>
