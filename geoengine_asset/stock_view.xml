@@ -1,0 +1,20 @@
+<openerp>
+	<data>
+
+        <record id="view_location_asset_geospatial_form" model="ir.ui.view">
+            <field name="name">stock.location.asset.geospatial.form</field>
+            <field name="model">stock.location</field>
+			<field name="inherit_id" ref="asset_extension.view_location_asset_form"/>
+            <field name="arch" type="xml">
+				<group string="Location" position="after">
+					<group col="5" attrs="{'invisible': [('usage','!=','asset')]}">
+						<button name="geo_localize" type="object" string="GeoLocalize" icon="color-picker" invisible="1"/><newline/>
+						<field name="latitude"/>
+						<field name="longitude"/>
+					</group>
+				</group>
+			</field>
+		</record>
+
+	</data>
+</openerp>

@@ -29,6 +29,7 @@
 	 'asset_extension',
  ],
  'data': [
+	 'stock_view.xml',
      'geo_asset_view.xml'
  ],
  'installable': True,
