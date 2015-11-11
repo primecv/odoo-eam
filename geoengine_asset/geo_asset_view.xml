@@ -55,6 +55,8 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">asset.asset</field>
             <field name="view_type">form</field>
+			<field name="domain">[('is_accessory','=',False)]</field>
+			<field name="context">{'default_is_accessory': 0, 'search_default_is_accessory': 0}</field>
             <field name="view_mode">kanban,tree,form,geoengine</field>
         </record>
 
