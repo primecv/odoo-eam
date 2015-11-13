@@ -209,7 +209,10 @@
             <field name="model">asset.asset</field>
 			<field name="inherit_id" ref="asset.assets_search"/>
             <field name="arch" type="xml">
+				<field name="asset_number" position="replace"/>
 				<field name="name" position="after">
+					<field name="barcode_no"/>
+					<field name="asset_number"/>
 					<field name="equipment_type_id"/>
 					<field name="category_id"/>
 				</field>
