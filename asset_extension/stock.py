@@ -79,5 +79,7 @@ class stock_location(osv.osv):
     island = fields.Char(related='island_id.name', string='Island', store=True)
     county_id = fields.Many2one('res.country.county', string='County')
     county = fields.Char(string='County')
+    latitude = fields.Float(string='Latitude')
+    longitude = fields.Float(string='Longitude')
 
 

@@ -30,6 +30,11 @@
 						<field name="zip"/>
 						<field name="country_code" invisible="1"/>
 					</group>
+					<group col="5" attrs="{'invisible': [('usage','!=','asset')]}">
+						<button name="geo_localize" type="object" string="GeoLocalize" icon="color-picker" invisible="1"/><newline/>
+						<field name="latitude"/>
+						<field name="longitude"/>
+					</group>
 				</separator>
 				<field name="location_id" position="replace">
 					<field name="location_id" on_change="onchange_location_id(location_id)"/>
