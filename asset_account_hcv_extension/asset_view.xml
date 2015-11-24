@@ -46,6 +46,9 @@
 				</field>
 
 				<group string="Analytic Information" position="replace"/>
+				<field name="open_asset" position="replace">
+					<field name="open_asset" invisible="1"/>
+				</field>
 
 			</field>
 		</record>
