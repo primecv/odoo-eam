@@ -18,8 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{'name': 'Geospatial support for OpenERP',
- 'version': '0.2',
+{'name': 'Geospatial support for Odoo',
+ 'version': '8.0.0.2.0',
  'category': 'GeoBI',
  'author': "Camptocamp,ACSONE SA/NV,Odoo Community Association (OCA)",
  'license': 'AGPL-3',
@@ -44,6 +44,6 @@
  },
  'qweb': ["static/src/xml/geoengine.xml"],
  'installable': True,
- 'active': False,
+ 'active': True,
  'pre_init_hook': 'init_postgis',
  }
