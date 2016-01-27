@@ -50,12 +50,19 @@ class account_asset_category(osv.osv):
 		if not method:
 			return False
 		if method == 'linear':
-			return {'value': {'method_progress_factor': 0, 'method_linear_factor': 0}}
+			return {'value': {'method_progress_factor':0, 'method_linear_factor':0, 'method_time':'number'}}
 		return {'value': {'method_progress_factor': 0}}
 
 	def onchange_method_factor(self, cr, uid, ids, factor, context=None):
-		if factor and factor != 0:
-			return {'value': {'method_number': 1/factor, 'method_number_readonly': 1/factor}}
+		#if factor and factor != 0:
+			##return {'value': {'method_number': 1/factor, 'method_number_readonly': 1/factor}}
+			#return {'value': {'method_linear_factor': factor}}
 		return {}
 
-
+	def onchange_method_number(self, cr, uid, ids, number, context=None):
+		vals= {}
+		if number:
+			vals['method_linear_factor'] = 1.0/number
+			print "######",vals
+			return {'value': vals}
+		return vals

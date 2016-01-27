@@ -31,7 +31,27 @@
 		    <field name="model">account.asset.category</field>
 			<field name="inherit_id" ref="account_asset.view_account_asset_category_form"/>
 		    <field name="arch" type="xml">
-				<field name="method_number" position="replace">
+                <group string="Depreciation Dates" position="replace"/>
+				<group string="Depreciation Method" position="replace"/>
+				<group string="Analytic Information" position="before">
+                    <group string="Depreciation Method">
+						<field name="method" on_change="onchange_method(method, method_progress_factor)"/>
+                        <field name="method_progress_factor" attrs="{'invisible':[('method','=','linear')], 'required':[('method','=','degressive')]}"/>
+						<field name="method_linear_factor" on_change="onchange_method_factor(method_linear_factor)" attrs="{'invisible':[('method','=','degressive')], 'required':[('method','=','linear')]}"/>
+                        <field name="prorata"/>
+                        <field name="open_asset"/>
+                    </group>
+
+                    <group string="Depreciation Dates">
+                        <field name="method_time" attrs="{'readonly': [('method','=','linear')]}"/>
+                        <field name="method_number" attrs="{'required':[('method_time','=','number')], 'invisible':[('method_time','!=','number')]}" on_change="onchange_method_number(method_number)"/>
+						<field name="method_number_readonly" attrs="{'invisible':[('method_time','=','end')], 'required':[('method_time','=','number')]}" invisible="1"/>
+                        <field name="method_period"/>
+                        <field name="method_end" attrs="{'required': [('method_time','=','end')], 'invisible':[('method_time','=','number')]}"/>
+                    </group>
+				</group>
+
+				<!--field name="method_number" position="replace">
 					<field name="method_number" attrs="{'required':[('method_time','=','number')]}" invisible="1"/>
 				</field>
 				<field name="method_number" position="after">
@@ -43,7 +63,7 @@
 				</field>
 				<field name="method_progress_factor" position="after">
 					<field name="method_linear_factor" on_change="onchange_method_factor(method_linear_factor)" attrs="{'invisible':[('method','=','degressive')], 'required':[('method','=','linear')]}"/>
-				</field>
+				</field-->
 
 				<group string="Analytic Information" position="replace"/>
 				<field name="open_asset" position="replace">
