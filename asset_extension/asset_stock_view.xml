@@ -21,7 +21,7 @@
 				<field name="criticality" position="before">
 					<field name="property_stock_asset" domain="[('usage','=','asset')]" required="1"/>
 					<field name="equipment_type" invisible="1"/>		
-					<field name="equipment_type_id" on_change="onchange_equipment_type(equipment_type_id)"/>
+					<field name="equipment_type_id" on_change="onchange_equipment_type(equipment_type_id)" required="1"/>
 					<field name="equipment_origin_id" widget="selection"/>
 					<field name="asset_value_estimate" invisible="1"/>
 				</field>
@@ -34,7 +34,7 @@
 				</field>
 				<field name="active" position="before">
 					<field name="code" readonly="1" attrs="{'invisible': [('code','=',False)]}"/>
-					<field name="category_id" domain="[('equipment_family_id','=',equipment_type_id)]"/>
+					<field name="category_id" domain="[('equipment_family_id','=',equipment_type_id)]" required="1"/>
 					<field name="asset_value" invisible="1"/>
 					<field name="is_accessory" invisible="1"/>		
 				</field>
@@ -44,30 +44,30 @@
                         <group>
                             <group>
                                 <field name="asset_number" invisible="1"/>
-                                <field name="model"/>
-                                <field name="serial"/>
+                                <field name="model" required="1"/>
+                                <field name="serial" required="1"/>
                             </group>
                             <group>
-								<field name="mark"/>
-								<field name="manuf_year"/>
-								<field name="state_operation" widget="radio"/>
+								<field name="mark" required="1"/>
+								<field name="manuf_year" required="1"/>
+								<field name="state_operation" widget="radio" required="1"/>
                             </group>
                         </group>
 						<group string="Barcode">
 							<group col="4">
 								<field name="barcode_no"/>
-								<field name="barcode_label" widget='image' class="oe_left oe_avatar" options='{"size": [250, 100]}' string="Barcode Label" colspan="2"/>
+								<field name="barcode_label" widget='image' class="oe_left oe_avatar" options='{"size": [250, 100]}' string="Barcode Label" colspan="2" required="1"/>
 							</group>
 						</group>
                         <group string="Warranty">
                             <group>
 								<field name="manufacturer_id" domain="[('is_manufacturer','=',True)]" context="{'form_view_ref':'asset_extension.view_partner_manufacturer_form', 'is_manufacturer': True, 'default_is_manufacturer': True}"/>
-	                            <field name="start_date" string="Start Use"/>
+	                            <field name="start_date" string="Start Use" required="1"/>
                             	<field name="warranty_start_date"/>
                             </group>
                             <group>
 	                            <field name="vendor_id" string="Supplier"/>
-    	                        <field name="purchase_date"/>
+    	                        <field name="purchase_date" required="1"/>
 								<field name="warranty_end_date"/>
                             </group>
                         </group>
