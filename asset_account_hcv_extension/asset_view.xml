@@ -73,6 +73,16 @@
 			</field>
 		</record>
 
+        <record id="assets_form_view_account_hcv_extension" model="ir.ui.view">
+            <field name="name">asset.asset.form.account.hcv.extension</field>
+            <field name="model">asset.asset</field>
+			<field name="inherit_id" ref="asset_extension.assets_form_view_stock_extension"/>
+            <field name="arch" type="xml">
+				<field name="asset_value" position="before">
+					<field name="account_asset_category_id"/>
+				</field>
+			</field>
+		</record>
 
 	</data>
 </openerp>

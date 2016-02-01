@@ -21,6 +21,13 @@
 
 from openerp.osv import fields, osv
 
+class asset_asset(osv.osv):
+	_inherit = "asset.asset"
+
+	_columns = {
+		'account_asset_category_id': fields.many2one('account.asset.category', 'Asset Category'),
+	}
+
 class account_asset(osv.osv):
 	_inherit = 'account.asset.asset'
 
