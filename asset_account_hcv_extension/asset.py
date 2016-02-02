@@ -24,8 +24,22 @@ from openerp.osv import fields, osv
 class asset_asset(osv.osv):
 	_inherit = "asset.asset"
 
+	def get_depreciation_lines(self, cr, uid, ids, field_name, arg, context=None):
+		account_asset_obj = self.pool.get('account.asset.asset')
+		lines = account_asset_obj.search(cr, uid, [('asset_id', '=', ids[0])])
+		dp_lines = []
+		for asset in account_asset_obj.browse(cr, uid, lines):
+			for dp_line in asset.depreciation_line_ids:
+				dp_lines.append(dp_line.id)
+		return dict([(id, dp_lines) for id in ids])
+
 	_columns = {
 		'account_asset_category_id': fields.many2one('account.asset.category', 'Asset Category'),
+		'depreciation_line': fields.function(get_depreciation_lines, type='one2many', relation='account.asset.depreciation.line', string='Depreciation Lines'),
+	}
+
+	_defaults = {
+		 'depreciation_line': lambda self, cr, uid, context : self.get_depreciation_lines(cr, uid, [0], '', '', context)[0],
 	}
 
 class account_asset(osv.osv):
@@ -73,3 +87,11 @@ class account_asset_category(osv.osv):
 			print "######",vals
 			return {'value': vals}
 		return vals
+
+class account_asset_depreciation_line(osv.osv):
+	_inherit = 'account.asset.depreciation.line'
+
+	_defaults = {
+		'remaining_value': 0.0,
+		'depreciated_value': 0.0,
+	}

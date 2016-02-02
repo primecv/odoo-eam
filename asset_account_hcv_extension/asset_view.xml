@@ -7,6 +7,10 @@
             <field name="model">account.asset.asset</field>
             <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
             <field name="arch" type="xml">
+				<field name="asset_id" position="replace"/>
+				<field name="amount" position="after">
+					<field name="remaining_value"/>
+				</field>
 				<field name="category_id" position="before">
 					<field name="asset_id" attrs="{'readonly':[('state','!=','draft')]}" on_change="onchange_asset(asset_id)"/>
 					<field name="asset_location_id" attrs="{'invisible': [('asset_location_id','=',False)]}"/>
@@ -23,6 +27,7 @@
 				<field name="purchase_date" position="after">
 					<field name="code"/>
 				</field>
+
 			</field>
 		</record>
 
@@ -81,6 +86,13 @@
 				<field name="asset_value" position="before">
 					<field name="account_asset_category_id"/>
 				</field>
+                <page string="Info" position="after">
+					<page string="Depreciation Lines">
+						<group>
+							<field name="depreciation_line" widget="one2many_list" colspan="4" nolabel="1" readonly="1"/>
+						</group>
+					</page>
+				</page>
 			</field>
 		</record>
 
