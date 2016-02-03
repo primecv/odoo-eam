@@ -7,7 +7,7 @@
             <field name="model">account.asset.asset</field>
             <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
             <field name="arch" type="xml">
-				<field name="asset_id" position="replace"/>
+				<!--field name="asset_id" position="replace"/-->
 				<field name="amount" position="after">
 					<field name="remaining_value"/>
 				</field>
