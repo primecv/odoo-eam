@@ -92,13 +92,13 @@
 				<field name="asset_value" position="before">
 					<field name="account_asset_category_id"/>
 				</field>
-                <page string="Info" position="after">
+                <!--page string="Info" position="after">
 					<page string="Depreciation Lines">
 						<group>
 							<field name="depreciation_line" widget="one2many_list" colspan="4" nolabel="1" readonly="1"/>
 						</group>
 					</page>
-				</page>
+				</page-->
 			</field>
 		</record>
 
