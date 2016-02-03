@@ -33,14 +33,34 @@ class asset_asset(osv.osv):
 				dp_lines.append(dp_line.id)
 		return dict([(id, dp_lines) for id in ids])
 
+	def _depr_count(self, cr, uid, ids, field_name, arg, context=None):
+		res = dict.fromkeys(ids, 0)
+		depr = self.pool['account.asset.depreciation.line']
+		for asset in self.browse(cr, uid, ids, context=context):
+			res[asset.id] = depr.search_count(cr,uid, [('asset_asset_id', '=', asset.id)], context=context)
+		return res
+
 	_columns = {
 		'account_asset_category_id': fields.many2one('account.asset.category', 'Asset Category'),
 		'depreciation_line': fields.function(get_depreciation_lines, type='one2many', relation='account.asset.depreciation.line', string='Depreciation Lines'),
+        'depr_count': fields.function(_depr_count, string='# Depreciations', type='integer'),
 	}
+
 
 	_defaults = {
 		 'depreciation_line': lambda self, cr, uid, context : self.get_depreciation_lines(cr, uid, [0], '', '', context)[0],
 	}
+
+	def action_view_depreciation_lines(self, cr, uid, ids, context=None):
+		return {
+            'domain': "[('asset_asset_id','in',[" + ','.join(map(str, ids)) + "])]",
+            'name': ('Depreciation Items'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'account.asset.depreciation.line',
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }
 
 class account_asset(osv.osv):
 	_inherit = 'account.asset.asset'
@@ -90,6 +110,10 @@ class account_asset_category(osv.osv):
 
 class account_asset_depreciation_line(osv.osv):
 	_inherit = 'account.asset.depreciation.line'
+
+	_columns = {
+		'asset_asset_id': fields.related('asset_id', 'asset_id', type='many2one', relation='asset.asset'),
+	}
 
 	_defaults = {
 		'remaining_value': 0.0,
