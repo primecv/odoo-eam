@@ -58,6 +58,21 @@ class asset_asset(osv.osv):
 		vals['asset_id'] = asset_id
 		codeseq = self.pool.get('ir.sequence').get(cr, uid, 'asset.code') 
 		vals['code'] = codeseq
+		#generate sequential barcode no :
+		cr.execute('''select barcode_no from asset_asset  where barcode_no is not null order by barcode_no desc limit 1;''')
+		barcodes = cr.fetchone()[0]
+		bcode = ''
+		for code in str(barcodes):
+			if ord(code) in (48, 49, 50, 51, 52, 53, 54, 55, 56, 57):
+				bcode = bcode + str(code)
+		bcode = bcode[:9]
+		if len(bcode) < 9:
+			chars = 9 - len(bcode)
+			for i in range(0, chars):
+				bcode = '0' + str(bcode)
+		bcode = int(bcode)
+		bcode = bcode + 1
+		vals['barcode_no'] = bcode
 		res = super(asset_asset, self).create(cr, uid, vals, context)
 		if 'property_stock_asset' in vals:
 			location_id = vals['property_stock_asset']
