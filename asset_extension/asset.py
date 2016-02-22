@@ -68,6 +68,7 @@ class asset_asset(osv.osv):
 		bcode = bcode[:9]
 		bcode = int(bcode)
 		bcode = bcode + 1
+		bcode = str(bcode)
 		if len(bcode) < 9:
 			chars = 9 - len(bcode)
 			for i in range(0, chars):
