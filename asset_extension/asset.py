@@ -66,12 +66,12 @@ class asset_asset(osv.osv):
 			if ord(code) in (48, 49, 50, 51, 52, 53, 54, 55, 56, 57):
 				bcode = bcode + str(code)
 		bcode = bcode[:9]
+		bcode = int(bcode)
+		bcode = bcode + 1
 		if len(bcode) < 9:
 			chars = 9 - len(bcode)
 			for i in range(0, chars):
 				bcode = '0' + str(bcode)
-		bcode = int(bcode)
-		bcode = bcode + 1
 		vals['barcode_no'] = bcode
 		res = super(asset_asset, self).create(cr, uid, vals, context)
 		if 'property_stock_asset' in vals:
