@@ -133,6 +133,20 @@ class asset_asset(osv.osv):
 			res = super(asset_asset, self).search(cr, user, args, offset=offset, limit=limit, order=order, context=context, count=count)
 		return res
 
+	def update_barcode_no(self, cr, uid, ids, context=None):
+		if not context:
+			context = {}
+		context['asset_id'] = ids
+		return {
+			'type': 'ir.actions.act_window',
+			'name': 'Update Barcode',
+			'res_model': 'asset.asset.new.barcode',
+			'view_type': 'form',
+			'view_mode': 'form',
+			'context': context,
+			'target': 'new',
+		}
+
 	def onchange_hospital(self, cr, uid, ids, hospital_id, context=None):
 		if not hospital_id:
 			return {'value': {'department_ids': []}}

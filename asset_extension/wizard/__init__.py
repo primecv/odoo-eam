@@ -1,0 +1,1 @@
+import asset_asset_new_barcode

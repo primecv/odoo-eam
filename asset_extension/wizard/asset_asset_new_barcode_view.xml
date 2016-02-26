@@ -1,0 +1,24 @@
+<openerp>
+	<data>
+
+		<record id="asset_asset_new_barcode_form" model="ir.ui.view">
+			<field name="name">asset.asset.new.barcode.form</field>
+			<field name="model">asset.asset.new.barcode</field>
+			<field name="arch" type="xml">
+				<form string="Update Barcode Number">
+					<group string="Update Barcode Number">
+						<label string="Enter New Barcode Number for an Asset : " colspan="4"/>
+						<group>
+							<field name="barcode_no" required="1"/>
+						</group>
+					</group>
+					<footer>
+						<button name="update" string="Update" class="oe_highlight" type="object"/>or
+						<button name="cancel" special="cancel" string="cancel" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</openerp>

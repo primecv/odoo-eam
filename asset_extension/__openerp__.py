@@ -46,6 +46,7 @@
         'asset_report.xml',
         'asset_report_view.xml',
         'views/report_assetlist.xml',
+        'wizard/asset_asset_new_barcode_view.xml',
     ],
     'installable': True,
     'auto_install': False,
