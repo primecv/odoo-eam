@@ -23,5 +23,8 @@ class asset_asset_new_barcode(osv.osv_memory):
 					raise osv.except_osv(('Alert!'), ('Barcode No must have 9 digits.'))
 				if flag:
 					raise osv.except_osv(('Alert!'), ('Barcode No can only contain numbers 0-9.'))
+				asset = self.pool.get('asset.asset').search(cr, uid, [('barcode_no','=', barcode_no)])
+				if asset:
+					raise osv.except_osv(('Duplicate Barcodes'), ('You cannot have more than one asset with same Barcode No.'))
 			return self.pool.get('asset.asset').write(cr, uid, asset_id, {'barcode_no': barcode_no})
 		return False
