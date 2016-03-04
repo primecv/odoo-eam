@@ -49,6 +49,7 @@ class purchase_order(osv.osv):
                                        "in exception.",
                                   select=True, copy=False),
 		'po_id': fields.many2one('purchase.order', 'Purchase Order'),
+		'rfq_hcv_id': fields.many2one('rfq.hcv', 'RFQ'),
 	}
 
 	def wkf_confirm_order(self, cr, uid, ids, context=None):

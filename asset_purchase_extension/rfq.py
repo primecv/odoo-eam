@@ -30,7 +30,7 @@ class rfq_hcv(osv.osv):
 
 	_columns = {
 		'name': fields.char('RFQ No.'),
-		'type': fields.selection([('asset','Asset'), ('accessory', 'Accessory'), ('parts', 'Parts')], 'RFQ for'),
+		'type': fields.selection([('asset','Asset'), ('accessory', 'Accessory'), ('parts', 'Parts')], 'RFQ for', track_visibility='onchange'),
 		'created': fields.boolean('Create'),
 		'supplier_line': fields.one2many('rfq.suppliers.hcv', 'rfq_id', 'Suppliers'),
 		'product_id': fields.many2one('product.product', 'Part', domain="[('product_type','=','part')]"),
@@ -47,7 +47,7 @@ class rfq_hcv(osv.osv):
 									('except_picking', 'Shipping Exception'),
 									('except_invoice', 'Invoice Exception'),
 									('done', 'Done'),
-									('cancel', 'Cancelled')], 'State'),
+									('cancel', 'Cancelled')], 'State', track_visibility='onchange'),
 		'note': fields.text('Notes'),
 		'date_order':fields.datetime('Order Date'),
 		'picking_type_id': fields.many2one('stock.picking.type', 'Deliver To', help="This will determine picking type of incoming shipment"),
@@ -78,6 +78,7 @@ class rfq_hcv(osv.osv):
 		'state': 'draft',
         'date_order': fields.datetime.now,
         'picking_type_id': _get_picking_in,
+		'product_qty': 1,
 	}
 
 	def create(self, cr, uid, vals, context=None):
@@ -226,16 +227,29 @@ class rfq_hcv(osv.osv):
 						'bid_date': line.bid_date,
 						'bid_validity': line.bid_expiry_date,
 						'picking_type_id': rec.picking_type_id.id,
+						'rfq_hcv_id': rec.id,
 					}
 
 					taxes = []
 					t = [taxes.append(tax.id) for tax in rec.taxes_id]
-					line_data = [[0, False, {'name': rec.product_id.name,
-											'product_id': rec.product_id.id,
+					if rec.type == 'asset': 
+						desc = rec.asset_id.name
+						uom = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'product', 'product_uom_unit')
+						uom_id = uom and uom[1] or False
+						if not uom:
+							uom_id = self.pool.get('product.uom').search(cr, uid, [('id','>',0)])[0]
+					if rec.type == 'parts': 
+						desc = rec.product_id.name
+						uom_id = rec.product_id.product_tmpl_id.uom_po_id and rec.product_id.product_tmpl_id.uom_po_id.id or \
+								rec.product_id.product_tmpl_id.uom_id.id
+					if rec.type == 'accessory': 
+						desc = rec.accessory_id.name
+						uom_id = rec.accessory_id.product_tmpl_id.uom_po_id and rec.accessory_id.product_tmpl_id.uom_po_id.id or \
+								rec.accessory_id.product_tmpl_id.uom_id.id
+					line_data = [[0, False, {'name': desc,
+											'product_id': rec.product_id and rec.product_id.id or False,
 											'product_qty': rec.product_qty,
-											'product_uom': rec.product_id.product_tmpl_id.uom_po_id and \
-															rec.product_id.product_tmpl_id.uom_po_id.id or \
-															rec.product_id.product_tmpl_id.uom_id.id,
+											'product_uom': uom_id,
 											'price_unit': line.price_unit,
 											'date_planned': line.bid_date or dt.today(),
 											'taxes_id': [[6, 0, taxes]],
@@ -331,17 +345,33 @@ class rfq_hcv_print(osv.osv):
 			#2. Confirm rfq for with selected supplier :
 			if rec.confirm_rfq:
 				for rfq in self.pool.get('rfq.hcv').browse(cr, uid, rfq_id):
-					for line in rfq.supplier_line:
-						if line.supplier_id.id == supplier_id:
-							po_id = line.po_id.id
-							self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
-						elif line.po_id:
+					if rfq.type == 'parts':
+						for line in rfq.supplier_line:
+							if line.supplier_id.id == supplier_id:
+								po_id = line.po_id.id
+								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
+							elif line.po_id:
+								self.pool.get('purchase.order').action_cancel(cr, uid, [line.po_id.id])
+								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
+					elif rfq.type == 'accessory':
+						for line in rfq.supplier_line:
 							self.pool.get('purchase.order').action_cancel(cr, uid, [line.po_id.id])
-							self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
+							if line.supplier_id.id == supplier_id:
+								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
+							elif line.po_id:
+								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
+					elif rfq.type == 'asset':
+						for line in rfq.supplier_line:
+							self.pool.get('purchase.order').action_cancel(cr, uid, [line.po_id.id])
+							if line.supplier_id.id == supplier_id:
+								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
+							elif line.po_id:
+								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
 				#confirm po:
-				name = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'
-				self.pool.get('purchase.order').write(cr, uid, [po_id], {'name': name})
-				self.pool.get('purchase.order').signal_workflow(cr, uid, [po_id], 'purchase_confirm')
-				self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'state': 'approved', 'po_id': po_id})
-			return True
+				if po_id:
+					name = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'
+					self.pool.get('purchase.order').write(cr, uid, [po_id], {'name': name})
+					self.pool.get('purchase.order').signal_workflow(cr, uid, [po_id], 'purchase_confirm')
+					self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'po_id': po_id})
+			return self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'state': 'approved'})
 
