@@ -15,6 +15,7 @@
 						<button name="confirm_rfq" string="Confirm RFQ" type="object" states="bid"/>
 	                    <button name="action_cancel_draft" states="cancel,rfq" string="Set to Draft" type="object"/>
 						<button name="action_cancel" string="Cancel" type="object" states="rfq,bid"/>
+						<button name="view_picking" string="Receive Products" type="object" attrs="{'invisible': ['|',('shipped','=',True), ('po_id','=',False)]}" class="oe_highlight"/>
 						<field name="state" widget="statusbar" statusbar_visible="draft,rfq,bid,approved,done"/>
 					</header>
 					<sheet>

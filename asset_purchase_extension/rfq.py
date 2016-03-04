@@ -54,11 +54,9 @@ class rfq_hcv(osv.osv):
 
         'minimum_planned_date': fields.datetime('Minimum Planned Date'),
         'location_id': fields.many2one('stock.location', 'Destination', domain=[('usage','<>','view'),('usage','<>','asset')]),
-        'shipped':fields.boolean('Received', readonly=True, select=True, copy=False,
-                                 help="It indicates that a picking has been done"),
 		'update_check': fields.boolean('Document Update'),
 		'po_id': fields.many2one('purchase.order', 'Purchase Order'),
-
+		'shipped': fields.related('po_id', 'shipped', type='boolean', string='Shipped', store=False),
 	}
 
 	def _get_picking_in(self, cr, uid, context=None):
@@ -120,6 +118,11 @@ class rfq_hcv(osv.osv):
 				if line.po_id:
 					self.pool.get('purchase.order').signal_workflow(cr, uid, [line.po_id.id], 'bid_received')
 		return self.write(cr, uid, ids, {'state': 'bid'})
+
+	def view_picking(self, cr, uid, ids, context=None):
+		for rec in self.browse(cr, uid, ids):
+			if rec.po_id:
+				return self.pool.get('purchase.order').view_picking(cr, uid, [rec.po_id.id], context)
 
 	def action_cancel(self, cr, uid, ids, context=None):
 		for rec in self.browse(cr, uid, ids):
