@@ -1,0 +1,131 @@
+<openerp>
+	<data>
+
+		<record id="rfq_hcv_form" model="ir.ui.view">
+			<field name="name">rfq.hcv.form</field>		
+			<field name="model">rfq.hcv</field>
+			<field name="arch" type="xml">
+				<form string="RFQ">
+					<header>
+	                    <button name="bid_received" states="rfq" type="object" string="Bid Received" class="oe_highlight"/>
+						<button name="print_rfq" string="Print RFQ" type="object" states="draft,rfq"/>
+						<button name="send_rfq" string="Send RFQ By Email" type="object" states="draft" class="oe_highlight"/>
+						<button name="send_rfq" string="Re-Send RFQ By Email" type="object" states="rfq"/>
+						<button name="confirm_rfq" string="Confirm RFQ" type="object" states="draft,rfq"/>
+						<button name="confirm_rfq" string="Confirm RFQ" type="object" states="bid"/>
+	                    <button name="action_cancel_draft" states="cancel,rfq" string="Set to Draft" type="object"/>
+						<button name="action_cancel" string="Cancel" type="object" states="rfq,bid"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,rfq,bid,approved,done"/>
+					</header>
+					<sheet>
+						<div>
+							<h1><field name="name" readonly="1"/></h1>
+						</div>
+
+						<group col="4">
+							<group col="2">
+								<field name="product_id" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="product_qty" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="taxes_id" widget="many2many_tags" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+							</group>
+							<group col="2">
+								<field name="date_order" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="picking_type_id" required="1" on_change="onchange_picking_type_id(picking_type_id, context)" domain="[('code','=','incoming')]" options="{'no_create': True}" context="{'special_shortened_wh_name': True}" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="po_id" readonly="1" attrs="{'invisible': [('po_id','=',False)]}"/>
+							</group>
+						</group>
+
+						<notebook>
+							<page string="RFQ &amp; Bid">
+								<group colspan="4">
+									<field name="supplier_line" nolabel="1" colspan="4" widget="one2many_list" context="{'default_product_id': product_id}" attrs="{'readonly': [('state','not in',('draft','rfq'))]}">
+										<tree editable="top" string="Supplier Bid" colors="grey:state=='cancel'">
+											<field name="supplier_id" required="1" on_change="onchange_supplier_id(parent.product_id)"/>
+											<field name="product_id" invisible="1"/>
+											<field name="price_unit"/>
+											<field name="bid_date"/>
+											<field name="bid_expiry_date"/>
+											<field name="hours_of_operation"/>
+											<field name="planned_amount"/>
+											<field name="price_subtotal"/>
+											<field name="state" invisible="1"/>
+										</tree>
+									</field>
+								</group>
+							</page>
+							<page string="Deliveries">
+								<group col="4">
+									<field name="location_id" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+									<field name="minimum_planned_date" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+									<field name="shipped" readonly="1"/>
+								</group>
+							</page>
+						</notebook>
+						<group colspan="4"/>
+						<group colspan="4">
+							<field name="note" colspan="4" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+						</group>
+					</sheet>
+		            <div class="oe_chatter">
+		                <field name="message_follower_ids" widget="mail_followers"/>
+		                <field name="message_ids" widget="mail_thread"/>
+		            </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="rfq_hcv_tree" model="ir.ui.view">
+			<field name="name">rfq.hcv.tree</field>		
+			<field name="model">rfq.hcv</field>
+			<field name="arch" type="xml">
+				<tree string="RFQ">
+					<field name="name"/>
+					<field name="product_id"/>
+					<field name="supplier_line"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="rfq_hcv_action" model="ir.actions.act_window">
+			<field name="name">Requests for Quotation</field>
+			<field name="res_model">rfq.hcv</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html"><p>Click here to create new RFQ</p></field>
+		</record>
+
+        <menuitem action="rfq_hcv_action" id="menu_rfq_hcv"
+            parent="purchase.menu_procurement_management"
+            sequence="1"/>
+
+		<!-- Print/Confirm RFQ wizard based on supplier -->
+		<record id="rfq_hcv_print_form" model="ir.ui.view">
+			<field name="name">rfq.hcv.print.form</field>
+			<field name="model">rfq.hcv.print.confirm</field>
+			<field name="arch" type="xml">
+				<form string="Print RFQ">
+					<field name="supplier_ids" widget="many2many_tags" invisible="1"/>
+					<group>
+						<field name="confirm_rfq" invisible="1"/>
+						<field name="print_rfq" invisible="1"/>
+					</group>
+					<group>	
+						<label string="Select Supplier to print RFQ:" colspan="4" attrs="{'invisible': [('confirm_rfq','=',True)]}"/>
+						<label string="Select Supplier to confirm RFQ &amp; Generate PO with:" colspan="4" attrs="{'invisible': [('print_rfq','=',True)]}"/>
+						<group col="2">
+							<field name="supplier_id" options="{'no_open':True, 'no_create':True}" required="1" domain="[('id','in',(supplier_ids[0][2]))]"/>
+						</group>
+						<group col="2"/>
+					</group>
+					<footer>
+						<button name="print_report" type="object" string="Print" class="oe_highlight" attrs="{'invisible': [('confirm_rfq','=',True)]}"/>
+						<button name="print_report" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible': [('print_rfq','=',True)]}"/>or
+						<button name="cancel" special="cancel" string="Cancel" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</openerp>

@@ -1,0 +1,15 @@
+<openerp>
+    <data noupdate="1">
+        <record id="seq_type_rfq_hcv" model="ir.sequence.type">
+            <field name="name">RFQ</field>
+            <field name="code">rfq.hcv</field>
+        </record>
+        <record id="seq_rfq_hcv" model="ir.sequence">
+            <field name="name">RFQ</field>
+            <field name="code">rfq.hcv</field>
+            <field name="prefix">RFQ</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+
+</openerp>

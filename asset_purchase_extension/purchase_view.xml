@@ -188,4 +188,10 @@
         </record>
 
 	</data>
+
+	<data noupdate="1">
+		<!-- remove Existing RFQ & PO menus -->
+		<delete id="purchase.menu_purchase_rfq" model="ir.ui.menu"/>
+		<delete id="purchase.menu_purchase_form_action" model="ir.ui.menu"/>
+	</data>
 </openerp>
