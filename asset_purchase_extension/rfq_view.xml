@@ -24,23 +24,33 @@
 
 						<group col="4">
 							<group col="2">
-								<field name="product_id" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
-								<field name="product_qty" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
-								<field name="taxes_id" widget="many2many_tags" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="type" required="1" attrs="{'readonly': [('created','=',True)]}"/>
 							</group>
 							<group col="2">
-								<field name="date_order" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
-								<field name="picking_type_id" required="1" on_change="onchange_picking_type_id(picking_type_id, context)" domain="[('code','=','incoming')]" options="{'no_create': True}" context="{'special_shortened_wh_name': True}" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="created" invisible="1"/>
+							</group>
+						</group>
+						<group col="4">
+							<group col="2">
+								<field name="product_id" attrs="{'required':[('type','=','parts')], 'invisible':[('type','!=','parts')], 'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="accessory_id" attrs="{'required':[('type','=','accessory')], 'invisible':[('type','!=','accessory')], 'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="asset_id" attrs="{'required':[('type','=','asset')], 'invisible':[('type','!=','asset')], 'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="product_qty" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))], 'invisible':[('type','!=','parts')]}"/>
+								<field name="taxes_id" widget="many2many_tags" attrs="{'invisible':[('type','!=','parts')], 'readonly': [('state','not in',('draft','rfq'))]}"/>
+							</group>
+							<group col="2">
+								<field name="date_order" required="1" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','not in',('draft','rfq'))]}"/>
+								<field name="picking_type_id" required="1" on_change="onchange_picking_type_id(picking_type_id, context)" domain="[('code','=','incoming')]" options="{'no_create': True}" context="{'special_shortened_wh_name': True}" attrs="{'invisible':[('type','!=','parts')], 'readonly': [('state','not in',('draft','rfq'))]}"/>
 								<field name="po_id" readonly="1" attrs="{'invisible': [('po_id','=',False)]}"/>
 							</group>
 						</group>
 
 						<notebook>
-							<page string="RFQ &amp; Bid">
+							<page string="RFQ &amp; Bid" attrs="{'invisible':[('type','=',False)]}">
 								<group colspan="4">
 									<field name="supplier_line" nolabel="1" colspan="4" widget="one2many_list" context="{'default_product_id': product_id}" attrs="{'readonly': [('state','not in',('draft','rfq'))]}">
 										<tree editable="top" string="Supplier Bid" colors="grey:state=='cancel'">
-											<field name="supplier_id" required="1" on_change="onchange_supplier_id(parent.product_id)"/>
+											<field name="supplier_id" required="1" on_change="onchange_supplier_id(parent.type,parent.asset_id,parent.product_id,parent.accessory_id)"/>
 											<field name="product_id" invisible="1"/>
 											<field name="price_unit"/>
 											<field name="bid_date"/>
@@ -53,7 +63,7 @@
 									</field>
 								</group>
 							</page>
-							<page string="Deliveries">
+							<page string="Deliveries" attrs="{'invisible':[('type','!=','parts')]}">
 								<group col="4">
 									<field name="location_id" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
 									<field name="minimum_planned_date" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
@@ -63,7 +73,7 @@
 						</notebook>
 						<group colspan="4"/>
 						<group colspan="4">
-							<field name="note" colspan="4" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
+							<field name="note" colspan="4" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','not in',('draft','rfq'))]}"/>
 						</group>
 					</sheet>
 		            <div class="oe_chatter">

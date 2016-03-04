@@ -30,8 +30,12 @@ class rfq_hcv(osv.osv):
 
 	_columns = {
 		'name': fields.char('RFQ No.'),
+		'type': fields.selection([('asset','Asset'), ('accessory', 'Accessory'), ('parts', 'Parts')], 'RFQ for'),
+		'created': fields.boolean('Create'),
 		'supplier_line': fields.one2many('rfq.suppliers.hcv', 'rfq_id', 'Suppliers'),
-		'product_id': fields.many2one('product.product', 'Product'),
+		'product_id': fields.many2one('product.product', 'Part', domain="[('product_type','=','part')]"),
+		'accessory_id': fields.many2one('product.product', 'Accessory', domain="[('product_type','=','accessory')]"),
+		'asset_id': fields.many2one('asset.asset', 'Asset'),
 		'product_qty': fields.integer('Quantity'),
 		'taxes_id': fields.many2many('account.tax', 'rfq_hcv_taxes', 'rfq_id', 'tax_id', 'Taxes'),
 		'state': fields.selection([
@@ -79,6 +83,7 @@ class rfq_hcv(osv.osv):
 	def create(self, cr, uid, vals, context=None):
 		name = self.pool.get('ir.sequence').get(cr, uid, 'rfq.hcv') or '/'
 		vals['name'] = name
+		vals['created'] = True
 		return super(rfq_hcv, self).create(cr, uid, vals, context)
 
 	def write(self, cr, uid, ids, vals, context=None):
@@ -285,9 +290,14 @@ class rfq_suppliers_hcv(osv.osv):
 		'state': fields.selection([('done','Done'),('cancel','Cancel')], 'State'),
 	}
 
-	def onchange_supplier_id(self, cr, uid, ids, product_id, context=None):
-		if not product_id:
-			raise osv.except_osv(('No Product Defined!'), ('Before adding Suppliers, select Product in RFQ form.'))
+	def onchange_supplier_id(self, cr, uid, ids, ptype=False, asset_id=False, part_id=False, accessory_id=False, context=None):
+		if ptype:
+			if ptype == 'accessory' and not accessory_id:
+				raise osv.except_osv(('No Accessory Defined!'), ('Before adding Suppliers, select Accessory in RFQ form.'))
+			if ptype == 'asset' and not asset_id:
+				raise osv.except_osv(('No Asset Defined!'), ('Before adding Suppliers, select Asset in RFQ form.'))
+			if ptype == 'parts' and not part_id:
+				raise osv.except_osv(('No Parts Defined!'), ('Before adding Suppliers, select Part in RFQ form.'))
 		return True
 
 class rfq_hcv_print(osv.osv):
