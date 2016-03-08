@@ -36,7 +36,7 @@
 								<field name="product_id" attrs="{'required':[('type','=','parts')], 'invisible':[('type','!=','parts')], 'readonly': [('state','not in',('draft','rfq'))]}" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view', 'default_product_type': 'part'}"/>
 								<field name="accessory_id" attrs="{'required':[('type','=','accessory')], 'invisible':[('type','!=','accessory')], 'readonly': [('state','not in',('draft','rfq'))]}" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view', 'default_product_type': 'accessory'}"/>
 								<field name="asset_id" attrs="{'required':[('type','=','asset')], 'invisible':[('type','!=','asset')], 'readonly': [('state','not in',('draft','rfq'))]}"/>
-								<field name="product_qty" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))], 'invisible':[('type','!=','parts')]}"/>
+								<field name="product_qty" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))], 'invisible':[('type','=',False)]}"/>
 								<field name="taxes_id" widget="many2many_tags" attrs="{'invisible':[('type','!=','parts')], 'readonly': [('state','not in',('draft','rfq'))]}"/>
 							</group>
 							<group col="2">
