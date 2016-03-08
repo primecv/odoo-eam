@@ -317,6 +317,19 @@ class rfq_suppliers_hcv(osv.osv):
 				raise osv.except_osv(('No Parts Defined!'), ('Before adding Suppliers, select Part in RFQ form.'))
 		return True
 
+	def onchange_price_unit(self, cr, uid, ids, prodid=False, supplier_id=False, product_qty=0, price_unit=0.0,
+							taxes_id=False,context=None):
+		taxlist = []
+		if taxes_id and taxes_id[0] and taxes_id[0][2]:
+			taxlist = taxes_id[0][2]
+		taxes = self.pool.get('account.tax').browse(cr, uid, taxlist)
+		taxes = self.pool.get('account.tax').compute_all(cr, uid, taxes, price_unit, product_qty, prodid, supplier_id)
+		total = 0.0
+		if taxes['total_included']:
+			total = float(taxes['total_included'])
+		return {'value': {'price_subtotal': total}}
+		
+
 class rfq_hcv_print(osv.osv):
 	_name = "rfq.hcv.print.confirm"
 	_description = "Print RFQ"

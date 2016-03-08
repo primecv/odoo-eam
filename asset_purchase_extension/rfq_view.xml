@@ -53,7 +53,7 @@
 										<tree editable="top" string="Supplier Bid" colors="grey:state=='cancel'">
 											<field name="supplier_id" required="1" on_change="onchange_supplier_id(parent.type,parent.asset_id,parent.product_id,parent.accessory_id)"/>
 											<field name="product_id" invisible="1"/>
-											<field name="price_unit"/>
+											<field name="price_unit" on_change="onchange_price_unit(False,supplier_id,parent.product_qty,price_unit,parent.taxes_id)"/>
 											<field name="bid_date"/>
 											<field name="bid_expiry_date"/>
 											<field name="hours_of_operation"/>
