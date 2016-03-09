@@ -52,11 +52,12 @@ class rfq_hcv(osv.osv):
 		'date_order':fields.datetime('Order Date'),
 		'picking_type_id': fields.many2one('stock.picking.type', 'Deliver To', help="This will determine picking type of incoming shipment"),
 
-        'minimum_planned_date': fields.datetime('Minimum Planned Date'),
+        'minimum_planned_date': fields.datetime('Expected Date'),
         'location_id': fields.many2one('stock.location', 'Destination', domain=[('usage','<>','view'),('usage','<>','asset')]),
 		'update_check': fields.boolean('Document Update'),
 		'po_id': fields.many2one('purchase.order', 'Purchase Order'),
 		'shipped': fields.related('po_id', 'shipped', type='boolean', string='Shipped', store=False),
+        'invoice_method': fields.selection([('manual','Based on Purchase Order lines'),('order','Based on generated draft invoice'),('picking','Based on incoming shipments')], 'Invoicing Control'),
 	}
 
 	def _get_picking_in(self, cr, uid, context=None):
@@ -77,6 +78,7 @@ class rfq_hcv(osv.osv):
         'date_order': fields.datetime.now,
         'picking_type_id': _get_picking_in,
 		'product_qty': 1,
+		'invoice_method': 'manual',
 	}
 
 	def create(self, cr, uid, vals, context=None):
@@ -231,7 +233,7 @@ class rfq_hcv(osv.osv):
 						'bid_validity': line.bid_expiry_date,
 						'picking_type_id': rec.picking_type_id.id,
 						'rfq_hcv_id': rec.id,
-						'invoice_method': 'manual',
+						'invoice_method': rec.invoice_method,
 					}
 
 					taxes = []
