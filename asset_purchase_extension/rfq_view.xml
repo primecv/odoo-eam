@@ -8,7 +8,7 @@
 				<form string="RFQ">
 					<header>
 	                    <button name="bid_received" states="rfq" type="object" string="Bid Received" class="oe_highlight"/>
-						<button name="print_rfq" string="Print RFQ" type="object" states="draft,rfq"/>
+						<button name="print_rfq" string="Print RFQ" type="object"/>
 						<button name="send_rfq" string="Send RFQ By Email" type="object" states="draft" class="oe_highlight"/>
 						<button name="send_rfq" string="Re-Send RFQ By Email" type="object" states="rfq"/>
 						<button name="confirm_rfq" string="Confirm RFQ" type="object" states="draft,rfq"/>
@@ -64,7 +64,7 @@
 									</field>
 								</group>
 							</page>
-							<page string="Deliveries" attrs="{'invisible':[('type','!=','parts')]}">
+							<page string="Deliveries" attrs="{'invisible':[('type','not in',('parts','asset'))]}">
 								<group col="4">
 									<field name="location_id" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
 									<field name="minimum_planned_date" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
