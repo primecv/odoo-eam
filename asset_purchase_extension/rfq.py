@@ -231,6 +231,7 @@ class rfq_hcv(osv.osv):
 						'bid_validity': line.bid_expiry_date,
 						'picking_type_id': rec.picking_type_id.id,
 						'rfq_hcv_id': rec.id,
+						'invoice_method': 'manual',
 					}
 
 					taxes = []
