@@ -33,6 +33,7 @@
         'purchase_view.xml',
         'rfq_view.xml',
         'rfq_sequence.xml',
+        'register_view.xml',
         'views/report_purchasequotation.xml',
     ],
     'installable': True,

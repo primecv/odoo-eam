@@ -1,0 +1,76 @@
+<openerp>
+	<data>
+
+		<record id="registration_request_hcv_form" model="ir.ui.view">
+			<field name="name">registration.request.hcv.form</field>
+			<field name="model">registration.request.hcv</field>
+			<field name="arch" type="xml">
+				<form string="RFQ Registration">
+					<header>
+						<button name="action_confirm" type="object" string="Submit" states="draft" class="oe_highlight"/>
+						<button name="action_approve" type="object" string="Approve" states="submit" groups="purchase.group_purchase_manager" class="oe_highlight"/>
+						<button name="action_reject" type="object" string="Dismiss" states="submit" groups="purchase.group_purchase_manager" class="oe_highlight"/>
+						<button name="action_cancel" type="object" string="Cancel" states="draft,submit"/>
+						<button name="action_reset" type="object" string="Reset To Draft" states="cancel"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,submit,approve"/>
+					</header>
+					<sheet>
+						<group col="4">
+							<group col="2">
+								<field name="type" required="1" attrs="{'readonly': [('created','=',True)]}"/>
+							</group>
+							<group col="2">
+								<field name="created" invisible="1"/>
+							</group>
+						</group>
+						<group col="4">
+							<group col="2">
+								<field name="part_id" attrs="{'required':[('type','=','part')], 'invisible':[('type','!=','part')], 'readonly': [('state','!=','draft')]}" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view', 'default_product_type': 'part'}"/>
+								<field name="equipment_id" attrs="{'required':[('type','=','equipment')], 'invisible':[('type','!=','equipment')], 'readonly': [('state','!=','draft')]}"/>
+								<field name="department_id" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','!=','draft')]}"/>
+								<field name="user_id" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','!=','draft')]}"/>
+							</group>
+							<group col="2">
+								<field name="date" required="1" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','!=','draft')]}"/>
+								<field name="name" required="1" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','!=','draft')]}" colspan="2"/>
+							</group>
+						</group>
+					</sheet>
+		            <div class="oe_chatter">
+		                <field name="message_follower_ids" widget="mail_followers"/>
+		                <field name="message_ids" widget="mail_thread"/>
+		            </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="registration_request_hcv_tree" model="ir.ui.view">
+			<field name="name">registration.request.hcv.tree</field>
+			<field name="model">registration.request.hcv</field>
+			<field name="arch" type="xml">
+				<tree string="RFQ Registration" colors="grey:state=='cancel';red:state=='reject'">
+					<field name="type"/>
+					<field name="product"/>
+					<field name="date"/>
+					<field name="user_id"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="registration_request_hcv_action" model="ir.actions.act_window">
+			<field name="name">Registration Request</field>
+			<field name="res_model">registration.request.hcv</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click here to create new Registration Request.</p>
+			</field>
+		</record>
+
+        <menuitem action="registration_request_hcv_action" id="menu_registration_request_hcv"
+            parent="purchase.menu_procurement_management"
+            sequence="2"/>
+
+	</data>
+</openerp>
