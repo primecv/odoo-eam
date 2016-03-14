@@ -29,7 +29,13 @@ class asset_asset(osv.osv):
 	def create(self, cr, uid, vals, context=None):
 		res = super(asset_asset, self).create(cr, uid, vals, context)
 		if context and 'po_asset' in context and 'rfq_id' in context:
-			self.pool.get('rfq.hcv').write(cr, uid, [context['rfq_id']], {'create_asset': False, 
+			if context['default_is_accessory'] is True:
+				self.pool.get('rfq.hcv').write(cr, uid, [context['rfq_id']], {'create_accessory': False, 
+																			'new_accessory_id': res,
+																			'state': 'done'
+																		})
+			elif context['default_is_accessory'] is False:
+				self.pool.get('rfq.hcv').write(cr, uid, [context['rfq_id']], {'create_asset': False, 
 																			'new_asset_id': res,
 																			'state': 'done'
 																		})

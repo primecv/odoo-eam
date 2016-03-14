@@ -34,8 +34,8 @@ class rfq_hcv(osv.osv):
 		'created': fields.boolean('Create'),
 		'supplier_line': fields.one2many('rfq.suppliers.hcv', 'rfq_id', 'Suppliers'),
 		'product_id': fields.many2one('product.product', 'Part', domain="[('product_type','=','part')]"),
-		'accessory_id': fields.many2one('product.product', 'Accessory', domain="[('product_type','=','accessory')]"),
-		'asset_id': fields.many2one('asset.asset', 'Asset'),
+		'accessory_id': fields.many2one('asset.asset', 'Accessory', domain="[('is_accessory','=',True)]"),
+		'asset_id': fields.many2one('asset.asset', 'Asset', domain="[('is_accessory','=',False)]"),
 		'product_qty': fields.integer('Quantity'),
 		'taxes_id': fields.many2many('account.tax', 'rfq_hcv_taxes', 'rfq_id', 'tax_id', 'Taxes'),
 		'state': fields.selection([
@@ -61,7 +61,7 @@ class rfq_hcv(osv.osv):
 		'create_asset': fields.boolean('Create Asset?'),
 		'create_accessory': fields.boolean('Create Accessory?'),
 		'new_asset_id': fields.many2one('asset.asset', 'Related Asset'),
-		'new_accessory_id': fields.many2one('product.product', 'Related Accessory'),
+		'new_accessory_id': fields.many2one('asset.asset', 'Related Accessory'),
 	}
 
 	def _get_picking_in(self, cr, uid, context=None):
@@ -254,8 +254,10 @@ class rfq_hcv(osv.osv):
 								rec.product_id.product_tmpl_id.uom_id.id
 					if rec.type == 'accessory': 
 						desc = rec.accessory_id.name
-						uom_id = rec.accessory_id.product_tmpl_id.uom_po_id and rec.accessory_id.product_tmpl_id.uom_po_id.id or \
-								rec.accessory_id.product_tmpl_id.uom_id.id
+						uom = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'product', 'product_uom_unit')
+						uom_id = uom and uom[1] or False
+						if not uom:
+							uom_id = self.pool.get('product.uom').search(cr, uid, [('id','>',0)])[0]
 					line_data = [[0, False, {'name': desc,
 											'product_id': rec.product_id and rec.product_id.id or False,
 											'product_qty': rec.product_qty,
@@ -282,7 +284,7 @@ class rfq_hcv(osv.osv):
 					'view_mode': 'form',
 					'view_id': view_id or False,
 					'res_id': False,
-					'context': {'po_asset': True, 'rfq_id': rec.id},
+					'context': {'po_asset': True, 'rfq_id': rec.id, 'default_is_accessory':False},
 					'target': 'current'
 				}				
 			else:
@@ -298,23 +300,23 @@ class rfq_hcv(osv.osv):
 
 	def open_accessory(self, cr, uid, ids, context=None):
 		for rec in self.browse(cr, uid, ids):
-			view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_extension', 'product_template_parts_form_view')
+			view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_extension', 'asset_accessories_form_view')
 			view_id = view_ref and view_ref[1] or False,
 			if rec.create_accessory:
 				return {
 					'type': 'ir.actions.act_window',
-					'res_model': 'product.product',
+					'res_model': 'asset.asset',
 					'view_type': 'form',
 					'view_mode': 'form',
 					'view_id': view_id or False,
 					'res_id': False,
-					'context': {'po_asset': True, 'rfq_id': rec.id, 'default_product_type': 'accessory'},
+					'context': {'po_asset': True, 'rfq_id': rec.id, 'default_is_accessory': True},
 					'target': 'current'
 				}				
 			else:
 				return {
 					'type': 'ir.actions.act_window',
-					'res_model': 'product.product',
+					'res_model': 'asset.asset',
 					'view_type': 'form',
 					'view_mode': 'form',
 					'res_id': int(rec.new_accessory_id.id),
