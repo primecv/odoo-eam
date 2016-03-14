@@ -58,6 +58,10 @@ class rfq_hcv(osv.osv):
 		'po_id': fields.many2one('purchase.order', 'Purchase Order'),
 		'shipped': fields.related('po_id', 'shipped', type='boolean', string='Shipped', store=False),
         'invoice_method': fields.selection([('manual','Based on Purchase Order lines'),('order','Based on generated draft invoice'),('picking','Based on incoming shipments')], 'Invoicing Control'),
+		'create_asset': fields.boolean('Create Asset?'),
+		'create_accessory': fields.boolean('Create Accessory?'),
+		'new_asset_id': fields.many2one('asset.asset', 'Related Asset'),
+		'new_accessory_id': fields.many2one('product.product', 'Related Accessory'),
 	}
 
 	def _get_picking_in(self, cr, uid, context=None):
@@ -266,6 +270,58 @@ class rfq_hcv(osv.osv):
 					self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'po_id': po_id})
 		return self.write(cr, uid, ids, {'update_check': True})
 
+	def open_asset(self, cr, uid, ids, context=None):
+		for rec in self.browse(cr, uid, ids):
+			view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_stock', 'assets_form_view_stock')
+			view_id = view_ref and view_ref[1] or False,
+			if rec.create_asset:
+				return {
+					'type': 'ir.actions.act_window',
+					'res_model': 'asset.asset',
+					'view_type': 'form',
+					'view_mode': 'form',
+					'view_id': view_id or False,
+					'res_id': False,
+					'context': {'po_asset': True, 'rfq_id': rec.id},
+					'target': 'current'
+				}				
+			else:
+				return {
+					'type': 'ir.actions.act_window',
+					'res_model': 'asset.asset',
+					'view_type': 'form',
+					'view_mode': 'form',
+					'res_id': int(rec.new_asset_id.id),
+					'context': {'po_asset': True},
+					'target': 'current'
+				}
+
+	def open_accessory(self, cr, uid, ids, context=None):
+		for rec in self.browse(cr, uid, ids):
+			view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_extension', 'product_template_parts_form_view')
+			view_id = view_ref and view_ref[1] or False,
+			if rec.create_accessory:
+				return {
+					'type': 'ir.actions.act_window',
+					'res_model': 'product.product',
+					'view_type': 'form',
+					'view_mode': 'form',
+					'view_id': view_id or False,
+					'res_id': False,
+					'context': {'po_asset': True, 'rfq_id': rec.id, 'default_product_type': 'accessory'},
+					'target': 'current'
+				}				
+			else:
+				return {
+					'type': 'ir.actions.act_window',
+					'res_model': 'product.product',
+					'view_type': 'form',
+					'view_mode': 'form',
+					'res_id': int(rec.new_accessory_id.id),
+					'context': {'po_asset': True, 'rfq_id': rec.id},
+					'target': 'current'
+				}
+
 	def onchange_picking_type_id(self, cr, uid, ids, picking_type_id, context=None):
 		value = {}
 		if picking_type_id:
@@ -379,6 +435,8 @@ class rfq_hcv_print(osv.osv):
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
 							elif line.po_id:
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
+							#update flag to allow creating new Accessory :
+							self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'create_accessory': True, 'state': 'done'})
 					elif rfq.type == 'asset':
 						for line in rfq.supplier_line:
 							self.pool.get('purchase.order').action_cancel(cr, uid, [line.po_id.id])
@@ -386,6 +444,8 @@ class rfq_hcv_print(osv.osv):
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
 							elif line.po_id:
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
+							#update flag to allow creating new Asset :
+							self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'create_asset': True, 'state': 'done'})
 				#confirm po:
 				if po_id:
 					name = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'

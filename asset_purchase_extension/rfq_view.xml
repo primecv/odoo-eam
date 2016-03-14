@@ -13,6 +13,10 @@
 						<button name="send_rfq" string="Re-Send RFQ By Email" type="object" states="rfq"/>
 						<button name="confirm_rfq" string="Confirm RFQ" type="object" states="draft,rfq"/>
 						<button name="confirm_rfq" string="Confirm RFQ" type="object" states="bid"/>
+						<button name="open_asset" string="Create Asset" type="object" attrs="{'invisible': [('create_asset','=',False)]}"/>
+						<button name="open_asset" string="View Asset" type="object" attrs="{'invisible': [('new_asset_id','=',False)]}"/>
+						<button name="open_accessory" string="Create Accessory" type="object" attrs="{'invisible': [('create_accessory','=',False)]}"/>
+						<button name="open_accessory" string="View Accessory" type="object" attrs="{'invisible': [('new_accessory_id','=',False)]}"/>
 	                    <button name="action_cancel_draft" states="cancel,rfq" string="Set to Draft" type="object"/>
 						<button name="action_cancel" string="Cancel" type="object" states="rfq,bid"/>
 						<button name="view_picking" string="Receive Products" type="object" attrs="{'invisible': ['|',('shipped','=',True), ('po_id','=',False)]}" class="oe_highlight"/>
@@ -29,6 +33,10 @@
 							</group>
 							<group col="2">
 								<field name="created" invisible="1"/>
+								<field name="create_asset" invisible="1"/>
+								<field name="create_accessory" invisible="1"/>
+								<field name="new_asset_id" invisible="1"/>
+								<field name="new_accessory_id" invisible="1"/>
 							</group>
 						</group>
 						<group col="4">
