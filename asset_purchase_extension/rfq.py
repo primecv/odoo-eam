@@ -436,7 +436,7 @@ class rfq_hcv_print(osv.osv):
 							elif line.po_id:
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
 							#update flag to allow creating new Accessory :
-							self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'create_accessory': True, 'state': 'done'})
+							self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'create_accessory': True})
 					elif rfq.type == 'asset':
 						for line in rfq.supplier_line:
 							self.pool.get('purchase.order').action_cancel(cr, uid, [line.po_id.id])
@@ -445,7 +445,7 @@ class rfq_hcv_print(osv.osv):
 							elif line.po_id:
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
 							#update flag to allow creating new Asset :
-							self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'create_asset': True, 'state': 'done'})
+							self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'create_asset': True})
 				#confirm po:
 				if po_id:
 					name = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'
