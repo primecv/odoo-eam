@@ -92,6 +92,7 @@
 			<field name="arch" type="xml">
 				<tree string="RFQ">
 					<field name="name"/>
+					<field name="type" string="Type"/>
 					<field name="product_id"/>
 					<field name="supplier_line"/>
 					<field name="state"/>
