@@ -72,7 +72,7 @@
 									</field>
 								</group>
 							</page>
-							<page string="Deliveries" attrs="{'invisible':[('type','not in',('parts','asset'))]}">
+							<page string="Deliveries" attrs="{'invisible':[('type','=',False))]}">
 								<group col="4">
 									<field name="location_id" required="1" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
 									<field name="minimum_planned_date" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
