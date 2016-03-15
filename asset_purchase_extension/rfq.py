@@ -417,7 +417,8 @@ class rfq_hcv_print(osv.osv):
 					for line in rfq.supplier_line:
 						if line.supplier_id.id == supplier_id:
 							po_id = line.po_id.id
-				self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'state': 'rfq'})
+					if rfq.state == 'draft':
+						self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'state': 'rfq'})
 				return self.pool['report'].get_action(cr, uid, [po_id], 'purchase.report_purchasequotation', context=context)
 			#2. Confirm rfq for with selected supplier :
 			if rec.confirm_rfq:
