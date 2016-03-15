@@ -52,7 +52,7 @@ class rfq_hcv(osv.osv):
 		'date_order':fields.datetime('Order Date'),
 		'picking_type_id': fields.many2one('stock.picking.type', 'Deliver To', help="This will determine picking type of incoming shipment"),
 
-        'minimum_planned_date': fields.datetime('Expected Date'),
+        'minimum_planned_date': fields.date('Expected Date'),
         'location_id': fields.many2one('stock.location', 'Destination', domain=[('usage','<>','view'),('usage','<>','asset')]),
 		'update_check': fields.boolean('Document Update'),
 		'po_id': fields.many2one('purchase.order', 'Purchase Order'),
@@ -164,6 +164,12 @@ class rfq_hcv(osv.osv):
 		}		
 		return vals
 
+	def print_po(self, cr, uid, ids, context=None):
+		for rec in self.browse(cr, uid, ids):
+			for line in rec.supplier_line:
+				if line.state == 'done':
+					return self.pool['report'].get_action(cr, uid, [line.po_id.id], 'purchase.report_purchaseorder')
+
 	def send_rfq(self, cr, uid, ids, context=None):
 		self.check_suppliers(cr, uid, ids)
 
@@ -265,6 +271,7 @@ class rfq_hcv(osv.osv):
 											'price_unit': line.price_unit,
 											'date_planned': line.bid_date or dt.today(),
 											'taxes_id': [[6, 0, taxes]],
+											'rfq_line_id': line.id,
 											}]]
 					vals.update({'order_line': line_data})
 					po_id = self.pool.get('purchase.order').create(cr, uid, vals, context)

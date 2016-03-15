@@ -72,3 +72,10 @@ class purchase_order(osv.osv):
 			if rec.state == 'draft': 
 				self.write(cr, uid, ids, {'state': 'sent'})
 		return self.pool['report'].get_action(cr, uid, ids, 'purchase.report_purchasequotation', context=context)
+
+class purchase_order_line(osv.osv):
+	_inherit = "purchase.order.line"
+
+	_columns = {
+		'rfq_line_id': fields.many2one('rfq.suppliers.hcv', 'RFQ Line Id'),
+	}
