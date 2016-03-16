@@ -13,6 +13,13 @@
 		</td>
 	</xpath>
 
+	<xpath expr="//td[@class='text-right']" position="replace">
+		<td class="text-right">
+            <span t-esc="'%.0f'%(order_line.product_qty)"/>
+            <span t-field="order_line.product_uom" groups="product.group_uom"/>
+		</td>
+	</xpath>
+
 	<xpath expr="//td[@class='text-center']" position="before">
         <td class="text-center">
             <span class="text-center" t-field="o.date_order"/>
