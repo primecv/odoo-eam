@@ -79,6 +79,7 @@
 									<field name="minimum_planned_date" attrs="{'readonly': [('state','not in',('draft','rfq'))]}"/>
 									<field name="shipped" readonly="1"/>
 									<field name="invoice_method" required="1"/>
+									<field name="payment_term_id" options="{'no_open': True, 'no_create': True}"/>
 								</group>
 							</page>
 						</notebook>
