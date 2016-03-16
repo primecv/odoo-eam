@@ -59,7 +59,7 @@ class asset_asset(osv.osv):
 		codeseq = self.pool.get('ir.sequence').get(cr, uid, 'asset.code') 
 		vals['code'] = codeseq
 		#generate sequential barcode no :
-		cr.execute('''select barcode_no from asset_asset  where barcode_no is not null order by barcode_no desc limit 1;''')
+		cr.execute('''select barcode_no::int from asset_asset  where barcode_no is not null order by barcode_no desc limit 1;''')
 		barcodes = cr.fetchone()[0]
 		bcode = ''
 		for code in str(barcodes):
