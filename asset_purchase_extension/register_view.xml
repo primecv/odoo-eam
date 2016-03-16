@@ -27,12 +27,13 @@
 							<group col="2">
 								<field name="part_id" attrs="{'required':[('type','=','part')], 'invisible':[('type','!=','part')], 'readonly': [('state','!=','draft')]}" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view', 'default_product_type': 'part'}"/>
 								<field name="equipment_id" attrs="{'required':[('type','=','equipment')], 'invisible':[('type','!=','equipment')], 'readonly': [('state','!=','draft')]}"/>
-								<field name="department_id" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','!=','draft')]}"/>
-								<field name="user_id" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','!=','draft')]}"/>
+								<field name="quantity"/>
+								<field name="department_id" attrs="{'readonly': [('state','!=','draft')]}"/>
 							</group>
 							<group col="2">
-								<field name="date" required="1" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','!=','draft')]}"/>
-								<field name="name" required="1" attrs="{'invisible':[('type','=',False)], 'readonly': [('state','!=','draft')]}" colspan="2"/>
+								<field name="date" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+								<field name="name" required="1" attrs="{'readonly': [('state','!=','draft')]}" colspan="2"/>
+								<field name="user_id" attrs="{'readonly': [('state','!=','draft')]}"/>
 							</group>
 						</group>
 					</sheet>

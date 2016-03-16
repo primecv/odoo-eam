@@ -47,6 +47,7 @@ class registration_request_hcv(osv.osv):
 		'part_id': fields.many2one('product.product', 'Part', domain="[('product_type','=','part')]", track_visibility='onchange'),
 		'equipment_id': fields.many2one('asset.asset', 'Equipment', track_visibility='onchange'),
 		'product': fields.function(get_product_desc, type="char", string="Product Description", store=True),
+		'quantity': fields.integer('Quantity'),
 		'department_id': fields.many2one('res.users', 'Department'),	
 		'user_id': fields.many2one('res.users', 'User', track_visibility='onchange'),
 		'state': fields.selection([('draft', 'Draft'), ('submit', 'Waiting Approval'), ('approve', 'Approved'), ('reject', 'Rejected'), ('cancel', 'Cancelled')], 'State', track_visibility='onchange'),
@@ -56,6 +57,7 @@ class registration_request_hcv(osv.osv):
 		'user_id': lambda obj, cr, uid, context: uid,
 		'date': fields.datetime.now,
 		'state': 'draft',
+		'quantity': 1,
 	}
 
 	def create(self, cr, uid, vals, context=None):
