@@ -24,6 +24,12 @@ from openerp.osv import fields, osv
 class purchase_order(osv.osv):
 	_inherit = "purchase.order"
 
+	def init(self, cr):
+		try:
+			cr.execute('alter table purchase_order drop constraint purchase_order_name_uniq;')
+		except:
+			pass
+
 	STATE_SELECTION = [
         ('draft', 'Draft PO'),
         ('sent', 'RFQ'),
