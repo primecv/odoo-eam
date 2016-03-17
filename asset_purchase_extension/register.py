@@ -73,6 +73,15 @@ class registration_request_hcv(osv.osv):
 		vals['name'] = name
 		return super(registration_request_hcv, self).create(cr, uid, vals, context)
 
+	def copy(self, cr, uid, id, default=None, context=None):
+		if default is None:
+			default = {}
+		context = dict(context or {})
+		default.update(move_id=False)
+		default.update(answer='')
+		res = super(registration_request_hcv, self).copy(cr, uid, id, default, context)
+		return res
+
 	def action_confirm(self, cr, uid, ids, context=None):
 		return self.write(cr, uid, ids, {'state': 'submit'})
 
