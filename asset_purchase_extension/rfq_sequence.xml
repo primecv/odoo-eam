@@ -11,5 +11,17 @@
             <field name="padding">4</field>
         </record>
     </data>
+	<data noupdate="1">
+        <record id="seq_type_registration_request" model="ir.sequence.type">
+            <field name="name">RR</field>
+            <field name="code">registration.request</field>
+        </record>
+        <record id="seq_registration_request" model="ir.sequence">
+            <field name="name">RR</field>
+            <field name="code">registration.request</field>
+            <field name="prefix">RR</field>
+            <field name="padding">4</field>
+        </record>
+	</data>
 
 </openerp>

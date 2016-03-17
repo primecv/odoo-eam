@@ -42,9 +42,10 @@ class registration_request_hcv(osv.osv):
 		return result
 
 	_columns = {
-		'name': fields.text('Reason', track_visibility='onchange'),
+		'name': fields.char('Name'),
+		'reason': fields.text('Reason', track_visibility='onchange'),
 		'created': fields.boolean('Create'),
-		'type': fields.selection([('asset','Asset'),('accessory','Accessory'),('part', 'Parts')], 'Product Type'),
+		'type': fields.selection([('asset','Asset'),('accessory','Accessory'),('part', 'Parts')], 'Request Type'),
 		'date': fields.date('Request Date'),
 		'part_id': fields.many2one('product.product', 'Part', domain="[('product_type','=','part')]", track_visibility='onchange'),
 		#'equipment_id': fields.many2one('asset.asset', 'Equipment', track_visibility='onchange'),
@@ -54,8 +55,9 @@ class registration_request_hcv(osv.osv):
 		'quantity': fields.integer('Quantity'),
 		'department_id': fields.many2one('res.users', 'Department'),	
 		'user_id': fields.many2one('res.users', 'User', track_visibility='onchange'),
-		'state': fields.selection([('draft', 'Draft'), ('submit', 'Waiting Approval'), ('approve', 'Approved'), ('reject', 'Rejected'), ('cancel', 'Cancelled'),('transfer','Transferred')], 'State', track_visibility='onchange'),
+		'state': fields.selection([('draft', 'Draft'), ('submit', 'Waiting Approval'), ('approve', 'Approved'), ('reject', 'Rejected'), ('cancel', 'Cancelled'),('transfer','Transfer Initiated')], 'State', track_visibility='onchange'),
 		'move_id': fields.many2one('stock.move', 'Move'),
+		'answer': fields.text('Answer', track_visibility='onchange'),
 	}
 
 	_defaults = {
@@ -67,6 +69,8 @@ class registration_request_hcv(osv.osv):
 
 	def create(self, cr, uid, vals, context=None):
 		vals['created'] = True
+		name = self.pool.get('ir.sequence').get(cr, uid, 'registration.request') or '/'
+		vals['name'] = name
 		return super(registration_request_hcv, self).create(cr, uid, vals, context)
 
 	def action_confirm(self, cr, uid, ids, context=None):
@@ -82,7 +86,7 @@ class registration_request_hcv(osv.osv):
 		return self.write(cr, uid, ids, {'state': 'cancel'})
 
 	def action_reset(self, cr, uid, ids, context=None):
-		return self.write(cr, uid, ids, {'state': 'draft'})
+		return self.write(cr, uid, ids, {'state': 'draft', 'answer': ''})
 
 	def part_transfer(self, cr, uid, ids, context=None):
 		for rec in self.browse(cr, uid, ids):
@@ -91,11 +95,18 @@ class registration_request_hcv(osv.osv):
 				location_id = location_id[1]
 			else:
 				raise osv.except_osv(('Error!'), ('Source Location not found.\nPlease contact your administrator.'))
+			picking_type_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'picking_type_internal')
+			if picking_type_id:
+				picking_type_id = picking_type_id[1]
+			view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_purchase_extension', 'view_stock_move_form_hcv')
+			view_id = view_ref and view_ref[1] or False
 			ctx = {
+					'default_picking_type_id': picking_type_id,
+					'default_invoice_state': 'none',
 					'default_product_id': rec.part_id.id,
 					'default_product_uom_qty': rec.quantity,
+					'default_product_uos_qty': rec.quantity,
 					'default_name': 'INT:HCV',
-					'default_auto_validate': True,
 					'default_location_id': location_id,
 					'default_state': 'draft',
 					'default_product_uom': rec.part_id.product_tmpl_id.uom_id.id,
@@ -108,6 +119,7 @@ class registration_request_hcv(osv.osv):
 				'res_model': 'stock.move',
 				'view_type': 'form',
 				'view_mode': 'form',
+				'view_id': view_id,
 				'target': 'current',
 				'context': ctx
 			}
@@ -116,6 +128,8 @@ class registration_request_hcv(osv.osv):
 		return True
 
 	def open_move(self, cr, uid, ids, context=None):
+		view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_purchase_extension', 'view_stock_move_form_hcv')
+		view_id = view_ref and view_ref[1] or False
 		for rec in self.browse(cr, uid, ids):
 			return {
 				'name': 'Move',
@@ -123,16 +137,9 @@ class registration_request_hcv(osv.osv):
 				'res_model': 'stock.move',
 				'view_type': 'form',
 				'view_mode': 'form',
+				'view_id': view_id,
 				'res_id': rec.move_id.id,
 				'target': 'current',
 			}
 
-class stock_move(osv.osv):
-	_inherit = "stock.move"
-
-	def create(self, cr, uid, vals, context=None):
-		res = super(stock_move, self).create(cr, uid, vals, context)
-		if context and 'hcv' in context and context['hcv'] is True:
-			self.pool.get('registration.request.hcv').write(cr, uid,[context['register_id']],{'move_id': res, 'state':'transfer'})
-		return res
 
