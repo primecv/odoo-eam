@@ -11,7 +11,7 @@
 						<button name="action_approve" type="object" string="Approve" states="submit" groups="purchase.group_purchase_manager" class="oe_highlight"/>
 						<button name="action_reject" type="object" string="Dismiss" states="submit" groups="purchase.group_purchase_manager" class="oe_highlight"/>
 						<button name="part_transfer" type="object" string="Transfer" attrs="{'invisible':['|',('type','!=','part'),('state','!=','approve')]}"/>
-						<button name="open_po" type="object" string="Create RFQ" attrs="{'invisible':['|',('type','!=','equipment'),('state','!=','approve')]}"/>
+						<button name="open_po" type="object" string="Create RFQ" attrs="{'invisible':['|',('type','not in',('asset','accessory')),('state','!=','approve')]}"/>
 						<button name="open_move" type="object" string="Open Move" attrs="{'invisible': [('move_id','=',False)]}"/>
 						<button name="action_cancel" type="object" string="Cancel" states="draft,submit"/>
 						<button name="action_reset" type="object" string="Reset To Draft" states="cancel"/>
@@ -30,7 +30,8 @@
 						<group col="4">
 							<group col="2">
 								<field name="part_id" attrs="{'required':[('type','=','part')], 'invisible':[('type','!=','part')], 'readonly': [('state','!=','draft')]}" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view', 'default_product_type': 'part'}"/>
-								<field name="equipment_id" attrs="{'required':[('type','=','equipment')], 'invisible':[('type','!=','equipment')], 'readonly': [('state','!=','draft')]}"/>
+								<field name="asset_id" attrs="{'required':[('type','=','asset')], 'invisible':[('type','!=','asset')], 'readonly': [('state','!=','draft')]}"/>
+								<field name="accessory_id" attrs="{'required':[('type','=','accessory')], 'invisible':[('type','!=','accessory')], 'readonly': [('state','!=','draft')]}"/>
 								<field name="quantity" attrs="{'readonly': [('state','!=','draft')]}"/>
 								<field name="department_id" attrs="{'readonly': [('state','!=','draft')]}"/>
 							</group>

@@ -35,17 +35,21 @@ class registration_request_hcv(osv.osv):
 			result[rec.id] = ''
 			if rec.type == 'part': 
 				result[rec.id] = rec.part_id.name
-			elif rec.type == 'equipment':
-				result[rec.id] = rec.equipment_id.name
+			elif rec.type == 'asset':
+				result[rec.id] = rec.asset_id.name
+			elif rec.type == 'accessory':
+				result[rec.id] = rec.accessory_id.name
 		return result
 
 	_columns = {
 		'name': fields.text('Reason', track_visibility='onchange'),
 		'created': fields.boolean('Create'),
-		'type': fields.selection([('part', 'Parts'), ('equipment', 'Equipment')], 'Product Type'),
+		'type': fields.selection([('asset','Asset'),('accessory','Accessory'),('part', 'Parts')], 'Product Type'),
 		'date': fields.date('Request Date'),
 		'part_id': fields.many2one('product.product', 'Part', domain="[('product_type','=','part')]", track_visibility='onchange'),
-		'equipment_id': fields.many2one('asset.asset', 'Equipment', track_visibility='onchange'),
+		#'equipment_id': fields.many2one('asset.asset', 'Equipment', track_visibility='onchange'),
+		'accessory_id': fields.many2one('asset.asset', 'Accessory', domain="[('is_accessory','=',True)]"),
+		'asset_id': fields.many2one('asset.asset', 'Asset', domain="[('is_accessory','=',False)]"),
 		'product': fields.function(get_product_desc, type="char", string="Product Description", store=True),
 		'quantity': fields.integer('Quantity'),
 		'department_id': fields.many2one('res.users', 'Department'),	
