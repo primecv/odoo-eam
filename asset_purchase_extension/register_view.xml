@@ -36,8 +36,8 @@
 							</group>
 							<group col="2">
 								<field name="date" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
-								<field name="user_id" attrs="{'readonly': [('state','!=','draft')]}"/>
-								<field name="department_id" attrs="{'readonly': [('state','!=','draft')]}"/>
+								<field name="user_id" readonly="1"/>
+								<field name="department_id" readonly="1"/>
 								<field name="answer" attrs="{'invisible':[('state','=','draft')], 'required':[('state','=','submit')], 'readonly': [('state','!=','submit')]}" colspan="2"/>
 							</group>
 						</group>

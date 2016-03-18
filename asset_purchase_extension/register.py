@@ -41,6 +41,14 @@ class registration_request_hcv(osv.osv):
 				result[rec.id] = rec.accessory_id.name
 		return result
 
+	def get_department(self, cr, uid, context=None):
+		emp = self.pool.get('hr.employee').search(cr, uid, [('user_id','=',uid)])
+		if emp:
+			emp = emp[0]
+			for employee in self.pool.get('hr.employee').browse(cr, uid, [emp]):
+				return employee.department_id and employee.department_id.id or False
+		return False
+
 	_columns = {
 		'name': fields.char('Name'),
 		'reason': fields.text('Reason', track_visibility='onchange'),
@@ -53,7 +61,7 @@ class registration_request_hcv(osv.osv):
 		'asset_id': fields.many2one('asset.asset', 'Asset', domain="[('is_accessory','=',False)]"),
 		'product': fields.function(get_product_desc, type="char", string="Product Description", store=True),
 		'quantity': fields.integer('Quantity'),
-		'department_id': fields.many2one('res.users', 'Department'),	
+		'department_id': fields.many2one('hr.department', 'Department'),
 		'user_id': fields.many2one('res.users', 'User', track_visibility='onchange'),
 		'state': fields.selection([('draft', 'Draft'), ('submit', 'Waiting Approval'), ('approve', 'Approved'), ('reject', 'Rejected'), ('cancel', 'Cancelled'),('transfer','Transfer Initiated')], 'State', track_visibility='onchange'),
 		'move_id': fields.many2one('stock.move', 'Move'),
@@ -62,6 +70,7 @@ class registration_request_hcv(osv.osv):
 
 	_defaults = {
 		'user_id': lambda obj, cr, uid, context: uid,
+		'department_id': get_department,
 		'date': fields.datetime.now,
 		'state': 'draft',
 		'quantity': 1,
