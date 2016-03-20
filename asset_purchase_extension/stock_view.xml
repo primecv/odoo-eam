@@ -28,7 +28,7 @@
                                     <button name="%(stock.move_scrap)d"
                                             string="Scrap" type="action"
                                             icon="terp-gtk-jump-to-ltr" context="{'scrap': True}"
-                                            states="draft,waiting,confirmed,assigned" colspan="1"/>
+                                            states="draft,waiting,confirmed,assigned" colspan="1" invisible="1"/>
                                 </div>
                                 <field name="name"/>
                                 <label for="product_uos_qty" groups="product.group_uos"/>
@@ -49,18 +49,18 @@
                             </group>
                         </group>
                         <group name="origin_grp" string="Origin">
-                            <field name="origin"/>
+                            <field name="origin" readonly="1"/>
                             <field name="location_id" groups="stock.group_locations"/>
-                            <field name="picking_id" domain="[('picking_type_id','=',picking_type_id)]"/>
+                            <field name="picking_id" domain="[('picking_type_id','=',picking_type_id)]" readonly="1"/>
                             <field name="create_date" groups="base.group_no_one"/>
                             <field name="procure_method" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="stock.group_adv_location"/>
                             <field name="group_id" invisible="1"/>
                         </group>
                         <group name="destination_grp" string="Destination" groups="stock.group_locations">
                             <field name="location_dest_id" />
-                            <field name="partner_id" context="{'contact_display':'partner'}" />
+                            <field name="partner_id" context="{'contact_display':'partner'}" invisible="1"/>
                         </group>
-                        <group name="quants_grp" string="Reserved Quants" colspan="4" groups="base.group_no_one">
+                        <group name="quants_grp" string="Reserved Quants" colspan="4" groups="base.group_no_one" invisible="1">
                             <field name="reserved_quant_ids"/>
                         </group>
                     </group>
