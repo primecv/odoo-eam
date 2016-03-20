@@ -26,6 +26,18 @@ import openerp.addons.decimal_precision as dp
 class stock_move(osv.osv):
 	_inherit = "stock.move"
 
+	_columns = {
+        'product_uom_qty': fields.integer('Quantity', digits_compute=dp.get_precision('Product Unit of Measure'),
+            required=True, states={'done': [('readonly', True)]},
+            help="This is the quantity of products from an inventory "
+                "point of view. For moves in the state 'done', this is the "
+                "quantity of products that were actually moved. For other "
+                "moves, this is the quantity of product that is planned to "
+                "be moved. Lowering this quantity does not generate a "
+                "backorder. Changing this quantity on assigned moves affects "
+                "the product reservation, and should be done with care."
+        ),
+	}
 	def create(self, cr, uid, vals, context=None):
 		res = super(stock_move, self).create(cr, uid, vals, context)
 		if context and 'hcv' in context and context['hcv'] is True:
