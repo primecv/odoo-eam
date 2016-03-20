@@ -128,6 +128,7 @@ class registration_request_hcv(osv.osv):
 					'default_location_id': location_id,
 					'default_state': 'draft',
 					'default_product_uom': rec.part_id.product_tmpl_id.uom_id.id,
+					'default_origin': rec.name,
 					'hcv': True,
 					'register_id': rec.id,
 					}
