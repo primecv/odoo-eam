@@ -65,3 +65,26 @@ class stock_move(osv.osv):
 		if loc_id:
 			result['location_id'] = loc_id
 		return {'value': result}
+
+	def get_rr_ref(self, cr, uid, ids):
+		rr_id = False
+		for rec in self.browse(cr, uid, ids):
+			origin = rec.origin
+			if origin:
+				rr_id = self.pool.get('registration.request.hcv').search(cr, uid, [('name','=',origin)])
+		return rr_id
+
+	def action_done(self, cr, uid, ids, context=None):
+		res = super(stock_move, self).action_done(cr, uid, ids, context)
+		rr_id = self.get_rr_ref(cr, uid, ids)
+		if rr_id:
+			self.pool.get('registration.request.hcv').write(cr, uid, rr_id, {'state': 'transfer_done'})
+		return res
+
+	def action_cancel(self, cr, uid, ids, context=None):
+		res = super(stock_move, self).action_cancel(cr, uid, ids, context)
+		rr_id = self.get_rr_ref(cr, uid, ids)
+		if rr_id:
+			self.pool.get('registration.request.hcv').write(cr, uid, rr_id, {'state': 'transfer_cancel'})
+		return res
+

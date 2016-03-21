@@ -64,7 +64,7 @@ class registration_request_hcv(osv.osv):
 		'quantity': fields.integer('Quantity'),
 		'department_id': fields.many2one('hr.department', 'Department'),
 		'user_id': fields.many2one('res.users', 'User', track_visibility='onchange'),
-		'state': fields.selection([('draft', 'Draft'), ('submit', 'Waiting Approval'), ('approve', 'Approved'), ('reject', 'Rejected'), ('cancel', 'Cancelled'),('transfer','Transfer Initiated')], 'State', track_visibility='onchange'),
+		'state': fields.selection([('draft', 'Draft'), ('submit', 'Waiting Approval'), ('approve', 'Approved'), ('reject', 'Rejected'), ('cancel', 'Cancelled'),('transfer','Transfer Initiated'),('transfer_done','Transferred'),('transfer_cancel', 'Transfer Cancelled')], 'State', track_visibility='onchange'),
 		'move_id': fields.many2one('stock.move', 'Move'),
 		'answer': fields.text('Answer', track_visibility='onchange'),
 	}
