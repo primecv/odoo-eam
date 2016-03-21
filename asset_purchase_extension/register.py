@@ -109,6 +109,9 @@ class registration_request_hcv(osv.osv):
 
 	def part_transfer(self, cr, uid, ids, context=None):
 		for rec in self.browse(cr, uid, ids):
+			part_id = rec.part_id.id
+			if rec.quantity > rec.part_id.qty_available:
+				raise osv.except_osv(('Alert!'), ('There is no sufficient quantity available in stock.'))
 			location_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'stock_location_stock')
 			if location_id:
 				location_id = location_id[1]
