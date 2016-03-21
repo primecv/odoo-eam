@@ -44,3 +44,24 @@ class stock_move(osv.osv):
 			self.pool.get('registration.request.hcv').write(cr, uid,[context['register_id']],{'move_id': res, 'state':'transfer'})
 		return res
 
+	def onchange_product_id(self, cr, uid, ids, prod_id=False, loc_id=False, loc_dest_id=False, partner_id=False):
+		if not prod_id:
+			return {}
+		user = self.pool.get('res.users').browse(cr, uid, uid)
+		lang = user and user.lang or False
+		if partner_id:
+			addr_rec = self.pool.get('res.partner').browse(cr, uid, partner_id)
+			if addr_rec:
+				lang = addr_rec and addr_rec.lang or False
+		ctx = {'lang': lang}
+
+		product = self.pool.get('product.product').browse(cr, uid, [prod_id], context=ctx)[0]
+		uos_id = product.uos_id and product.uos_id.id or False
+		result = {
+            'name': product.partner_ref,
+            'product_uom': product.uom_id.id,
+            'product_uos': uos_id,
+        }
+		if loc_id:
+			result['location_id'] = loc_id
+		return {'value': result}

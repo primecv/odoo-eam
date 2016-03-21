@@ -126,6 +126,7 @@ class registration_request_hcv(osv.osv):
 					'default_product_uos_qty': rec.quantity,
 					'default_name': 'INT:HCV',
 					'default_location_id': location_id,
+					'default_location_dest_id': False,
 					'default_state': 'draft',
 					'default_product_uom': rec.part_id.product_tmpl_id.uom_id.id,
 					'default_origin': rec.name,
