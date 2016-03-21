@@ -12,6 +12,7 @@
 						<button name="action_reject" type="object" string="Dismiss" states="submit" groups="purchase.group_purchase_manager" class="oe_highlight"/>
 						<button name="part_transfer" type="object" string="Transfer" attrs="{'invisible':['|',('type','!=','part'),('state','!=','approve')]}"/>
 						<button name="open_po" type="object" string="Create RFQ" attrs="{'invisible':['|',('type','not in',('asset','accessory')),('state','!=','approve')]}"/>
+						<button name="open_po" type="object" string="Open RFQ" attrs="{'invisible':['|',('type','not in',('asset','accessory')),('state','!=','done')]}"/>
 						<button name="open_move" type="object" string="Open Move" attrs="{'invisible': [('move_id','=',False)]}"/>
 						<button name="action_cancel" type="object" string="Cancel" states="draft,submit"/>
 						<button name="action_reset" type="object" string="Reset To Draft" states="cancel"/>

@@ -64,9 +64,10 @@ class registration_request_hcv(osv.osv):
 		'quantity': fields.integer('Quantity'),
 		'department_id': fields.many2one('hr.department', 'Department'),
 		'user_id': fields.many2one('res.users', 'User', track_visibility='onchange'),
-		'state': fields.selection([('draft', 'Draft'), ('submit', 'Waiting Approval'), ('approve', 'Approved'), ('reject', 'Rejected'), ('cancel', 'Cancelled'),('transfer','Transfer Initiated'),('transfer_done','Transferred'),('transfer_cancel', 'Transfer Cancelled')], 'State', track_visibility='onchange'),
+		'state': fields.selection([('draft', 'Draft'), ('submit', 'Waiting Approval'), ('approve', 'Approved'), ('reject', 'Rejected'), ('cancel', 'Cancelled'),('transfer','Transfer Initiated'),('transfer_done','Transferred'),('transfer_cancel', 'Transfer Cancelled'),('done','Done')], 'State', track_visibility='onchange'),
 		'move_id': fields.many2one('stock.move', 'Move'),
 		'answer': fields.text('Answer', track_visibility='onchange'),
+		'rfq_id': fields.many2one('rfq.hcv', 'RFQ'),
 	}
 
 	_defaults = {
@@ -89,6 +90,7 @@ class registration_request_hcv(osv.osv):
 		context = dict(context or {})
 		default.update(move_id=False)
 		default.update(answer='')
+		default.update(rfq_id=False)
 		res = super(registration_request_hcv, self).copy(cr, uid, id, default, context)
 		return res
 
@@ -149,7 +151,26 @@ class registration_request_hcv(osv.osv):
 			}
 
 	def open_po(self, cr, uid, ids, context=None):
-		return True
+		for rec in self.browse(cr, uid, ids):
+			if not rec.rfq_id:
+				vals = {
+					'type': rec.type,
+					'asset_id': rec.asset_id and rec.asset_id.id or False,
+					'accessory_id': rec.accessory_id and rec.accessory_id.id or False,
+					'product_qty': rec.quantity,
+				}
+				rfq_id = self.pool.get('rfq.hcv').create(cr, uid, vals, context=context)
+				self.write(cr, uid, ids, {'rfq_id': rfq_id, 'state':'done'})
+			else:
+				rfq_id = rec.rfq_id.id
+		return {
+			'type': 'ir.actions.act_window',
+			'res_model': 'rfq.hcv',
+			'res_id': rfq_id,
+			'view_mode': 'form',
+			'view_type': 'form',
+			'target': 'current'
+		}
 
 	def open_move(self, cr, uid, ids, context=None):
 		view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_purchase_extension', 'view_stock_move_form_hcv')
