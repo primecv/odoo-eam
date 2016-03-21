@@ -27,6 +27,7 @@ class registration_request_hcv(osv.osv):
 	_name = "registration.request.hcv"
 	_inherit = ['mail.thread', 'ir.needaction_mixin']
 	_description = "Parts/Equipment Registration"
+	_order = "id desc"
 
 	def get_product_desc(self, cr, uid, ids, field_name, arg, context=None):
 		desc = ''
