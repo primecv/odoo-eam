@@ -26,6 +26,11 @@ import openerp.addons.decimal_precision as dp
 class asset_asset(osv.osv):
 	_inherit = "asset.asset"
 
+	_columns = {
+		'hours_of_operation': fields.float('Hours of Operation'),
+		'planned_amount': fields.float('Amounts of Planned Tests'),
+	}
+
 	def create(self, cr, uid, vals, context=None):
 		res = super(asset_asset, self).create(cr, uid, vals, context)
 		if context and 'po_asset' in context and 'rfq_id' in context:

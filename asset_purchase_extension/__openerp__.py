@@ -35,6 +35,7 @@
         'rfq_sequence.xml',
         'register_view.xml',
         'stock_view.xml',
+        'asset_view.xml',
         'views/report_purchasequotation.xml',
     ],
     'installable': True,

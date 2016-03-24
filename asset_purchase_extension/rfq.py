@@ -280,11 +280,19 @@ class rfq_hcv(osv.osv):
 					self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'po_id': po_id})
 		return self.write(cr, uid, ids, {'update_check': True})
 
+	def get_depreciation_factor(self, cr, uid, ids, context=None):
+		for rec in self.browse(cr, uid, ids):
+			for line in rec.supplier_line:
+				if line.state == 'done':
+					return (line.hours_of_operation, line.planned_amount)
+		return (None, None)
+
 	def open_asset(self, cr, uid, ids, context=None):
 		for rec in self.browse(cr, uid, ids):
 			view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_stock', 'assets_form_view_stock')
 			view_id = view_ref and view_ref[1] or False,
 			if rec.create_asset:
+				hours_of_operation, planned_amount = self.get_depreciation_factor(cr, uid, ids)
 				return {
 					'type': 'ir.actions.act_window',
 					'res_model': 'asset.asset',
@@ -292,7 +300,12 @@ class rfq_hcv(osv.osv):
 					'view_mode': 'form',
 					'view_id': view_id or False,
 					'res_id': False,
-					'context': {'po_asset': True, 'rfq_id': rec.id, 'default_is_accessory':False},
+					'context': {'po_asset': True, 
+								'rfq_id': rec.id, 
+								'default_is_accessory':False,
+								'default_hours_of_operation': hours_of_operation,
+								'default_planned_amount': planned_amount
+								},
 					'target': 'current'
 				}				
 			else:
@@ -311,6 +324,7 @@ class rfq_hcv(osv.osv):
 			view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_extension', 'asset_accessories_form_view')
 			view_id = view_ref and view_ref[1] or False,
 			if rec.create_accessory:
+				hours_of_operation, planned_amount = self.get_depreciation_factor(cr, uid, ids)
 				return {
 					'type': 'ir.actions.act_window',
 					'res_model': 'asset.asset',
@@ -318,7 +332,12 @@ class rfq_hcv(osv.osv):
 					'view_mode': 'form',
 					'view_id': view_id or False,
 					'res_id': False,
-					'context': {'po_asset': True, 'rfq_id': rec.id, 'default_is_accessory': True},
+					'context': {'po_asset': True, 
+								'rfq_id': rec.id, 
+								'default_is_accessory': True, 
+								'default_hours_of_operation': hours_of_operation,
+								'default_planned_amount': planned_amount
+								},
 					'target': 'current'
 				}				
 			else:
