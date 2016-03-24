@@ -41,8 +41,11 @@
 				<group string="Analytic Information" position="before">
                     <group string="Depreciation Method">
 						<field name="method" on_change="onchange_method(method, method_progress_factor)"/>
-                        <field name="method_progress_factor" attrs="{'invisible':[('method','=','linear')], 'required':[('method','=','degressive')]}"/>
+                        <field name="method_progress_factor" invisible="1"/>
 						<field name="method_linear_factor" on_change="onchange_method_factor(method_linear_factor)" attrs="{'invisible':[('method','=','degressive')], 'required':[('method','=','linear')]}"/>
+                        <field name="degressive_method_type" attrs="{'invisible':[('method','=','linear')], 'required':[('method','=','degressive')]}"/>
+						<field name="operating_hours" widget="float_time" attrs="{'invisible':[('degressive_method_type','!=','hours')], 'required':[('method','=','degressive'),('degressive_method_type','=','hours')]}"/>
+						<field name="qty_produced" attrs="{'invisible':[('degressive_method_type','!=','units')], 'required':[('method','=','degressive'),('degressive_method_type','=','units')]}"/>
                         <field name="prorata"/>
                         <field name="open_asset"/>
                     </group>

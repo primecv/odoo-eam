@@ -85,6 +85,9 @@ class account_asset_category(osv.osv):
 		'method_linear_factor': fields.float('Linear Factor', digits=(10,4)),
 		'method_number_readonly': fields.related('method_number', type='integer', string='Number of Depriciations', store=True, readonly=True),
 		'method_number': fields.integer('Number of Depreciations', help="The number of depreciations needed to depreciate your asset"),
+		'degressive_method_type': fields.selection([('hours','No of Hours'), ('units','No of Units')], 'Degressive Factor'),
+		'operating_hours': fields.float('Hours of Operation'),
+		'qty_produced': fields.integer('Qty of Units Produced'),
 	}
 
 	def onchange_method(self, cr, uid, ids, method, factor, context=None):
