@@ -25,5 +25,17 @@
 			</field>
 		</record>	
 
+        <record id="asset_accessories_form_view_depreciation" model="ir.ui.view">
+            <field name="name">asset.asset.accessory.depreciation.form</field>
+            <field name="model">asset.asset</field>
+			<field name="inherit_id" ref="asset_extension.asset_accessories_form_view"/>
+            <field name="arch" type="xml">
+				<field name="mark" position="after">
+					<field name="hours_of_operation" widget="float_time"/>
+					<field name="planned_amount"/>
+				</field>
+			</field>
+		</record>
+
 	</data>
 </openerp>
