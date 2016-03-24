@@ -65,6 +65,28 @@
 			</field>
 		</record>
 
+		<record id="registration_request_hcv_search" model="ir.ui.view">
+			<field name="name">registration.request.hcv.search</field>
+			<field name="model">registration.request.hcv</field>
+			<field name="arch" type="xml">
+				<search string="RFQ Registration">
+					<field name="name"/>
+					<field name="type"/>
+					<field name="date"/>
+					<field name="department_id"/>
+					<field name="user_id"/>
+					<filter name="parts" string="Parts" domain="[('type','=','part')]"/>
+					<filter name="assets" string="Assets" domain="[('type','=','asset')]"/>
+					<filter name="accessory" string="Accessories" domain="[('type','=','accessory')]"/>
+					<group string="Group By" expand="0">
+						<filter string="Departments" context="{'group_by': 'department_id'}"/>
+						<filter string="Users" context="{'group_by': 'user_id'}"/>
+						<filter string="Type" context="{'group_by': 'type'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
 		<record id="registration_request_hcv_action" model="ir.actions.act_window">
 			<field name="name">Registration Request</field>
 			<field name="res_model">registration.request.hcv</field>
