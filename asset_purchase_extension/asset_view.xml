@@ -13,5 +13,17 @@
 			</field>
 		</record>	
 
+        <record id="assets_form_view_hcv_depreciation" model="ir.ui.view">
+            <field name="name">asset.asset.form.hcv.depreciation</field>
+            <field name="model">asset.asset</field>	
+			<field name="inherit_id" ref="asset_extension.assets_form_view_hcv_stock"/>
+            <field name="arch" type="xml">
+				<field name="serial" position="after">
+					<field name="hours_of_operation" widget="float_time"/>
+					<field name="planned_amount"/>
+				</field>
+			</field>
+		</record>	
+
 	</data>
 </openerp>
