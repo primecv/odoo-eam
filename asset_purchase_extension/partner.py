@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2015 Prime Consulting, Cape Verde (<http://prime.cv>).
+#    Copyright (C) 2015 Prime Consulting (<http://prime.cv>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,29 +18,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from datetime import datetime
+from datetime import date as dt
+from openerp.osv import fields, osv
+import openerp.addons.decimal_precision as dp
+
+class res_partner(osv.osv):
+	_inherit = "res.partner"
+
+	_columns = {
+		'purchase_line_ids': fields.one2many('product.supplierinfo.hcv', 'partner_id', 'Products Supplied'),
+	}
 
 
-{
-    'name': 'Assets Purchase Extension',
-    'version': '1.0',
-    'category': 'Tools',
-    'summary': 'Asset Management',
-    'author': 'Prime Consulting, Cape Verde',
-    'website': 'prime.cv',
-    'category': 'Enterprise Asset Management',
-    'depends': ['asset_purchase', 'asset_extension', 'stock'],
-    'data': [
-        'purchase_view.xml',
-        'rfq_view.xml',
-        'rfq_sequence.xml',
-        'register_view.xml',
-        'stock_view.xml',
-        'asset_view.xml',
-        'partner_view.xml',
-        'views/report_purchasequotation.xml',
-    ],
-    'installable': True,
-    'auto_install': False,
-    'application': False,
-}
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+class product_supplierinfo_hcv(osv.osv):
+	_name = "product.supplierinfo.hcv"
+	_description = "Products Supplied"
+	_columns = {
+		'partner_id': fields.many2one('res.partner', 'Supplier'),
+		'product_id': fields.many2one('product.product', 'Product'),
+		'price': fields.float('Price'),
+		'delivery_date': fields.date('Delivery Date'),
+		'delivery_time': fields.integer('Delivery Time(in Days)'),
+	}
+
