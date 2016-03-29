@@ -1,0 +1,43 @@
+<openerp>
+	<data>
+
+		<!-- Hide Journal Items button on Partner form -->
+        <record model="ir.ui.view" id="partner_view_buttons_hcv">
+            <field name="name">partner.view.buttons.hcv</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.partner_view_buttons" />
+            <field name="arch" type="xml">
+				<button name="%(account.action_account_moves_all_tree)d" position="replace">
+                    <button type="action" class="oe_stat_button" name="%(account.action_account_moves_all_tree)d" groups="account.group_account_user" icon="fa-list" invisible="1">
+                        <field string="Journal Items" name="journal_item_count" widget="statinfo" invisible="1"/>
+                    </button>
+				</button>
+			</field>
+		</record>
+
+		<!-- Hide Supplier Inv. Button on Partner form -->
+        <record id="res_partner_view_purchase_account_buttons_hcv" model="ir.ui.view">
+            <field name="name">res.partner.view.purchase.account.buttons.hcv</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="purchase.res_partner_view_purchase_account_buttons"/>
+            <field name="arch" type="xml">
+				<button name="%(purchase.act_res_partner_2_supplier_invoices)d" position="replace">
+		            <button class="oe_inline oe_stat_button" name="%(purchase.act_res_partner_2_supplier_invoices)d" type="action"
+		                attrs="{'invisible': [('supplier', '=', False)]}" icon="fa-pencil-square-o" help="Supplier Invoices" invisible="1">
+		                <field string="Supplier Inv." name="supplier_invoice_count" widget="statinfo" invisible="1"/>
+		            </button>
+				</button>
+			</field>
+		</record>
+
+		<!-- Set Defalult type as Contract -->
+        <record id="account.action_open_partner_analytic_accounts" model="ir.actions.act_window">
+            <field name="context">{'search_default_partner_id': [active_id], 'default_partner_id': active_id, 'default_type': 'contract', 'default_purchase': 1, 'search_default_purchase': 1, 'default_manager_id': 1}</field>
+            <field name="name">Contracts/Analytic Accounts</field>
+            <field name="res_model">account.analytic.account</field>
+            <field name="view_id" ref="account.view_account_analytic_account_tree"/>
+            <field name="search_view_id" ref="account.view_account_analytic_account_search"/>
+        </record>
+
+	</data>
+</openerp>
