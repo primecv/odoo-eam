@@ -230,7 +230,7 @@
 						    </field>
 						</page>
 
-						<page string="Department" name="department">
+						<page string="Department" name="department" invisible="1">
 							<group>
 								<group>
 									<field name="department_ids" required="1" />
@@ -295,7 +295,7 @@
 			<field name="inherit_id" ref="account.view_partner_property_form"/>
 			<field name="arch" type="xml">
 				<page string="Accounting" name="accounting" position="after">
-					<page string="Department" name="department">
+					<page string="Department" name="department" invisible="1">
 						<group>
 							<group>
 								<field name="is_hospital"/>
