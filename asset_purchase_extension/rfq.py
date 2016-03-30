@@ -56,6 +56,7 @@ class rfq_hcv(osv.osv):
         'location_id': fields.many2one('stock.location', 'Destination', domain=[('usage','<>','view'),('usage','<>','asset')]),
 		'update_check': fields.boolean('Document Update'),
 		'po_id': fields.many2one('purchase.order', 'Purchase Order'),
+		'purchase_date': fields.date('Purchase Confirmed Date', track_visibility='onchange'),
 		'shipped': fields.related('po_id', 'shipped', type='boolean', string='Shipped', store=False),
         'invoice_method': fields.selection([('manual','Based on Purchase Order lines'),('order','Based on generated draft invoice'),('picking','Based on incoming shipments')], 'Invoicing Control', readonly=True),
 		'payment_term_id': fields.many2one('account.payment.term', 'Payment Term'),
@@ -470,6 +471,16 @@ class rfq_hcv_print(osv.osv):
 							if line.supplier_id.id == supplier_id:
 								po_id = line.po_id.id
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
+								#create Product entry in Products supplied tab of Supplier:
+								product_supplier_id = self.pool.get('product.supplierinfo.hcv').search(cr, uid, 
+																				[('partner_id','=',line.supplier_id.id),
+																			  	 ('product_id','=',line.rfq_id.product_id.id)])
+								if not product_supplier_id:
+									supplier_product_data = {'product_id':line.rfq_id.product_id.id,
+															 'partner_id':line.supplier_id.id,
+															 'price':line.price_unit,
+															 }
+									self.pool.get('product.supplierinfo.hcv').create(cr, uid, supplier_product_data)
 							elif line.po_id:
 								self.pool.get('purchase.order').action_cancel(cr, uid, [line.po_id.id])
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
@@ -496,6 +507,6 @@ class rfq_hcv_print(osv.osv):
 					name = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'
 					self.pool.get('purchase.order').write(cr, uid, [po_id], {'name': name})
 					self.pool.get('purchase.order').signal_workflow(cr, uid, [po_id], 'purchase_confirm')
-					self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'po_id': po_id})
+					self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'po_id': po_id, 'purchase_date':dt.today()})
 			return self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'state': 'approved'})
 
