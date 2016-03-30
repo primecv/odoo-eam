@@ -221,6 +221,7 @@
 				<field name="name" position="after">
 					<field name="barcode_no"/>
 					<field name="asset_number"/>
+					<field name="state_operation"/>
 					<field name="equipment_type_id"/>
 					<field name="category_id"/>
 					<field name="warehouse_state_id"/>
