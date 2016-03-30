@@ -44,6 +44,31 @@ class stock_move(osv.osv):
 			self.pool.get('registration.request.hcv').write(cr, uid,[context['register_id']],{'move_id': res, 'state':'transfer'})
 		return res
 
+	def write(self, cr, uid, ids, vals, context=None):
+		""" To update Delivery Date and Delivery Time in Products Supplied Table 
+		"""
+		res = super(stock_move, self).write(cr, uid, ids, vals, context=context)
+		if vals.get('state') in ['done']:
+			for move in self.browse(cr, uid, ids, context=context):
+				if move.purchase_line_id and move.purchase_line_id.order_id:
+					po_id = move.purchase_line_id.order_id.id
+					supplier_id = move.purchase_line_id.order_id.partner_id.id
+					product_id = move.product_id and move.product_id.id or False
+					if product_id and supplier_id:
+						product_supplier_id = self.pool.get('product.supplierinfo.hcv').search(cr, uid, [
+											('product_id','=',product_id), ('partner_id','=',supplier_id)])
+						if product_supplier_id:
+							delivery_time = None
+							delivery_date = dt.today()
+							order_date = move.purchase_line_id.order_id.rfq_hcv_id and \
+								move.purchase_line_id.order_id.rfq_hcv_id.purchase_date
+							if delivery_date and order_date:
+								order_date = datetime.strptime(order_date, "%Y-%m-%d").date()
+								delivery_time = str(abs((delivery_date - order_date).days))
+							self.pool.get('product.supplierinfo.hcv').write(cr, uid, product_supplier_id, 
+											{'delivery_date':delivery_date, 'delivery_time':delivery_time})
+		return res
+
 	def onchange_product_id(self, cr, uid, ids, prod_id=False, loc_id=False, loc_dest_id=False, partner_id=False):
 		if not prod_id:
 			return {}
