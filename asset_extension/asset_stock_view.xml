@@ -223,6 +223,7 @@
 					<field name="asset_number"/>
 					<field name="equipment_type_id"/>
 					<field name="category_id"/>
+					<field name="warehouse_state_id"/>
 				</field>
 				<field name="property_stock_asset" position="after">
 					<field name="asset_location_parent_search"/>
