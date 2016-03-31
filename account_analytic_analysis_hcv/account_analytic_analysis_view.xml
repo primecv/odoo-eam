@@ -160,6 +160,21 @@
             <field name="act_window_id" ref="action_account_analytic_overdue_hcv_all"/>
         </record>
 
+
+        <record model="ir.actions.act_window.view" id="action_account_analytic_contract_tree_view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="account.view_account_analytic_account_tree"/>
+            <field name="act_window_id" ref="action_account_analytic_overdue_hcv_all2"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_account_analytic_contract_form_view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_analytic_account_form_hcv"/>
+            <field name="act_window_id" ref="action_account_analytic_overdue_hcv_all2"/>
+        </record>
+
         <menuitem action="action_account_analytic_overdue_hcv_all" id="menu_purchase_contract_action" parent="purchase.menu_procurement_management" sequence="7"/>
 
 		<!-- Link new contract form to Contracts link in Supplier -->
