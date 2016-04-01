@@ -103,13 +103,34 @@ class account_asset_category(osv.osv):
 			#return {'value': {'method_linear_factor': factor}}
 		return {}
 
-	def onchange_method_number(self, cr, uid, ids, number, context=None):
+	def onchange_method_number(self, cr, uid, ids, method, number, period, context=None):
 		vals= {}
+		period = float(period)
+		if method == 'degressive':
+			if number:
+				vals['method_progress_factor'] = period / number
 		if number:
 			vals['method_linear_factor'] = 1.0/number
-			print "######",vals
 			return {'value': vals}
 		return vals
+
+	def onchange_degressive_method_type(self, cr, uid, ids, degressive_method_type, context=None):
+		vals = {}
+		if degressive_method_type:
+			vals['qty_produced'], vals['operating_hours'], vals['method_number'] = 0, 0, 0
+		return {'value': vals}
+
+	def onchange_units(self, cr, uid, ids, units, context=None):
+		vals = {}
+		if units:
+			vals['method_number'] = units
+		return {'value': vals}
+
+	def onchange_hours(self, cr, uid, ids, hours, context=None):
+		vals = {}
+		if hours:
+			vals['method_number'] = int(hours)
+		return {'value': vals}
 
 class account_asset_depreciation_line(osv.osv):
 	_inherit = 'account.asset.depreciation.line'
