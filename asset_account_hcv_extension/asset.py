@@ -68,6 +68,9 @@ class account_asset(osv.osv):
 	_columns = {
 		'asset_location_id': fields.related('asset_id', 'property_stock_asset', relation='stock.location', type='many2one', string='Asset Location', store=True, readonly=True),
 		'barcode_no': fields.related('asset_id', 'barcode_no', type='char', string='Barcode No', store=True, readonly=True),
+		'capacity_type': fields.selection([('hours','No of Hours'), ('units', 'No of Units')], 'Installed Capacity'),
+		'total_hours': fields.float('No of Hours'),
+		'total_units': fields.integer('No of Units'),
 	}
 
 	def onchange_asset(self, cr, uid, ids, asset, context=None):
@@ -77,6 +80,64 @@ class account_asset(osv.osv):
 							'asset_location_id': asset.property_stock_asset and asset.property_stock_asset.id or False
 						}
 				}
+
+	def compute_depreciation_board(self, cr, uid, ids, context=None):
+		depreciation_line_obj = self.pool.get('account.asset.depreciation.line')
+		currency_obj = self.pool.get('res.currency')
+		for asset in self.browse(cr, uid, ids, context=context):
+			if asset.method == 'degressive':
+				capacity_type = asset.capacity_type
+				total_capacity = 0.0
+				if capacity_type == 'hours':
+					total_capacity = asset.total_hours
+				elif capacity_type == 'units':	
+					total_capacity = asset.total_units
+
+				#check if depreciation line capacity exceeds total installed capacity :
+				capacity = 0.0
+				for line in asset.depreciation_line_ids:
+					if capacity_type == 'hours':
+						capacity = capacity + line.hours
+					elif capacity_type == 'units':
+						capacity = capacity + line.units
+				if capacity > total_capacity:
+					raise osv.except_osv(('Validation Error!'),('Depreciation Units cannot exceed Installed Capacity.'))
+
+				#to compute depreciation amount per depreciation line :
+				du = 0.0
+				if total_capacity:
+					du = asset.purchase_value / total_capacity
+				capacity = 0.0
+				total_depreciation = 0.0
+				for line2 in asset.depreciation_line_ids:
+					if capacity_type == 'hours':
+						capacity = line2.hours
+					elif capacity_type == 'units':
+						capacity = line2.units
+					current_depreciation = capacity * du
+					depreciation_line_obj.write(cr, uid, [line2.id], {
+																		'amount': current_depreciation, 
+																		'depreciated_value': total_depreciation
+																	})
+					total_depreciation = total_depreciation + current_depreciation
+			else:
+				return super(account_asset, self).compute_depreciation_board(cr, uid, ids, context)
+
+class account_asset_depreciation_line(osv.osv):
+	_inherit = "account.asset.depreciation.line"
+
+	_columns = {
+		'units': fields.integer('No of Units'),
+		'hours': fields.float('No of Hours'),
+		'capacity_type': fields.selection([('hours','No of Hours'), ('units', 'No of Units')], 'Installed Capacity'),
+	}
+
+	def onchange_capacity(self, cr, uid, ids, capacity_type, name, context=None):
+		vals = {}
+		if capacity_type:
+			vals['capacity_type'] = capacity_type
+			vals['name'] = str(name)
+		return {'value': vals}
 
 class account_asset_category(osv.osv):
 	_inherit = "account.asset.category"
