@@ -28,7 +28,7 @@
     'author': 'Prime Consulting, Cape Verde',
     'website': 'prime.cv',
     'category': 'Enterprise Asset Management',
-    'depends': ['asset_extension', 'asset_account'],
+    'depends': ['asset_extension', 'asset_account', 'account_asset'],
     'data': [
         'asset_view.xml',
     ],
