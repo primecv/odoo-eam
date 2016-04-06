@@ -109,7 +109,7 @@
 						<field name="method" on_change="onchange_method(method, method_progress_factor)"/>
                         <field name="method_progress_factor" invisible="1"/>
 						<field name="method_linear_factor" on_change="onchange_method_factor(method_linear_factor)" attrs="{'invisible':[('method','=','degressive')], 'required':[('method','=','linear')]}"/>
-                        <field name="degressive_method_type" attrs="{'invisible':[('method','=','linear')], 'required':[('method','=','degressive')]}" on_change="onchange_degressive_method_type(degressive_method_type)" invisible="1"/>
+                        <field name="degressive_method_type" attrs="{'invisible':[('method','=','linear')]}" on_change="onchange_degressive_method_type(degressive_method_type)" invisible="1"/>
 						<field name="operating_hours" widget="float_time" attrs="{'invisible':['|',('method','!=','degressive'),('degressive_method_type','!=','hours')], 'required':[('method','=','degressive'),('degressive_method_type','=','hours')]}" on_change="onchange_hours(operating_hours)" invisible="1"/>
 						<field name="qty_produced" attrs="{'invisible':[('degressive_method_type','!=','units')], 'required':[('method','=','degressive'),('degressive_method_type','=','units')]}" on_change="onchange_units(qty_produced)" invisible="1"/>
                         <field name="prorata" attrs="{'invisible':[('method','!=','linear')]}"/>
