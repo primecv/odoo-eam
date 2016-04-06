@@ -130,10 +130,14 @@ class account_asset_depreciation_line(osv.osv):
 		'units': fields.integer('No of Units'),
 		'hours': fields.float('No of Hours'),
 		'capacity_type': fields.selection([('hours','No of Hours'), ('units', 'No of Units')], 'Installed Capacity'),
+		'amount_copy': fields.related('amount', type='float', store=True, string='Current Depreciation', readonly=True),
+		'depreciation_date_to': fields.date('Date To'),
 	}
 
 	def onchange_capacity(self, cr, uid, ids, capacity_type, name, context=None):
 		vals = {}
+		if not capacity_type:
+			raise osv.except_osv(('Alert!'), ('Please select Installed Capacity in Assets form.'))
 		if capacity_type:
 			vals['capacity_type'] = capacity_type
 			vals['name'] = str(name)

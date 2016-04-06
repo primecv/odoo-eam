@@ -61,13 +61,15 @@
                     <field name="depreciation_line_ids" mode="tree">
                         <tree string="Depreciation Lines" colors="blue:(move_check == False);black:(move_check == True)" editable="bottom">
 							<field name="name" invisible="1"/>
-                            <field name="depreciation_date" required="1"/>
-							<field name="capacity_type" on_change="onchange_capacity(parent.capacity_type, parent.id)" invisible="1"/>
+                            <field name="depreciation_date" required="1" string="Date From"/>
+							<field name="depreciation_date_to" required="1"/>
+							<field name="capacity_type" on_change="onchange_capacity(parent.capacity_type,parent.id)" invisible="1"/>
 							<field name="units" attrs="{'readonly': [('capacity_type','=','hours')]}"/>
 							<field name="hours" attrs="{'readonly': [('capacity_type','=','units')]}"/>
                             <field name="sequence" invisible="1"/>
                             <field name="depreciated_value" readonly="1"/>
-                            <field name="amount"/>
+							<field name="amount_copy"/>
+                            <field name="amount" invisible="1"/>
                             <field name="remaining_value" readonly="1"/>
                             <field name="move_check" readonly="1"/>
                             <field name="parent_state" invisible="1"/>
