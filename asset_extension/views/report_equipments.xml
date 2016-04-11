@@ -17,7 +17,7 @@
             </div>
 
 			<div>
-				<strong><h4>Hospital: <span t-field="o.location_id.name"/></h4></strong>
+				<strong><h4>Hospital: <span t-field="o.location_id.complete_name"/></h4></strong>
 			</div>
 			<p/><br/>
 
