@@ -1,0 +1,47 @@
+<openerp>
+	<data>
+	
+		<record id="hcv_equipment_list_form" model="ir.ui.view">
+			<field name="name">hcv.equipment.list.form</field>
+			<field name="model">hcv.equipment.list</field>
+			<field name="arch" type="xml">
+				<form string="Equipments List">
+					<group>
+						<label string="Select Hospital Location and click Print button to generate Equipments list report :" colspan="4"/>
+						<group>
+							<field name="location_id" required="1"/>
+							<field name="asset_ids" invisible="1"/>
+						</group>
+						<group/>
+					</group>
+					<footer>
+						<button name="print_report" type="object" string="Print" class="oe_highlight"/>or
+						<button name="cancel" special="cancel" string="Cancel" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="hcv_equipment_list_action" model="ir.actions.act_window">
+			<field name="name">Equipments List Report</field>
+			<field name="res_model">hcv.equipment.list</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+        <menuitem name="Reports"
+            id="menu_stock_hcv_reports"
+            parent="stock.menu_stock_root"
+            groups="stock.group_stock_user"
+            sequence="10"/>
+
+		<menuitem id="menu_hcv_equipment_list" 
+			parent="menu_stock_hcv_reports" 
+			action="hcv_equipment_list_action"
+			sequence="1"/>
+
+
+	</data>
+</openerp>
+
