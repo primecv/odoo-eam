@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_hcv_equipments_document">
+    <t t-call="asset_extension.external_layout">
+        <div class="page">
+            <div class="text-center">
+                    <h3><u>Equipments List Report</u></h3>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5 col-xs-offset-7">
+                    <font color="white">
+                            <span t-field="o.id"/><span t-field="o.id"/><span t-field="o.id"/><span t-field="o.id"/>
+                    </font>
+                </div>
+            </div>
+
+			<div>
+				<strong><h4>Hospital: <span t-field="o.location_id.name"/></h4></strong>
+			</div>
+			<p/><br/>
+
+			<div class="text-right"><strong>Total: <span t-field="o.total_assets"/></strong></div>
+            <table class="table table-bordered">
+                    <tr style="background-color:#D3D3D3">
+                        <th>Barcode No</th>
+                        <th>Equipment</th>
+                        <th>Equipment Family</th>
+                    </tr>
+                <tbody class="invoice_tbody">
+                    <tr t-foreach="o.asset_ids" t-as="l">
+                        <td><span t-field="l.asset_id.barcode_no"/></td>
+                        <td><span t-field="l.asset_id.name"/></td>
+                        <td><span t-field="l.asset_id.equipment_type_id.name"/></td>
+                    </tr>
+	            </tbody>
+		    </table>
+
+            <table class="table table-condensed">
+				<tr/>
+			</table>
+            <table class="table table-condensed">
+				<tr/>
+			</table>
+            <table class="table table-condensed">
+				<tr/>
+			</table>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr class="border-black">
+                            <td class="text-right"><strong>Signature</strong></td>
+                        </tr>
+					</table>
+				</div>
+			</div>
+            <div class="oe_structure"/>
+
+        </div>
+    </t>
+</template>
+
+<template id="report_hcv_equipments">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'asset_extension.report_hcv_equipments_document')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>
+

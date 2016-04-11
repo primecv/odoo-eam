@@ -11,6 +11,17 @@
 			menu="False"
 			header="True"
         />
+
+        <report 
+            string="Equipments List" 
+            id="equipments_list_report"
+            model="hcv.equipment.list" 
+            report_type="qweb-pdf"
+            name="asset_extension.report_hcv_equipments"
+            file="asset_extension.report_hcv_equipments"
+			menu="False"
+			header="True"
+        />
 	
         <record id="asset_report_list" model="ir.actions.report.xml">
             <field name="paperformat_id" ref="asset_extension.paperformat_assetlist"/>
