@@ -23,6 +23,16 @@
 			header="True"
         />
 	
+        <report 
+            string="Stock Move" 
+            id="stock_move_report"
+            model="stock.move" 
+            report_type="qweb-pdf"
+            name="asset_extension.report_stock_move"
+            file="asset_extension.report_stock_move"
+			header="True"
+        />
+
         <record id="asset_report_list" model="ir.actions.report.xml">
             <field name="paperformat_id" ref="asset_extension.paperformat_assetlist"/>
         </record>
