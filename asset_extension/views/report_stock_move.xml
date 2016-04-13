@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_stock_move_document">
+    <t t-call="report.external_layout">
+        <div class="page">
+            <div class="oe_structure"/>
+            <div class="row">
+                <div class="col-xs-6">
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h4><u>Stock Move Report</u></h4>
+			</div>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th><strong>Product</strong></th>
+                        <th><strong>Origin</strong></th>
+                        <th><strong>Destination</strong></th>
+                        <th class="text-right"><strong>Qty</strong></th>
+                        <th class="text-right"><strong>Date</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span t-field="o.product_id.name"/>
+                        </td>
+                        <td>
+                            <span t-field="o.location_id.name"/>
+                        </td>
+                        <td>
+                            <span t-field="o.location_dest_id.name"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="o.product_uom_qty"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="o.date"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr class="border-black">
+                            <td class="text-center"><strong>Received By</strong></td>
+                        </tr>
+					</table>
+				</div>
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr class="border-black">
+                            <td class="text-center"><strong>Issued By</strong></td>
+                        </tr>
+					</table>
+				</div>
+			</div>
+
+            <div class="oe_structure"/>
+        </div>
+    </t>
+</template>
+
+<template id="report_stock_move">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'asset_extension.report_stock_move_document')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>
