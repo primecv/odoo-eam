@@ -45,10 +45,10 @@
                             <span t-field="o.product_id.name"/>
                         </td>
                         <td>
-                            <span t-field="o.location_id.name"/>
+                            <span t-field="o.location_id.complete_name"/>
                         </td>
                         <td>
-                            <span t-field="o.location_dest_id.name"/>
+                            <span t-field="o.location_dest_id.complete_name"/>
                         </td>
                         <td class="text-right">
                             <span t-field="o.product_uom_qty"/>
