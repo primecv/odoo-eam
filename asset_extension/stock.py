@@ -82,4 +82,9 @@ class stock_location(osv.osv):
     latitude = fields.Float(string='Latitude')
     longitude = fields.Float(string='Longitude')
 
+class stock_move(osv.osv):
+	_inherit = "stock.move"
+
+	def print_move_hcv_report(self, cr, uid, ids, context=None):
+		return self.pool['report'].get_action(cr, uid, ids, 'asset_extension.report_stock_move', context=context)
 

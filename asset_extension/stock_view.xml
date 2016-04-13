@@ -42,5 +42,16 @@
 			</field>
 		</record>
 
+        <record id="view_move_hcv_report_form" model="ir.ui.view">
+            <field name="name">stock.move.hcv.report.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+				<button name="action_cancel" position="after">
+					<button name="print_move_hcv_report" type="object" string="Print Move" class="oe_highlight" states="confirmed,assigned,done"/>
+				</button>
+			</field>
+		</record>
+
 	</data>
 </openerp>
