@@ -296,6 +296,7 @@ class rfq_hcv(osv.osv):
 					result['hours_of_operation'] = line.hours_of_operation
 					result['planned_amount'] = line.planned_amount
 					result['supplier_id'] = line.supplier_id.id
+					result['price_unit'] = line.price_unit
 		return result
 
 	def open_asset(self, cr, uid, ids, context=None):
@@ -319,6 +320,7 @@ class rfq_hcv(osv.osv):
 								'default_planned_amount': result['planned_amount'],
 								'default_vendor_id': result['supplier_id'],
 								'default_purchase_date': result['order_date'],
+								'price_unit': result['price_unit'],
 								},
 					'target': 'current'
 				}				
@@ -355,6 +357,7 @@ class rfq_hcv(osv.osv):
 								'default_vendor_id': result['supplier_id'],
 								'default_supplier_id': result['supplier_id'],
 								'default_purchase_date': result['order_date'],
+								'price_unit': result['price_unit'],
 								},
 					'target': 'current'
 				}				

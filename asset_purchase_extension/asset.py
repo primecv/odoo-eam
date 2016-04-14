@@ -34,6 +34,13 @@ class asset_asset(osv.osv):
 	def create(self, cr, uid, vals, context=None):
 		res = super(asset_asset, self).create(cr, uid, vals, context)
 		if context and 'po_asset' in context and 'rfq_id' in context:
+			#add item in Supplier's Product Supplied Tab :
+			purchase_date = 'purchase_date' in vals and vals['purchase_date'] or False
+			self.pool.get('product.supplierinfo.hcv').create(cr, uid, {
+																		'name': vals['name'],
+																		'price': context['price_unit'],
+																		'delivery_date': purchase_date,
+																	})
 			if context['default_is_accessory'] is True:
 				self.pool.get('rfq.hcv').write(cr, uid, [context['rfq_id']], {'create_accessory': False, 
 																			'new_accessory_id': res,
