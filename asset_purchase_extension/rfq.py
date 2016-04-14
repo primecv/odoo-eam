@@ -481,6 +481,7 @@ class rfq_hcv_print(osv.osv):
 									supplier_product_data = {'product_id':line.rfq_id.product_id.id,
 															 'partner_id':line.supplier_id.id,
 															 'price':line.price_unit,
+															 'name':line.rfq_id.product_id.name_template
 															 }
 									self.pool.get('product.supplierinfo.hcv').create(cr, uid, supplier_product_data)
 							elif line.po_id:

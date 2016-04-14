@@ -37,6 +37,7 @@ class product_supplierinfo_hcv(osv.osv):
 	_columns = {
 		'partner_id': fields.many2one('res.partner', 'Supplier'),
 		'product_id': fields.many2one('product.product', 'Product'),
+		'name': fields.char('Product'),
 		'price': fields.float('Price'),
 		'delivery_date': fields.date('Delivery Date'),
 		'delivery_time': fields.char('Delivery Time(in Days)'),
