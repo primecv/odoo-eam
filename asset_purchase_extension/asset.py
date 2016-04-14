@@ -40,6 +40,7 @@ class asset_asset(osv.osv):
 																		'name': vals['name'],
 																		'price': context['price_unit'],
 																		'delivery_date': purchase_date,
+																		'partner_id': context['default_vendor_id'],
 																	})
 			if context['default_is_accessory'] is True:
 				self.pool.get('rfq.hcv').write(cr, uid, [context['rfq_id']], {'create_accessory': False, 
