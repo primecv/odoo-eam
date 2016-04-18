@@ -52,7 +52,7 @@
 				<field name="code" position="replace"/>
 				<field name="purchase_date" position="after">
 					<field name="code"/>
-					<field name="capacity_type" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+					<field name="capacity_type" attrs="{'readonly':[('state','!=','draft')], 'required':[('method','=','degressive')]}"/>
 					<field name="total_hours" attrs="{'readonly':[('state','!=','draft')],'invisible':[('capacity_type','!=','hours')],'required':[('capacity_type','=','hours')]}" widget="float_time"/>
 					<field name="total_units" attrs="{'readonly':[('state','!=','draft')],'invisible':[('capacity_type','!=','units')],'required':[('capacity_type','=','units')]}"/>
 				</field>
