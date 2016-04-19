@@ -202,6 +202,7 @@ class account_asset_depreciation_line(osv.osv):
 
 	_columns = {
 		'asset_asset_id': fields.related('asset_id', 'asset_id', type='many2one', relation='asset.asset'),
+		'method': fields.related('asset_id', 'method', type='char', string='Method'),
 	}
 
 	_defaults = {
