@@ -27,8 +27,8 @@ class asset_asset(osv.osv):
 	_inherit = "asset.asset"
 
 	_columns = {
-		'hours_of_operation': fields.float('Hours of Operation'),
-		'planned_amount': fields.float('Amounts of Planned Tests'),
+		'hours_of_operation': fields.float('Hours of Operation', readonly=True),
+		'planned_amount': fields.float('Amounts of Planned Tests', readonly=True),
 	}
 
 	def create(self, cr, uid, vals, context=None):
