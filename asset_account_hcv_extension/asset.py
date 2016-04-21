@@ -81,6 +81,15 @@ class account_asset(osv.osv):
 						}
 				}
 
+	def validate(self, cr, uid, ids, context=None):
+		for asset in self.browse(cr, uid, ids):
+			for l in asset.depreciation_line_ids:
+				if l.depreciation_date and l.depreciation_date < asset.purchase_date:
+					raise osv.except_osv(('Validation Error!'), ("Depreciation Start Date must be greater than Asset's Purchase Date"))
+				if l.depreciation_date and l.depreciation_date_to and l.depreciation_date > l.depreciation_date_to:
+					raise osv.except_osv(('Validation Error!'), ("Invalid Depreciation Date Range."))
+		return super(account_asset, self).validate(cr, uid, ids, context)
+
 	def compute_depreciation_board(self, cr, uid, ids, context=None):
 		depreciation_line_obj = self.pool.get('account.asset.depreciation.line')
 		currency_obj = self.pool.get('res.currency')
@@ -93,6 +102,12 @@ class account_asset(osv.osv):
 				elif capacity_type == 'units':	
 					total_capacity = asset.total_units
 
+				#check start & end date :
+				for l in asset.depreciation_line_ids:
+					if l.depreciation_date and l.depreciation_date < asset.purchase_date:
+						raise osv.except_osv(('Validation Error!'), ("Depreciation Start Date must be greater than Asset's Purchase Date"))
+					if l.depreciation_date and l.depreciation_date_to and l.depreciation_date > l.depreciation_date_to:
+						raise osv.except_osv(('Validation Error!'), ("Invalid Depreciation Date Range."))
 				#check if depreciation line capacity exceeds total installed capacity :
 				capacity = 0.0
 				for line in asset.depreciation_line_ids:
