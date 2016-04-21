@@ -34,6 +34,8 @@ class asset_asset(osv.osv):
 	def create(self, cr, uid, vals, context=None):
 		res = super(asset_asset, self).create(cr, uid, vals, context)
 		if context and 'po_asset' in context and 'rfq_id' in context:
+			#update Asset Value :
+			self.write(cr, uid, [res], {'asset_value': context['price_unit']})
 			#add item in Supplier's Product Supplied Tab :
 			purchase_date = 'purchase_date' in vals and vals['purchase_date'] or False
 			self.pool.get('product.supplierinfo.hcv').create(cr, uid, {
