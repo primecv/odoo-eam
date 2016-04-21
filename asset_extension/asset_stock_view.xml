@@ -35,7 +35,7 @@
 				<field name="active" position="before">
 					<field name="code" readonly="1" attrs="{'invisible': [('code','=',False)]}"/>
 					<field name="category_id" domain="[('equipment_family_id','=',equipment_type_id)]" required="0"/>
-					<field name="asset_value" invisible="1"/>
+					<field name="asset_value" />
 					<field name="is_accessory" invisible="1"/>		
 				</field>
 
