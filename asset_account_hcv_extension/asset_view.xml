@@ -121,7 +121,8 @@
 
                     <group string="Depreciation Dates" attrs="{'invisible':[('method','!=','linear')]}">
                         <field name="method_time" attrs="{'readonly': [('method','=','linear')], 'invisible':[('method','=','degressive')]}"/>
-                        <field name="method_number" attrs="{'required':[('method_time','=','number')], 'invisible':['|',('method_time','!=','number'),('method','=','degressive')]}" on_change="onchange_method_number(method,method_number,method_period)"/>
+                        <field name="method_number" attrs="{'required':[('method_time','=','number')], 'invisible':['|',('method_time','!=','number'),('method','=','degressive')]}" on_change="onchange_method_number(method,method_number,method_period)" invisible="1"/>
+						<field name="method_number_copy" attrs="{'required': [('method_time','=','number')], 'invisible': [('method','!=','linear')]}" on_change="onchange_compute_no_of_linear_depreciations(method_number_copy)"/>
 						<field name="method_number_readonly" attrs="{'invisible':[('method_time','=','end')], 'required':[('method_time','=','number')]}" invisible="1"/>
                         <field name="method_period" on_change="onchange_method_number(method,method_number,method_period)"/>
                         <field name="method_end" attrs="{'required': [('method_time','=','end')], 'invisible':[('method_time','=','number')]}"/>

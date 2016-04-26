@@ -168,13 +168,14 @@ class account_asset_category(osv.osv):
 		'degressive_method_type': fields.selection([('hours','No of Hours'), ('units','No of Units')], 'Degressive Factor'),
 		'operating_hours': fields.float('Hours of Operation'),
 		'qty_produced': fields.integer('Qty of Units Produced'),
+		'method_number_copy': fields.integer('Number of Depreciations'),
 	}
 
 	def onchange_method(self, cr, uid, ids, method, factor, context=None):
 		if not method:
 			return False
 		if method == 'linear':
-			return {'value': {'method_progress_factor':0, 'method_linear_factor':0, 'method_time':'number'}}
+			return {'value': {'method_progress_factor':0, 'method_linear_factor':0, 'method_time':'number', 'method_period': 1}}
 		return {'value': {'method_progress_factor': 0}}
 
 	def onchange_method_factor(self, cr, uid, ids, factor, context=None):
@@ -189,10 +190,17 @@ class account_asset_category(osv.osv):
 		if method == 'degressive':
 			if number:
 				vals['method_progress_factor'] = period / number
+		if method == 'linear':
+			vals['method_period'] = 1
 		if number:
 			vals['method_linear_factor'] = 1.0/number
 			return {'value': vals}
 		return vals
+
+	def onchange_compute_no_of_linear_depreciations(self, cr, uid, ids, method_no_year, context=None):
+		vals = {}
+		vals['method_number'] = method_no_year * 12
+		return {'value': vals}
 
 	def onchange_degressive_method_type(self, cr, uid, ids, degressive_method_type, context=None):
 		vals = {}
