@@ -57,8 +57,6 @@ class depreciation_map_report(osv.osv):
 						flag = True
 						for acc_asset in self.pool.get('account.asset.asset').browse(cr, uid, account_assets):
 							self.pool.get('account.asset.asset').write(cr, uid, [acc_asset.id], {'depreciation_map_id':rec.id})
-			if not flag :
-				raise osv.except_osv(('Information'), ('No Depreciation found for selected search items.'))
 			return self.pool['report'].get_action(cr, uid, ids, 'asset_account_hcv_extension.report_depreciation_map', context=context)
 
 class account_asset_asset(osv.osv):
