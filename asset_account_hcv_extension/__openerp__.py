@@ -31,6 +31,9 @@
     'depends': ['asset_extension', 'asset_account', 'account_asset'],
     'data': [
         'asset_view.xml',
+        'wizard/depreciation_map_report.xml',
+        'report.xml',
+        'views/depreciation_map.xml',
     ],
     'installable': True,
     'auto_install': False,

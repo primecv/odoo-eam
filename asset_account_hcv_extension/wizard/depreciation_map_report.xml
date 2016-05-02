@@ -1,0 +1,44 @@
+<openerp>
+	<data>
+
+		<record id="asset_depreciation_map_report_form" model="ir.ui.view">
+			<field name="name">asset.depreciation.map.report</field>
+			<field name="model">asset.depreciation.map.report</field>
+			<field name="arch" type="xml">
+				<form string="Asset Depreciation Map Report">
+					<group col="6">
+						<field name="type" required="1" on_change="onchange_type(type)"/>
+						<field name="service_location_id" attrs="{'invisible':[('type','!=','service')], 'required':[('type','=','service')]}"/>
+						<field name="hospital_location_id" attrs="{'invisible':[('type','!=','hospital')], 'required':[('type','=','hospital')]}"/>
+						<field name="asset_ids" colspan="4" invisible="1"/>
+					</group>
+					<group>
+						<group>
+							<field name="asset_ref" attrs="{'invisible':[('type','=',False)]}" domain="['|',('property_stock_asset','=',hospital_location_id),('property_stock_asset','=',service_location_id)]"/>
+						</group>
+						<group/>
+					</group>
+					<footer>
+						<button name="print_report" type="object" class="oe_highlight" string="Print"/>or
+						<button name="cancel" special="cancel" string="cancel" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="act_asset_depreciation_map_report" model="ir.actions.act_window">
+			<field name="name">Depreciation Map Report</field>
+			<field name="res_model">asset.depreciation.map.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem id="menu_asset_depreciation_map_report" 
+			parent="asset_extension.menu_stock_hcv_reports"
+			action="act_asset_depreciation_map_report"
+			sequence="5"/>
+
+	</data>
+</openerp>
+

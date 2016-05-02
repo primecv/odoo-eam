@@ -1,0 +1,15 @@
+<openerp>
+	<data>
+
+        <report 
+            id="report_depreciationmap"
+            string="Asset Depreciation Map"
+            model="asset.depreciation.map.report" 
+            report_type="qweb-pdf"
+            file="report_depreciation_map"
+            name="asset_account_hcv_extension.report_depreciation_map"
+        />
+
+	</data>
+</openerp>
+

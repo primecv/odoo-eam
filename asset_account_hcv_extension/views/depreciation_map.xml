@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_depreciation_map_document">
+    <t t-call="report.external_layout">
+        <div class="page">
+            <div class="oe_structure"/>
+            <div class="row">
+
+            </div>
+
+			<h2 class="text-center">Depreciation Map Report</h2>
+            <h3 class="text-center">
+                <span t-if="o.type == 'service'">Service : <span t-field="o.service_location_id.name"/></span>
+                <span t-if="o.type == 'hospital'">Hospital : <span t-field="o.hospital_location_id.name"/></span>
+            </h3>
+			<p/><br/>
+
+            <table class="table-condensed" style="width:100%">
+                    <tr t-foreach="o.asset_ids" t-as="asset" style="width:100%">
+						<td style="width:100%">
+		                    <table class="table-bordered table-condensed" style="width:100%">
+		                         <thead><tr>
+		                                  <th class="text-center">Asset Name</th>
+		                                  <th class="text-center">Purchase Date</th>
+		                                  <th class="text-center">Asset Value</th>
+		                          </tr></thead>
+		                         <tbody><tr>
+		                                <td class="text-center"><span t-field="asset.asset_id.name"/></td>
+		                                <td class="text-center"><span t-field="asset.purchase_date"/></td>
+		                                <td class="text-center"><span t-field="asset.purchase_value"/></td>
+		                         </tr></tbody> 
+		                    </table>
+
+							<h5>
+								<span t-if="asset.depreciation_line_ids" style="width:100%"><b><u>Depreciation Lines</u></b></span>
+							</h5>
+
+							<table class="table table-condensed" style="width:100%">
+								<tbody>
+								    <tr>
+								        <th style="width:15%">Date From</th>
+								        <th style="width:15%">Date To</th>
+								        <th style="width:40%">Amount already depreciated</th>
+								        <th style="width:30%">Current Depreciation</th>
+								    </tr>
+				                    <tr t-foreach="asset.depreciation_line_ids" t-as="l">
+										<td style="width:15%"><span t-field="l.depreciation_date"/></td>
+										<td style="width:15%"><span t-field="l.depreciation_date_to"/></td>
+										<td style="width:40%" class="text-center"><span t-field="l.depreciated_value"/></td>
+										<td style="width:30%" class="text-center"><span t-field="l.amount_copy"/></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+                    </tr>
+            </table>
+
+            <div class="oe_structure"/>
+        </div>
+    </t>
+</template>
+
+<template id="report_depreciation_map">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'user_id.partner_id.lang', 'asset_account_hcv_extension.report_depreciation_map_document')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>
