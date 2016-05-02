@@ -42,9 +42,11 @@ class depreciation_map_report(osv.osv):
 			else:
 				location_id = rec.hospital_location_id.id
 
+			flag = False
 			if rec.asset_ref: #print report for selected asset
 				account_assets = self.pool.get('account.asset.asset').search(cr, uid, [('asset_id','=',rec.asset_ref.id)])
 				if account_assets:
+					flag = True
 					for acc_asset in self.pool.get('account.asset.asset').browse(cr, uid, account_assets):
 						self.pool.get('account.asset.asset').write(cr, uid, [acc_asset.id], {'depreciation_map_id':rec.id})
 			elif not rec.asset_ref: #print report for all assets in a location
@@ -52,8 +54,11 @@ class depreciation_map_report(osv.osv):
 				if assets:
 					account_assets = self.pool.get('account.asset.asset').search(cr, uid, [('asset_id','in',assets)])
 					if account_assets:
+						flag = True
 						for acc_asset in self.pool.get('account.asset.asset').browse(cr, uid, account_assets):
 							self.pool.get('account.asset.asset').write(cr, uid, [acc_asset.id], {'depreciation_map_id':rec.id})
+			if not flag :
+				raise osv.except_osv(('Information'), ('No Depreciation found for selected search items.'))
 			return self.pool['report'].get_action(cr, uid, ids, 'asset_account_hcv_extension.report_depreciation_map', context=context)
 
 class account_asset_asset(osv.osv):
