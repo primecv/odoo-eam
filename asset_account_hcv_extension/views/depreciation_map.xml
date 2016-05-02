@@ -11,8 +11,8 @@
 
 			<h2 class="text-center">Depreciation Map Report</h2>
             <h3 class="text-center">
-                <span t-if="o.type == 'service'">Service : <span t-field="o.service_location_id.name"/></span>
-                <span t-if="o.type == 'hospital'">Hospital : <span t-field="o.hospital_location_id.name"/></span>
+                <span t-if="o.type == 'service'">Service : <span t-field="o.service_location_id.complete_name"/></span>
+                <span t-if="o.type == 'hospital'">Hospital : <span t-field="o.hospital_location_id.complete_name"/></span>
             </h3>
 			<p/><br/>
 
