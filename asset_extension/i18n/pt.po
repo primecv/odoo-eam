@@ -625,3 +625,45 @@ msgstr "meses"
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "note to be displayed on quotations..."
 msgstr "nota a ser apresentada nas cotações..."
+
+#. module: asset_extension
+#: field:mro.order,date:0
+#: view:website:asset_extension.report_stock_move_document
+msgid "Date"
+msgstr "Data"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_stock_move_document
+msgid "Destination"
+msgstr "Destino"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_stock_move_document
+msgid "Issued By"
+msgstr "Enviado por"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_stock_move_document
+msgid "Origin"
+msgstr "Origem"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_product_product
+#: view:website:asset_extension.report_stock_move_document
+msgid "Product"
+msgstr "Ativo"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_stock_move_document
+msgid "Qty"
+msgstr "Qtd"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_stock_move_document
+msgid "Received By"
+msgstr "Recebido por"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_stock_move_document
+msgid "Stock Move Report"
+msgstr "Relatório de Movimentos"
