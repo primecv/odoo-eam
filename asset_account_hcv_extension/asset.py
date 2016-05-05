@@ -74,6 +74,7 @@ class account_asset(osv.osv):
 		'capacity_type': fields.selection([('hours','No of Hours'), ('units', 'No of Units')], 'Installed Capacity'),
 		'total_hours': fields.float('No of Hours'),
 		'total_units': fields.integer('No of Units'),
+		'method_number_copy':fields.integer('Number of Depreciations'),
 	}
 
 	def onchange_asset(self, cr, uid, ids, asset, context=None):
@@ -83,6 +84,24 @@ class account_asset(osv.osv):
 							'asset_location_id': asset.property_stock_asset and asset.property_stock_asset.id or False
 						}
 				}
+
+	def onchange_category_id(self, cr, uid, ids, category_id, context=None):
+		res = {'value':{}}
+		asset_categ_obj = self.pool.get('account.asset.category')
+		if category_id:
+			category_obj = asset_categ_obj.browse(cr, uid, category_id, context=context)
+			res['value'] = {
+                            'method': category_obj.method,
+                            'method_number': category_obj.method_number,
+                            'method_number_copy': category_obj.method_number_copy,
+                            'method_time': category_obj.method_time,
+                            'method_period': category_obj.method_period,
+                            'method_progress_factor': category_obj.method_progress_factor,
+                            'method_end': category_obj.method_end,
+                            'prorata': category_obj.prorata,
+            }
+		return res
+
 
 	def validate(self, cr, uid, ids, context=None):
 		for asset in self.browse(cr, uid, ids):

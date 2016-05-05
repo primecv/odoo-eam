@@ -40,7 +40,10 @@
 					<field name="prorata" attrs="{'invisible': ['|',('method','!=','linear'),('method_time','=','end')]}"/>
 				</field>
 				<field name="method_number" position="replace">
-                    <field name="method_number" attrs="{'invisible':['|',('method','!=','linear'),('method_time','=','end')], 'required':[('method_time','=','number')]}"/>
+                    <field name="method_number" attrs="{'required':[('method_time','=','number')]}" invisible="1"/>
+				</field>
+				<field name="method_number" position="after">
+					<field name="method_number_copy" attrs="{'required':[('method_time','=','number')], 'invisible':[('method','!=','linear')]}" />
 				</field>
 				<field name="method_period" position="replace">
                     <field name="method_period" attrs="{'invisible':[('method','!=','linear')]}"/>
