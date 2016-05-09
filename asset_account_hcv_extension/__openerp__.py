@@ -32,6 +32,7 @@
     'data': [
         'asset_view.xml',
         'wizard/depreciation_map_report.xml',
+        'wizard/account_asset_change_duration_view.xml',
         'report.xml',
         'views/depreciation_map.xml',
     ],

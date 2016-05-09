@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record model="ir.ui.view" id="asset_modify_hcv_form">
+            <field name="name">wizard.asset.modify.hcv.form</field>
+            <field name="model">asset.modify</field>
+			<field name="inherit_id" ref="account_asset.asset_modify_form"/>
+            <field name="arch" type="xml">
+                <field name="asset_method_time" position="after">
+					<field name="method" invisible="1"/>
+					<field name="capacity_type" invisible="1"/>
+				</field>
+
+                <group col="4" position="attributes">
+					<attribute name="attrs">{'invisible': [('method','=','degressive')]}</attribute>
+				</group>
+
+				<group col="4" position="after">
+					<group string="Asset Durations to Modify" col="4" attrs="{'invisible':[('method','=','linear')]}">
+						<group col="2">
+							<field name="total_hours" attrs="{'invisible': [('capacity_type','=','units')], 'required':[('capacity_type','=','hours')]}"/>
+							<field name="total_units" attrs="{'invisible': [('capacity_type','=','hours')], 'required':[('capacity_type','=','units')]}"/>
+						</group>
+					</group>
+				</group>
+            </field>
+        </record>
+    
+    </data>
+</openerp>
