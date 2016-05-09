@@ -24,14 +24,14 @@
 				<field name="parent_id" position="replace"/>
 
 				<!-- hide fields for degressive method -->
-				<field name="method_progress_factor" position="replace">
+				<field name="method_progress_factor" position="replace">		
 					<field name="method_progress_factor" invisible="1"/>
 				</field>
 				<label for="method_time" position="replace">
-					<label for="method_time" string="" attrs="{'invisible':[('method','!=','linear')]}"/>
+					<label for="method_time" string="" attrs="{'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}"/>
 				</label>
 				<field name="method_time" position="replace">
-					<field name="method_time" on_change="onchange_method_time(method_time)" class="oe_inline" attrs="{'invisible':[('method','!=','linear')]}"/>
+					<field name="method_time" on_change="onchange_method_time(method_time)" class="oe_inline" attrs="{'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}"/>
 				</field>
 				<button icon="terp-stock_effects-object-colorize" position="replace">
                     <button name="%(account_asset.action_asset_modify)d" string="Change Duration" type="action" icon="terp-stock_effects-object-colorize" class="oe_inline" colspan="1" attrs="{'invisible':['|',('state','=','close'),('method','!=','linear')]}"/>
@@ -40,16 +40,16 @@
 					<field name="prorata" attrs="{'invisible': ['|',('method','!=','linear'),('method_time','=','end')]}"/>
 				</field>
 				<field name="method_number" position="replace">
-                    <field name="method_number" attrs="{'required':[('method_time','=','number')]}" invisible="1"/>
+                    <field name="method_number" attrs="{'required':[('method_time','=','number')], 'readonly':[('state','!=','draft')]}" invisible="1"/>
 				</field>
 				<field name="method_number" position="after">
-					<field name="method_number_copy" attrs="{'required':[('method_time','=','number')], 'invisible':[('method','!=','linear')]}" />
+					<field name="method_number_copy" attrs="{'required':[('method_time','=','number')], 'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}" />
 				</field>
 				<field name="method_period" position="replace">
-                    <field name="method_period" attrs="{'invisible':[('method','!=','linear')]}"/>
+                    <field name="method_period" attrs="{'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}"/>
 				</field>
 				<field name="method_end" position="replace">
-                    <field name="method_end" attrs="{'required': [('method_time','=','end')], 'invisible':['|',('method','!=','linear'),('method_time','=','number')]}"/>
+                    <field name="method_end" attrs="{'required': [('method_time','=','end')], 'invisible':['|',('method','!=','linear'),('method_time','=','number')], 'readonly':[('state','!=','draft')]}"/>
 				</field>
 
 				<field name="code" position="replace"/>
