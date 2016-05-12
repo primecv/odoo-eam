@@ -16,6 +16,14 @@
             </h3>
 			<p/><br/>
 
+            <table class="table-condensed" style="width:100%" t-if="not o.asset_ids">
+		         <thead><tr>
+		                  <th class="text-center">Asset Name</th>
+		                  <th class="text-center">Purchase Date</th>
+		                  <th class="text-center">Asset Value</th>
+		          </tr></thead>
+			</table>
+
             <table class="table-condensed" style="width:100%">
                     <tr t-foreach="o.asset_ids" t-as="asset" style="width:100%">
 						<td style="width:100%">
@@ -33,7 +41,7 @@
 		                    </table>
 
 							<h5>
-								<span t-if="asset.depreciation_line_ids" style="width:100%"><b><u>Depreciation Lines</u></b></span>
+								<span style="width:100%"><b><u>Depreciation Lines</u></b></span>
 							</h5>
 
 							<table class="table table-condensed" style="width:100%">
