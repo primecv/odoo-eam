@@ -33,8 +33,8 @@ class mro_hcv_report(osv.osv_memory):
 			if rec.type == 'period':
 				return self.pool['report'].get_action(cr, uid, ids, 'asset_extension.report_mroperiod', context=context)
 			if rec.type == 'scheduled':
-				return self.pool['report'].get_action(cr, uid, ids, 'sale.report_saleorder', context=context)
+				return True
 			if rec.type == 'technician':
-				return self.pool['report'].get_action(cr, uid, ids, 'sale.report_saleorder', context=context)
+				return True
 			if rec.type == 'equipment':
-				return self.pool['report'].get_action(cr, uid, ids, 'sale.report_saleorder', context=context)
+				return True
