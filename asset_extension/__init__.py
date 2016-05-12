@@ -6,3 +6,4 @@ import mro
 import stock
 import asset_report
 import wizard
+import report

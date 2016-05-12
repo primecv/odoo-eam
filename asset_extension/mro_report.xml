@@ -1,0 +1,15 @@
+<openerp>
+	<data>
+
+        <report 
+            id="report_mro_period"
+            string="Maintenance By Period"
+            model="mro.hcv.report" 
+            report_type="qweb-pdf"
+			menu="False"
+            file="asset_extension.report_mroperiod" 
+            name="asset_extension.report_mroperiod" 
+        />
+
+	</data>
+</openerp>

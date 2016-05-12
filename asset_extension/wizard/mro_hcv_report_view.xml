@@ -1,0 +1,46 @@
+<openerp>
+	<data>
+
+		<record id="mro_hcv_report_form" model="ir.ui.view">
+			<field name="name">mro.hcv.report.form</field>
+			<field name="model">mro.hcv.report</field>
+			<field name="arch" type="xml">
+				<form string="Maintenance Reports">
+					<group>
+						<group>
+							<field name="type"/>
+						</group>
+					</group>
+					<group attrs="{'invisible': [('type','!=','period')]}" col="4" name="period" string="Filters">
+						<field name="start_period" required="1"/>	
+						<field name="end_period" required="1"/>
+					</group>
+
+					<footer>
+						<button name="print_report" string="Print" type="object" class="oe_highlight"/>or
+						<button name="cancel" string="cancel" special="cancel" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="mro_hcv_report_action" model="ir.actions.act_window">
+			<field name="name">Maintenance Report</field>
+			<field name="res_model">mro.hcv.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem id="menu_mro_hcv_reports_main" 
+			name="Reports"
+			parent="base.menu_mro_root"
+			sequence="190"/>
+					
+		<menuitem id="menu_mro_hcv_report_action" 
+			action="mro_hcv_report_action"
+			parent="menu_mro_hcv_reports_main"
+			sequence="10"/>
+
+	</data>
+</openerp>
