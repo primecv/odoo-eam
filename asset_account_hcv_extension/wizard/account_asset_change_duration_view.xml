@@ -18,7 +18,8 @@
 
 				<group col="4" position="after">
 					<group string="Asset Durations to Modify" col="4" attrs="{'invisible':[('method','=','linear')]}">
-						<group col="2">
+						<group col="4">
+							<field name="name"/>
 							<field name="total_hours" attrs="{'invisible': [('capacity_type','=','units')], 'required':[('capacity_type','=','hours')]}"/>
 							<field name="total_units" attrs="{'invisible': [('capacity_type','=','hours')], 'required':[('capacity_type','=','units')]}"/>
 						</group>
