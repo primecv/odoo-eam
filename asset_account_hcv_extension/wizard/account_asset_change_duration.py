@@ -32,6 +32,7 @@ class asset_modify(osv.osv_memory):
 		'capacity_type': fields.selection([('hours','No of Hours'), ('units', 'No of Units')], 'Installed Capacity'),
 		'total_hours': fields.float('No of Hours'),
 		'total_units': fields.integer('No of Units'),
+        'name2': fields.char('Name'),
     }
 
     def default_get(self, cr, uid, fields, context=None):
@@ -86,16 +87,20 @@ class asset_modify(osv.osv_memory):
         asset_id = context.get('active_id', False)
         asset = asset_obj.browse(cr, uid, asset_id, context=context)
         data = self.browse(cr, uid, ids[0], context=context)
+        if data.method == 'linear': name = data.name 
+        else: name = data.name2
         history_vals = {
             'asset_id': asset_id,
-            'name': data.name,
+            'name': name,
             'method_time': asset.method_time,
-            'method_number': asset.method_number,
-            'method_period': asset.method_period,
+            'method_number': data.method_number,
+            'method_period': data.method_period,
             'method_end': asset.method_end,
             'user_id': uid,
             'date': time.strftime('%Y-%m-%d'),
             'note': data.note,
+            'total_hours': data.total_hours,
+            'total_units': data.total_units,
         }
         history_obj.create(cr, uid, history_vals, context=context)
         asset_vals = {

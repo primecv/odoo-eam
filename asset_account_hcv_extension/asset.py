@@ -342,3 +342,11 @@ class account_asset_depreciation_line(osv.osv):
 		'remaining_value': 0.0,
 		'depreciated_value': 0.0,
 	}
+
+class account_asset_history(osv.osv):
+	_inherit = 'account.asset.history'
+
+	_columns = {
+		'total_hours': fields.float('No of Hours'),
+		'total_units': fields.integer('No of Units'),
+	}
