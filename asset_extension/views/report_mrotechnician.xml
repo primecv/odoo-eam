@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_mrotechnician_document">
+    <t t-call="report.external_layout">
+        <div class="page">
+            <div class="oe_structure"/>
+
+            <div class="row">
+                <div class="col-xs-6">
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h3><u>Maintenance Report - By Technician</u></h3>
+             </div>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+
+			<h5 t-if="o.start_period or o.end_period">
+				<strong>  Period : </strong>
+				<span t-if="o.start_period and not o.end_period">From </span>
+				<span t-if="not o.start_period and o.end_period">From Beginning - </span>
+				<span t-esc="formatLang(o.start_period, date=True)"/> 
+				<span t-if="o.start_period and o.end_period">To </span>
+				<span t-esc="formatLang(o.end_period, date=True)"/>
+			</h5>
+			<h5>
+				<span t-if="not o.start_period and not o.end_period"><strong>Period : </strong>All Maintenance Orders</span>
+			</h5>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+
+			<t t-foreach="getLines(o.start_period, o.end_period)" t-as="l">
+            	<table class="table-condensed" style="width:100%">
+                    <tr style="width:100%">
+                        <span t-if="l"><strong>Technician Name : </strong> <span t-esc="l"/></span>
+						<br/>
+                        <span t-if="l"><strong>Total Orders : </strong> <span t-esc="getLineCount(o.start_period, o.end_period, l)"/></span>
+						<br/>
+                                   
+	                    <td style="width:100%" />
+
+						<table class="table table-condensed table-bordered" style="width:100%" t-if="l">
+                         <tbody>
+                           <tr>
+                               <th style="width:25%" class="text-center"><strong>Type of Maintenance</strong></th>
+                               <th style="width:25%" class="text-center"><strong>Asset</strong></th>
+                               <th style="width:25%" class="text-center"><strong>Execution Date</strong></th>
+                               <th style="width:25%" class="text-center"><strong>State</strong></th>
+                           </tr>
+                           <tr t-foreach="getLineDetails(o.start_period, o.end_period, l)" t-as="mro" style="width:100%">
+                               <td style="width:25%"><span t-esc="mro.type"/></td>
+                               <td style="width:25%"><span t-esc="mro.asset_id.name"/></td>
+                               <td style="width:25%"><span t-esc="mro.date_execution"/></td>
+                               <td style="width:25%" class="text-center">
+									<span t-if="mro.state == 'draft'">Draft</span>
+									<span t-if="mro.state == 'released'">Waiting Parts</span>
+									<span t-if="mro.state == 'ready'">Ready to Maintenance</span>
+									<span t-if="mro.state == 'validate'">Validated</span>
+									<span t-if="mro.state == 'done'">Done</span>
+									<span t-if="mro.state == 'cancel'">Cancelled</span>
+                               </td>
+                           </tr>
+                         </tbody>
+						</table>
+					</tr>
+					<tr style="width:100%">
+					</tr>
+				</table>
+			</t>
+
+            <div class="oe_structure"/>
+        </div>
+    </t>
+</template>
+
+<template id="report_mrotechnician">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'asset_extension.report_mrotechnician_document')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

@@ -11,5 +11,15 @@
             name="asset_extension.report_mroperiod" 
         />
 
+        <report 
+            id="report_mro_technician"
+            string="Maintenance By Technician"
+            model="mro.hcv.report" 
+            report_type="qweb-pdf"
+			menu="False"
+            file="asset_extension.report_mrotechnician" 
+            name="asset_extension.report_mrotechnician" 
+        />
+
 	</data>
 </openerp>

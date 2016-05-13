@@ -35,6 +35,6 @@ class mro_hcv_report(osv.osv_memory):
 			if rec.type == 'scheduled':
 				return True
 			if rec.type == 'technician':
-				return True
+				return self.pool['report'].get_action(cr, uid, ids, 'asset_extension.report_mrotechnician', context=context)
 			if rec.type == 'equipment':
 				return True
