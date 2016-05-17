@@ -10,8 +10,8 @@
 	                    <button name="bid_received" states="rfq" type="object" string="Bid Received" class="oe_highlight"/>
 						<button name="print_rfq" string="Print RFQ" type="object" states="draft,rfq,bid,confirmed"/>
 						<button name="print_po" string="Print" type="object" states="approved,done"/>
-						<button name="send_rfq" string="Send RFQ By Email" type="object" states="draft" class="oe_highlight"/>
-						<button name="send_rfq" string="Re-Send RFQ By Email" type="object" states="rfq"/>
+						<!--button name="send_rfq" string="Send RFQ By Email" type="object" states="draft" class="oe_highlight"/>
+						<button name="send_rfq" string="Re-Send RFQ By Email" type="object" states="rfq"/-->
 						<button name="confirm_rfq" string="Confirm RFQ" type="object" states="draft,rfq"/>
 						<button name="confirm_rfq" string="Confirm RFQ" type="object" states="bid"/>
 						<button name="open_asset" string="Create Asset" type="object" attrs="{'invisible': [('create_asset','=',False)]}"/>
