@@ -21,5 +21,15 @@
             name="asset_extension.report_mrotechnician" 
         />
 
+        <report 
+            id="report_mro_scheduled"
+            string="Scheduled Maintenance"
+            model="mro.hcv.report" 
+            report_type="qweb-pdf"
+			menu="False"
+            file="asset_extension.report_mroscheduled" 
+            name="asset_extension.report_mroscheduled" 
+        />
+
 	</data>
 </openerp>

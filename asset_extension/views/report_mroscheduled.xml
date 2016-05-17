@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_mroscheduled_document">
+    <t t-call="report.external_layout">
+        <div class="page">
+            <div class="oe_structure"/>
+
+            <div class="row">
+                <div class="col-xs-6">
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h3><u>Scheduled Maintenance</u></h3>
+			</div>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+
+			<h5 t-if="o.start_period or o.end_period">
+				<strong>  Period : </strong>
+				<span t-if="o.start_period and not o.end_period">From </span>
+				<span t-if="not o.start_period and o.end_period">From Beginning - </span>
+				<span t-esc="formatLang(o.start_period, date=True)"/> 
+				<span t-if="o.start_period and o.end_period">To </span>
+				<span t-esc="formatLang(o.end_period, date=True)"/>
+			</h5>
+			<h5>
+				<span t-if="not o.start_period and not o.end_period"><strong>Period : </strong>All Scheduled Maintenance Orders</span>
+			</h5>
+
+			<h5><strong>Total Orders : </strong><span t-esc="getTotal(o.start_period, o.end_period)"/></h5>
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr/>
+					</table>
+				</div>
+			</div>
+
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width:25%"><strong>Type of Maintenance</strong></th>
+                        <th style="width:20%"><strong>Asset</strong></th>
+                        <th style="width:23%"><strong>Execution Date</strong></th>
+                        <th style="width:20%"><strong>Technician</strong></th>
+                        <th style="width:12%"><strong>State</strong></th>
+                    </tr>
+                </thead>
+             </table>
+            <table class="table table-condensed">
+                <tbody>
+                    <t t-foreach="getLines(o.start_period, o.end_period)" t-as="l">
+                    <tr>
+                        <td style="width:23%">
+                            <span t-field="l.type"/>
+                        </td>
+                        <td style="width:22%">
+                            <span t-field="l.asset_id.name"/>
+                        </td>
+                        <td style="width:23%">
+                            <span t-field="l.date_execution"/>
+                        </td>
+                        <td style="width:20%">
+                            <span t-if="l.type == 'Preventive'"><span t-field="l.technician_p_id.name"/></span>
+                            <span t-if="l.type == 'Corrective'"><span t-field="l.technician_id.name"/></span>
+                        </td>
+                        <td  style="width:12%">
+							<span t-if="l.state == 'draft'">Draft</span>
+							<span t-if="l.state == 'released'">Waiting Parts</span>
+							<span t-if="l.state == 'ready'">Ready to Maintenance</span>
+							<span t-if="l.state == 'validate'">Validated</span>
+							<span t-if="l.state == 'done'">Done</span>
+							<span t-if="l.state == 'cancel'">Cancelled</span>
+                        </td>
+                    </tr>
+                   </t>
+                </tbody>
+            </table>
+
+            <div class="oe_structure"/>
+        </div>
+    </t>
+</template>
+
+<template id="report_mroscheduled">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'asset_extension.report_mroscheduled_document')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>
