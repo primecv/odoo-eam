@@ -43,10 +43,10 @@
 				</div>
 			</div>
 
-			<t t-foreach="getLines(o.start_period, o.end_period)" t-as="l">
+			<t t-foreach="getLines(o.start_period, o.end_period, o.technician_id)" t-as="l">
             	<table class="table-condensed" style="width:100%">
                     <tr style="width:100%">
-                        <span t-if="l"><strong>Technician Name : </strong> <span t-esc="l"/></span>
+                        <span t-if="l"><strong>Technician Name : </strong> <span t-esc="l.name"/></span>
 						<br/>
                         <span t-if="l"><strong>Total Orders : </strong> <span t-esc="getLineCount(o.start_period, o.end_period, l)"/></span>
 						<br/>

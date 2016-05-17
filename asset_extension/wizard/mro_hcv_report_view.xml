@@ -14,6 +14,7 @@
 					<group attrs="{'invisible': [('type','=',False)]}" col="4" name="period" string="Filters">
 						<field name="start_period" attrs="{'required': [('type','=','period')]}"/>	
 						<field name="end_period" attrs="{'required': [('type','=','period')]}"/>
+						<field name="technician_id" attrs="{'invisible': [('type','!=','technician')]}"/>
 					</group>
 
 					<footer>

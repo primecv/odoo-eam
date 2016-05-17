@@ -21,7 +21,7 @@ class mro_hcv_report(osv.osv_memory):
 		'end_period': fields.date('End Date'),
 
 		'partner_id': fields.many2one('res.partner', 'Partner'),
-
+		'technician_id': fields.many2one('hr.employee', 'Technician (Optional)', help="If selected, Report will list Maintenance Orders for selected Technician only.")
 	}
 
 	_defaults = {
