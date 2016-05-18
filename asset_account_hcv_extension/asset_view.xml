@@ -31,7 +31,7 @@
 					<label for="method_time" string="" attrs="{'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}" invisible="1"/>
 				</label>
 				<field name="method_time" position="replace">
-					<field name="method_time" on_change="onchange_method_time(method_time)" class="oe_inline" attrs="{'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}"/>
+					<field name="method_time" on_change="onchange_method_time(method_time)" class="oe_inline" attrs="{'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}" invisible="1"/>
 				</field>
 				<button icon="terp-stock_effects-object-colorize" position="replace">
                     <button name="%(account_asset.action_asset_modify)d" string="Change Duration" type="action" icon="terp-stock_effects-object-colorize" class="oe_inline" colspan="1" attrs="{'invisible':[('state','=','close')]}"/>
