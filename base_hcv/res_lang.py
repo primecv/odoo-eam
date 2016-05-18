@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2015 Prime Consulting, Cape Verde (<http://prime.cv>).
+#    Prime Consulting, Cape Verde
+#    Copyright (C) 2016 Prime Consulting (<http://www.prime.cv>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,22 +19,14 @@
 #
 ##############################################################################
 
+from openerp.osv import fields, osv
 
-{
-    'name': 'Base Extension for HCV',
-    'version': '1.0',
-    'category': 'Tools',
-    'summary': 'Base Extension for HCV - General Customization of Base Modules',
-    'author': 'Prime Consulting, Cape Verde',
-    'website': 'prime.cv',
-    'category': 'Tools',
-    'depends': ['base', 'purchase'],
-    'data': [
-        'partner_view.xml',
-        'res_lang_data.xml',
-    ],
-    'installable': True,
-    'auto_install': False,
-    'application': False,
-}
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+class lang(osv.osv):
+	_inherit = "res.lang"
+
+	def set_date_format(self, cr, uid, **args):
+		langs = self.search(cr, uid, [('id','>',0)])
+		for lang in self.read(cr, uid, langs, ['id']):
+			self.write(cr, uid, [lang['id']], {'date_format': '%d/%m/%Y'})
+		return True
+

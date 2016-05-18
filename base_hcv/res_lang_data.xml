@@ -1,0 +1,7 @@
+<openerp>
+
+	<data>
+		<function name="set_date_format" model="res.lang"/>
+	</data>
+
+</openerp>
