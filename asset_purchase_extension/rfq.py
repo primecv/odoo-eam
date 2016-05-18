@@ -305,6 +305,8 @@ class rfq_hcv(osv.osv):
 			view_id = view_ref and view_ref[1] or False,
 			if rec.create_asset:
 				result = self.get_depreciation_factor(cr, uid, ids)
+				equipment_origin_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_extension', 'asset_equip_origin3')
+				equipment_origin_id = equipment_origin_id and equipment_origin_id[1] or False
 				return {
 					'type': 'ir.actions.act_window',
 					'res_model': 'asset.asset',
@@ -321,6 +323,8 @@ class rfq_hcv(osv.osv):
 								'default_vendor_id': result['supplier_id'],
 								'default_purchase_date': result['order_date'],
 								'price_unit': result['price_unit'],
+								'default_asset_value': result['price_unit'],
+								'default_equipment_origin_id': equipment_origin_id,
 								},
 					'target': 'current'
 				}				
@@ -341,6 +345,8 @@ class rfq_hcv(osv.osv):
 			view_id = view_ref and view_ref[1] or False,
 			if rec.create_accessory:
 				result = self.get_depreciation_factor(cr, uid, ids)
+				equipment_origin_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'asset_extension', 'asset_equip_origin3')
+				equipment_origin_id = equipment_origin_id and equipment_origin_id[1] or False
 				return {
 					'type': 'ir.actions.act_window',
 					'res_model': 'asset.asset',
@@ -358,6 +364,8 @@ class rfq_hcv(osv.osv):
 								'default_supplier_id': result['supplier_id'],
 								'default_purchase_date': result['order_date'],
 								'price_unit': result['price_unit'],
+								'default_asset_value': result['price_unit'],
+								'default_equipment_origin_id': equipment_origin_id,
 								},
 					'target': 'current'
 				}				
