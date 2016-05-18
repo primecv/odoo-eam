@@ -68,6 +68,61 @@ class asset_asset(osv.osv):
 class account_asset(osv.osv):
 	_inherit = 'account.asset.asset'
 
+	def get_dates(self, cr, uid, lines):
+		deprs = []
+		for depr in lines:
+			deprs.append(depr.id)
+		smallest = self.pool.get('account.asset.depreciation.line').search(cr, uid, [('id','in',deprs), ('depreciation_date is not null')], order='depreciation_date asc')
+		greatest = self.pool.get('account.asset.depreciation.line').search(cr, uid, [('id', 'in', deprs), ('depreciation_date is not null')], order='depreciation_date desc')
+		sdate, gdate = False, False
+		if smallest:
+			for rec in self.pool.get('account.asset.depreciation.line').browse(cr, uid, [smallest[0]]):
+				sdate = rec.depreciation_date
+		if greatest:
+			for rec in self.pool.get('account.asset.depreciation.line').browse(cr, uid, [greatest[0]]):
+				gdate = rec.depreciation_date
+		return (sdate, gdate)
+
+	def check_depreciation_period(self, cr, uid, ids, context=None):
+		for rec in self.browse(cr, uid, ids):
+			assets = self.search(cr, uid, [('asset_id','=',rec.asset_id.id), ('id','!=',rec.id)])
+			flag = True
+			for asset in self.browse(cr, uid, assets):
+				for curr_depr in rec.depreciation_line_ids:
+					for depr in asset.depreciation_line_ids:
+						if depr.depreciation_date and depr.depreciation_date_to:
+							if curr_depr.depreciation_date and curr_depr.depreciation_date_to:
+								if (curr_depr.depreciation_date >= depr.depreciation_date and \
+									curr_depr.depreciation_date <= depr.depreciation_date_to) or \
+									(curr_depr.depreciation_date_to >= depr.depreciation_date and \
+									curr_depr.depreciation_date_to <= depr.depreciation_date_to):
+									flag = False
+									break
+							elif curr_depr.depreciation_date and not curr_depr.depreciation_date_to:
+								if (curr_depr.depreciation_date >= depr.depreciation_date and \
+									curr_depr.depreciation_date <= depr.depreciation_date_to):
+									flag = False
+									break
+							elif not curr_depr.depreciation_date and curr_depr.depreciation_date_to:
+								if (curr_depr.depreciation_date_to >= depr.depreciation_date and \
+									curr_depr.depreciation_date_to <= depr.depreciation_date_to):
+									flag = False
+									break
+						elif depr.depreciation_date and not depr.depreciation_date_to:
+							smallest, largest = self.get_dates(cr, uid, asset.depreciation_line_ids)
+							if smallest and largest:
+								if curr_depr.depreciation_date and curr_depr.depreciation_date >= smallest \
+									and curr_depr.depreciation_date <= largest:
+									flag = False
+									break
+								if curr_depr.depreciation_date_to and curr_depr.depreciation_date_to >= smallest \
+									and curr_depr.depreciation_date_to <= largest:
+									flag = False
+									break
+			if flag is False:
+				return False
+			return True
+
 	_columns = {
 		'asset_location_id': fields.related('asset_id', 'property_stock_asset', relation='stock.location', type='many2one', string='Asset Location', store=True, readonly=True),
 		'barcode_no': fields.related('asset_id', 'barcode_no', type='char', string='Barcode No', store=True, readonly=True),
@@ -76,6 +131,8 @@ class account_asset(osv.osv):
 		'total_units': fields.integer('No of Units'),
 		'method_number_copy':fields.integer('Number of Depreciations'),
 	}
+
+	_constraints = [(check_depreciation_period, 'An Asset Cannot be downgraded more than once in the same period.', ['depreciation_line_ids'])]
 
 	def onchange_asset(self, cr, uid, ids, asset, context=None):
 		asset = self.pool.get('asset.asset').browse(cr, uid, asset, context=context)
