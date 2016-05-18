@@ -28,7 +28,7 @@
 					<field name="method_progress_factor" invisible="1"/>
 				</field>
 				<label for="method_time" position="replace">
-					<label for="method_time" string="" attrs="{'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}"/>
+					<label for="method_time" string="" attrs="{'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}" invisible="1"/>
 				</label>
 				<field name="method_time" position="replace">
 					<field name="method_time" on_change="onchange_method_time(method_time)" class="oe_inline" attrs="{'invisible':[('method','!=','linear')], 'readonly':[('state','!=','draft')]}"/>
