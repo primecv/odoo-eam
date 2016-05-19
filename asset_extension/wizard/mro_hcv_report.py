@@ -31,6 +31,8 @@ class mro_hcv_report(osv.osv_memory):
 
 	def print_report(self, cr, uid, ids, context=None):
 		for rec in self.browse(cr, uid, ids):
+			if (rec.start_period and rec.end_period) and (rec.end_period < rec.start_period):
+				raise osv.except_osv(('Alert!'),('End Date Must be greater than Start Date.'))
 			if rec.type == 'scheduled':
 				return self.pool['report'].get_action(cr, uid, ids, 'asset_extension.report_mroscheduled', context=context)
 			if rec.type == 'period':
