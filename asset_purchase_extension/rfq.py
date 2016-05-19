@@ -334,6 +334,7 @@ class rfq_hcv(osv.osv):
 					'res_model': 'asset.asset',
 					'view_type': 'form',
 					'view_mode': 'form',
+					'view_id': view_id or False,
 					'res_id': int(rec.new_asset_id.id),
 					'context': {'po_asset': True},
 					'target': 'current'
