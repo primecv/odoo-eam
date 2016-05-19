@@ -12,7 +12,7 @@
 					<field name="remaining_value"/>
 				</field>
 				<field name="category_id" position="before">
-					<field name="asset_id" attrs="{'readonly':[('state','!=','draft')]}" on_change="onchange_asset(asset_id)"/>
+					<field name="asset_id" attrs="{'readonly':[('state','!=','draft')]}" on_change="onchange_asset(asset_id)" context="{'form_view_ref': 'asset_stock.assets_form_view_stock'}"/>
 					<field name="asset_location_id" attrs="{'invisible': [('asset_location_id','=',False)]}"/>
 					<field name="barcode_no" attrs="{'invisible': [('asset_location_id','=',False)]}"/>
 				</field>
