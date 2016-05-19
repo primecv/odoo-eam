@@ -21,6 +21,7 @@ class mro_hcv_report(osv.osv_memory):
 		'end_period': fields.date('End Date'),
 
 		'partner_id': fields.many2one('res.partner', 'Partner'),
+		'asset_id': fields.many2one('asset.asset', 'Equipment (Optional)', help="If selected, Report will list Maintenance Orders for selected Equipment only."),
 		'technician_id': fields.many2one('hr.employee', 'Technician (Optional)', help="If selected, Report will list Maintenance Orders for selected Technician only.")
 	}
 
@@ -34,9 +35,7 @@ class mro_hcv_report(osv.osv_memory):
 				return self.pool['report'].get_action(cr, uid, ids, 'asset_extension.report_mroscheduled', context=context)
 			if rec.type == 'period':
 				return self.pool['report'].get_action(cr, uid, ids, 'asset_extension.report_mroperiod', context=context)
-			if rec.type == 'scheduled':
-				return True
 			if rec.type == 'technician':
 				return self.pool['report'].get_action(cr, uid, ids, 'asset_extension.report_mrotechnician', context=context)
 			if rec.type == 'equipment':
-				return True
+				return self.pool['report'].get_action(cr, uid, ids, 'asset_extension.report_mroequipment', context=context)

@@ -49,6 +49,7 @@
         'views/report_mroperiod.xml',
         'views/report_mroscheduled.xml',
         'views/report_mrotechnician.xml',
+        'views/report_mroequipment.xml',
         'views/report_assetlist.xml',
         'wizard/asset_asset_new_barcode_view.xml',
         'wizard/asset_list_view.xml',

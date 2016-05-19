@@ -31,5 +31,15 @@
             name="asset_extension.report_mroscheduled" 
         />
 
+        <report 
+            id="report_mro_equipment"
+            string="Maintenance By Equipment"
+            model="mro.hcv.report" 
+            report_type="qweb-pdf"
+			menu="False"
+            file="asset_extension.report_mroequipment" 
+            name="asset_extension.report_mroequipment" 
+        />
+
 	</data>
 </openerp>
