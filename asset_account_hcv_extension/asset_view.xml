@@ -8,6 +8,12 @@
             <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
             <field name="arch" type="xml">
 				<!--field name="asset_id" position="replace"/-->
+				<field name="state" position="before">
+					<button name="print_entries" string="Entries" type="object"/>
+				</field>
+				<div class="oe_button_box oe_right" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</div>
 				<field name="amount" position="after">
 					<field name="remaining_value"/>
 				</field>

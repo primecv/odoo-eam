@@ -44,11 +44,15 @@ class depreciation_map_report(osv.osv):
 
 			flag = False
 			if rec.asset_ref: #print report for selected asset
-				account_assets = self.pool.get('account.asset.asset').search(cr, uid, [('asset_id','=',rec.asset_ref.id)])
-				if account_assets:
-					flag = True
-					for acc_asset in self.pool.get('account.asset.asset').browse(cr, uid, account_assets):
+				if context and 'asset' in context and context['asset'] == True:
+					for acc_asset in self.pool.get('account.asset.asset').browse(cr, uid, [context['asset_id']]):
 						self.pool.get('account.asset.asset').write(cr, uid, [acc_asset.id], {'depreciation_map_id':rec.id})
+				else:
+					account_assets = self.pool.get('account.asset.asset').search(cr, uid, [('asset_id','=',rec.asset_ref.id)])
+					if account_assets:
+						flag = True
+						for acc_asset in self.pool.get('account.asset.asset').browse(cr, uid, account_assets):
+							self.pool.get('account.asset.asset').write(cr, uid, [acc_asset.id], {'depreciation_map_id':rec.id})
 			elif not rec.asset_ref: #print report for all assets in a location
 				assets = self.pool.get('asset.asset').search(cr, uid, [('property_stock_asset','=',location_id)])
 				if assets:

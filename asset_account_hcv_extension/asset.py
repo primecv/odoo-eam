@@ -306,6 +306,20 @@ class account_asset(osv.osv):
 						year = depreciation_date.year
 				return True
 
+	def print_entries(self, cr, uid, ids, context=None):
+		for rec in self.browse(cr, uid, ids):
+			asset_id = rec.asset_id.id
+			location_id = rec.asset_id.property_stock_asset.id
+			ttype = 'hospital'
+			if rec.asset_id.property_stock_asset.location_id:
+				ttype = 'service'
+			entry_id = self.pool.get('asset.depreciation.map.report').create(cr, uid, {
+										'asset_ref': asset_id,
+										'type': ttype,
+										str(ttype)+'_location_id': location_id,
+			})
+			return self.pool.get('asset.depreciation.map.report').print_report(cr, uid, [entry_id], context={'asset': True, 'asset_id': rec.id})
+
 class account_asset_depreciation_line(osv.osv):
 	_inherit = "account.asset.depreciation.line"
 
