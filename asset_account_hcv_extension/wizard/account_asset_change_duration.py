@@ -102,6 +102,9 @@ class asset_modify(osv.osv_memory):
             'total_hours': data.total_hours,
             'total_units': data.total_units,
         }
+        if data.method == 'degressive':
+            history_vals['method_number'] = 0
+            history_vals['method_period'] = 0
         history_obj.create(cr, uid, history_vals, context=context)
         asset_vals = {
             'method_number_copy': data.method_number,

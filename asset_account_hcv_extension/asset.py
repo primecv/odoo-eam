@@ -417,6 +417,7 @@ class account_asset_depreciation_line(osv.osv):
 
 class account_asset_history(osv.osv):
 	_inherit = 'account.asset.history'
+	_order = "id asc"
 
 	_columns = {
 		'total_hours': fields.float('No of Hours'),
