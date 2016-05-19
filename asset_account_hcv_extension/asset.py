@@ -138,6 +138,7 @@ class account_asset(osv.osv):
 		asset = self.pool.get('asset.asset').browse(cr, uid, asset, context=context)
 		return {'value': {	'name': asset.name, 
 							'barcode_no': asset.barcode_no, 
+							'category_id': asset.account_asset_category_id and asset.account_asset_category_id.id or False,
 							'asset_location_id': asset.property_stock_asset and asset.property_stock_asset.id or False
 						}
 				}
