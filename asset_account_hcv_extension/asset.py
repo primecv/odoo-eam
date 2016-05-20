@@ -143,9 +143,12 @@ class account_asset(osv.osv):
 						}
 				}
 
-	def onchange_category_id(self, cr, uid, ids, category_id, context=None):
+	def onchange_category_id(self, cr, uid, ids, asset_id, category_id, context=None):
 		res = {'value':{}}
 		asset_categ_obj = self.pool.get('account.asset.category')
+		if asset_id:
+			asset = self.pool.get('asset.asset').browse(cr, uid, asset_id, context=context)
+			category_id = asset.account_asset_category_id and asset.account_asset_category_id.id or False
 		if category_id:
 			category_obj = asset_categ_obj.browse(cr, uid, category_id, context=context)
 			res['value'] = {
@@ -157,7 +160,10 @@ class account_asset(osv.osv):
                             'method_progress_factor': category_obj.method_progress_factor,
                             'method_end': category_obj.method_end,
                             'prorata': category_obj.prorata,
+							'category_id': category_id
             }
+		else:
+			res['value'] = {'category_id': category_id}
 		return res
 
 

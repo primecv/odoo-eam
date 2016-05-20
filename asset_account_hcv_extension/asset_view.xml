@@ -23,6 +23,9 @@
 					<field name="barcode_no" attrs="{'invisible': [('asset_location_id','=',False)]}"/>
 				</field>
 
+				<field name="category_id" position="attributes">
+					<attribute name="on_change">onchange_category_id(asset_id, category_id)</attribute>
+				</field>
                 <label for="name" position="replace"/>
                 <field name="name" position="attributes">
                     <attribute name="invisible">1</attribute>
