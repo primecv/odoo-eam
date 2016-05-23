@@ -113,3 +113,20 @@ class stock_move(osv.osv):
 			self.pool.get('registration.request.hcv').write(cr, uid, rr_id, {'state': 'transfer_cancel'})
 		return res
 
+class stock_picking(osv.osv):
+	_inherit = "stock.picking"
+
+	def write(self, cr, uid, ids, vals, context=None):
+		if 'date_done' in vals:
+			for rec in self.browse(cr, uid, ids):
+				po_ref = rec.origin
+			if 'origin' in vals:
+				po_ref = vals['origin']
+			po_id = self.pool.get('purchase.order').search(cr, uid, [('name','=',po_ref)])
+			if po_id:
+				po_hcv_id = self.pool.get('purchase.order').browse(cr, uid, [po_id[0]])[0].rfq_hcv_id
+				if po_hcv_id:
+					po_hcv_id = po_hcv_id.id
+					self.pool.get('rfq.hcv').write(cr, uid, [po_hcv_id], {'state': 'done'})
+		return super(stock_picking, self).write(cr, uid, ids, vals, context)
+
