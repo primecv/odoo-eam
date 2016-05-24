@@ -32,6 +32,7 @@
     'data': [
         'partner_view.xml',
         'res_lang_data.xml',
+        'partner_report.xml',
     ],
     'installable': True,
     'auto_install': False,

@@ -1,0 +1,30 @@
+<openerp>
+	<data>
+
+        <report
+            id="base.res_partner_address_report"
+            model="res.partner"
+            name="res.partner"
+            string="Labels"
+            xml="base/res/res_partner_report_address.xml"
+            xsl="base/res/res_partner_report_address.xsl"
+			menu="False"
+            groups="base.group_no_one"/>
+
+        <report 
+            id="account.action_report_print_overdue"
+            model="res.partner"
+            report_type="qweb-pdf"
+            string="Overdue Payments"
+            name="account.report_overdue"
+            file="account.report_overdue"
+			menu="False"
+        />
+
+	</data>
+
+	<data noupdate="1">
+		<delete model="ir.values" id="account.ir_values_account_partner_ledger"/>
+	</data>
+
+</openerp>
