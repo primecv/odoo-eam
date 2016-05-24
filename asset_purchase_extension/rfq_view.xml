@@ -116,6 +116,29 @@
 			</field>
 		</record>
 
+		<record id="rfq_hcv_search" model="ir.ui.view">
+			<field name="name">rfq.hcv.search</field>		
+			<field name="model">rfq.hcv</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="RFQ">
+					<field name="name"/>
+					<field name="type" string="Type"/>
+					<field name="partner_id" operator="child_of"/>
+					<field name="product_id"/>
+					<field name="state"/>
+                    <filter name="parts" string="Parts" domain="[('type','=','parts')]"/>
+                    <filter name="asset" string="Assets" domain="[('type','=','asset')]"/>
+                    <filter name="accessory" string="Accessory" domain="[('type','=','accessory')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Type" domain="[]" context="{'group_by':'type'}"/>
+						<filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
 		<record id="rfq_hcv_action" model="ir.actions.act_window">
 			<field name="name">Requests for Quotation</field>
 			<field name="res_model">rfq.hcv</field>

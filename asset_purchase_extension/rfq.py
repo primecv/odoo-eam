@@ -64,6 +64,7 @@ class rfq_hcv(osv.osv):
 		'create_accessory': fields.boolean('Create Accessory?'),
 		'new_asset_id': fields.many2one('asset.asset', 'Related Asset'),
 		'new_accessory_id': fields.many2one('asset.asset', 'Related Accessory'),
+		'partner_id': fields.many2one('res.partner', 'Supplier'),
 	}
 
 	def _get_picking_in(self, cr, uid, context=None):
@@ -480,10 +481,12 @@ class rfq_hcv_print(osv.osv):
 			#2. Confirm rfq for with selected supplier :
 			if rec.confirm_rfq:
 				for rfq in self.pool.get('rfq.hcv').browse(cr, uid, rfq_id):
+					confirm_supplier_id = False
 					if rfq.type == 'parts':
 						for line in rfq.supplier_line:
 							if line.supplier_id.id == supplier_id:
 								po_id = line.po_id.id
+								confirm_supplier_id = supplier_id
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
 								#create Product entry in Products supplied tab of Supplier:
 								product_supplier_id = self.pool.get('product.supplierinfo.hcv').search(cr, uid, 
@@ -503,6 +506,7 @@ class rfq_hcv_print(osv.osv):
 						for line in rfq.supplier_line:
 							self.pool.get('purchase.order').action_cancel(cr, uid, [line.po_id.id])
 							if line.supplier_id.id == supplier_id:
+								confirm_supplier_id = supplier_id
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
 							elif line.po_id:
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
@@ -512,6 +516,7 @@ class rfq_hcv_print(osv.osv):
 						for line in rfq.supplier_line:
 							self.pool.get('purchase.order').action_cancel(cr, uid, [line.po_id.id])
 							if line.supplier_id.id == supplier_id:
+								confirm_supplier_id = supplier_id
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'done'})
 							elif line.po_id:
 								self.pool.get('rfq.suppliers.hcv').write(cr, uid, [line.id], {'state':'cancel'})
@@ -523,5 +528,5 @@ class rfq_hcv_print(osv.osv):
 					self.pool.get('purchase.order').write(cr, uid, [po_id], {'name': name})
 					self.pool.get('purchase.order').signal_workflow(cr, uid, [po_id], 'purchase_confirm')
 					self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'po_id': po_id, 'purchase_date':dt.today()})
-			return self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'state': 'approved'})
+			return self.pool.get('rfq.hcv').write(cr, uid, rfq_id, {'state': 'approved', 'partner_id': confirm_supplier_id})
 
