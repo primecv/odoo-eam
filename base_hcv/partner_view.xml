@@ -1,19 +1,9 @@
 <openerp>
 	<data>
 
+		<delete id="base_hcv.partner_view_buttons_hcv" model="ir.ui.view"/>
+
 		<!-- Hide Journal Items button on Partner form -->
-        <!--record model="ir.ui.view" id="partner_view_buttons_hcv">
-            <field name="name">partner.view.buttons.hcv</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="account.partner_view_buttons" />
-            <field name="arch" type="xml">
-				<button name="%(account.action_account_moves_all_tree)d" position="replace">
-                    <button type="action" class="oe_stat_button" name="%(account.action_account_moves_all_tree)d" groups="account.group_account_user" icon="fa-list" invisible="1">
-                        <field string="Journal Items" name="journal_item_count" widget="statinfo" invisible="1"/>
-                    </button>
-				</button>
-			</field>
-		</record-->
         <record model="ir.ui.view" id="partner_view_button_journal_item_count_hcv">
             <field name="name">partner.view.button.journal_item_count.hcv</field>
             <field name="model">res.partner</field>
