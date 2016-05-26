@@ -50,7 +50,7 @@
                                     <div name="duration">
                                         <field name="date" class="oe_inline"/>
                                     </div>
-									<field name="quantity_max"/>
+									<field name="quantity_max" invisible="1"/>
                                 </group>
                                 <separator string="Terms and Conditions" name="description"/>
                                 <field name="description"/>
