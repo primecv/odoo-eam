@@ -37,14 +37,14 @@
                         <notebook>
                             <page string="Contract Information" name="contract_page" attrs="{'invisible':[('type','not in',['contract', 'template'])]}">
                                 <group string="Renewal" name="contract">
-                                    <p colspan="2" class="oe_grey oe_edit_only">
+                                    <!--p colspan="2" class="oe_grey oe_edit_only">
                                         Once the end date of the contract is
                                         passed or the maximum number of service
                                         units (e.g. support contract) is
                                         reached, the account manager is notified 
                                         by email to renew the contract with the
                                         customer.
-                                    </p>
+                                    </p-->
                                     <field name="date_start"/>
                                     <label for="date" string="End Date"/>
                                     <div name="duration">
