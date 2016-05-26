@@ -145,6 +145,25 @@
             </field>
         </record>
 
+        <record id="view_account_analytic_account_hcv_tree" model="ir.ui.view">
+            <field name="name">account.analytic.account.hcv.tree</field>
+            <field name="model">account.analytic.account</field>
+			<field name="inherit_id" ref="account.view_account_analytic_account_tree"/>
+			<field name="arch" type="xml">
+				<field name="debit" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</field>
+				<field name="credit" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</field>
+				<field name="balance" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</field>
+				<field name="type" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</field>
+			</field>
+		</record>
 
         <record model="ir.actions.act_window.view" id="action_account_analytic_purchase_tree_view">
             <field name="sequence" eval="1"/>
