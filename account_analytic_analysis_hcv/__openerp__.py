@@ -28,7 +28,8 @@
     'website': 'prime.cv',
     'depends': ['account_analytic_analysis', 'purchase'],
     'data': [
-        'account_analytic_analysis_view.xml'
+        'account_analytic_analysis_view.xml',
+        'report.xml',
     ],
     'installable': True,
     'auto_install': False,

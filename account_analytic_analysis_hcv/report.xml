@@ -1,0 +1,13 @@
+<openerp>
+	<data noupdate="1">
+
+		<delete model="ir.values" id="account.account_analytic_balance_values"/>
+
+        <delete model="ir.values" id="account.account_analytic_cost_values"/>
+
+        <delete model="ir.values" id="account.account_analytic_invert_balance_values"/>
+
+        <delete model="ir.values" id="account.account_analytic_cost_ledger_journal_values"/>
+
+	</data>
+</openerp>
