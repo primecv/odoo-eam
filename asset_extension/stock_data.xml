@@ -11,6 +11,20 @@
         </record>
 
 	</data>
+
+	<data>
+		<!-- Hide Picking Report -->
+        <report 
+            string="Picking" 
+            id="stock.action_report_picking" 
+            model="stock.picking" 
+            report_type="qweb-pdf"
+            name="stock.report_picking" 
+            file="stock.report_picking" 
+			menu="False"
+        />
+
+	</data>
 </openerp>
 
 		

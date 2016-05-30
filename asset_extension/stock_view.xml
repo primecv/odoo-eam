@@ -1,6 +1,17 @@
 <openerp>
 	<data>
 
+        <record id="view_picking_hcv_form" model="ir.ui.view">
+            <field name="name">stock.picking.hcv.form</field>
+            <field name="model">stock.picking</field>
+			<field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+				<button name="do_print_picking" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</button>
+			</field>
+		</record>
+
         <record id="view_location_asset_form" model="ir.ui.view">
             <field name="name">stock.location.asset.form</field>
             <field name="model">stock.location</field>
