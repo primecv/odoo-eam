@@ -10,7 +10,7 @@
         <record model="ir.actions.act_window.view" id="stock.action_stock_move_form_all">
             <field name="sequence" eval="3"/>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_stock_move_hcv_form"/>
+            <field name="view_id" ref="view_stock_move_form_hcv"/>
 	        <field name="act_window_id" ref="stock.action_move_form2"/>
         </record>
 
