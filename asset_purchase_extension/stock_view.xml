@@ -4,7 +4,7 @@
         <record id="view_stock_move_form_hcv" model="ir.ui.view">
             <field name="name">stock.move.hcv.form</field>
             <field name="model">stock.move</field>
-            <field eval="21" name="priority"/>
+            <field eval="2" name="priority"/>
             <field name="arch" type="xml">
                 <form string="Stock Moves">
                 <header>
@@ -50,13 +50,13 @@
                         </group>
                         <group name="origin_grp" string="Origin">
                             <field name="origin" readonly="1"/>
-                            <field name="location_id" groups="stock.group_locations"/>
+                            <field name="location_id"/>
                             <field name="picking_id" domain="[('picking_type_id','=',picking_type_id)]" readonly="1"/>
                             <field name="create_date" groups="base.group_no_one"/>
-                            <field name="procure_method" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="stock.group_adv_location"/>
+                            <field name="procure_method" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             <field name="group_id" invisible="1"/>
                         </group>
-                        <group name="destination_grp" string="Destination" groups="stock.group_locations">
+                        <group name="destination_grp" string="Destination">
                             <field name="location_dest_id" />
                             <field name="partner_id" context="{'contact_display':'partner'}" invisible="1"/>
                         </group>
