@@ -28,6 +28,7 @@ class asset_asset(osv.osv):
           string="Asset Location",
           store=True,
 		  required=True,
+		  track_visibility='onchange',
           help="This location will be used as the destination location for installed parts during asset life."),
 		'asset_location_child_ids': fields.one2many('asset.location.child.rel', 'child_id', 'Asset Location Hierarchy'),
 		'asset_location_parent_ids': fields.one2many('asset.location.parent.rel', 'parent_id', 'Asset Location Hierarchy'),
