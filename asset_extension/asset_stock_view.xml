@@ -268,5 +268,97 @@
 		
 		<menuitem id="menu_res_country_city_stock" parent="menu_localisation_stock" sequence="8" action="res_partner_hospital.res_country_city_action" groups="asset.group_mro_manager"/>
 
+		<!-- Asset Stock Move views -->
+		<record id="asset_stock_move_form" model="ir.ui.view">
+			<field name="name">asset.stock.move.form</field>
+			<field name="model">asset.stock.move</field>
+			<field name="arch" type="xml">
+				<form string="Stock Moves">
+					<header>
+						<button name="do_transfer" type="object" string="Transfer" class="oe_highlight" states="draft"/>
+						<button name="action_cancel" type="object" string="Cancel" states="draft"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,done" readonly="1"/>
+					</header>
+					<sheet>
+						<group col="4">
+							<group col="2">
+								<field name="type" required="1" attrs="{'readonly':[('state','in',('done','cancel'))]}" on_change="onchange_type(type)"/>
+							</group>
+							<group col="2"/>
+						</group>
+						<group>
+							<group>
+								<field name="accessory_id" attrs="{'required':[('type','=','accessory')], 'invisible':[('type','!=','accessory')], 'readonly': [('state','in',('done','cancel'))]}" context="{'form_view_ref': 'asset_extension.product_template_parts_form_view', 'default_product_type': 'accessory'}" on_change="onchange_asset(type,asset_id,accessory_id,location_id)"/>
+								<field name="asset_id" attrs="{'required':[('type','=','asset')], 'invisible':[('type','!=','asset')], 'readonly': [('state','in',('done','cancel'))]}" on_change="onchange_asset(type,asset_id,accessory_id,location_id)"/>
+								<field name="name" required="1" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
+							</group>
+							<group>
+								<field name="create_date" readonly="1"/>
+								<field name="date" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
+							</group>
+						</group>
+						<group>
+							<group name="source_loc" string="Source">
+								<field name="location_id" required="1" on_change="onchange_asset(type,asset_id,accessory_id,location_id)" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
+							</group>
+							<group name="destination_loc" string="Destination">
+								<field name="location_dest_id" required="1" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
+							</group>
+						</group>
+						<field name="note" placeholder="Other Info...." attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
+					</sheet>
+		            <div class="oe_chatter">
+		                <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+		                <field name="message_ids" widget="mail_thread"/>
+		            </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="asset_stock_move_tree" model="ir.ui.view">
+			<field name="name">asset.stock.move.tree</field>
+			<field name="model">asset.stock.move</field>
+			<field name="arch" type="xml">
+				<tree string="Asset Moves" colors="grey:state == 'cancel';red:state=='draft'">
+					<field name="type"/>
+					<field name="equipment_ref"/>
+					<field name="name"/>
+					<field name="location_id"/>
+					<field name="location_dest_id"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="asset_stock_move_search" model="ir.ui.view">
+			<field name="name">asset.stock.move.search</field>
+			<field name="model">asset.stock.move</field>
+			<field name="arch" type="xml">
+				<search string="Asset Moves">
+					<field name="equipment_ref" string="Equipment"/>
+					<field name="type"/>
+					<field name="location_id"/>
+					<field name="location_dest_id"/>
+                    <filter name="asset" string="Assets" domain="[('type','=','asset')]"/>
+                    <filter name="accessory" string="Accessory" domain="[('type','=','accessory')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Type" domain="[]" context="{'group_by':'type'}"/>
+						<filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="asset_stock_move_action" model="ir.actions.act_window">
+			<field name="name">Asset Moves</field>
+			<field name="res_model">asset.stock.move</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html"><p class="oe_view_nocontent_create">Click here to create new Asset Moves</p></field>
+		</record>
+
+		<menuitem action="asset_stock_move_action" id="menu_action_asset_move" parent="stock.menu_traceability" sequence="4"/>
+		
 	</data>
 </openerp>

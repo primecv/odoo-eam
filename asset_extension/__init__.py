@@ -1,4 +1,5 @@
 import asset
+import asset_stock
 import product
 import hr 
 import res_partner
