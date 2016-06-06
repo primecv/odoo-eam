@@ -4,23 +4,33 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0-20150814\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-11 12:47+0000\n"
-"PO-Revision-Date: 2015-09-14 10:17-0100\n"
-"Last-Translator: eneida\n"
+"POT-Creation-Date: 2016-06-03 18:21+0000\n"
+"PO-Revision-Date: 2016-06-03 23:17-0100\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: pt_PT\n"
-"X-Generator: Poedit 1.6.9\n"
+"Plural-Forms: \n"
+"Language: pt\n"
+"X-Generator: Poedit 1.8.7\n"
+
+#. module: asset_extension
+#: view:website:asset_extension.external_layout_footer
+msgid "&bull;"
+msgstr "&bull;"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "(edit company address)"
-msgstr "(Editar endereço de Empresa)"
+msgstr "(editar endereço de empresa)"
+
+#. module: asset_extension
+#: view:website:asset_extension.minimal_layout
+msgid "<!DOCTYPE html>"
+msgstr "<!DOCTYPE html>"
 
 #. module: asset_extension
 #: model:ir.actions.act_window,help:asset_extension.action_partner_manufacturer_form
@@ -33,7 +43,7 @@ msgid ""
 "                documents, etc.\n"
 "              </p>\n"
 "            "
-msgstr ""
+msgstr "<p class=\"oe_view_nocontent_create\">                Click to add a manufacturer.              </p><p>                Odoo helps you easily track all activities related to                a customer; discussions, history of business opportunities,                documents, etc.              </p>            "
 
 #. module: asset_extension
 #: model:ir.actions.act_window,help:asset_extension.action_employee_technician_form
@@ -42,12 +52,44 @@ msgid ""
 "                Click to add a new Technician.\n"
 "              </p><p>\n"
 "                With just a quick glance on the Odoo employee screen, you\n"
-"                can easily find all the information you need for each "
-"person;\n"
+"                can easily find all the information you need for each person;\n"
 "                contact data, job position, availability, etc.\n"
 "              </p>\n"
 "            "
+msgstr "<p class=\"oe_view_nocontent_create\">                Click to add a new Technician.              </p><p>                With just a quick glance on the Odoo employee screen, you                can easily find all the information you need for each person;                contact data, job position, availability, etc.              </p>            "
+
+#. module: asset_extension
+#: model:ir.actions.act_window,help:asset_extension.asset_accessory_action
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to define a new Accessory.\n"
+"              </p>\n"
+"            "
 msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click para inserir um novo Acessório.\n"
+"              </p>\n"
+"            "
+
+#. module: asset_extension
+#: model:ir.actions.act_window,help:asset_extension.asset_stock_move_action
+msgid "<p class=\"oe_view_nocontent_create\">Click here to create new Asset Moves</p>"
+msgstr "<p class=\"oe_view_nocontent_create\">Click aqui para iniciar uma Transferência</p>"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.asset_accessory_tree
+#: model:ir.actions.act_window,name:asset_extension.asset_accessory_action
+#: model:ir.ui.menu,name:asset_extension.menu_assets_assets_accessories
+msgid "Accessories"
+msgstr "Acessórios"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.asset_accessories_form_view
+#: view:asset.stock.move:asset_extension.asset_stock_move_search
+#: field:asset.stock.move,accessory_id:0 selection:asset.stock.move,type:0
+#: selection:product.product,product_type:0
+msgid "Accessory"
+msgstr "Acessório"
 
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
@@ -56,9 +98,10 @@ msgid "Accounting"
 msgstr "Contabilidade"
 
 #. module: asset_extension
+#: selection:asset.asset,state_operation:0
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "Active"
-msgstr "Activo"
+msgstr "Ativo"
 
 #. module: asset_extension
 #: view:stock.location:asset_extension.view_location_asset_form
@@ -71,27 +114,130 @@ msgid "Address"
 msgstr "Endereço"
 
 #. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "All Maintenance Orders"
+msgstr "Todas as Manutenções"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mroscheduled_document
+msgid "All Scheduled Maintenance Orders"
+msgstr "Todas as Manutenções Agendadas"
+
+#. module: asset_extension
+#: field:asset.asset.hcv.list,asset_id:0 field:asset.stock.move,asset_id:0
+#: selection:asset.stock.move,type:0
 #: model:ir.model,name:asset_extension.model_asset_asset
+#: view:website:asset_extension.report_assetlist_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
 msgid "Asset"
 msgstr "Equipamento"
 
 #. module: asset_extension
+#: model:ir.model,name:asset_extension.model_asset_asset_new_barcode
+msgid "Asset Barcode Update"
+msgstr "Atualização Cod Barras"
+
+#. module: asset_extension
 #: model:ir.ui.menu,name:asset_extension.menu_stock_asset_category
 msgid "Asset Categories"
-msgstr "Categorias do Equipamento"
+msgstr "Grupo de Ativos"
 
 #. module: asset_extension
 #: view:asset.asset.category:asset_extension.asset_asset_category_form
 #: view:asset.asset.category:asset_extension.asset_asset_category_tree
 #: model:ir.actions.act_window,name:asset_extension.asset_asset_category_action
 msgid "Asset Category"
-msgstr "Categoria do Activo"
+msgstr "Categoria do Ativo"
 
 #. module: asset_extension
-#: view:asset.asset:asset_extension.assets_form_hcv_view
+#: model:ir.ui.menu,name:asset_extension.menu_asset_equipment_family
+msgid "Asset Equipment Families"
+msgstr "Família de Equipamentos"
+
+#. module: asset_extension
+#: model:ir.ui.menu,name:asset_extension.menu_asset_equipment_origin
+msgid "Asset Equipment Origins"
+msgstr "Procedência"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_asset_asset_hcv_list
+msgid "Asset List"
+msgstr "Lista de Ativos"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_assetlist_document
+msgid "Asset List Report"
+msgstr "Relatório Lista de Ativos"
+
+#. module: asset_extension
+#: field:mro.order,asset_location_rel_id:0
+#: view:website:asset_extension.report_assetlist_document
+msgid "Asset Location"
+msgstr "Localização do Ativo"
+
+#. module: asset_extension
+#: field:asset.asset,asset_location_child_ids:0
+#: field:asset.asset,asset_location_parent_ids:0
+msgid "Asset Location Hierarchy"
+msgstr "Localização hierárquica do Ativo"
+
+#. module: asset_extension
+#: field:asset.asset,asset_location_child_search:0
+msgid "Asset Location with Child Locations"
+msgstr "Localização de Ativos com seus descendentes"
+
+#. module: asset_extension
+#: field:asset.asset,asset_location_parent_search:0
+msgid "Asset Location with Parent Locations"
+msgstr "Localização de Ativos com os seus Ascendentes"
+
+#. module: asset_extension
+#: model:ir.actions.report.xml,name:asset_extension.asset_move_report
+msgid "Asset Move"
+msgstr "Transferência"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_asset_move_document
+msgid "Asset Move Report"
+msgstr "Relatório de Transferência"
+
+#. module: asset_extension
+#: view:asset.stock.move:asset_extension.asset_stock_move_search
+#: view:asset.stock.move:asset_extension.asset_stock_move_tree
+#: model:ir.actions.act_window,name:asset_extension.asset_stock_move_action
+#: model:ir.model,name:asset_extension.model_asset_stock_move
+#: model:ir.ui.menu,name:asset_extension.menu_action_asset_move
+msgid "Asset Moves"
+msgstr "Transferência"
+
+#. module: asset_extension
+#: view:asset.list.report:asset_extension.asset_asset_report_form
+#: model:ir.actions.report.xml,name:asset_extension.asset_report_list
+msgid "Asset Report"
+msgstr "Relatório de Ativos"
+
+#. module: asset_extension
 #: view:asset.asset:asset_extension.assets_form_view_hcv_stock
+#: field:asset.list.report,asset_list:0
+#: view:asset.stock.move:asset_extension.asset_stock_move_search
+#: field:hcv.equipment.list,asset_ids:0
 msgid "Assets"
 msgstr "Equipamentos"
+
+#. module: asset_extension
+#: field:mro.order,technician_id:0 field:mro.order,technician_p_id:0
+msgid "Assigned To"
+msgstr "Atribuido a"
+
+#. module: asset_extension
+#: field:mro.order,delivery_document_ids:0
+#: field:mro.order,documentation_attachments:0
+#: field:mro.order,documentation_attachments_confirm:0
+msgid "Attachment(s)"
+msgstr "Anexo (s)"
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
@@ -106,16 +252,20 @@ msgstr "Peças Disponíveis"
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "Bank Details"
-msgstr "Detalhes bancários"
+msgstr "Dados bancários"
 
 #. module: asset_extension
+#: view:asset.asset:asset_extension.asset_accessories_form_view
 #: view:asset.asset:asset_extension.assets_form_view_hcv_stock
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
+#: field:asset.asset,barcode_label:0
 #: view:product.product:asset_extension.product_template_parts_form_view
+#: field:product.product,barcode_label:0
 msgid "Barcode"
 msgstr "Cód de Barras"
 
 #. module: asset_extension
+#: view:asset.asset:asset_extension.asset_accessories_form_view
 #: view:asset.asset:asset_extension.assets_form_view_hcv_stock
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
@@ -123,14 +273,74 @@ msgid "Barcode Label"
 msgstr "Foto da Etiqueta"
 
 #. module: asset_extension
+#: field:asset.asset,barcode_no:0 field:mro.order,barcode_no:0
+#: field:product.product,barcode_no:0
+#: view:website:asset_extension.report_assetlist_document
+#: view:website:asset_extension.report_hcv_equipments_document
+msgid "Barcode No"
+msgstr "Nº do Código de Barras"
+
+#. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "Birth"
 msgstr "Início"
 
 #. module: asset_extension
+#: selection:mro.hcv.report,type:0
+msgid "By Equipment"
+msgstr "Por Equipamento"
+
+#. module: asset_extension
+#: selection:mro.hcv.report,type:0
+msgid "By Period"
+msgstr "Por Período"
+
+#. module: asset_extension
+#: selection:mro.hcv.report,type:0
+msgid "By Technician"
+msgstr "Por Técnico"
+
+#. module: asset_extension
+#: view:asset.list.report:asset_extension.asset_asset_report_form
+#: view:asset.stock.move:asset_extension.asset_stock_move_form
+#: view:hcv.equipment.list:asset_extension.hcv_equipment_list_form
 #: view:mro.order:asset_extension.mro_order_form_view_extension
 msgid "Cancel"
 msgstr "Cancelar"
+
+#. module: asset_extension
+#: view:stock.picking:asset_extension.view_picking_hcv_form
+msgid "Cancel Move"
+msgstr "Cancelar Transferência"
+
+#. module: asset_extension
+#: selection:asset.stock.move,state:0
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: asset_extension
+#: field:asset.asset,category_id:0
+msgid "Category"
+msgstr "Categoria"
+
+#. module: asset_extension
+#: field:asset.asset.category,name:0
+msgid "Category Name"
+msgstr "Nome da Categoria"
+
+#. module: asset_extension
+#: field:mro.order,cause:0 field:mro.task,cause:0
+msgid "Cause"
+msgstr "Motivo"
+
+#. module: asset_extension
+#: field:asset.location.child.rel,child_id:0
+msgid "Child Asset"
+msgstr "Ativo descendente"
 
 #. module: asset_extension
 #: model:ir.ui.menu,name:asset_extension.menu_res_country_city_stock
@@ -144,8 +354,19 @@ msgstr "Cidadania & Outras Informações"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
+#: field:stock.location,city:0 field:stock.location,city_id:0
 msgid "City"
 msgstr "Cidade"
+
+#. module: asset_extension
+#: view:asset.list.report:asset_extension.asset_asset_report_form
+msgid "Click Print button to generate Asset Report for Selected Assets"
+msgstr "Clique no botão Imprimir, para gerar o relatório de acordo com seleção efetuada"
+
+#. module: asset_extension
+#: field:asset.asset,code:0 field:asset.asset.category,code:0
+msgid "Code"
+msgstr "Código"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
@@ -160,7 +381,7 @@ msgstr "Configurações"
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
 msgid "Confirm Maintenance"
-msgstr "Confirmar Manutenção"
+msgstr "Confirma Manutenção"
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
@@ -171,6 +392,16 @@ msgstr "Peças Utilizadas"
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "Contact Information"
 msgstr "Informação de Contacto"
+
+#. module: asset_extension
+#: selection:mro.order,type:0 selection:mro.request,type:0
+msgid "Corrective"
+msgstr "Corretiva"
+
+#. module: asset_extension
+#: field:mro.order,maintenance_c_cost:0 field:mro.order,maintenance_cost:0
+msgid "Cost of Maintenance"
+msgstr "Custo da Manutenção"
 
 #. module: asset_extension
 #: model:ir.ui.menu,name:asset_extension.menu_res_country_county_stock
@@ -184,8 +415,75 @@ msgstr "Países"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
+#: field:stock.location,country:0
 msgid "Country"
 msgstr "País"
+
+#. module: asset_extension
+#: field:stock.location,country_code:0
+msgid "Country Code"
+msgstr "Código do País"
+
+#. module: asset_extension
+#: field:asset.asset,location_county:0 field:stock.location,county:0
+#: field:stock.location,county_id:0
+msgid "County"
+msgstr "Concelho"
+
+#. module: asset_extension
+#: field:asset.asset.category,create_uid:0
+#: field:asset.asset.hcv.list,create_uid:0
+#: field:asset.asset.new.barcode,create_uid:0
+#: field:asset.equipment.family,create_uid:0
+#: field:asset.equipment.origin,create_uid:0
+#: field:asset.list.report,create_uid:0
+#: field:asset.location.child.rel,create_uid:0
+#: field:asset.location.parent.rel,create_uid:0
+#: field:asset.stock.move,create_uid:0 field:hcv.equipment.list,create_uid:0
+#: field:mro.hcv.report,create_uid:0
+#: field:mro.order.delivery.attachments,create_uid:0
+#: field:mro.order.documentation.attachments,create_uid:0
+#: field:mro.order.resolution.line,create_uid:0
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: asset_extension
+#: field:asset.asset.category,create_date:0
+#: field:asset.asset.hcv.list,create_date:0
+#: field:asset.asset.new.barcode,create_date:0
+#: field:asset.equipment.family,create_date:0
+#: field:asset.equipment.origin,create_date:0
+#: field:asset.list.report,create_date:0
+#: field:asset.location.child.rel,create_date:0
+#: field:asset.location.parent.rel,create_date:0
+#: field:hcv.equipment.list,create_date:0 field:mro.hcv.report,create_date:0
+#: field:mro.order.delivery.attachments,create_date:0
+#: field:mro.order.documentation.attachments,create_date:0
+#: field:mro.order.resolution.line,create_date:0
+msgid "Created on"
+msgstr "Criado a "
+
+#. module: asset_extension
+#: field:asset.stock.move,create_date:0
+msgid "Creation Date"
+msgstr "Data de Criação"
+
+#. module: asset_extension
+#: field:asset.stock.move,date:0 field:mro.order,date:0
+#: view:website:asset_extension.report_asset_move_document
+#: view:website:asset_extension.report_stock_move_document
+msgid "Date"
+msgstr "Data"
+
+#. module: asset_extension
+#: field:mro.order,delivery_date:0 field:mro.request,delivery_date:0
+msgid "Date of Delivery"
+msgstr "Data da Entrega"
+
+#. module: asset_extension
+#: help:asset.stock.move,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Data da última mensagem postada neste registo."
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
@@ -198,7 +496,14 @@ msgid "Delivery Documents"
 msgstr "Documentação de Entrega"
 
 #. module: asset_extension
+#: field:asset.asset,department_ids:0 field:mro.request,department_ids:0
+msgid "Departments"
+msgstr "Serviços"
+
+#. module: asset_extension
+#: field:asset.stock.move,name:0 field:mro.order,resolution_note:0
 #: view:mro.request:asset_extension.mro_request_asset_extension_form
+#: field:mro.task,description:0
 msgid "Description"
 msgstr "Descrição"
 
@@ -233,14 +538,50 @@ msgid "Description for Tools"
 msgstr "Descrição para Ferramentas"
 
 #. module: asset_extension
+#: view:asset.stock.move:asset_extension.asset_stock_move_form
+#: view:stock.picking:asset_extension.view_picking_hcv_form
+#: view:website:asset_extension.report_asset_move_document
+#: view:website:asset_extension.report_stock_move_document
+msgid "Destination"
+msgstr "Destino"
+
+#. module: asset_extension
+#: field:asset.stock.move,location_dest_id:0
+msgid "Destination Location"
+msgstr "Destino"
+
+#. module: asset_extension
+#: field:mro.order,diagnostic:0 field:mro.request,diagnostic:0
+msgid "Diagnostic"
+msgstr "Disgonóstico"
+
+#. module: asset_extension
+#: view:website:asset_extension.external_layout_footer
+msgid "Document Printed By:"
+msgstr "Documento Impresso Por:"
+
+#. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
 msgid "Documentation"
 msgstr "Documentação"
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
 msgid "Done"
 msgstr "Concluído"
+
+#. module: asset_extension
+#: selection:asset.stock.move,state:0
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Draft"
+msgstr "Rascunho"
 
 #. module: asset_extension
 #: model:ir.model,name:asset_extension.model_hr_employee
@@ -248,9 +589,165 @@ msgid "Employee"
 msgstr "Funcionário"
 
 #. module: asset_extension
+#: field:mro.hcv.report,end_period:0
+msgid "End Date"
+msgstr "Data Fim"
+
+#. module: asset_extension
+#: view:asset.asset.new.barcode:asset_extension.asset_asset_new_barcode_form
+msgid "Enter New Barcode Number for an Asset :"
+msgstr "Insira o novo número de código de barras para o Ativo :"
+
+#. module: asset_extension
+#: selection:asset.asset,equipment_type:0
+msgid "Equipamento Biomédico"
+msgstr "Equipamento Biomédico"
+
+#. module: asset_extension
+#: selection:asset.asset,equipment_type:0
+msgid "Equipamento Cozinha"
+msgstr "Equipamento Cozinha"
+
+#. module: asset_extension
+#: selection:asset.asset,equipment_type:0
+msgid "Equipamento Informáticos"
+msgstr "Equipamento Informáticos"
+
+#. module: asset_extension
+#: selection:asset.asset,equipment_type:0
+msgid "Equipamento Lavandaria"
+msgstr "Equipamento Lavandaria"
+
+#. module: asset_extension
+#: selection:asset.asset,equipment_type:0
+msgid "Equipamento Refrigeração"
+msgstr "Equipamento Refrigeração"
+
+#. module: asset_extension
+#: selection:asset.asset,equipment_type:0
+msgid "Equipamentos de Escritório"
+msgstr "Equipamento de Escritório"
+
+#. module: asset_extension
+#: field:asset.asset,equipment_id:0
+#: view:asset.stock.move:asset_extension.asset_stock_move_search
+#: field:asset.stock.move,equipment_ref:0 field:product.product,equipment_id:0
+#: view:website:asset_extension.report_asset_move_document
+#: view:website:asset_extension.report_hcv_equipments_document
+msgid "Equipment"
+msgstr "Equipamento"
+
+#. module: asset_extension
+#: field:mro.hcv.report,asset_id:0
+msgid "Equipment (Optional)"
+msgstr "Equipamento (Opcional)"
+
+#. module: asset_extension
+#: field:asset.asset,equipment_type:0 field:asset.asset,equipment_type_id:0
+#: view:asset.equipment.family:asset_extension.asset_equipment_family_form
+#: view:asset.equipment.family:asset_extension.asset_equipment_family_tree
+#: field:asset.equipment.family,name:0
+#: model:ir.actions.act_window,name:asset_extension.asset_equipment_family_action
+#: view:website:asset_extension.report_assetlist_document
+#: view:website:asset_extension.report_hcv_equipments_document
+msgid "Equipment Family"
+msgstr "Família do Equipamento"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+msgid "Equipment Name :"
+msgstr "Nome do Equipamento :"
+
+#. module: asset_extension
+#: view:asset.equipment.origin:asset_extension.asset_equipment_origin_form
+#: view:asset.equipment.origin:asset_extension.asset_equipment_origin_tree
+#: field:asset.equipment.origin,name:0
+#: model:ir.actions.act_window,name:asset_extension.asset_equipment_origin_action
+#: model:ir.model,name:asset_extension.model_asset_equipment_origin
+msgid "Equipment Origin"
+msgstr "Procedência"
+
+#. module: asset_extension
+#: view:mro.order:asset_extension.mro_order_tree_view_eam
+msgid "Equipment(Asset)"
+msgstr "Equipamento"
+
+#. module: asset_extension
+#: view:hcv.equipment.list:asset_extension.hcv_equipment_list_form
+#: model:ir.actions.report.xml,name:asset_extension.equipments_list_report
+msgid "Equipments List"
+msgstr "Lista de Equipamentos"
+
+#. module: asset_extension
+#: model:ir.actions.act_window,name:asset_extension.hcv_equipment_list_action
+#: model:ir.ui.menu,name:asset_extension.menu_hcv_equipment_list
+#: view:website:asset_extension.report_hcv_equipments_document
+msgid "Equipments List Report"
+msgstr "Listagem de Equipamentos"
+
+#. module: asset_extension
+#: field:asset.asset,asset_value_estimate:0
+msgid "Estimated Value"
+msgstr "Valor aproximado"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Execution Date"
+msgstr "Data de Execução"
+
+#. module: asset_extension
+#: field:mro.request,technician_id:0
+msgid "Expert (technician)"
+msgstr "Técnico"
+
+#. module: asset_extension
+#: selection:mro.order,intervention_type:0
+msgid "External"
+msgstr "Externo"
+
+#. module: asset_extension
+#: field:mro.order.delivery.attachments,file:0
+#: field:mro.order.documentation.attachments,file:0
+msgid "File"
+msgstr "Ficheiro"
+
+#. module: asset_extension
+#: field:mro.order.delivery.attachments,name:0
+#: field:mro.order.documentation.attachments,name:0
+msgid "Filename"
+msgstr "Nome do ficheiro"
+
+#. module: asset_extension
+#: view:mro.hcv.report:asset_extension.mro_hcv_report_form
+msgid "Filters"
+msgstr "Filtros"
+
+#. module: asset_extension
+#: field:asset.stock.move,message_follower_ids:0
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
 msgid "Force Reservation"
 msgstr "Forçar a Reserva"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "From"
+msgstr "De"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "From Beginning -"
+msgstr "Do Começo -"
 
 #. module: asset_extension
 #: view:stock.location:asset_extension.view_location_asset_form
@@ -258,12 +755,79 @@ msgid "GeoLocalize"
 msgstr "GeoLocalização"
 
 #. module: asset_extension
+#: view:asset.stock.move:asset_extension.asset_stock_move_search
+msgid "Group By"
+msgstr "Agrupar Por"
+
+#. module: asset_extension
+#: field:asset.asset.hcv.list,hcv_id:0
+msgid "HCV"
+msgstr "HCV"
+
+#. module: asset_extension
+#: model:res.groups,name:asset_extension.group_hcv_admin
+msgid "HCV_administrator"
+msgstr "HCV_administrator"
+
+#. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "HR Settings"
 msgstr "Configurações RH"
 
 #. module: asset_extension
-#: view:asset.asset:asset_extension.assets_form_hcv_view
+#: help:asset.stock.move,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr "Detém o resumo dos chats (número de mensagens, ...). Este resumo é directamente em formato html, a fim de ser inserido em vista kanban."
+
+#. module: asset_extension
+#: field:asset.asset,hospital_id:0 field:mro.request,hospital_id:0
+#: view:website:asset_extension.report_assetlist_document
+msgid "Hospital"
+msgstr "Hospital"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_hcv_equipments_document
+msgid "Hospital:"
+msgstr "Hospital:"
+
+#. module: asset_extension
+#: field:asset.asset,asset_id:0 field:asset.asset.category,id:0
+#: field:asset.asset.hcv.list,id:0 field:asset.asset.new.barcode,id:0
+#: field:asset.equipment.family,id:0 field:asset.equipment.origin,id:0
+#: field:asset.list.report,id:0 field:asset.location.child.rel,id:0
+#: field:asset.location.parent.rel,id:0 field:asset.stock.move,id:0
+#: field:hcv.equipment.list,id:0 field:mro.hcv.report,id:0
+#: field:mro.order.delivery.attachments,id:0
+#: field:mro.order.documentation.attachments,id:0
+#: field:mro.order.resolution.line,id:0
+#: field:report.asset_extension.report_mroequipment,id:0
+#: field:report.asset_extension.report_mroperiod,id:0
+#: field:report.asset_extension.report_mroscheduled,id:0
+#: field:report.asset_extension.report_mrotechnician,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: asset_extension
+#: help:asset.stock.move,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "Se selecionado, novas mensagens requererão a sua atenção."
+
+#. module: asset_extension
+#: help:mro.hcv.report,asset_id:0
+msgid "If selected, Report will list Maintenance Orders for selected Equipment only."
+msgstr "Se selecionado, o relatório irá listar todas as Ordens de Manutenção para o Equipamento selecionado."
+
+#. module: asset_extension
+#: help:mro.hcv.report,technician_id:0
+msgid "If selected, Report will list Maintenance Orders for selected Technician only."
+msgstr "Se Selecionado, o relatório irá listar Manutenções realizadas apenas por este técnico."
+
+#. module: asset_extension
+#: selection:asset.asset,state_operation:0
+msgid "Inactive"
+msgstr "Inativo"
+
+#. module: asset_extension
 #: view:asset.asset:asset_extension.assets_form_view_extension
 #: view:asset.asset:asset_extension.assets_form_view_hcv_stock
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
@@ -271,11 +835,17 @@ msgid "Info"
 msgstr "Info"
 
 #. module: asset_extension
+#: view:asset.asset:asset_extension.asset_accessories_form_view
 #: view:mro.order:asset_extension.mro_order_form_view_extension
 #: view:mro.request:asset_extension.mro_request_asset_extension_form
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "Information"
 msgstr "Informação"
+
+#. module: asset_extension
+#: selection:mro.order,intervention_type:0
+msgid "Internal"
+msgstr "Interno"
 
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
@@ -285,7 +855,7 @@ msgstr "Categoria Interna"
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "Internal Notes"
-msgstr "Notas internas"
+msgstr "Notas Internas"
 
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
@@ -298,9 +868,37 @@ msgid "Inventory Locations"
 msgstr "Localizações de Inventário"
 
 #. module: asset_extension
+#: field:asset.asset,is_accessory:0
+msgid "Is Accessory"
+msgstr "É um Acessório"
+
+#. module: asset_extension
+#: field:res.partner,is_manufacturer:0
+msgid "Is Manufacturer?"
+msgstr "É Fabricante"
+
+#. module: asset_extension
+#: field:hr.employee,is_technician:0
+msgid "Is Technician?"
+msgstr "É Técnico"
+
+#. module: asset_extension
+#: field:asset.stock.move,message_is_follower:0
+msgid "Is a Follower"
+msgstr "É um Seguidor"
+
+#. module: asset_extension
+#: field:asset.asset,location_island:0
 #: model:ir.ui.menu,name:asset_extension.menu_res_country_island_stock
+#: field:stock.location,island:0 field:stock.location,island_id:0
 msgid "Island"
 msgstr "Ilha"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_asset_move_document
+#: view:website:asset_extension.report_stock_move_document
+msgid "Issued By"
+msgstr "Enviado por"
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
@@ -308,25 +906,118 @@ msgid "Labor"
 msgstr "Trabalho"
 
 #. module: asset_extension
+#: field:asset.stock.move,message_last_post:0
+msgid "Last Message Date"
+msgstr "Data da Última Mensagem"
+
+#. module: asset_extension
+#: field:asset.asset.category,write_uid:0
+#: field:asset.asset.hcv.list,write_uid:0
+#: field:asset.asset.new.barcode,write_uid:0
+#: field:asset.equipment.family,write_uid:0
+#: field:asset.equipment.origin,write_uid:0 field:asset.list.report,write_uid:0
+#: field:asset.location.child.rel,write_uid:0
+#: field:asset.location.parent.rel,write_uid:0
+#: field:asset.stock.move,write_uid:0 field:hcv.equipment.list,write_uid:0
+#: field:mro.hcv.report,write_uid:0
+#: field:mro.order.delivery.attachments,write_uid:0
+#: field:mro.order.documentation.attachments,write_uid:0
+#: field:mro.order.resolution.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: asset_extension
+#: field:asset.asset.category,write_date:0
+#: field:asset.asset.hcv.list,write_date:0
+#: field:asset.asset.new.barcode,write_date:0
+#: field:asset.equipment.family,write_date:0
+#: field:asset.equipment.origin,write_date:0
+#: field:asset.list.report,write_date:0
+#: field:asset.location.child.rel,write_date:0
+#: field:asset.location.parent.rel,write_date:0
+#: field:asset.stock.move,write_date:0 field:hcv.equipment.list,write_date:0
+#: field:mro.hcv.report,write_date:0
+#: field:mro.order.delivery.attachments,write_date:0
+#: field:mro.order.documentation.attachments,write_date:0
+#: field:mro.order.resolution.line,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualização a"
+
+#. module: asset_extension
+#: field:stock.location,latitude:0
+msgid "Latitude"
+msgstr "Latitude"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_hcv_equipment_list
+msgid "List of Equipments into a Hospital"
+msgstr "Lista de Equipamentos no Hospital"
+
+#. module: asset_extension
 #: model:ir.ui.menu,name:asset_extension.menu_localisation_stock
 msgid "Localization"
 msgstr "Localização"
 
 #. module: asset_extension
+#: view:asset.asset:asset_extension.asset_accessories_form_view
+#: field:asset.location.child.rel,location_id:0
+#: field:asset.location.parent.rel,location_id:0
+#: field:hcv.equipment.list,location_id:0
+#: field:product.product,part_location_id:0
 #: view:stock.location:asset_extension.view_location_asset_form
 msgid "Location"
 msgstr "Local"
 
 #. module: asset_extension
+#: field:asset.asset,asset_location_rel_check:0
+msgid "Location Rel Check"
+msgstr "Verificar Localização relacionada"
+
+#. module: asset_extension
+#: field:stock.location,longitude:0
+msgid "Longitude"
+msgstr "Longitude"
+
+#. module: asset_extension
+#: field:mro.order.resolution.line,order_id:0
+msgid "MRO Order"
+msgstr "Ordens de MRO"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_hcv_stock
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+msgid "Maintenance"
+msgstr "Manutenção"
+
+#. module: asset_extension
+#: model:ir.actions.report.xml,name:asset_extension.report_mro_equipment
+msgid "Maintenance By Equipment"
+msgstr "Manutenção por Equipamento"
+
+#. module: asset_extension
+#: model:ir.actions.report.xml,name:asset_extension.report_mro_period
+msgid "Maintenance By Period"
+msgstr "Manutenção por Período"
+
+#. module: asset_extension
+#: model:ir.actions.report.xml,name:asset_extension.report_mro_technician
+msgid "Maintenance By Technician"
+msgstr "Manutenção por Técnico"
+
+#. module: asset_extension
 #: model:ir.model,name:asset_extension.model_mro_order
 #: view:mro.order:asset_extension.mro_order_form_view_extension
+#: field:mro.order.delivery.attachments,order_id:0
+#: field:mro.order.documentation.attachments,order_confirm_id:0
+#: field:mro.order.documentation.attachments,order_id:0 field:mro.task,mro_id:0
 msgid "Maintenance Order"
-msgstr "Registo de Manutenção"
+msgstr "Manutenção"
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
+#: view:mro.order:asset_extension.mro_order_tree_view_eam
 msgid "Maintenance Orders"
-msgstr "Registos de Manutenção"
+msgstr "Ordens de Manutenção"
 
 #. module: asset_extension
 #: model:ir.model,name:asset_extension.model_mro_order_parts_line
@@ -334,9 +1025,52 @@ msgid "Maintenance Planned Parts"
 msgstr "Peças programadas para a Manutenção"
 
 #. module: asset_extension
+#: model:ir.actions.act_window,name:asset_extension.mro_hcv_report_action
+#: model:ir.ui.menu,name:asset_extension.menu_mro_hcv_report_action
+#: view:website:asset_extension.report_mroperiod_document
+msgid "Maintenance Report"
+msgstr "Relatório de Manutenção"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+msgid "Maintenance Report - By Equipment"
+msgstr "Relatório de Manutenção - Por Equipamento"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Maintenance Report - By Technician"
+msgstr "Relatório de Manutenção - Por Técnico"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_mro_hcv_report
+#: view:mro.hcv.report:asset_extension.mro_hcv_report_form
+msgid "Maintenance Reports"
+msgstr "Relatórios de Manutenção"
+
+#. module: asset_extension
 #: model:ir.model,name:asset_extension.model_mro_request
 msgid "Maintenance Request"
-msgstr "Pedido de Manutenção"
+msgstr "Manutenção Corretiva"
+
+#. module: asset_extension
+#: model:ir.model,name:asset_extension.model_mro_task
+msgid "Maintenance Task"
+msgstr "Tarefas de Manutenção"
+
+#. module: asset_extension
+#: model:ir.actions.act_window,name:asset_extension.action_my_tasks
+msgid "Maintenance Tasks"
+msgstr "Tarefas de manutenção"
+
+#. module: asset_extension
+#: view:mro.order:asset_extension.mro_order_tree_view_eam
+msgid "Maintenance Type"
+msgstr "Tipo de Manutenção"
+
+#. module: asset_extension
+#: field:stock.move,mro_order_id:0
+msgid "Maitenance Order"
+msgstr "Pedidos de Manutenção"
 
 #. module: asset_extension
 #: model:ir.actions.act_window,name:asset_extension.action_partner_manufacturer_form
@@ -346,16 +1080,70 @@ msgid "Manufacturer"
 msgstr "Fabricante"
 
 #. module: asset_extension
+#: field:asset.asset,manuf_year:0 field:product.product,manufacturing_year:0
+msgid "Manufacturing Year"
+msgstr "Ano de Fabrico"
+
+#. module: asset_extension
+#: field:asset.asset,mark:0 field:product.product,mark:0
+msgid "Mark"
+msgstr "Marca"
+
+#. module: asset_extension
+#: field:asset.stock.move,message_ids:0
+msgid "Messages"
+msgstr "Mensagens"
+
+#. module: asset_extension
+#: help:asset.stock.move,message_ids:0
+msgid "Messages and communication history"
+msgstr "Histórico de Mensagens e Comunicações"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+msgid "Mobility History"
+msgstr "Histórico de Mobilidade"
+
+#. module: asset_extension
+#: field:product.product,model:0
+msgid "Model"
+msgstr "Modelo"
+
+#. module: asset_extension
+#: field:mro.order,move_lines:0
+msgid "Moves"
+msgstr "Movimentos"
+
+#. module: asset_extension
+#: model:ir.ui.menu,name:asset_extension.menu_maintenance_my_tasks
+msgid "My Tasks"
+msgstr "Minhas Tarefas"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.asset_accessories_form_view
+#: field:asset.list.report,name:0
 #: view:product.product:asset_extension.product_template_parts_form_view
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "Name"
 msgstr "Nome"
 
 #. module: asset_extension
-#: view:asset.asset:asset_extension.assets_form_hcv_view
+#: field:asset.asset.new.barcode,barcode_no:0
+msgid "New Barcode No"
+msgstr "Novo nº de Cod Barras"
+
+#. module: asset_extension
+#: field:asset.stock.move,note:0 field:mro.order,delivery_note:0
+#: field:mro.order,validation_note:0
+msgid "Note"
+msgstr "Nota"
+
+#. module: asset_extension
 #: view:asset.asset:asset_extension.assets_form_view_extension
 #: view:asset.asset:asset_extension.assets_form_view_hcv_stock
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
+#: field:asset.asset,notes:0
+#: view:mro.order:asset_extension.mro_order_form_view_extension
 msgid "Notes"
 msgstr "Notas"
 
@@ -363,6 +1151,33 @@ msgstr "Notas"
 #: view:mro.order:asset_extension.mro_order_form_view_extension
 msgid "Operations"
 msgstr "Operações"
+
+#. module: asset_extension
+#: field:mro.order,operations_description_confirm:0
+msgid "Operations Description"
+msgstr "Descrição de Operações"
+
+#. module: asset_extension
+#: view:mro.order:asset_extension.mro_order_tree_view_eam
+msgid "Order Date"
+msgstr "Data do Pedido"
+
+#. module: asset_extension
+#: view:stock.picking:asset_extension.view_picking_hcv_form
+#: view:website:asset_extension.report_asset_move_document
+#: view:website:asset_extension.report_stock_move_document
+msgid "Origin"
+msgstr "Origem"
+
+#. module: asset_extension
+#: field:asset.asset,equipment_origin_id:0
+msgid "Origin of the Equipment"
+msgstr "Procedência do Equipamento"
+
+#. module: asset_extension
+#: view:asset.stock.move:asset_extension.asset_stock_move_form
+msgid "Other Info...."
+msgstr "Outra Info...."
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
@@ -375,15 +1190,31 @@ msgid "Packaging"
 msgstr "Embalagem"
 
 #. module: asset_extension
+#: view:website:asset_extension.external_layout_footer
+msgid "Page:"
+msgstr "Página:"
+
+#. module: asset_extension
+#: field:asset.location.parent.rel,parent_id:0
+msgid "Parent Asset"
+msgstr "Ativo Ascendente"
+
+#. module: asset_extension
+#: selection:product.product,product_type:0
+msgid "Part"
+msgstr "Peça"
+
+#. module: asset_extension
+#: field:asset.list.report,partner_id:0 field:hcv.equipment.list,partner_id:0
 #: model:ir.model,name:asset_extension.model_res_partner
+#: field:mro.hcv.report,partner_id:0
 msgid "Partner"
-msgstr "Terceiro"
+msgstr "Parceiro"
 
 #. module: asset_extension
 #: model:ir.actions.act_window,name:asset_extension.product_template_parts_action
-#: model:ir.ui.menu,name:asset_extension.menu_stock_parts
-#: model:ir.ui.menu,name:asset_extension.menu_stock_parts_parts
 #: view:mro.order:asset_extension.mro_order_form_view_extension
+#: field:mro.order.resolution.line,parts_id:0
 #: view:product.product:asset_extension.product_template_parts_form_view
 #: view:product.product:asset_extension.product_template_parts_tree_view
 msgid "Parts"
@@ -400,14 +1231,17 @@ msgid "Parts to Consume"
 msgstr "Peças a ser Utilizadas"
 
 #. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Period :"
+msgstr "Período :"
+
+#. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 msgid "Personal Information"
 msgstr "Informação Pessoal"
-
-#. module: asset_extension
-#: view:mro.order:asset_extension.mro_order_form_view_extension
-msgid "Planned Parts"
-msgstr "Peças Previstas"
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
@@ -415,9 +1249,46 @@ msgid "Position"
 msgstr "Posição"
 
 #. module: asset_extension
+#: selection:mro.order,type:0
+msgid "Preventive"
+msgstr "Preventiva"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.asset_accessories_form_view
+msgid "Price"
+msgstr "Preço"
+
+#. module: asset_extension
+#: view:asset.list.report:asset_extension.asset_asset_report_form
+#: view:hcv.equipment.list:asset_extension.hcv_equipment_list_form
+#: view:mro.hcv.report:asset_extension.mro_hcv_report_form
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: asset_extension
+#: model:ir.actions.act_window,name:asset_extension.action_view_asset_report
+msgid "Print Assets List"
+msgstr "Imprimir Lista de Ativos"
+
+#. module: asset_extension
+#: view:stock.move:asset_extension.view_move_hcv_report_form
+msgid "Print Move"
+msgstr "Imprimir Movimentos"
+
+#. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
 msgid "Problem Description"
 msgstr "Descrição"
+
+#. module: asset_extension
+#: view:stock.picking:asset_extension.view_picking_hcv_form
+msgid "Process Entirely"
+msgstr "Processar Tudo"
+
+#. module: asset_extension
+#: view:stock.picking:asset_extension.view_picking_hcv_form
+msgid "Process Later"
+msgstr "Processar mais tarde"
 
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
@@ -426,8 +1297,14 @@ msgstr "Aquisições"
 
 #. module: asset_extension
 #: model:ir.model,name:asset_extension.model_product_product
+#: view:website:asset_extension.report_stock_move_document
 msgid "Product"
-msgstr "Peças"
+msgstr "Artigo"
+
+#. module: asset_extension
+#: field:stock.move,product_tmpl_id:0
+msgid "Product Template"
+msgstr "Template de Ativo"
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
@@ -440,24 +1317,54 @@ msgid "Purchase"
 msgstr "Compra"
 
 #. module: asset_extension
+#: field:product.product,purchase_date:0
+msgid "Purchase Date"
+msgstr "Data da Compra"
+
+#. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "Put an internal note..."
-msgstr "Insira uma nota interna..."
+msgstr "Coloque uma Nota interna..."
+
+#. module: asset_extension
+#: view:website:asset_extension.report_stock_move_document
+msgid "Qty"
+msgstr "Qtd"
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
+#: field:mro.order.resolution.line,qty:0
 msgid "Quantity"
 msgstr "Quantidade"
 
 #. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Ready to Maintenance"
+msgstr "Em Manutenção"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_asset_move_document
+#: view:website:asset_extension.report_stock_move_document
+msgid "Received By"
+msgstr "Recebido por"
+
+#. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
 msgid "Recreate Picking"
-msgstr "Recriar a Selecção"
+msgstr "Recriar a Seleção"
 
 #. module: asset_extension
 #: view:mro.request:asset_extension.mro_request_asset_extension_form
 msgid "Reject Reason"
-msgstr "Rejeitar a Razão"
+msgstr "Rejeitar o Motivo"
+
+#. module: asset_extension
+#: field:asset.asset.category,equipment_family_id:0
+msgid "Related Equipment Family"
+msgstr "Família de Equipamento"
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
@@ -465,14 +1372,52 @@ msgid "Related User"
 msgstr "Utilizador Relacionado"
 
 #. module: asset_extension
+#: field:asset.asset,asset_report_id:0
+msgid "Report Id"
+msgstr "ID do Relatório"
+
+#. module: asset_extension
+#: field:mro.hcv.report,name:0
+msgid "Report Name"
+msgstr "Nome do Relatório"
+
+#. module: asset_extension
+#: field:mro.hcv.report,type:0
+msgid "Report Type"
+msgstr "Tipo de Relatório"
+
+#. module: asset_extension
+#: model:ir.ui.menu,name:asset_extension.menu_mro_hcv_reports_main
+#: model:ir.ui.menu,name:asset_extension.menu_stock_hcv_reports
+msgid "Reports"
+msgstr "Relatórios"
+
+#. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
+#: field:mro.task,request_date:0
 msgid "Request Date"
 msgstr "Data do Pedido"
 
 #. module: asset_extension
+#: view:stock.picking:asset_extension.view_picking_hcv_form
+msgid "Reserved Quants"
+msgstr "Reserved Quants"
+
+#. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
+#: field:mro.request,resolution:0
 msgid "Resolution"
 msgstr "Resolução"
+
+#. module: asset_extension
+#: field:mro.order,resolution_date:0 field:mro.request,resolution_date:0
+msgid "Resolution Date"
+msgstr "Data da Resolução"
+
+#. module: asset_extension
+#: field:mro.order,resolution_parts_line:0
+msgid "Resolution Parts"
+msgstr "Peças para Resolução"
 
 #. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
@@ -487,7 +1432,54 @@ msgstr "Vendas"
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "Sales & Purchases"
-msgstr "Compras & Vendas"
+msgstr "Compra & Venda"
+
+#. module: asset_extension
+#: selection:mro.hcv.report,type:0
+msgid "Scheduled"
+msgstr "Agendada"
+
+#. module: asset_extension
+#: model:ir.actions.report.xml,name:asset_extension.report_mro_scheduled
+#: view:website:asset_extension.report_mroscheduled_document
+msgid "Scheduled Maintenance"
+msgstr "Manutenção Agendada"
+
+#. module: asset_extension
+#: view:stock.picking:asset_extension.view_picking_hcv_form
+msgid "Scrap"
+msgstr "Scrap"
+
+#. module: asset_extension
+#: view:hcv.equipment.list:asset_extension.hcv_equipment_list_form
+msgid "Select Hospital Location and click Print button to generate Equipments list report :"
+msgstr "Selecione a Localização do Hospital e click no botão para gerar o relatório de Equipamentos:"
+
+#. module: asset_extension
+#: field:product.product,serial:0
+msgid "Serial No"
+msgstr "Nº de série"
+
+#. module: asset_extension
+#: view:stock.picking:asset_extension.view_picking_hcv_form
+msgid "Set Available"
+msgstr "Definir como Disponível"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_assetlist_document
+#: view:website:asset_extension.report_hcv_equipments_document
+msgid "Signature"
+msgstr "Assinatura"
+
+#. module: asset_extension
+#: view:asset.stock.move:asset_extension.asset_stock_move_form
+msgid "Source"
+msgstr "Origem"
+
+#. module: asset_extension
+#: field:asset.stock.move,location_id:0
+msgid "Source Location"
+msgstr "Localização da Origem"
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
@@ -507,9 +1499,12 @@ msgstr "Especifique os especialistas necessários à execução desta tarefa..."
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
 msgid "Specify the tools and mechanisms needed for execute this order..."
-msgstr ""
-"Especifique as ferramentas e os mecanismos necessários à execução desta "
-"tarefa..."
+msgstr "Especifique as ferramentas e os mecanismos necessários à execução desta tarefa..."
+
+#. module: asset_extension
+#: field:mro.hcv.report,start_period:0
+msgid "Start Date"
+msgstr "Data Início"
 
 #. module: asset_extension
 #: view:asset.asset:asset_extension.assets_form_view_hcv_stock
@@ -519,23 +1514,62 @@ msgstr "Início de Uso"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
 msgid "State"
 msgstr "Estado"
 
 #. module: asset_extension
+#: field:asset.asset,state_operation:0
+msgid "State Operation"
+msgstr "Estado Operacional"
+
+#. module: asset_extension
+#: view:asset.stock.move:asset_extension.asset_stock_move_search
+#: field:asset.stock.move,state:0
 #: view:hr.employee:asset_extension.view_employee_technician_form
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "Status"
 msgstr "Modo"
 
 #. module: asset_extension
+#: model:ir.actions.report.xml,name:asset_extension.stock_move_report
+#: model:ir.model,name:asset_extension.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento do Stock"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_stock_move_document
+msgid "Stock Move Report"
+msgstr "Relatório de Movimentos"
+
+#. module: asset_extension
+#: view:asset.stock.move:asset_extension.asset_stock_move_form
+#: view:stock.picking:asset_extension.view_picking_hcv_form
+msgid "Stock Moves"
+msgstr "Movimentos de Stock"
+
+#. module: asset_extension
+#: field:stock.location,street:0
+msgid "Street"
+msgstr "Zona"
+
+#. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "Street..."
-msgstr "Rua..."
+msgstr "Zona..."
+
+#. module: asset_extension
+#: field:asset.stock.move,message_summary:0
+msgid "Summary"
+msgstr "Resumo"
 
 #. module: asset_extension
 #: view:asset.asset:asset_extension.assets_form_view_hcv_stock
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
+#: field:asset.asset,supplier_id:0 field:product.product,supplier_id:0
 msgid "Supplier"
 msgstr "Fornecedor"
 
@@ -545,22 +1579,31 @@ msgid "Suppliers"
 msgstr "Fornecedores"
 
 #. module: asset_extension
-#: view:asset.asset:asset_extension.assets_form_hcv_view
-msgid "Tags..."
-msgstr "Tags..."
-
-#. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
 #: model:ir.actions.act_window,name:asset_extension.action_employee_technician_form
 #: model:ir.ui.menu,name:asset_extension.technician_base
 #: model:ir.ui.menu,name:asset_extension.technician_main
+#: field:mro.order,technician_ref:0 field:mro.task,technician_id:0
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
 msgid "Technician"
 msgstr "Técnico"
 
 #. module: asset_extension
+#: field:mro.hcv.report,technician_id:0
+msgid "Technician (Optional)"
+msgstr "Técnico (Opcional)"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Technician Name :"
+msgstr "Nome do Técnico :"
+
+#. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "This note will be displayed on requests for quotation..."
-msgstr "Esta nora será exibida nos pedidos de cotação..."
+msgstr "Esta nota será exibida nos pedidos de cotação..."
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
@@ -568,9 +1611,72 @@ msgid "Tools"
 msgstr "Ferramentas"
 
 #. module: asset_extension
+#: field:mro.order,tools_description_confirm:0
+msgid "Tools Description"
+msgstr "Descrição de Ferramentas Utilizadas"
+
+#. module: asset_extension
+#: field:asset.list.report,total_assets:0
+msgid "Total"
+msgstr "Total"
+
+#. module: asset_extension
+#: field:hcv.equipment.list,total_assets:0
+msgid "Total Assets"
+msgstr "Total de Ativos"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Total Orders :"
+msgstr "Total Registos :"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_assetlist_document
+#: view:website:asset_extension.report_hcv_equipments_document
+msgid "Total:"
+msgstr "Total:"
+
+#. module: asset_extension
+#: view:asset.stock.move:asset_extension.asset_stock_move_form
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: asset_extension
+#: selection:asset.stock.move,state:0
+msgid "Transferred"
+msgstr "Transferido "
+
+#. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view
+#: view:stock.move:asset_extension.view_move_hcv_report_form
+#: view:stock.move:asset_extension.view_move_picking_form
+#: view:stock.move:asset_extension.view_move_picking_hcv_tree
+#: view:stock.picking:asset_extension.view_picking_hcv_form
 msgid "True"
 msgstr "Válido"
+
+#. module: asset_extension
+#: view:asset.stock.move:asset_extension.asset_stock_move_search
+#: field:asset.stock.move,type:0 field:product.product,product_type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: asset_extension
+#: field:mro.order,intervention_type:0
+msgid "Type of Intervention"
+msgstr "Tipo de Intervenção"
+
+#. module: asset_extension
+#: field:mro.order,type:0 field:mro.request,type:0
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Type of Maintenance"
+msgstr "Tipo de Manutenção"
 
 #. module: asset_extension
 #: view:mro.order:asset_extension.mro_order_form_view_extension
@@ -579,7 +1685,59 @@ msgid "Unit of Measure"
 msgstr "Unidade de Medida"
 
 #. module: asset_extension
-#: view:asset.asset:asset_extension.assets_form_hcv_view
+#: field:asset.stock.move,message_unread:0
+msgid "Unread Messages"
+msgstr "Mensagens por ler"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.assets_form_view_hcv_stock
+#: view:asset.asset:asset_extension.assets_form_view_stock_extension
+#: view:asset.asset.new.barcode:asset_extension.asset_asset_new_barcode_form
+msgid "Update"
+msgstr "Atualizar"
+
+#. module: asset_extension
+#: view:asset.asset.new.barcode:asset_extension.asset_asset_new_barcode_form
+msgid "Update Barcode Number"
+msgstr "Atualizar Cod Barras"
+
+#. module: asset_extension
+#: view:mro.order:asset_extension.mro_order_form_view_extension
+msgid "Validate"
+msgstr "Validar"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Validated"
+msgstr "Validado"
+
+#. module: asset_extension
+#: view:mro.order:asset_extension.mro_order_form_view_extension
+msgid "Validation"
+msgstr "Validação"
+
+#. module: asset_extension
+#: field:mro.order,validation_date:0
+msgid "Validation Date"
+msgstr "Data da Validação"
+
+#. module: asset_extension
+#: field:asset.asset,asset_value:0
+msgid "Value"
+msgstr "Valor"
+
+#. module: asset_extension
+#: view:website:asset_extension.report_mroequipment_document
+#: view:website:asset_extension.report_mroperiod_document
+#: view:website:asset_extension.report_mroscheduled_document
+#: view:website:asset_extension.report_mrotechnician_document
+msgid "Waiting Parts"
+msgstr "Em Manutenção"
+
+#. module: asset_extension
 #: view:asset.asset:asset_extension.assets_form_view_extension
 #: view:asset.asset:asset_extension.assets_form_view_hcv_stock
 #: view:asset.asset:asset_extension.assets_form_view_stock_extension
@@ -592,19 +1750,60 @@ msgid "Weights"
 msgstr "Pesos"
 
 #. module: asset_extension
+#: field:mro.order,work_c_hours:0 field:mro.order,work_hours:0
+msgid "Work Hours"
+msgstr "Horas de Trabalho"
+
+#. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "ZIP"
 msgstr "ZIP"
 
 #. module: asset_extension
+#: field:stock.location,zip:0
+msgid "Zip"
+msgstr "Zip"
+
+#. module: asset_extension
+#: view:website:asset_extension.layout
+msgid "asset_extension.layout"
+msgstr "asset_extension.layout"
+
+#. module: asset_extension
+#: view:asset.asset.new.barcode:asset_extension.asset_asset_new_barcode_form
+#: view:mro.hcv.report:asset_extension.mro_hcv_report_form
+msgid "cancel"
+msgstr "cancelar"
+
+#. module: asset_extension
+#: view:website:asset_extension.layout
+msgid "data_report_dpi if data_report_dpi else None"
+msgstr "data_report_dpi if data_report_dpi else None"
+
+#. module: asset_extension
+#: view:website:asset_extension.layout
+msgid "data_report_header_spacing if data_report_header_spacing else None"
+msgstr "data_report_header_spacing if data_report_header_spacing else None"
+
+#. module: asset_extension
+#: view:website:asset_extension.layout
+msgid "data_report_margin_top if data_report_margin_top else None"
+msgstr "data_report_margin_top if data_report_margin_top else None"
+
+#. module: asset_extension
+#: view:asset.asset:asset_extension.asset_accessories_form_view
+msgid "describe the accesssory characteristics..."
+msgstr "Descreve as características do Acessório..."
+
+#. module: asset_extension
 #: view:product.product:asset_extension.product_template_parts_form_view
 msgid "describe the product characteristics..."
-msgstr "descreve as caracteristicas do Produto"
+msgstr "descreve as caraterísticas do Ativo"
 
 #. module: asset_extension
 #: view:res.partner:asset_extension.view_partner_manufacturer_form
 msgid "e.g. +32.81.81.37.00"
-msgstr ""
+msgstr "e.g. +32.81.81.37.00"
 
 #. module: asset_extension
 #: view:hr.employee:asset_extension.view_employee_technician_form
@@ -627,43 +1826,9 @@ msgid "note to be displayed on quotations..."
 msgstr "nota a ser apresentada nas cotações..."
 
 #. module: asset_extension
-#: field:mro.order,date:0
-#: view:website:asset_extension.report_stock_move_document
-msgid "Date"
-msgstr "Data"
-
-#. module: asset_extension
-#: view:website:asset_extension.report_stock_move_document
-msgid "Destination"
-msgstr "Destino"
-
-#. module: asset_extension
-#: view:website:asset_extension.report_stock_move_document
-msgid "Issued By"
-msgstr "Enviado por"
-
-#. module: asset_extension
-#: view:website:asset_extension.report_stock_move_document
-msgid "Origin"
-msgstr "Origem"
-
-#. module: asset_extension
-#: model:ir.model,name:asset_extension.model_product_product
-#: view:website:asset_extension.report_stock_move_document
-msgid "Product"
-msgstr "Ativo"
-
-#. module: asset_extension
-#: view:website:asset_extension.report_stock_move_document
-msgid "Qty"
-msgstr "Qtd"
-
-#. module: asset_extension
-#: view:website:asset_extension.report_stock_move_document
-msgid "Received By"
-msgstr "Recebido por"
-
-#. module: asset_extension
-#: view:website:asset_extension.report_stock_move_document
-msgid "Stock Move Report"
-msgstr "Relatório de Movimentos"
+#: view:asset.asset.new.barcode:asset_extension.asset_asset_new_barcode_form
+#: view:asset.list.report:asset_extension.asset_asset_report_form
+#: view:hcv.equipment.list:asset_extension.hcv_equipment_list_form
+#: view:mro.hcv.report:asset_extension.mro_hcv_report_form
+msgid "or"
+msgstr "ou"
