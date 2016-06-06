@@ -1,6 +1,6 @@
 from openerp import api
 from openerp import fields as fields
-from openerp.osv import osv
+from openerp.osv import osv, fields as osv_fields
 from openerp import exceptions
 from openerp import tools
 from openerp.tools.translate import _
@@ -85,6 +85,27 @@ class stock_location(osv.osv):
 class stock_move(osv.osv):
 	_inherit = "stock.move"
 
+	_columns = {
+		'from_hcv': osv_fields.boolean('From HCV'),
+	}
+
 	def print_move_hcv_report(self, cr, uid, ids, context=None):
 		return self.pool['report'].get_action(cr, uid, ids, 'asset_extension.report_stock_move', context=context)
+
+	def default_get(self, cr, uid, fields, context=None):
+		res = super(stock_move, self).default_get(cr, uid, fields, context)
+		if context and 'from_hcv' in context:
+			location_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'stock_location_stock')
+			if location_id:
+				res.update(location_id=location_id[1])
+		return res
+
+	def onchange_location_id(self, cr, uid, ids, from_hcv, location_id, context=None):
+		vals = {}
+		if from_hcv and from_hcv is True:
+			location_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'stock_location_stock')
+			if location_id:
+				location_id=location_id[1]
+				vals['location_id'] = location_id
+		return {'value': vals}
 
