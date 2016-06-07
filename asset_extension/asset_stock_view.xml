@@ -358,7 +358,7 @@
 			<field name="help" type="html"><p class="oe_view_nocontent_create">Click here to create new Asset Moves</p></field>
 		</record>
 
-		<menuitem action="asset_stock_move_action" id="menu_action_asset_move" parent="stock.menu_traceability" sequence="4"/>
+		<menuitem action="asset_stock_move_action" id="menu_action_asset_move" parent="stock.menu_traceability" sequence="4" groups="asset_extension.group_hcv_manager"/>
 		
 	</data>
 </openerp>
