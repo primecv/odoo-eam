@@ -56,7 +56,7 @@
 						<group string="Barcode">
 							<group col="5">
 								<field name="barcode_no" readonly="1" colspan="2"/>
-								<button name="update_barcode_no" type="object" string="Update" class="oe_edit_only oe_inline" groups="base.group_erp_manager" colspan="1"/>
+								<button name="update_barcode_no" type="object" string="Update" class="oe_edit_only oe_inline" groups="asset_extension.group_hcv_admin" colspan="1"/>
 								<field name="barcode_label" widget='image' class="oe_left oe_avatar" options='{"size": [250, 100]}' string="Barcode Label" colspan="2" required="0"/>
 							</group>
 						</group>
@@ -155,7 +155,7 @@
 								<group string="Barcode">
 									<group col="5">
 										<field name="barcode_no"  readonly="1" colspan="2"/>
-										<button name="update_barcode_no" type="object" string="Update" class="oe_edit_only oe_inline" groups="base.group_erp_manager" colspan="1"/>
+										<button name="update_barcode_no" type="object" string="Update" class="oe_edit_only oe_inline" groups="asset_extension.group_hcv_admin" colspan="1"/>
 										<field name="barcode_label" widget='image' class="oe_left oe_avatar" options='{"size": [250, 100]}' string="Barcode Label" colspan="2"/>
 									</group>
 								</group>
