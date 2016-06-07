@@ -57,6 +57,8 @@
         'views/report_equipments.xml',
         'views/report_asset_move.xml',
         'views/report_stock_move.xml',
+
+        'security/security.xml',
     ],
     'installable': True,
     'auto_install': False,
