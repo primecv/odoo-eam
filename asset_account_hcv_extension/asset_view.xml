@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
 				<!--field name="asset_id" position="replace"/-->
 				<field name="state" position="before">
-					<button name="print_entries" string="Entries" type="object"/>
+					<button name="print_entries" string="Depreciation Map Report" type="object"/>
 				</field>
 				<div class="oe_button_box oe_right" position="attributes">
 					<attribute name="invisible">True</attribute>
