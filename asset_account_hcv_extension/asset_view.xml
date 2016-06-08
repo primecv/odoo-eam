@@ -46,7 +46,7 @@
                     <button name="%(account_asset.action_asset_modify)d" string="Change Duration" type="action" icon="terp-stock_effects-object-colorize" class="oe_inline" colspan="1" attrs="{'invisible':[('state','=','close')]}"/>
 				</button>
 				<field name="prorata" position="replace">
-					<field name="prorata" attrs="{'invisible': ['|',('method','!=','linear'),('method_time','=','end')]}"/>
+					<field name="prorata" attrs="{'invisible': ['|',('method','!=','linear'),('method_time','=','end')]}" invisible="1"/>
 				</field>
 				<field name="method_number" position="replace">
                     <field name="method_number" attrs="{'required':[('method_time','=','number')], 'readonly':[('state','!=','draft')]}" invisible="1"/>
