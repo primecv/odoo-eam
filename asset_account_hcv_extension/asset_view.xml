@@ -109,6 +109,10 @@
                         </form>
                     </field>
 				</field>
+
+				<field name="account_move_line_ids" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
 			</field>
 		</record>
 
