@@ -47,16 +47,18 @@
 							<table class="table table-condensed" style="width:100%">
 								<tbody>
 								    <tr>
-								        <th style="width:15%">Date From</th>
-								        <th style="width:15%">Date To</th>
-								        <th style="width:40%">Amount already depreciated</th>
-								        <th style="width:30%">Current Depreciation</th>
+								        <th style="width:13%">Date From</th>
+								        <th style="width:13%">Date To</th>
+								        <th style="width:25%" class="text-center">Amount already depreciated</th>
+								        <th style="width:25%" class="text-center">Current Depreciation</th>
+										<th style="width:24%" class="text-center">Next Period Depreciation</th>
 								    </tr>
 				                    <tr t-foreach="asset.depreciation_line_ids" t-as="l">
-										<td style="width:15%"><span t-field="l.depreciation_date"/></td>
-										<td style="width:15%"><span t-field="l.depreciation_date_to"/></td>
-										<td style="width:40%" class="text-center"><span t-field="l.depreciated_value"/></td>
-										<td style="width:30%" class="text-center"><span t-field="l.amount_copy"/></td>
+										<td style="width:13%"><span t-field="l.depreciation_date"/></td>
+										<td style="width:13%"><span t-field="l.depreciation_date_to"/></td>
+										<td style="width:25%" class="text-center"><span t-field="l.depreciated_value"/></td>
+										<td style="width:25%" class="text-center"><span t-field="l.amount_copy"/></td>
+										<td style="width:24%" class="text-center"><span t-field="l.remaining_value"/></td>
 									</tr>
 								</tbody>
 							</table>
