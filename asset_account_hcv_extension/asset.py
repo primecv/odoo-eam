@@ -47,6 +47,7 @@ class asset_asset(osv.osv):
 		'account_asset_category_id': fields.many2one('account.asset.category', 'Asset Category'),
 		'depreciation_line': fields.function(get_depreciation_lines, type='one2many', relation='account.asset.depreciation.line', string='Depreciation Lines'),
         'depr_count': fields.function(_depr_count, string='# Depreciations', type='integer'),
+        'is_depreciated': fields.boolean('Is Depreciated?'),
 	}
 
 
