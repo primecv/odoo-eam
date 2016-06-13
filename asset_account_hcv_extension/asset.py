@@ -177,6 +177,11 @@ class account_asset(osv.osv):
 					raise osv.except_osv(('Validation Error!'), ("Depreciation Start Date must be greater than Asset's Purchase Date"))
 				if l.depreciation_date and l.depreciation_date_to and l.depreciation_date > l.depreciation_date_to:
 					raise osv.except_osv(('Validation Error!'), ("Invalid Depreciation Date Range."))
+			asset_id = asset.asset_id
+			all_assets = self.search(cr, uid, [('asset_id','=',asset_id.id), ('state','=','open'), ('id','!=',asset.id)])
+			if all_assets:
+				raise osv.except_osv(('Validation Error!'), ('There already exists an entry for asset %s in Running State.')%(asset_id.name))
+			self.pool.get('asset.asset').write(cr, uid, [asset_id.id], {'is_depreciated': True})
 		return super(account_asset, self).validate(cr, uid, ids, context)
 
 	def _compute_board_undone_dotation_nb(self, cr, uid, asset, depreciation_date, total_days, context=None):
