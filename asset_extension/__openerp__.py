@@ -30,6 +30,8 @@
     'category': 'Enterprise Asset Management',
     'depends': ['mro', 'res_partner_hospital', 'hr', 'asset_stock', 'asset_mrp'],
     'data': [
+        'security/security.xml',
+
         'asset_view.xml',
         'product_view.xml',
         'asset_sequence.xml',
@@ -57,8 +59,6 @@
         'views/report_equipments.xml',
         'views/report_asset_move.xml',
         'views/report_stock_move.xml',
-
-        'security/security.xml',
     ],
     'installable': True,
     'auto_install': False,
