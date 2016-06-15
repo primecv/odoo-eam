@@ -292,6 +292,26 @@
             </field>
         </record>
         
+        <record id="mro_order_hcv_search" model="ir.ui.view">
+            <field name="name">mro.order.search</field>
+            <field name="model">mro.order</field>
+			<field name="inherit_id" ref="mro.mro_order_search"/>
+            <field name="arch" type="xml">
+				<filter name="message_unread" position="before">
+                    <field name="name"/>
+					<field name="date_scheduled" string="Order Date"/>
+                    <field name="date_execution"/>
+                    <field name="asset_id" string="Equipment(Asset)"/>
+                    <field name="maintenance_type" invisible="1"/>
+					<field name="type" string="Maintenance Type"/>
+                    <field name="description" invisible="1"/>
+                    <field name="origin" invisible="1"/>
+					<field name="technician_ref"/>
+                    <field name="state"/>
+				</filter>
+			</field>
+		</record>
+
 		<!-- MRO Task -->
         <record id="mro.mro_task_form_view" model="ir.ui.view">
             <field name="name">mro.task.form</field>
