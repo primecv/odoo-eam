@@ -86,6 +86,25 @@ class asset_modify(osv.osv_memory):
         history_obj = self.pool.get('account.asset.history')
         asset_id = context.get('active_id', False)
         asset = asset_obj.browse(cr, uid, asset_id, context=context)
+        if not asset.history_ids:
+            vals = {
+                'asset_id': asset_id,
+                'name': asset_id.name,
+                'method_time': asset.method_time,
+                'method_number': asset.method_number,
+                'method_period': asset.method_period,
+                'method_end': asset.method_end,
+                'user_id': uid,
+                'date': time.strftime('%Y-%m-%d'),
+                'note': 'Initial State',
+                'total_hours': asset.total_hours,
+                'total_units': asset.total_units,
+
+            }
+            if asset.method == 'degressive':
+                vals['method_number'] = 0
+                vals['method_period'] = 0
+            history_obj.create(cr, uid, vals, context=context)
         data = self.browse(cr, uid, ids[0], context=context)
         if data.method == 'linear': name = data.name 
         else: name = data.name2
