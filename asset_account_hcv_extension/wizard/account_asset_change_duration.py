@@ -89,7 +89,7 @@ class asset_modify(osv.osv_memory):
         if not asset.history_ids:
             vals = {
                 'asset_id': asset_id,
-                'name': asset_id.name,
+                'name': asset.name,
                 'method_time': asset.method_time,
                 'method_number': asset.method_number,
                 'method_period': asset.method_period,
