@@ -399,13 +399,32 @@
             </field>
         </record>
 
+        <record id="view_mro_task_calendar" model="ir.ui.view">
+            <field name="name">mro.task.calendar</field>
+            <field name="model">mro.task</field>
+            <field name="arch" type="xml">
+                <calendar string="Maintenance Tasks" color="mro_id" date_start="request_date">
+                    <field name="mro_id"/>
+                    <field name="technician_id"/>
+                </calendar>
+            </field>
+        </record>
+
         <record id="action_my_tasks" model="ir.actions.act_window">
             <field name="name">Maintenance Tasks</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">mro.task</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,calendar</field>
 			<field name="domain">[('technician_id.user_id.id','=',uid)]</field>
+        </record>        
+
+        <record id="mro.action_tasks" model="ir.actions.act_window">
+            <field name="name">Maintenance Tasks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mro.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
         </record>        
 
         <menuitem name="My Tasks"
