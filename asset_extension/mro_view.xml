@@ -381,6 +381,24 @@
             </field>
         </record>
 
+        <record id="mro.mro_task_search_view" model="ir.ui.view">
+            <field name="name">mro.task.search</field>
+            <field name="model">mro.task</field>
+			<field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <search string="Maintenance Tasks">
+                    <field name="name"/>
+					<field name="request_date"/>
+                    <field name="maintenance_type"/>
+					<field name="mro_id"/>
+					<field name="technician_id"/>
+					<group string="Group By" expand="0">
+						<filter string="Maintenance Type" context="{'group_by':'maintenance_type'}" domain="[]"/>
+					</group>
+                </search>
+            </field>
+        </record>
+
         <record id="action_my_tasks" model="ir.actions.act_window">
             <field name="name">Maintenance Tasks</field>
             <field name="type">ir.actions.act_window</field>
