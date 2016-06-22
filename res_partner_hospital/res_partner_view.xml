@@ -307,7 +307,7 @@
 			</field>
 		</record>
 
-		<menuitem name="Hospital Management" id="hospital_top" sequence="79"/>
+		<menuitem name="Hospital Management" id="hospital_top" sequence="79" groups="base.group_system"/>
 
 		<menuitem id="hospital_main" parent="hospital_top" name="Hospital Management" sequence="10"/>
 		<menuitem id="hospital_sub" parent="hospital_main" action="action_partner_hospital_form"/>
