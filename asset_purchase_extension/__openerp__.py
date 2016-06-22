@@ -28,7 +28,7 @@
     'author': 'Prime Consulting, Cape Verde',
     'website': 'prime.cv',
     'category': 'Enterprise Asset Management',
-    'depends': ['asset_purchase', 'asset_extension', 'stock', 'base_hcv'],
+    'depends': ['asset_purchase', 'asset_extension', 'stock_account', 'base_hcv'],
     'data': [
         'purchase_view.xml',
         'rfq_view.xml',
@@ -37,6 +37,8 @@
         'asset_view.xml',
         'partner_view.xml',
         'views/report_purchasequotation.xml',
+        'security/ir.model.access.csv',
+        'menu.xml',
     ],
     'installable': True,
     'auto_install': False,
