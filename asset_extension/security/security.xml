@@ -25,12 +25,13 @@
 			<field name="name">HCV_Manutenção_User</field>
 		</record>
 
-		<record id="group_hcv_purchase_manager" model="res.groups">
-			<field name="name">HCV_purchase_manager</field>
-		</record>
-
 		<record id="group_hcv_purchase_user" model="res.groups">
 			<field name="name">HCV_Purchase_user</field>
+		</record>
+
+		<record id="group_hcv_purchase_manager" model="res.groups">
+			<field name="name">HCV_purchase_manager</field>
+        <field name="implied_ids" eval="[(4, ref('group_hcv_purchase_user'))]"/>
 		</record>
 
 	</data>
