@@ -65,7 +65,7 @@
 			sequence="20"/>
         <menuitem id="base.menu_action_currency_form" 
 			name="Currencies" 
-			parent="menu_configuration_misc" 
+			parent="account.menu_configuration_misc" 
 			sequence="20" 
 			groups="base.group_no_one,asset_extension.group_hcv_contabilidade"/>
 	</data>
