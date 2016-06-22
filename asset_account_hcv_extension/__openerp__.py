@@ -29,12 +29,14 @@
     'website': 'prime.cv',
     'category': 'Enterprise Asset Management',
     'depends': ['asset_extension', 'asset_account', 'account_asset'],
-    'data': [
+    'data': [  
         'asset_view.xml',
         'wizard/depreciation_map_report.xml',
         'wizard/account_asset_change_duration_view.xml',
         'report.xml',
         'views/depreciation_map.xml',
+        'security/ir.model.access.csv',#defines access rights for HCV Accounting Group
+        'menu.xml',#defines Accounting menus for HCV Accounting Group
     ],
     'installable': True,
     'auto_install': False,

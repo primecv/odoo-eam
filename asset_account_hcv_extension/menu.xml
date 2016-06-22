@@ -1,0 +1,72 @@
+<openerp>
+	<data>
+
+        <menuitem name="Accounting"
+            id="account.menu_finance" groups="account.group_account_user,account.group_account_manager,account.group_account_invoice,asset_extension.group_hcv_contabilidade"
+            sequence="50"/>
+		<menuitem id="account.menu_finance_receivables" 
+			name="Customers" 
+			parent="account.menu_finance" 
+			groups="account.group_account_user,account.group_account_manager,account.group_account_invoice"
+			sequence="2"/>
+        <menuitem id="account.menu_finance_payables" 
+			name="Suppliers" 
+			parent="account.menu_finance"
+			groups="account.group_account_user,account.group_account_manager,account.group_account_invoice" 
+			sequence="3"/>
+
+		<!-- Account : 1) Assets -->
+
+	    <menuitem id="account_asset.menu_finance_assets" 
+			groups="account.group_account_manager,asset_extension.group_hcv_contabilidade" 
+			name="Assets" parent="account.menu_finance" sequence="9"/>
+
+		    <menuitem parent="account_asset.menu_finance_assets" 
+				id="account_asset.menu_action_account_asset_asset_form" 
+				sequence="10"
+				groups="account.group_account_manager,asset_extension.group_hcv_contabilidade" 
+				action="account_asset.action_account_asset_asset_form"/>
+			<menuitem parent="account_asset.menu_finance_assets" 
+				id="account_asset.menu_action_account_asset_asset_tree"
+				groups="account.group_account_manager,asset_extension.group_hcv_contabilidade" 
+			    sequence="20"
+			    action="account_asset.action_account_asset_asset_tree"/>
+			<menuitem id="menu_asset_depreciation_map_report_hcv" 
+				parent="account_asset.menu_finance_assets"
+				action="act_asset_depreciation_map_report"
+				groups="account.group_account_manager,asset_extension.group_hcv_contabilidade" 
+				sequence="500"/>
+
+        <menuitem id="account.menu_finance_configuration" 
+			name="Configuration" 
+			parent="account.menu_finance" 
+			sequence="15" 
+			groups="account.group_account_manager,asset_extension.group_hcv_contabilidade" />
+		
+		    <menuitem id="account.menu_finance_config_assets" 
+				name="Assets" 
+				parent="account.menu_finance_configuration" 
+				groups="account.group_account_manager,asset_extension.group_hcv_contabilidade" 
+				sequence="25"/>
+				<menuitem parent="account_asset.menu_finance_config_assets" 
+					id="account_asset.menu_action_account_asset_asset_list_normal" 
+					groups="account.group_account_manager,asset_extension.group_hcv_contabilidade" 
+					action="account_asset.action_account_asset_asset_list_normal"/>
+
+        <menuitem id="account.account_account_menu" 
+			name="Accounts" 
+			parent="account.menu_finance_configuration" 
+			groups="account.group_account_manager" 
+			sequence="15"/>
+        <menuitem id="account.next_id_27" 
+			name="Taxes" 
+			parent="account.menu_finance_configuration" 
+			groups="account.group_account_manager" 
+			sequence="20"/>
+        <menuitem id="base.menu_action_currency_form" 
+			name="Currencies" 
+			parent="menu_configuration_misc" 
+			sequence="20" 
+			groups="base.group_no_one,asset_extension.group_hcv_contabilidade"/>
+	</data>
+</openerp>

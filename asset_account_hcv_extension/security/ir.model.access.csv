@@ -1,0 +1,60 @@
+id	name	model_id:id	group_id:id	perm_read	perm_write	perm_create	perm_unlink
+access_account_asset_category_manager	account.asset.category	account_asset.model_account_asset_category	asset_extension.group_hcv_contabilidade	1	1	1	1
+access_account_asset_asset_manager	account.asset.asset	account_asset.model_account_asset_asset	asset_extension.group_hcv_contabilidade	1	1	1	1
+access_account_asset_history_manager	account.asset.history	account_asset.model_account_asset_history	asset_extension.group_hcv_contabilidade	1	1	1	1
+access_account_asset_depreciation_line_manager	account.asset.depreciation.line	account_asset.model_account_asset_depreciation_line	asset_extension.group_hcv_contabilidade	1	1	1	1
+access_asset_asset_report_manager	asset.asset.report	account_asset.model_asset_asset_report	asset_extension.group_hcv_contabilidade	1	1	1	1
+access1	asset.depreciation.map.report	model_asset_depreciation_map_report	asset_extension.group_hcv_contabilidade	1	1	1	1
+access2	asset.asset	asset.model_asset_asset	asset_extension.group_hcv_contabilidade	1	1	1	1
+access3	stock.location	stock.model_stock_location	asset_extension.group_hcv_contabilidade	1	0	0	0
+access4	res.users	base.model_res_users	asset_extension.group_hcv_contabilidade	1	0	0	0
+access4	account.move.line	account.model_account_move_line	asset_extension.group_hcv_contabilidade	1	1	1	0
+							
+							
+access5	account.journal.period manager	account.model_account_journal_period	asset_extension.group_hcv_contabilidade	1	0	0	0
+access6	account.subscription manager	account.model_account_subscription	asset_extension.group_hcv_contabilidade	1	0	0	0
+access7	account.subscription.line manager	account.model_account_subscription_line	asset_extension.group_hcv_contabilidade	1	0	0	0
+access8	account.account.template	account.model_account_account_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access9	account.tax.code.template	account.model_account_tax_code_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access10	account.chart.template	account.model_account_chart_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access11	account.tax.template	account.model_account_tax_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access12	account.analytic.line manager	account.model_account_analytic_line	asset_extension.group_hcv_contabilidade	1	0	0	0
+access13	account.payment.term	account.model_account_payment_term	asset_extension.group_hcv_contabilidade	1	1	1	1
+access14	account.payment.term.line	account.model_account_payment_term_line	asset_extension.group_hcv_contabilidade	1	1	1	1
+access15	account.tax	account.model_account_tax	asset_extension.group_hcv_contabilidade	1	1	1	1
+access16	account.journal	account.model_account_journal	asset_extension.group_hcv_contabilidade	1	1	1	1
+access17	account.period	account.model_account_period	asset_extension.group_hcv_contabilidade	1	1	1	1
+access18	account.analytic.journal	account.model_account_analytic_journal	asset_extension.group_hcv_contabilidade	1	1	1	1
+access19	account.fiscalyear	account.model_account_fiscalyear	asset_extension.group_hcv_contabilidade	1	1	1	1
+access20	account.account.template	account.model_account_account_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access21	account.tax.code.template	account.model_account_tax_code_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access22	account.chart.template	account.model_account_chart_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access23	account.tax.template	account.model_account_tax_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access24	account.analytic.line manager	account.model_account_analytic_line	asset_extension.group_hcv_contabilidade	1	0	0	0
+access25	account.payment.term	account.model_account_payment_term	asset_extension.group_hcv_contabilidade	1	1	1	1
+access26	account.payment.term.line	account.model_account_payment_term_line	asset_extension.group_hcv_contabilidade	1	1	1	1
+access27	account.tax	account.model_account_tax	asset_extension.group_hcv_contabilidade	1	1	1	1
+access28	account.journal	account.model_account_journal	asset_extension.group_hcv_contabilidade	1	1	1	1
+access29	account.period	account.model_account_period	asset_extension.group_hcv_contabilidade	1	1	1	1
+access30	account.analytic.journal	account.model_account_analytic_journal	asset_extension.group_hcv_contabilidade	1	1	1	1
+access31	account.fiscalyear	account.model_account_fiscalyear	asset_extension.group_hcv_contabilidade	1	1	1	1
+access32	res.currency account manager	base.model_res_currency	asset_extension.group_hcv_contabilidade	1	1	1	1
+access33	res.currency.rate account manager	base.model_res_currency_rate	asset_extension.group_hcv_contabilidade	1	1	1	1
+access34	account.fiscal.position account.manager	account.model_account_fiscal_position	asset_extension.group_hcv_contabilidade	1	1	1	1
+access35	account.fiscal.position.tax account.manager	account.model_account_fiscal_position_tax	asset_extension.group_hcv_contabilidade	1	1	1	1
+access36	account.fiscal.position account.manager	account.model_account_fiscal_position_account	asset_extension.group_hcv_contabilidade	1	1	1	1
+access37	account.fiscal.position.template	account.model_account_fiscal_position_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access38	account.fiscal.position.tax.template	account.model_account_fiscal_position_tax_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access39	account.fiscal.position.account.template	account.model_account_fiscal_position_account_template	asset_extension.group_hcv_contabilidade	1	1	1	1
+access40	temp.range	account.model_temp_range	asset_extension.group_hcv_contabilidade	1	0	0	0
+access41	report.aged.receivable	account.model_report_aged_receivable	asset_extension.group_hcv_contabilidade	1	1	1	1
+access42	report.invoice.created	account.model_report_invoice_created	asset_extension.group_hcv_contabilidade	1	1	1	1
+access43	report.account_type.sales	account.model_report_account_type_sales	asset_extension.group_hcv_contabilidade	1	1	1	1
+access44	report.account.sales	account.model_report_account_sales	asset_extension.group_hcv_contabilidade	1	1	1	1
+access45	res_partner group_account_manager	account.model_res_partner	asset_extension.group_hcv_contabilidade	1	0	0	0
+access46	account.move.line manager	account.model_account_move_line	asset_extension.group_hcv_contabilidade	1	0	0	0
+access47	account.move manager	account.model_account_move	asset_extension.group_hcv_contabilidade	1	0	0	0
+access48	account.entries.report	account.model_account_entries_report	asset_extension.group_hcv_contabilidade	1	1	1	1
+access49	analytic.entries.report	account.model_analytic_entries_report	asset_extension.group_hcv_contabilidade	1	0	0	0
+access50	account.move.reconcile manager	account.model_account_move_reconcile	asset_extension.group_hcv_contabilidade	1	0	0	0
+access51	account.treasury.report.manager	account.model_account_treasury_report	asset_extension.group_hcv_contabilidade	1	0	0	0
