@@ -75,6 +75,11 @@
 				    parent="stock.menu_stock_inventory_control"
 				    groups="stock.group_locations,asset_extension.group_hcv_manager"
 				    sequence="20"/>
+	        <menuitem action="stock.action_inventory_form" 
+				id="stock.menu_action_inventory_form" 
+				parent="stock.menu_stock_inventory_control" 
+			    groups="stock.group_stock_manager,asset_extension.group_hcv_manager"
+				sequence="30"/>
 
         <menuitem name="Reports"
             id="menu_stock_hcv_reports"
