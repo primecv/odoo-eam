@@ -37,6 +37,7 @@
         'views/depreciation_map.xml',
         'security/ir.model.access.csv',#defines access rights for HCV Accounting Group
         'menu.xml',#defines Accounting menus for HCV Accounting Group
+        'scheduler.xml',
     ],
     'installable': True,
     'auto_install': False,

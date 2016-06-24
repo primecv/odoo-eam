@@ -1,0 +1,17 @@
+<openerp>
+    <data noupdate="1">
+
+		<record id="schedule_post_depreciation_line" model="ir.cron">
+			<field name="name">Post Linear Depreciated Lines</field>
+			<field name="priority">3</field>
+			<field name="interval_number">12</field>
+			<field name="interval_type">hours</field>
+			<field name="numbercall">-1</field>
+			<field name="doall">True</field>
+			<field name="model">account.asset.asset</field>
+			<field name="function">scheduler_depreciation_post</field>
+			<field name="args">()</field>
+		</record>
+
+	</data>
+</openerp>

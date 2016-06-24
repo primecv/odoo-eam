@@ -69,6 +69,21 @@ class asset_asset(osv.osv):
 class account_asset(osv.osv):
 	_inherit = 'account.asset.asset'
 
+	def scheduler_depreciation_post(self, cr, uid, ids=None, context=None):
+		"""Scheduler function to check Linear method Depreciations and 
+		Post Depreciation Lines on reaching Depreciation Date (Date From).
+		"""
+		assets = self.search(cr, uid, [('method','=','linear'),
+									   ('state','in',('open','close'))
+							])
+		today = datetime.now().date()
+		for asset in self.browse(cr, uid, assets):
+			for depr in asset.depreciation_line_ids:
+				d_date = datetime.strptime(depr.depreciation_date, "%Y-%m-%d").date()
+				if not depr.move_check and d_date <= today:
+					self.pool.get('account.asset.depreciation.line').create_move(cr, uid, [depr.id])
+		return True
+
 	def get_dates(self, cr, uid, lines):
 		deprs = []
 		for depr in lines:
