@@ -184,6 +184,18 @@ class account_asset(osv.osv):
 			res['value'] = {'category_id': category_id}
 		return res
 
+	def asset_modify(self, cr, uid, ids, context=None):
+		for rec in self.browse(cr, uid, ids):
+			if not rec.depreciation_line_ids:
+				raise osv.except_osv(('Validation Error!'),('Change Duration Action can be performed only after adding at least one Depreciation.'))
+			else:
+				return {
+					'type': 'ir.actions.act_window',
+					'res_model': 'asset.modify',
+					'view_type': 'form',
+					'view_mode': 'tree,form',
+					'target': 'new',
+				}
 
 	def validate(self, cr, uid, ids, context=None):
 		for asset in self.browse(cr, uid, ids):
