@@ -87,6 +87,9 @@ class asset_modify(osv.osv_memory):
         asset_id = context.get('active_id', False)
         asset = asset_obj.browse(cr, uid, asset_id, context=context)
         if not asset.history_ids:
+            date = False
+            for depr in asset.depreciation_line_ids:
+                date = depr.depreciation_date
             vals = {
                 'asset_id': asset_id,
                 'name': asset.name,
@@ -95,7 +98,7 @@ class asset_modify(osv.osv_memory):
                 'method_period': asset.method_period,
                 'method_end': asset.method_end,
                 'user_id': uid,
-                'date': time.strftime('%Y-%m-%d'),
+                'date': date,
                 'note': 'Initial State',
                 'total_hours': asset.total_hours,
                 'total_units': asset.total_units,
