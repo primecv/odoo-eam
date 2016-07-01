@@ -193,7 +193,7 @@ class account_asset(osv.osv):
 					'type': 'ir.actions.act_window',
 					'res_model': 'asset.modify',
 					'view_type': 'form',
-					'view_mode': 'tree,form',
+					'view_mode': 'form',
 					'target': 'new',
 				}
 
