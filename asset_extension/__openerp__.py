@@ -56,6 +56,7 @@
         'wizard/asset_asset_new_barcode_view.xml',
         'wizard/asset_list_view.xml',
         'wizard/mro_hcv_report_view.xml',
+        'wizard/asset_temp_update_view.xml',
         'views/report_equipments.xml',
         'views/report_asset_move.xml',
         'views/report_stock_move.xml',
