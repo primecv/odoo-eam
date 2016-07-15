@@ -48,16 +48,14 @@ class asset_temp_update(osv.osv):
 							cell_value = worksheet.cell_value(curr_row, curr_cell)
 							result.append(cell_value)
 						count = count + 1
-						for res in result:
-							barcode_no = result[0]
-							name = result[1]
-							newname = result[2]
-							print"############ barcode no ", barcode_no
-							if barcode_no and name != newname:
-								asset = self.pool.get('asset.asset').search(cr, uid, [('barcode_no','=',str(barcode_no))])
-								if asset:
-									success = success + 1
-									self.pool.get('asset.asset').write(cr, uid, [asset[0]], {'name': newname})
+						barcode_no = result[0]
+						name = result[1]
+						newname = result[2]
+						if barcode_no and name != newname:
+							asset = self.pool.get('asset.asset').search(cr, uid, [('barcode_no','=',str(barcode_no))])
+							if asset:
+								success = success + 1
+								self.pool.get('asset.asset').write(cr, uid, [asset[0]], {'name': newname})
 				print "Total rows : ",count
 				print "Success : ",success
 		return True
