@@ -41,5 +41,15 @@
             name="asset_extension.report_mroequipment" 
         />
 
+        <report 
+            id="report_mro_service"
+            string="Maintenance By Service"
+            model="mro.hcv.report" 
+            report_type="qweb-pdf"
+			menu="False"
+            file="asset_extension.report_mroservice" 
+            name="asset_extension.report_mroservice" 
+        />
+
 	</data>
 </openerp>

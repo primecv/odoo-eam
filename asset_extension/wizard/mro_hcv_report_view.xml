@@ -16,6 +16,7 @@
 						<field name="end_period" attrs="{'required': [('type','=','period')]}"/>
 						<field name="technician_id" attrs="{'invisible': [('type','!=','technician')]}"/>
 						<field name="asset_id" attrs="{'invisible': [('type','!=','equipment')]}"/>
+						<field name="service_location_id" attrs="{'invisible': [('type','!=','service')]}"/>
 					</group>
 
 					<footer>
